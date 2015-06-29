@@ -594,18 +594,16 @@
 									<table class="table table-striped table-hover" id="sample-table-1">
 										<thead>
 											<tr>
-												<th class="center hidden-xs">ID</th>
-												<th>Full Name</th>
-												<th class="hidden-xs">Email</th>
+												
+												<th >Email</th>
                                                                                                 <th>Report id</th>
 												<th></th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
-												<td class="center hidden-xs">1122110</td>
-												<td>Peter Clark</td>
-												<td class="hidden-xs">peter@example.com</td>
+												
+												<td>peter@example.com</td>
                                                                                                 <td><a href="#" rel="nofollow" target="_blank">123456</a></td>
 												<td class="center">
 												<div>

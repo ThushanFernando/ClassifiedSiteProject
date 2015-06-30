@@ -37,6 +37,10 @@
 		<!-- end: MAIN CSS -->
 		<!-- start: CSS REQUIRED FOR THIS PAGE ONLY -->
 		<link rel="stylesheet" href="../plugins/fullcalendar/fullcalendar/fullcalendar.css">
+                <link rel="stylesheet" type="text/css" href="../plugins/select2/select2.css" />
+		<link rel="stylesheet" href="../plugins/DataTables/media/css/DT_bootstrap.css" />
+                <link rel="stylesheet" href="../plugins/summernote/build/summernote.css">
+		
 		<!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
 		<link rel="shortcut icon" href="favicon.ico" />
 	</head>
@@ -522,7 +526,13 @@
                                             <div class="col-sm-5">
                                                <div class="panel-body">
 						    <form action="#" role="form" class="smart-wizard form-horizontal" id="form">
-							    <div id="wizard" class="swMain">
+							<div class="col-md-12">
+												<div class="errorHandler alert alert-danger no-display">
+													<i class="fa fa-times-sign"></i> Enter User id, User name or User email.
+												</div>
+												
+                                                        </div>    
+                                                        <div id="wizard" class="swMain">
                                                                     <div id="step-1">
                                                                         <h2 class="title">Blocking process</h2>
 												<div class="form-group">
@@ -530,7 +540,7 @@
 														User ID <span class="symbol required"></span>
 													</label>
 													<div class="col-sm-7">
-														<input type="text" class="form-control" id="username" name="userid" placeholder="">
+														<input type="text" class="form-control" id="userid" name="userid" placeholder="">
 													</div>
 												</div>
                                                                                                 <div class="form-group">
@@ -546,7 +556,7 @@
 														Email <span class="symbol required"></span>
 													</label>
 													<div class="col-sm-7">
-														<input type="email" class="form-control" id="email" name="email" placeholder="">
+														<input type="email" class="form-control" id="useremail" name="useremail" placeholder="">
 													</div>
 												</div>
                                                                                                 <div class="form-group">
@@ -590,14 +600,14 @@
 										</a>
 									</div>
 								</div>
-								<div class="panel-body panel-scroll" style="height:300px">
-									<table class="table table-striped table-hover" id="sample-table-1">
+								<div class="panel-body">
+									<table class="table table-striped table-hover" id="sample_1">
 										<thead>
 											<tr>
 												<th class="center hidden-xs">ID</th>
 												<th>Ad Title</th>
 												<th class="hidden-xs">Email</th>
-                                                                                                <th>Report id</th>
+                                                                                                <th>Rep id</th>
 												<th></th>
 											</tr>
 										</thead>
@@ -705,7 +715,27 @@
 		<script src="../plugins/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
 		<script src="../plugins/fullcalendar/fullcalendar/fullcalendar.js"></script>
 		<script src="../js/index.js"></script>
+		<script type="text/javascript" src="../plugins/DataTables/media/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="../plugins/DataTables/media/js/DT_bootstrap.js"></script>
+		<script src="../js/table-data.js"></script>
+		<script src="../plugins/jquery-validation/dist/jquery.validate.min.js"></script>
+		<script src="../plugins/summernote/build/summernote.min.js"></script>
+		<script src="../plugins/ckeditor/ckeditor.js"></script>
+		<script src="../plugins/ckeditor/adapters/jquery.js"></script>
+		<script src="../js/form-validation.js"></script>
 		<!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+		<script>
+			jQuery(document).ready(function() {
+				Main.init();
+				FormValidator.init();
+			});
+		</script>
+		<script>
+			jQuery(document).ready(function() {
+				Main.init();
+				TableData.init();
+			});
+		</script>
 		<script>
 			jQuery(document).ready(function() {
 				Main.init();

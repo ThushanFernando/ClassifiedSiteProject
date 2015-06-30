@@ -39,7 +39,8 @@
 		<link rel="stylesheet" href="../plugins/fullcalendar/fullcalendar/fullcalendar.css">
                 <link href="../plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
 		<link href="../plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
-		
+		<link rel="stylesheet" type="text/css" href="../plugins/select2/select2.css" />
+		<link rel="stylesheet" href="../plugins/DataTables/media/css/DT_bootstrap.css" />
 		<!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
 		<link rel="shortcut icon" href="favicon.ico" />
 	</head>
@@ -537,9 +538,8 @@
 										
 									</div>
 								</div>
-								<div class="panel-body panel-scroll" style="height:300px">
-                                                                    
-									<table class="table table-striped table-hover " id="sample-table-1">
+								<div class="panel-body">
+									<table class="table table-striped table-hover" id="sample_1">
 										<thead>
 											<tr>
 												<th class="center hidden-xs">ID</th>
@@ -555,6 +555,42 @@
 										
                                                                                     
                                                                                     <tr>
+												<td class="center hidden-xs">1122110</td>
+                                                                                                <td class=" hidden-xs">Peter clark</td>
+												<td >Message</td>
+                                                                                                <td class="center hidden-xs">Kamal hjk</td>
+                                                                                                <td class="center">12345</td>
+                                                                                                <td class="center"><a href="">View</a></td>
+                                                                                                <td class="center">
+												<div>
+													<div class="btn-group">
+														<a class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
+															<i class="fa fa-cog"></i> <span class="caret"></span>
+														</a>
+														<ul role="menu" class="dropdown-menu pull-right">
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="#">
+																	<i class="fa clip-locked"></i> Block
+																</a>
+															</li>
+                                                                                                                        <li role="presentation">
+                                                                                                                            
+																<a role="menuitem" tabindex="-1" href="#responsive" data-toggle="modal">
+																	<i class="fa clip-notification-2"></i> Warn
+																</a>
+															</li>
+                                                                                                                        <li role="presentation">
+																<a role="menuitem" tabindex="-1" href="#">
+																	<i class="fa clip-remove"></i> Remove User
+																</a>
+															</li>
+															
+															
+														</ul>
+													</div>
+												</div></td>
+											</tr>
+                                                                                        <tr>
 												<td class="center hidden-xs">1122110</td>
                                                                                                 <td class=" hidden-xs">Peter clark</td>
 												<td >Message</td>
@@ -737,9 +773,17 @@
 		<script src="../js/ui-modals.js"></script>
                 <script src="../plugins/jquery-inputlimiter/jquery.inputlimiter.1.3.1.min.js"></script>
 		<script src="../plugins/autosize/jquery.autosize.min.js"></script>
-                
-		
+                <script type="text/javascript" src="../plugins/DataTables/media/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="../plugins/DataTables/media/js/DT_bootstrap.js"></script>
+		<script src="../js/table-data.js"></script>
 		<!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+		<script>
+			jQuery(document).ready(function() {
+				Main.init();
+				TableData.init();
+			});
+		</script>
+		
 		<script>
 			jQuery(document).ready(function() {
 				Main.init();

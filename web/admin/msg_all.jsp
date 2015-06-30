@@ -491,13 +491,13 @@
 							<!-- start: PAGE TITLE & BREADCRUMB -->
 							<ol class="breadcrumb">
 								<li>
-									<i class="clip-bubble"></i>
+									<i class="clip-home-3"></i>
 									<a href="#">
-										Messages
+										Home
 									</a>
 								</li>
 								<li class="active">
-									All
+                                                                    Messages &nbsp;/&nbsp; All
 								</li>
 								<li class="search-box">
 									<form class="sidebar-search">

@@ -724,24 +724,18 @@
 		<script src="../plugins/ckeditor/adapters/jquery.js"></script>
 		<script src="../js/form-validation.js"></script>
 		<!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+		
 		<script>
 			jQuery(document).ready(function() {
 				Main.init();
-				FormValidator.init();
-			});
-		</script>
-		<script>
-			jQuery(document).ready(function() {
-				Main.init();
+                                FormValidator.init();
 				TableData.init();
+                                Index.init();
+                                
+                                
 			});
 		</script>
-		<script>
-			jQuery(document).ready(function() {
-				Main.init();
-				Index.init();
-			});
-		</script>
+		
 	</body>
 	<!-- end: BODY -->
 </html>

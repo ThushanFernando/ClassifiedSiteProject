@@ -777,25 +777,16 @@
 		<script type="text/javascript" src="../plugins/DataTables/media/js/DT_bootstrap.js"></script>
 		<script src="../js/table-data.js"></script>
 		<!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
-		<script>
-			jQuery(document).ready(function() {
-				Main.init();
-				TableData.init();
-			});
-		</script>
 		
 		<script>
 			jQuery(document).ready(function() {
 				Main.init();
+                                TableData.init();
+                                UIModals.init();
 				Index.init();
 			});
 		</script>
-                <script>
-			jQuery(document).ready(function() {
-				Main.init();
-				UIModals.init();
-			});
-		</script>
+                
 	</body>
 	<!-- end: BODY -->
 </html>

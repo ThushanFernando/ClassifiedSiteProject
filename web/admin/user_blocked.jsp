@@ -724,20 +724,11 @@
 		<script>
 			jQuery(document).ready(function() {
 				Main.init();
-				FormValidator.init();
-			});
-		</script>
-		<script>
-			jQuery(document).ready(function() {
-				Main.init();
+                                FormValidator.init();
 				TableData.init();
-			});
-		</script>
-		
-		<script>
-			jQuery(document).ready(function() {
-				Main.init();
-				Index.init();
+                                Index.init();
+                                
+                                
 			});
 		</script>
 	</body>

@@ -11,9 +11,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <jsp:include page="navbar_start.jsp"></jsp:include>
+        <jsp:include page="BootstrapHeader.jsp"></jsp:include>
     </head>
-    <body class="container-fluid">
-        
+
+    <body class="container-fluid row">
+        <div class="col-lg-12">
+            <jsp:include page="navbar_start.jsp"></jsp:include>
+        </div>
     </body>
 </html>

@@ -40,7 +40,9 @@ public class DbClass {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 conn = (Connection) DriverManager.getConnection(URL + dbName, username, password);
-                System.out.println("Database Connected..");
+                if (conn != null) {
+                    System.out.println("Database Connected..");
+                }
 
             } catch (ClassNotFoundException ex) {
 
@@ -58,7 +60,7 @@ public class DbClass {
         if (this.conn != null) {
             state = true;
         }
-        
+
         return state;
     }
 
@@ -69,7 +71,9 @@ public class DbClass {
 
         try {
             conn.close();
-            System.out.println("Connection Closed..");
+            if (conn == null) {
+                System.out.println("Connection Closed..");
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(DbClass.class.getName()).log(Level.SEVERE, null, ex);

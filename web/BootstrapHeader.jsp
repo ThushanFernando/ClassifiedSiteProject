@@ -24,19 +24,14 @@
 
         <!----------------------------->
 
-        <!-- Bootstrap CSS-->
-        <link href="css/bootstrap.css" rel="stylesheet">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/bootstrap-theme.css" rel="stylesheet">
-        <link href="css/bootstrap-theme.min.css" rel="stylesheet">     
-
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="js/bootstrap.js"></script> 
+        <script src="jquery/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <script src="js/npm.js"></script> 
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="jquery/jquery-2.1.4.js"></script>
-        <script src="jquery/jquery-2.1.4.min.js"></script>
+        <!--
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        -->
     </head>
 </html>

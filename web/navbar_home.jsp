@@ -48,7 +48,7 @@
                 </ul>
                 <form class="navbar-form navbar-left center-block" role="search">
                     <div class="form-group">
-                        <input class="form-control" placeholder="I'm looking for..?" type="text" required="">
+                        <input class="form-control" style="font-family: cursive;" placeholder="I'm looking for..?" type="text" required="">
                     </div>
                     <button type="submit" class="btn btn-info" style="border: solid 2px gray;">Search</button>
                 </form>                

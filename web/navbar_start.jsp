@@ -9,12 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <jsp:include page="BootstrapHeader.jsp"></jsp:include>
+        <title>Welcome To Superb.lk</title>
         <link rel="stylesheet" type="text/css" href="menubar/bootstrap.min.css">
     </head>
-    <body>
-
+    <!--remove class="navbar-fixed-top" attribute in case of error-->
+    <body style="font-family: Century Gothic; padding: 1px;" class="navbar-fixed-top text-center">
         <div class="navbar navbar-custom">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -41,7 +40,7 @@
                 </ul>
                 <form class="navbar-form navbar-left center-block" role="search">
                     <div class="form-group">
-                        <input class="form-control" placeholder="I'm looking for..?" type="text" required="">
+                        <input class="form-control" style="font-family: cursive;" placeholder="I'm looking for..?" type="text" required="">
                     </div>
                     <button type="submit" class="btn btn-info" style="border: solid 2px gray;">Search</button>
                 </form>                

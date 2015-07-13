@@ -8,15 +8,17 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <jsp:include page="BootstrapHeader.jsp"></jsp:include>
-    </head>
 
-    <body class="container-fluid row">
-        <div class="col-lg-12">
-            <jsp:include page="navbar_start.jsp"></jsp:include>
-        </div>
-    </body>
+    <jsp:include page="BootstrapHeader.jsp"></jsp:include>
+
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <title>Welcome To Superb.lk</title>
+        </head>
+
+        <body class="container-fluid">
+        <jsp:include page="navbar_start.jsp"></jsp:include>
+        </body>
+        
+    <jsp:include page="footer_nav.jsp"></jsp:include>
 </html>

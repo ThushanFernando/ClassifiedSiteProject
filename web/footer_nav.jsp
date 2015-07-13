@@ -35,7 +35,7 @@
                 <li><a data-toggle="tooltip" data-placement="top" title="Facebook" href=""><img src="media/images/social-icons_pack1/128/facebook.png" width="20" height="20" alt="Facebook"/> Facebook</a></li>
                 <li><a data-toggle="tooltip" data-placement="top" title="Google +" href=""><img src="media/images/social-icons_pack1/128/google.png" width="20" height="20" alt="Google +"/> Google +</a></li>
                 <li><a data-toggle="tooltip" data-placement="top" title="Twitter" href=""><img src="media/images/social-icons_pack1/128/twitter.png" width="20" height="20" alt="Twitter"/> Twitter</a></li>
-                <li class="active"><a class="text-right" href="http://nextglow.com/">&COPY; NextGlow Web Designers</a></li>
+                <li class="active"><a class="text-right" href="http://nextglow.com/" data-toggle="tooltip" data-placement="top" title="Go To Designer Web Site">&COPY; NextGlow Web Designers</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

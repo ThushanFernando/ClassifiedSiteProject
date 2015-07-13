@@ -52,7 +52,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a data-toggle="modal" data-target="#login_model" href="">
                             <b>Log In</b>
                         </a>
                     </li>
@@ -60,5 +60,6 @@
             </div><!-- /.navbar-collapse -->
         </div>
 
+        <jsp:include page="model_login.jsp"></jsp:include>
     </body>
 </html>

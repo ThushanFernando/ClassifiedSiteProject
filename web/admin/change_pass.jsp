@@ -37,10 +37,7 @@
 		<!-- end: MAIN CSS -->
 		<!-- start: CSS REQUIRED FOR THIS PAGE ONLY -->
 		<link rel="stylesheet" href="plugins/fullcalendar/fullcalendar/fullcalendar.css">
-                <link rel="stylesheet" type="text/css" href="plugins/select2/select2.css" />
-		<link rel="stylesheet" href="plugins/DataTables/media/css/DT_bootstrap.css" />
                 <link rel="stylesheet" href="plugins/summernote/build/summernote.css">
-		<link rel="stylesheet" href="plugins/summernote/build/summernote.css">
                 <link href="plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
 		<link href="plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
 		
@@ -307,10 +304,7 @@
 							<ul class="dropdown-menu">
 								
 								
-								<li>
-									<a href="#responsive" data-toggle="modal"><i class="clip-key"></i>
-										&nbsp;Change password </a>
-								</li>
+								
 								<li>
 									<a href="login_example1.html">
 										<i class="clip-exit"></i>
@@ -340,7 +334,7 @@
 					<!-- end: MAIN MENU TOGGLER BUTTON -->
 					<!-- start: MAIN NAVIGATION MENU -->
 					<ul class="main-navigation-menu">
-						<li>
+						<li >
 							<a href="index.jsp"><i class="clip-home-3"></i>
 								<span class="title"> Dashboard </span><span class="selected"></span>
 							</a>
@@ -423,7 +417,7 @@
 							</a>
 						</li>
                                                
-                                                <li class="active open">
+                                                <li>
 							<a href="ads_blocked.jsp" ><i class="clip-note"></i>
 								<span class="title"> Blocked Ads</span><span class="selected"></span>
 							</a>
@@ -493,7 +487,7 @@
 									</a>
 								</li>
 								<li class="active">
-									Blocked Ads
+									Change password
 								</li>
 								<li class="search-box">
 									<form class="sidebar-search">
@@ -506,137 +500,75 @@
 									</form>
 								</li>
 							</ol>
-							<div class="page-header">
-								<h1>Ads <small>blocked</small></h1>
-							</div>
+							
 							<!-- end: PAGE TITLE & BREADCRUMB -->
 						</div>
 					</div>
 					<!-- end: PAGE HEADER -->
 					<!-- start: PAGE CONTENT -->
-                                        <div class="row">
-                                            <div class="col-sm-5">
-                                               <div class="panel-body">
-						    <form action="#" role="form" class="smart-wizard form-horizontal" id="form">
-							<div class="col-md-12">
-												<div class="errorHandler alert alert-danger no-display">
-													<i class="fa fa-times-sign"></i> Enter User id, User name or User email.
-												</div>
-												
-                                                        </div>    
-                                                        <div id="wizard" class="swMain">
-                                                                    <div id="step-1">
-                                                                        <h2 class="title">Blocking process</h2>
-												<div class="form-group">
-													<label class="col-sm-3 control-label">
-														User ID <span class="symbol required"></span>
-													</label>
-													<div class="col-sm-7">
-														<input type="text" class="form-control" id="userid" name="userid" placeholder="">
-													</div>
-												</div>
-                                                                                                <div class="form-group">
-													<label class="col-sm-3 control-label">
-														User name <span class="symbol required"></span>
-													</label>
-													<div class="col-sm-7">
-														<input type="text" class="form-control" id="username" name="username" placeholder="">
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-sm-3 control-label">
-														Email <span class="symbol required"></span>
-													</label>
-													<div class="col-sm-7">
-														<input type="email" class="form-control" id="useremail" name="useremail" placeholder="">
-													</div>
-												</div>
-                                                                                                <div class="form-group">
-													<label class="col-sm-3 control-label">
-														Report id <span class="symbol required"></span>
-													</label>
-													<div class="col-sm-7">
-														<input type="text" class="form-control" id="username" name="reportid" placeholder="">
-													</div>
-												</div>
-                                                                                                 
-												<div class="form-group">
-													<div class="col-sm-4 col-sm-offset-6">
-														<button class="btn btn-blue next-step btn-block">
-															Block <i class="fa fa-arrow-circle-right"></i>
-														</button>
-													</div>
-												</div>
-											</div>
-                                                            </div>
-                                                    </form>
-                                               </div>
-                                            </div>
-                                        
-						<div class="col-sm-7">
+                                        <div class="row" style="margin-top: 5px">
+						<div class="col-md-12">
+							<!-- start: FORM VALIDATION 1 PANEL -->
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<i class="clip-users-2"></i>
-									Blocked Ads
-									<div class="panel-tools">
-										<a class="btn btn-xs btn-link panel-collapse collapses" href="#">
-										</a>
-										<a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal">
-											<i class="fa fa-wrench"></i>
-										</a>
-										<a class="btn btn-xs btn-link panel-refresh" href="#">
-											<i class="fa fa-refresh"></i>
-										</a>
-										<a class="btn btn-xs btn-link panel-close" href="#">
-											<i class="fa fa-times"></i>
-										</a>
-									</div>
+								Step 2. Enter new login details		
 								</div>
 								<div class="panel-body">
-									<table class="table table-striped table-hover" id="sample_1">
-										<thead>
-											<tr>
-												<th class="center hidden-xs">ID</th>
-												<th>Ad Title</th>
-												<th class="hidden-xs">Email</th>
-                                                                                                <th>Rep id</th>
-												<th></th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td class="center hidden-xs">1122110</td>
-                                                                                                <td><a href="https://www.google.lk/" rel="nofollow" target="_blank">Samsung galaxy note n7000 for sale</a></td>
-												<td class="hidden-xs">peter@example.com</td>
-                                                                                                <td><a href="#" rel="nofollow" target="_blank">123456</a></td>
-												<td class="center">
-												<div>
-													<div class="btn-group">
-														<a class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
-															<i class="fa fa-cog"></i> <span class="caret"></span>
-														</a>
-														<ul role="menu" class="dropdown-menu pull-right">
-															<li role="presentation">
-																<a role="menuitem" tabindex="-1" href="#">
-																	<i class="fa fa-unlock"></i> Unblock
-																</a>
-															</li>
-															
-															
-														</ul>
-													</div>
-												</div></td>
-											</tr>
+									<h2><i class="fa fa-pencil-square teal"></i> Change Your password</h2>
+									
+									<hr>
+									<form action="#" role="form" id="form">
+										<div class="row">
+											<div class="col-md-4">
+												<div class="errorHandler alert alert-danger no-display">
+													<i class="fa fa-times-sign"></i> You have some form errors. Please check below.
+												</div>
+												<div class="successHandler alert alert-success no-display">
+													<i class="fa fa-ok"></i> Your form validation is successful!
+												</div>
+											</div>
+                                                                                </div>    
+                                                                                <div class="row">
+											<div class="col-md-4">
+												<div class="form-group">
+													<label class="control-label">
+														User Name 
+													</label>
+													<input type="text" placeholder="Insert your User Name(if you want to change)" class="form-control" id="usernamenew" name="usernamenew">
+												</div>
+												
+												<div class="form-group">
+													<label class="control-label">
+														Password <span class="symbol required"></span>
+													</label>
+													<input type="password" class="form-control" name="password" id="password">
+												</div>
+                                                                                               
+                                                                                                <div class="form-group">
+													<label class="control-label">
+														Password <span class="symbol required"></span>
+													</label>
+													<input type="password" class="form-control" name="password_again" id="password_again">
+												</div>
+												
+											</div>
 											
-										</tbody>
-									</table>
+										</div>
+										
+										<div class="row">
+											<div class="col-md-4">
+												<button class="btn btn-blue btn-block" type="submit">
+													Proceed <i class="fa fa-arrow-circle-right"></i>
+												</button>
+											</div>
+											
+										</div>
+									</form>
 								</div>
 							</div>
+							<!-- end: FORM VALIDATION 1 PANEL -->
 						</div>
-                                            
 					</div>
-					
-					
 					<!-- end: PAGE CONTENT-->
 				</div>
 			</div>
@@ -677,74 +609,6 @@
 				</div>
 			</div>
 		</div>
-                
-                <!-- start: BOOTSTRAP EXTENDED MODALS -->
-		<div id="responsive" class="modal fade" tabindex="-1" data-width="500" style="display: none;">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-					&times;
-				</button>
-                            <h2></h2>
-				
-			</div>
-			<div class="modal-body">
-				<div class="row">
-						<div class="col-md-12">
-							<!-- start: FORM VALIDATION 1 PANEL -->
-							<div class="panel panel-default">
-								<div class="panel-heading">
-                                                                    Step 1. Enter current login details	
-								</div>
-								<div class="panel-body">
-									<h2><i class="fa fa-pencil-square teal"></i> Change Your password</h2>
-									
-									<hr>
-									<form action="#" role="form" id="form">
-										<div class="row">
-											<div class="col-md-12">
-												<div class="errorHandler alert alert-danger no-display">
-													<i class="fa fa-times-sign"></i> You have some form errors. Please check below.
-												</div>
-												<div class="successHandler alert alert-success no-display">
-													<i class="fa fa-ok"></i> Your form validation is successful!
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<label class="control-label">
-														User Name <span class="symbol required"></span>
-													</label>
-													<input type="text" placeholder="Insert your User Name" class="form-control" id="username" name="username">
-												</div>
-												
-												<div class="form-group">
-													<label class="control-label">
-														Password <span class="symbol required"></span>
-													</label>
-													<input type="password" class="form-control" name="password" id="password">
-												</div>
-												
-											</div>
-											
-										</div>
-										
-										<div class="row">
-											<div class="col-md-4">
-												<button class="btn btn-blue btn-block" type="submit">
-													Proceed <i class="fa fa-arrow-circle-right"></i>
-												</button>
-											</div>
-											
-										</div>
-									</form>
-								</div>
-							</div>
-							<!-- end: FORM VALIDATION 1 PANEL -->
-						</div>
-					</div>
-			</div>
-			
-		</div>
 		<!-- start: MAIN JAVASCRIPTS -->
 		<!--[if lt IE 9]>
 		<script src="plugins/respond.min.js"></script>
@@ -775,10 +639,7 @@
 		<script src="plugins/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
 		<script src="plugins/fullcalendar/fullcalendar/fullcalendar.js"></script>
 		<script src="js/index.js"></script>
-		<script type="text/javascript" src="plugins/DataTables/media/js/jquery.dataTables.min.js"></script>
-		<script type="text/javascript" src="plugins/DataTables/media/js/DT_bootstrap.js"></script>
-		<script src="js/table-data.js"></script>
-		<script src="plugins/jquery-validation/dist/jquery.validate.min.js"></script>
+                <script src="plugins/jquery-validation/dist/jquery.validate.min.js"></script>
 		<script src="plugins/summernote/build/summernote.min.js"></script>
 		<script src="plugins/ckeditor/ckeditor.js"></script>
 		<script src="plugins/ckeditor/adapters/jquery.js"></script>
@@ -786,20 +647,18 @@
                 <script src="plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
 		<script src="plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
 		<script src="js/ui-modals.js"></script>
-		<!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 		
+		<!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 		<script>
 			jQuery(document).ready(function() {
 				Main.init();
-                                UIModals.init();
-				FormValidator.init();
-				TableData.init();
-                                Index.init();
                                 
+				UIModals.init();
+				FormValidator.init();
+                                Index.init();
                                 
 			});
 		</script>
-		
 	</body>
 	<!-- end: BODY -->
 </html>

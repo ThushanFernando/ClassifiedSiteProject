@@ -37,7 +37,11 @@
 		<!-- end: MAIN CSS -->
 		<!-- start: CSS REQUIRED FOR THIS PAGE ONLY -->
 		<link rel="stylesheet" href="plugins/fullcalendar/fullcalendar/fullcalendar.css">
-		<!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
+		<link rel="stylesheet" href="plugins/summernote/build/summernote.css">
+                <link href="plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+		<link href="plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+		
+                <!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
 		<link rel="shortcut icon" href="favicon.ico" />
 	</head>
 	<!-- end: HEAD -->
@@ -299,21 +303,10 @@
 							</a>
 							<ul class="dropdown-menu">
 								
+								
 								<li>
-									<a href="pages_calendar.html">
-										<i class="clip-calendar"></i>
-										&nbsp;My Calendar
-									</a>
-								<li>
-									<a href="pages_messages.html">
-										<i class="clip-bubble-4"></i>
-										&nbsp;My Messages (3)
-									</a>
-								</li>
-								<li class="divider"></li>
-								<li>
-									<a href="utility_lock_screen.html"><i class="clip-locked"></i>
-										&nbsp;Lock Screen </a>
+									<a href="#responsive" data-toggle="modal"><i class="clip-key"></i>
+										&nbsp;Change password </a>
 								</li>
 								<li>
 									<a href="login_example1.html">
@@ -840,6 +833,74 @@
 				</div>
 			</div>
 		</div>
+                
+                <!-- start: BOOTSTRAP EXTENDED MODALS -->
+		<div id="responsive" class="modal fade" tabindex="-1" data-width="500" style="display: none;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+                            <h2></h2>
+				
+			</div>
+			<div class="modal-body">
+				<div class="row">
+						<div class="col-md-12">
+							<!-- start: FORM VALIDATION 1 PANEL -->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+                                                                    Step 1. Enter current login details	
+								</div>
+								<div class="panel-body">
+									<h2><i class="fa fa-pencil-square teal"></i> Change Your password</h2>
+									
+									<hr>
+									<form action="#" role="form" id="form">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="errorHandler alert alert-danger no-display">
+													<i class="fa fa-times-sign"></i> You have some form errors. Please check below.
+												</div>
+												<div class="successHandler alert alert-success no-display">
+													<i class="fa fa-ok"></i> Your form validation is successful!
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">
+														User Name <span class="symbol required"></span>
+													</label>
+													<input type="text" placeholder="Insert your User Name" class="form-control" id="username" name="username">
+												</div>
+												
+												<div class="form-group">
+													<label class="control-label">
+														Password <span class="symbol required"></span>
+													</label>
+													<input type="password" class="form-control" name="password" id="password">
+												</div>
+												
+											</div>
+											
+										</div>
+										
+										<div class="row">
+											<div class="col-md-4">
+												<button class="btn btn-blue btn-block" type="submit">
+													Proceed <i class="fa fa-arrow-circle-right"></i>
+												</button>
+											</div>
+											
+										</div>
+									</form>
+								</div>
+							</div>
+							<!-- end: FORM VALIDATION 1 PANEL -->
+						</div>
+					</div>
+			</div>
+			
+		</div>
 		<!-- start: MAIN JAVASCRIPTS -->
 		<!--[if lt IE 9]>
 		<script src="plugins/respond.min.js"></script>
@@ -870,11 +931,21 @@
 		<script src="plugins/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
 		<script src="plugins/fullcalendar/fullcalendar/fullcalendar.js"></script>
 		<script src="js/index.js"></script>
+                <script src="plugins/jquery-validation/dist/jquery.validate.min.js"></script>
+		<script src="plugins/summernote/build/summernote.min.js"></script>
+		<script src="plugins/ckeditor/ckeditor.js"></script>
+		<script src="plugins/ckeditor/adapters/jquery.js"></script>
+		<script src="js/form-validation.js"></script>
+                <script src="plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
+		<script src="plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
+		<script src="js/ui-modals.js"></script>
 		<!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 		<script>
 			jQuery(document).ready(function() {
 				Main.init();
 				Index.init();
+                                UIModals.init();
+				FormValidator.init();
 			});
 		</script>
 	</body>

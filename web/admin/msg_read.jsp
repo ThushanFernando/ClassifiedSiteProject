@@ -21,23 +21,27 @@
 		<meta content="" name="author" />
 		<!-- end: META -->
 		<!-- start: MAIN CSS -->
-		<link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="../fonts/style.css">
-		<link rel="stylesheet" href="../css/main.css">
-		<link rel="stylesheet" href="../css/main-responsive.css">
-		<link rel="stylesheet" href="../plugins/iCheck/skins/all.css">
-		<link rel="stylesheet" href="../plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css">
-		<link rel="stylesheet" href="../plugins/perfect-scrollbar/src/perfect-scrollbar.css">
-		<link rel="stylesheet" href="../css/theme_light.css" type="text/css" id="skin_color">
-		<link rel="stylesheet" href="../css/print.css" type="text/css" media="print"/>
+		<link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="fonts/style.css">
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/main-responsive.css">
+		<link rel="stylesheet" href="plugins/iCheck/skins/all.css">
+		<link rel="stylesheet" href="plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css">
+		<link rel="stylesheet" href="plugins/perfect-scrollbar/src/perfect-scrollbar.css">
+		<link rel="stylesheet" href="css/theme_light.css" type="text/css" id="skin_color">
+		<link rel="stylesheet" href="css/print.css" type="text/css" media="print"/>
 		<!--[if IE 7]>
-		<link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome-ie7.min.css">
+		<link rel="stylesheet" href="plugins/font-awesome/css/font-awesome-ie7.min.css">
 		<![endif]-->
 		<!-- end: MAIN CSS -->
 		<!-- start: CSS REQUIRED FOR THIS PAGE ONLY -->
-		<link rel="stylesheet" href="../plugins/fullcalendar/fullcalendar/fullcalendar.css">
-		<!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
+		<link rel="stylesheet" href="plugins/fullcalendar/fullcalendar/fullcalendar.css">
+		<link rel="stylesheet" href="plugins/summernote/build/summernote.css">
+                <link href="plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+		<link href="plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+		
+                <!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
 		<link rel="shortcut icon" href="favicon.ico" />
 	</head>
 	<!-- end: HEAD -->
@@ -58,7 +62,7 @@
 					<!-- end: RESPONSIVE MENU TOGGLER -->
 					<!-- start: LOGO -->
 					<a class="navbar-brand" href="index.jsp">
-                                            <img  src="../images/logo.jpg" style="width: 100px;"/>
+                                            <img  src="images/logo.jpg" style="width: 100px;"/>
 					</a>
 					<!-- end: LOGO -->
 				</div>
@@ -212,7 +216,7 @@
 												<a href="javascript:;">
 													<div class="clearfix">
 														<div class="thread-image">
-															<img alt="" src="./../images/avatar-2.jpg">
+															<img alt="" src="./images/avatar-2.jpg">
 														</div>
 														<div class="thread-content">
 															<span class="author">Nicole Bell</span>
@@ -226,7 +230,7 @@
 												<a href="javascript:;">
 													<div class="clearfix">
 														<div class="thread-image">
-															<img alt="" src="./../images/avatar-1.jpg">
+															<img alt="" src="./images/avatar-1.jpg">
 														</div>
 														<div class="thread-content">
 															<span class="author">Peter Clark</span>
@@ -240,7 +244,7 @@
 												<a href="javascript:;">
 													<div class="clearfix">
 														<div class="thread-image">
-															<img alt="" src="./../images/avatar-3.jpg">
+															<img alt="" src="./images/avatar-3.jpg">
 														</div>
 														<div class="thread-content">
 															<span class="author">Steven Thompson</span>
@@ -254,7 +258,7 @@
 												<a href="javascript:;">
 													<div class="clearfix">
 														<div class="thread-image">
-															<img alt="" src="./../images/avatar-1.jpg">
+															<img alt="" src="./images/avatar-1.jpg">
 														</div>
 														<div class="thread-content">
 															<span class="author">Peter Clark</span>
@@ -268,7 +272,7 @@
 												<a href="javascript:;">
 													<div class="clearfix">
 														<div class="thread-image">
-															<img alt="" src="./../images/avatar-5.jpg">
+															<img alt="" src="./images/avatar-5.jpg">
 														</div>
 														<div class="thread-content">
 															<span class="author">Kenneth Ross</span>
@@ -293,27 +297,16 @@
 						<!-- start: USER DROPDOWN -->
 						<li class="dropdown current-user">
 							<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
-                                                            <img src="../images/profile_img.jpg" class="circle-img" alt="">
+                                                            <img src="images/profile_img.jpg" class="circle-img" alt="">
 								<span class="username">Ishan Madurasinghe</span>
 								<i class="clip-chevron-down"></i>
 							</a>
 							<ul class="dropdown-menu">
 								
+								
 								<li>
-									<a href="pages_calendar.html">
-										<i class="clip-calendar"></i>
-										&nbsp;My Calendar
-									</a>
-								<li>
-									<a href="pages_messages.html">
-										<i class="clip-bubble-4"></i>
-										&nbsp;My Messages (3)
-									</a>
-								</li>
-								<li class="divider"></li>
-								<li>
-									<a href="utility_lock_screen.html"><i class="clip-locked"></i>
-										&nbsp;Lock Screen </a>
+									<a href="#responsive" data-toggle="modal"><i class="clip-key"></i>
+										&nbsp;Change password </a>
 								</li>
 								<li>
 									<a href="login_example1.html">
@@ -558,7 +551,7 @@
 										</li>
 										<li class="messages-item">
 											<span title="Mark as starred" class="messages-item-star"><i class="fa fa-star"></i></span>
-											<img alt="" src="../images/avatar-1.jpg" class="messages-item-avatar">
+											<img alt="" src="images/avatar-1.jpg" class="messages-item-avatar">
 											<span class="messages-item-from">Peter Clark</span>
 											<div class="messages-item-time">
 												<span class="text">10:23 PM</span>
@@ -608,7 +601,7 @@
 										</li>
 										<li class="messages-item active starred">
 											
-											<img alt="" src="../images/avatar-2.jpg" class="messages-item-avatar">
+											<img alt="" src="images/avatar-2.jpg" class="messages-item-avatar">
 											<span class="messages-item-from">Nicole Bell</span>
 											<div class="messages-item-time">
 												<span class="text">08:46 PM</span>
@@ -659,7 +652,7 @@
 										<li class="messages-item">
 											
 											
-											<img alt="" src="../images/avatar-3.jpg" class="messages-item-avatar">
+											<img alt="" src="images/avatar-3.jpg" class="messages-item-avatar">
 											<span class="messages-item-from">Steven Thompson</span>
 											<div class="messages-item-time">
 												<span class="text">04:03 PM</span>
@@ -709,7 +702,7 @@
 										</li>
 										<li class="messages-item">
 											
-											<img alt="" src="../images/avatar-1.jpg" class="messages-item-avatar">
+											<img alt="" src="images/avatar-1.jpg" class="messages-item-avatar">
 											<span class="messages-item-from">Peter Clark</span>
 											<div class="messages-item-time">
 												<span class="text">11:16 AM</span>
@@ -840,41 +833,119 @@
 				</div>
 			</div>
 		</div>
+                
+                <!-- start: BOOTSTRAP EXTENDED MODALS -->
+		<div id="responsive" class="modal fade" tabindex="-1" data-width="500" style="display: none;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+                            <h2></h2>
+				
+			</div>
+			<div class="modal-body">
+				<div class="row">
+						<div class="col-md-12">
+							<!-- start: FORM VALIDATION 1 PANEL -->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+                                                                    Step 1. Enter current login details	
+								</div>
+								<div class="panel-body">
+									<h2><i class="fa fa-pencil-square teal"></i> Change Your password</h2>
+									
+									<hr>
+									<form action="#" role="form" id="form">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="errorHandler alert alert-danger no-display">
+													<i class="fa fa-times-sign"></i> You have some form errors. Please check below.
+												</div>
+												<div class="successHandler alert alert-success no-display">
+													<i class="fa fa-ok"></i> Your form validation is successful!
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">
+														User Name <span class="symbol required"></span>
+													</label>
+													<input type="text" placeholder="Insert your User Name" class="form-control" id="username" name="username">
+												</div>
+												
+												<div class="form-group">
+													<label class="control-label">
+														Password <span class="symbol required"></span>
+													</label>
+													<input type="password" class="form-control" name="password" id="password">
+												</div>
+												
+											</div>
+											
+										</div>
+										
+										<div class="row">
+											<div class="col-md-4">
+												<button class="btn btn-blue btn-block" type="submit">
+													Proceed <i class="fa fa-arrow-circle-right"></i>
+												</button>
+											</div>
+											
+										</div>
+									</form>
+								</div>
+							</div>
+							<!-- end: FORM VALIDATION 1 PANEL -->
+						</div>
+					</div>
+			</div>
+			
+		</div>
 		<!-- start: MAIN JAVASCRIPTS -->
 		<!--[if lt IE 9]>
-		<script src="../plugins/respond.min.js"></script>
-		<script src="../plugins/excanvas.min.js"></script>
+		<script src="plugins/respond.min.js"></script>
+		<script src="plugins/excanvas.min.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<![endif]-->
 		<!--[if gte IE 9]><!-->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 		<!--<![endif]-->
-		<script src="../plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js"></script>
-		<script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
-		<script src="../plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
-		<script src="../plugins/blockUI/jquery.blockUI.js"></script>
-		<script src="../plugins/iCheck/jquery.icheck.min.js"></script>
-		<script src="../plugins/perfect-scrollbar/src/jquery.mousewheel.js"></script>
-		<script src="../plugins/perfect-scrollbar/src/perfect-scrollbar.js"></script>
-		<script src="../plugins/less/less-1.5.0.min.js"></script>
-		<script src="../plugins/jquery-cookie/jquery.cookie.js"></script>
-		<script src="../plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js"></script>
-		<script src="../js/main.js"></script>
+		<script src="plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js"></script>
+		<script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src="plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+		<script src="plugins/blockUI/jquery.blockUI.js"></script>
+		<script src="plugins/iCheck/jquery.icheck.min.js"></script>
+		<script src="plugins/perfect-scrollbar/src/jquery.mousewheel.js"></script>
+		<script src="plugins/perfect-scrollbar/src/perfect-scrollbar.js"></script>
+		<script src="plugins/less/less-1.5.0.min.js"></script>
+		<script src="plugins/jquery-cookie/jquery.cookie.js"></script>
+		<script src="plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js"></script>
+		<script src="js/main.js"></script>
 		<!-- end: MAIN JAVASCRIPTS -->
 		<!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
-		<script src="../plugins/flot/jquery.flot.js"></script>
-		<script src="../plugins/flot/jquery.flot.pie.js"></script>
-		<script src="../plugins/flot/jquery.flot.resize.min.js"></script>
-		<script src="../plugins/jquery.sparkline/jquery.sparkline.js"></script>
-		<script src="../plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
-		<script src="../plugins/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
-		<script src="../plugins/fullcalendar/fullcalendar/fullcalendar.js"></script>
-		<script src="../js/index.js"></script>
+		<script src="plugins/flot/jquery.flot.js"></script>
+		<script src="plugins/flot/jquery.flot.pie.js"></script>
+		<script src="plugins/flot/jquery.flot.resize.min.js"></script>
+		<script src="plugins/jquery.sparkline/jquery.sparkline.js"></script>
+		<script src="plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+		<script src="plugins/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+		<script src="plugins/fullcalendar/fullcalendar/fullcalendar.js"></script>
+		<script src="js/index.js"></script>
+                <script src="plugins/jquery-validation/dist/jquery.validate.min.js"></script>
+		<script src="plugins/summernote/build/summernote.min.js"></script>
+		<script src="plugins/ckeditor/ckeditor.js"></script>
+		<script src="plugins/ckeditor/adapters/jquery.js"></script>
+		<script src="js/form-validation.js"></script>
+                <script src="plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
+		<script src="plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
+		<script src="js/ui-modals.js"></script>
 		<!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 		<script>
 			jQuery(document).ready(function() {
 				Main.init();
 				Index.init();
+                                UIModals.init();
+				FormValidator.init();
 			});
 		</script>
 	</body>

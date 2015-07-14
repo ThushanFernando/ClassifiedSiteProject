@@ -4059,10 +4059,11 @@ body.header-default .daterangepicker {
 	background: none repeat scroll 0 0 #FFFFFF;
 	position: fixed;
 	right: 0;
-	top: 100px;
+	top: 300px;
 	width: 215px;
 	z-index: 999;
 }
+
 #style_selector_container {
 	border: 1px solid rgba(23, 24, 26, 0.15);
 	border-bottom-left-radius: 2px;

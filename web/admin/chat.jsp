@@ -20,14 +20,14 @@
         <meta content="" name="author" />
         <!-- end: META -->
         <!-- start: MAIN CSS -->
-        <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../fonts/style.css">
-        <link rel="stylesheet" href="../css/main.css">
-        <link rel="stylesheet" href="../css/main-responsive.css">
-        <link rel="stylesheet" href="../plugins/perfect-scrollbar/src/perfect-scrollbar.css">
+        <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="fonts/style.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/main-responsive.css">
+        <link rel="stylesheet" href="plugins/perfect-scrollbar/src/perfect-scrollbar.css">
         <!--[if IE 7]>
-        <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome-ie7.min.css">
+        <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome-ie7.min.css">
         <![endif]-->
         <!-- end: MAIN CSS -->
         <!-- start: CSS REQUIRED FOR THIS PAGE ONLY -->
@@ -39,10 +39,11 @@
 
 
         
-        <div  class="row navbar-fixed-bottom">
+        
 
-            <div class="col-lg-12">
-                <div class="col-sm-2 pull-right"   >
+        <div class="row navbar-fixed-bottom" style="border: solid 1px; height: 50px;">
+                
+                <div class="col-sm-2  "   >
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <i class="clip-bubble-4 hidden-xs"></i>
@@ -60,8 +61,8 @@
 
                     </div>
                 </div>
-                <div class="col-sm-2 pull-right"   >
-                    <div class="panel panel-default">
+                <div class="col-sm-2  "   >
+                    <div class="panel panel-default ">
                         <div class="panel-heading">
                             <i class="clip-bubble-4 hidden-xs"></i>
                             <p>John Doe</p>
@@ -76,7 +77,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="panel-body panel-scroll" id="div1" style="height:200px">
+                        <div class="panel-body panel-scroll "  id="div1" style="height:200px">
                             <ol class="discussion">
                                 <li class="other">
                                     <div class="avatar">
@@ -127,7 +128,7 @@
 
                             </ol>
 
-
+                            <a href="chat.jsp"></a>
 
 
 
@@ -145,20 +146,20 @@
                 </div>
             </div>                                                 
 
-        </div>
+        
 
         <!-- start: MAIN JAVASCRIPTS -->
         <!--[if lt IE 9]>
-        <script src="../plugins/respond.min.js"></script>
-        <script src="../plugins/excanvas.min.js"></script>
+        <script src="plugins/respond.min.js"></script>
+        <script src="plugins/excanvas.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <![endif]-->
         <!--[if gte IE 9]><!-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
         <!--<![endif]-->
-        <script src="../plugins/perfect-scrollbar/src/perfect-scrollbar.js"></script>
-        <script src="../plugins/less/less-1.5.0.min.js"></script>
-        <script src="../js/main.js"></script>
+        <script src="plugins/perfect-scrollbar/src/perfect-scrollbar.js"></script>
+        <script src="plugins/less/less-1.5.0.min.js"></script>
+        <script src="js/main.js"></script>
 
         <!-- end: MAIN JAVASCRIPTS -->
         <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
@@ -171,7 +172,8 @@
         </script>
         <script>
             $('#div1').scrollTop($('#div1')[0].scrollHeight);
-        </script>    
+        </script> 
+        
     </body>
     <!-- end: BODY -->
 </html>

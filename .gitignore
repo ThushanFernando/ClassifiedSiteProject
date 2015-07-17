@@ -215,6 +215,4 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 /nbproject/private/
-/web/plugins/DataTables/examples/ajax/
-/web/plugins/DataTables/examples/
 /web/plugins/

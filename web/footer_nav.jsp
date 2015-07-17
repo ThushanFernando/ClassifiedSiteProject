@@ -5,9 +5,28 @@
 --%>
 
 <script type="text/javascript">
+    //tooltip plugin
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
+</script>
+
+<script>
+    //Superb.lk brand animation
+    $(document).ready(function () {
+        $("#brand").mouseenter(function () {
+            $("#brand").animate({
+                opacity: '1'
+            });
+            $("#brand").css({"color": "blue"});
+        });
+        $("#brand").mouseleave(function () {
+            $("#brand").animate({
+                opacity: '0.5'
+            });
+            $("#brand").css({"color": "black"});
+        });
+    });
 </script>
 
 <link rel="stylesheet" type="text/css" href="custom_styles_scripts/style_responsive_textarea.css">
@@ -22,7 +41,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Superb.lk</a>
+            <a class="navbar-brand"><div id="brand">Superb.lk</div></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -35,7 +54,7 @@
                 <li><a data-toggle="tooltip" data-placement="top" title="Facebook" href=""><img src="media/images/social-icons_pack1/128/facebook.png" width="20" height="20" alt="Facebook"/> Facebook</a></li>
                 <li><a data-toggle="tooltip" data-placement="top" title="Google +" href=""><img src="media/images/social-icons_pack1/128/google.png" width="20" height="20" alt="Google +"/> Google +</a></li>
                 <li><a data-toggle="tooltip" data-placement="top" title="Twitter" href=""><img src="media/images/social-icons_pack1/128/twitter.png" width="20" height="20" alt="Twitter"/> Twitter</a></li>
-                <li class="active"><a class="text-right" href="http://nextglow.com/" data-toggle="tooltip" data-placement="top" title="Go To Designer Web Site">&COPY; NextGlow Web Designers</a></li>
+                <li class="active"><a class="text-right" href="http://nextglow.com/" target="_blank" data-toggle="tooltip" data-placement="top" title="Go To Designer Web Site">&COPY; NextGlow Web Designers</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

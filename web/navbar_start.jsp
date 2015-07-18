@@ -40,7 +40,7 @@
                 </ul>
                 <form class="navbar-form navbar-left center-block" role="search">
                     <div class="form-group">
-                        <input class="form-control" style="font-family: cursive;" placeholder="I'm looking for..?" type="text" required="">
+                        <input class="form-control" placeholder="I'm looking for..?" type="text" required="">
                     </div>
                     <button type="submit" class="btn btn-info" style="border: solid 2px gray;">Search</button>
                 </form>                
@@ -52,7 +52,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a data-toggle="modal" data-target="#login_model" href="">
                             <b>Log In</b>
                         </a>
                     </li>
@@ -60,5 +60,6 @@
             </div><!-- /.navbar-collapse -->
         </div>
 
+        <jsp:include page="model_login.jsp"></jsp:include>
     </body>
 </html>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 09, 2015 at 07:50 PM
+-- Generation Time: Jul 17, 2015 at 04:25 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `classifiedsite`
 --
-CREATE DATABASE IF NOT EXISTS `classifiedsite` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `classifiedsite`;
 
 -- --------------------------------------------------------
 
@@ -3735,6 +3733,7 @@ set @pass = new.pass;
 insert into user_passwords(username, pass) values(@user,@pass);
 
 insert into user_info(username) values(@user);
+insert into user_account_status(username) values(@user);
 
 End
 //
@@ -3756,6 +3755,20 @@ END IF;
 End
 //
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_account_status`
+--
+
+CREATE TABLE IF NOT EXISTS `user_account_status` (
+  `username` varchar(25) NOT NULL,
+  `status` set('Activated','Inactive') NOT NULL DEFAULT 'Inactive',
+  `activate_code` int(10) DEFAULT NULL,
+  `activated_time_stamp` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -3814,7 +3827,7 @@ CREATE TABLE IF NOT EXISTS `user_passwords` (
   `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`),
   KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `user_passwords`
@@ -3903,6 +3916,12 @@ ALTER TABLE `item_inquiry`
 ALTER TABLE `location`
   ADD CONSTRAINT `location_city` FOREIGN KEY (`city`) REFERENCES `location_city` (`city_name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `location_district` FOREIGN KEY (`district`) REFERENCES `location_district` (`district_name`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `user_account_status`
+--
+ALTER TABLE `user_account_status`
+  ADD CONSTRAINT `user_account_status_username` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_info`

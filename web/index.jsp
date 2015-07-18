@@ -17,7 +17,7 @@
         </head>
 
         <body class="container-fluid">
-        <jsp:include page="navbar_start.jsp"></jsp:include>
+        <jsp:include page="navbar_home.jsp"></jsp:include>
         </body>
         
     <jsp:include page="footer_nav.jsp"></jsp:include>

@@ -651,7 +651,7 @@
                             
 				
 				
-                            <h4 class="modal-title"><input type="radio" class="square-green" value="" checked="checked" name="optionsRadios12">Message to the user</h4>
+                        <h4 class="modal-title"><input type="radio" class="square-green" value="" checked="checked" name="optionsRadios12">Message to the user</h4>
 			</div>
 			<div class="modal-body">
 				<div class="row">

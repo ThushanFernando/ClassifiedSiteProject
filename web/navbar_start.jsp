@@ -6,14 +6,16 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Welcome To Superb.lk</title>
         <link rel="stylesheet" type="text/css" href="menubar/bootstrap.min.css">
     </head>
+
     <!--remove class="navbar-fixed-top" attribute in case of error-->
-    <body style="font-family: Century Gothic; padding: 1px;" class="navbar-fixed-top text-center">
+    <body style="font-family: Century Gothic; padding: 1px;" class="text-center container-fluid">
         <div class="navbar navbar-custom">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -61,5 +63,4 @@
         </div>
 
         <jsp:include page="model_login.jsp"></jsp:include>
-    </body>
-</html>
+

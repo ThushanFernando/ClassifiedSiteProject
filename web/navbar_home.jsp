@@ -6,7 +6,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%--<jsp:include page="BootstrapHeader.jsp"></jsp:include>--%>
@@ -18,8 +20,23 @@
             }
         </style>
 
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".dropdown").hover(
+                        function () {
+                            $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true, true).slideDown("fast");
+                            $(this).toggleClass('open');
+                        },
+                        function () {
+                            $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true, true).slideUp("fast");
+                            $(this).toggleClass('open');
+                        }
+                );
+            });
+        </script>
+
     </head>
-    
+
     <!--remove class="navbar-fixed-top" attribute in case of error-->
     <body style="font-family: Century Gothic; padding: 1px;" class="navbar-fixed-top">
         <div class="navbar navbar-custom">

@@ -4,9 +4,17 @@
         <servlet-name>selected_districts</servlet-name>
         <servlet-class>servlets.selected_districts</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>client_ajax_updateItemCount</servlet-name>
+        <servlet-class>servlets.client_ajax_updateItemCount</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>selected_districts</servlet-name>
         <url-pattern>/selected_districts</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>client_ajax_updateItemCount</servlet-name>
+        <url-pattern>/client_ajax_updateItemCount</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

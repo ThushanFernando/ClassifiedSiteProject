@@ -67,7 +67,7 @@
 
         <hr class="hr-blue"/>
 
-        <div class="row-fluid container-fluid">
+        <div class="row-fluid container">
             <jsp:include page="browse_categories.jsp"></jsp:include>                
             </div>
             

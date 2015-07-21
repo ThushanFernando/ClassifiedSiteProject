@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Classes;
+package classes;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,19 +16,18 @@ import javax.swing.JOptionPane;
  *
  * @author Indunil
  */
-public class DbClass {
-
+public class Connect_DB {
     //connection object
     public Connection conn = null;
 
     //sql url
-    public static final String URL = "jdbc:mysql://localhost:3306/";
+    protected final String URL = "jdbc:mysql://localhost:3306/";
     //sql database name
-    public static String dbName = "classifiedsite";
+    protected String dbName = "classifiedsite";
     //username
-    public static String username = "root";
+    protected String username = "root";
     //password
-    public static String password = "";
+    protected String password = "";
 
     //open connection
     public boolean getConnection() {
@@ -46,13 +45,13 @@ public class DbClass {
 
             } catch (ClassNotFoundException ex) {
 
-                Logger.getLogger(DbClass.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(classes.Connect_DB.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, ex);
                 System.out.println(ex.toString());
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(DbClass.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(classes.Connect_DB.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, ex);
             System.out.println(ex.toString());
         }
@@ -76,7 +75,7 @@ public class DbClass {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(DbClass.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(classes.Connect_DB.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, ex);
             System.out.println(ex.toString());
         }

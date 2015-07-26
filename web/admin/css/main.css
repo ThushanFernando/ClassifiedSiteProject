@@ -3477,7 +3477,7 @@ div.timeline_element.purple div.timeline_title {
 	width: 40px;
 }
 .messages-list .messages-item .messages-item-from, .messages-list .messages-item .messages-item-subject {
-	margin-left: 45px;
+	margin-left: 0px;
 }
 .messages-list .messages-item .messages-item-from {
 	font-weight: bold;

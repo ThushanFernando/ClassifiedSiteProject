@@ -48,7 +48,7 @@
 	</head>
 	<!-- end: HEAD -->
 	<!-- start: BODY -->
-	<body>
+        <body onload="abc()">
                 <%
                 int msg_count=1;
                 %>
@@ -58,13 +58,15 @@
 			<div class="container">
 				<div class="navbar-header">
 					<!-- start: RESPONSIVE MENU TOGGLER -->
-					<button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+                                        
+                                        <button  data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
 						<span class="clip-list-2"></span>
 					</button>
 					<!-- end: RESPONSIVE MENU TOGGLER -->
 					<!-- start: LOGO -->
 					<a class="navbar-brand" href="index.jsp">
                                             <img  src="images/logo.jpg" style="width: 100px;"/>
+                                            
 					</a>
 					<!-- end: LOGO -->
 				</div>
@@ -204,7 +206,7 @@
                                                         <%}else{%>
 							<a class="dropdown-toggle" data-close-others="true" data-hover="dropdown" data-toggle="dropdown" href="#">
 								<i class="clip-bubble-3"></i>
-								<span class="badge"><%=msg_count%></span>
+                                                                <span id="MC" class="badge"></span>
 							</a>
 							<ul class="dropdown-menu posts">
 								<li>
@@ -827,7 +829,32 @@
                 <script src="plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
 		<script src="plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
 		<script src="js/ui-modals.js"></script>
-		
+		<script>
+              
+              
+               function abc() {
+
+                    $.ajax({
+                        type: "GET",
+                        url: "../Dashboard",
+                        dataType: "xml",
+                        success: function (xml) {
+                            $("#MC").html("");
+
+                            $(xml).find('values').each(function () {
+
+                                var msgcount = $(this).find('msgcount').text();
+                                
+                                $("#MC").append(msgcount);
+                                
+                            });
+
+                            
+                        }
+                    });
+                };
+            
+        </script>
 		
 		<!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 		<script>

@@ -140,18 +140,81 @@ public class AdminClass_NavbarTools {
     }
     
     public ArrayList unreadNotifications(){
+        ArrayList al=new ArrayList();
         try {
             dbc.getConnection();
             Statement stmt=dbc.conn.createStatement();
             String query="";
+            ResultSet rs=stmt.executeQuery(query);
+            if(!rs.isBeforeFirst()){
+                
+            }
+            else{
+                while(rs.next()){
+                    AdminClass_NavbarTools an=new AdminClass_NavbarTools();
+                    an.setId(rs.getString(""));
+                    an.setContent(rs.getString(""));
+                    an.setContent(rs.getString(""));
+                    an.setTimeStamp(rs.getString(""));
+                    al.add(an);
+                }
+            }
             
             
         } catch (SQLException ex) {
             Logger.getLogger(AdminClass_NavbarTools.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return al;
     }
     
+    public ArrayList unreadMessages(){
+        ArrayList al=new ArrayList();
+        try {
+            dbc.getConnection();
+            Statement stmt=dbc.conn.createStatement();
+            String query="";
+            ResultSet rs=stmt.executeQuery(query);
+            if(!rs.isBeforeFirst()){
+                
+            }
+            else{
+                while(rs.next()){
+                    AdminClass_NavbarTools an=new AdminClass_NavbarTools();
+                    an.setId(rs.getString(""));
+                    an.setUser(rs.getString(""));
+                    an.setContent(rs.getString(""));
+                    an.setTimeStamp(rs.getString(""));
+                    al.add(an);
+                }
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_NavbarTools.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return al;
+    }
     
+    public int newMessages(){
+        int status=0;
+        try {
+            dbc.getConnection();
+            Statement stmt=dbc.conn.createStatement();
+            String query="SELECT COUNT(`time_state`) FROM `user_messages` WHERE `time_state`='0'";
+            ResultSet rs=stmt.executeQuery(query);
+            while(rs.next()){
+                int count=rs.getInt("COUNT(`time_state`)");
+                if(count==0){
+                    status=1;
+                }
+                else{
+                    status=0;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_NavbarTools.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return status;
+    }
     
 }

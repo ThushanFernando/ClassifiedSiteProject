@@ -29,19 +29,7 @@ public class Dashboard extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Dashboard</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Dashboard at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,7 +44,14 @@ public class Dashboard extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("test/xml");
+       response.setCharacterEncoding("UTF-8");
+       String messageCount="7";
+       String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+               +"<values>\n"
+               +"   <msgcount>"+messageCount+"</msgcount>\n"
+               +"</values>\n";
+       response.getWriter().write(content);
     }
 
     /**

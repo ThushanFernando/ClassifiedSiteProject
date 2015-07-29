@@ -84,7 +84,7 @@ More detail and specific examples can be found in the included HTML file.
 		plot.hooks.processOptions.push(function(plot, options) {
 			if (options.series.pie.show) {
 
-				options.grid.show = false;
+				options.grid.show = true;
 
 				// set labels.show
 

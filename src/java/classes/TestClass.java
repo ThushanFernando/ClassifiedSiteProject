@@ -14,17 +14,17 @@ import java.util.Iterator;
  */
 public class TestClass {
     public static void main(String[] args) throws Exception {
-    AdminClass_Message am=new AdminClass_Message();
-    am.setUser("test");
-    ArrayList al=am.getConversation();
+    AdminClass_Overviewstats ao=new AdminClass_Overviewstats();
+    
+    ArrayList al=ao.usersYear();
     Iterator itr = al.iterator();
-    AdminClass_Message received = null;
+    AdminClass_Overviewstats received = null;
 
         while (itr.hasNext()) {
             Object a = itr.next();
-            received = (AdminClass_Message) a;
+            received = (AdminClass_Overviewstats) a;
 
-            System.out.println(received.getSender()+" "+received.getContent()+" "+received.getTimeStamp());
+            System.out.println(received.getTimePeriod()+" "+received.getCount());
         }
  }
 }

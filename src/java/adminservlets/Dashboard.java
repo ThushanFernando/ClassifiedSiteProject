@@ -5,8 +5,10 @@
  */
 package adminservlets;
 
+import classes.AdminClass_Overviewstats;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +31,7 @@ public class Dashboard extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
        
     }
 
@@ -44,14 +47,33 @@ public class Dashboard extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("test/xml");
-       response.setCharacterEncoding("UTF-8");
-       String messageCount="7";
-       String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-               +"<values>\n"
-               +"   <msgcount>"+messageCount+"</msgcount>\n"
-               +"</values>\n";
-       response.getWriter().write(content);
+        AdminClass_Overviewstats ao=new AdminClass_Overviewstats();
+        
+        ArrayList categoriesPresentage=ao.categoriesPresentage();
+        request.setAttribute("categoriesPresentage", categoriesPresentage);
+        
+        ArrayList pagevisitMonth=ao.pagevisitMonth();
+        request.setAttribute("pagevisitMonth", pagevisitMonth);
+        
+        ArrayList usersMonth=ao.usersMonth();
+        request.setAttribute("usersMonth", usersMonth);
+        
+        ArrayList adsMonth=ao.adsMonth();
+        request.setAttribute("adsMonth", adsMonth);
+        
+        ArrayList pagevisitYear=ao.pagevisitYear();
+        request.setAttribute("pagevisitYear", pagevisitYear);
+        
+        ArrayList usersYear=ao.usersYear();
+        request.setAttribute("usersYear", usersYear);
+        
+        ArrayList adsYear=ao.adsYear();
+        request.setAttribute("adsYear", adsYear);
+        
+        
+        RequestDispatcher rd=request.getRequestDispatcher("admin/index.jsp");
+        rd.forward(request, response);
+       
     }
 
     /**
@@ -65,7 +87,7 @@ public class Dashboard extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       
     }
 
     /**

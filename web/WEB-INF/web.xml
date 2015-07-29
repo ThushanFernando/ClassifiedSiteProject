@@ -36,6 +36,10 @@
         <servlet-name>ViewReports</servlet-name>
         <servlet-class>adminservlets.ViewReports</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DataCounts</servlet-name>
+        <servlet-class>adminservlets.DataCounts</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/Dashboard</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>ViewReports</servlet-name>
         <url-pattern>/ViewReports</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DataCounts</servlet-name>
+        <url-pattern>/DataCounts</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

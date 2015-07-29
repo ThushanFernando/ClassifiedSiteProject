@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Classes;
+package classes;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,10 +14,10 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Indunil
+ * @author SithuDewmi
  */
 public class DbClass {
-
+    
     //connection object
     public Connection conn = null;
 

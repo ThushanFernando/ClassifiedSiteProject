@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import Classes.DbClass;
+import classes.DbClass;
 import java.util.ArrayList;
 
 /**
@@ -122,7 +122,7 @@ public class AdminClass_NavbarTools {
         try {
             dbc.getConnection();
             Statement stmt=dbc.conn.createStatement();
-            String query="SELECT  count(`message_id`) from user_messages where `read_state`='0'";
+            String query="SELECT  count(`message_id`) from user_messages where `read_state`='0' AND receiver='Admin'";
             ResultSet rs=stmt.executeQuery(query);
             if(!rs.isBeforeFirst()){
                 count=0;

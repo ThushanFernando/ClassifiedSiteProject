@@ -8,7 +8,7 @@ package classes;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import Classes.DbClass;
+import classes.DbClass;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -6,16 +6,43 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<script src="custom_styles_scripts/script_password_strength_meter.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#login_form").submit(function () {
+            $("#loading_animation").html("<img src='media/images/Gif_Animations/loading.gif' width='25' height='25' alt='Loading...'/>");
+
+            var login = $("#login").val();
+            var password = $("#password").val();
+
+            var data = "login=" + login + "&" + "password=" + password;
+
+            $.ajax({
+                type: "POST",
+                url: "client_ajax_login",
+                data: data,
+                dataType: "xml",
+                success: function (xml) {
+                    var loginDetails = $(xml).find('login').text();
+                    var loginStatus = $(xml).find('loginStatus').text().toString();
+
+                    window.alert(loginStatus);
+                },
+                error: function () {
+                    window.alert('Request Failed!');
+                }
+            });
+        });
+    });
+</script>
 
 <!-- Modal -->
 
-<form method="POST" class="form-horizontal" action="">
+<form id="login_form" method="POST" class="form-horizontal">
     <div class="modal fade" id="login_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button id="close_button" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Log In<br/>
                         <small class="subsection-title">Sign Into Your Superb.lk Account</small>
                     </h4>
@@ -36,17 +63,17 @@
                         <div class="control-group">
                             <label class="control-label" for="email">Password</label>
                             <div class="controls">
-                                <input class="form-control" id="pass" name="pass" type="password" placeholder="Account Password" class="input-xlarge" required="">  
-                                <div class="pwstrength_viewport_progress"></div>
+                                <input class="form-control" id="password" name="pass" type="password" placeholder="Account Password" class="input-xlarge" required="">
                             </div>
                         </div>
                     </fieldset>
                 </div>
                 <div class="modal-footer text-center">
+                    <div class="pull-left img-responsive img-circle" id="loading_animation" style="padding: 2px;"></div>
                     <div class="btn-group">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                         <button type="reset" class="btn btn-info">Reset</button>
-                        <button type="submit" class="btn btn-primary">Log In</button>
+                        <button type="submit" id="login_button" class="btn btn-primary">Log In</button>
                     </div>                    
                 </div>
             </div>

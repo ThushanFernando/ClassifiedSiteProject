@@ -49,7 +49,7 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#">
+                        <a data-toggle="modal" data-target="#signup_model" href="">
                             Sign Up
                         </a>
                     </li>
@@ -62,5 +62,6 @@
             </div><!-- /.navbar-collapse -->
         </div>
 
+        <jsp:include page="model_signup.jsp"></jsp:include>
         <jsp:include page="model_login.jsp"></jsp:include>
 

@@ -5,13 +5,8 @@
 --%>
 
 <jsp:include page="BootstrapHeader.jsp"></jsp:include>
-
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-
 
 <html>
     <head>
@@ -52,10 +47,12 @@
     </head>
 
     <jsp:include page="navbar_start.jsp"></jsp:include>
-    <%--<jsp:include page="slider.jsp"></jsp:include>--%>
+    <jsp:include page="slider.jsp"></jsp:include>
 
     <body class="container-fluid text-center">
 
+        <hr class="hr-red">
+        
         <div class="row-fluid">
             <div class="col-lg-12">
                 <div class="caption text-center">

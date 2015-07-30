@@ -9,8 +9,12 @@
         <servlet-class>servlets.client_ajax_updateItemCount</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>client_ajax_login</servlet-name>
-        <servlet-class>servlets.client_ajax_login</servlet-class>
+        <servlet-name>Ajax_login</servlet-name>
+        <servlet-class>servlets.Ajax_login</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClearAll</servlet-name>
+        <servlet-class>servlets.ClearAll</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>selected_districts</servlet-name>
@@ -21,8 +25,12 @@
         <url-pattern>/client_ajax_updateItemCount</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>client_ajax_login</servlet-name>
-        <url-pattern>/client_ajax_login</url-pattern>
+        <servlet-name>Ajax_login</servlet-name>
+        <url-pattern>/Ajax_login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClearAll</servlet-name>
+        <url-pattern>/ClearAll</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -8,7 +8,7 @@ package classes;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import Classes.DbClass;
+import classes.Connect_DB;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class AdminClass_Message {
 
-    DbClass dbc = new DbClass();
+    Connect_DB dbc = new Connect_DB();
     private String user = null;
     private String sender = null;
     private String content = null;

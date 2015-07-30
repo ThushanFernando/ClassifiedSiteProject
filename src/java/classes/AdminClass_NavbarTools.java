@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import Classes.DbClass;
+import classes.Connect_DB;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * @author SithuDewmi
  */
 public class AdminClass_NavbarTools {
-    private final DbClass dbc=new DbClass();
+    private final Connect_DB dbc=new Connect_DB();
     private String id=null;
     private String user=null;
     private String content=null;

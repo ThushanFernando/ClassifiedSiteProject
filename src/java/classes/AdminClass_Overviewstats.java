@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import Classes.DbClass;
+import classes.Connect_DB;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import java.util.Calendar;
  */
 public class AdminClass_Overviewstats {
     
-    private final Classes.DbClass dbc = new Classes.DbClass();
+    private final classes.Connect_DB dbc = new classes.Connect_DB();
     private String id = null;
     private String timeStamp = null;
     private String category = null;

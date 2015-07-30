@@ -46,28 +46,28 @@
 
     </head>
 
-    <jsp:include page="navbar_start.jsp"></jsp:include>
-    <jsp:include page="slider.jsp"></jsp:include>
-
     <body class="container-fluid text-center">
 
-        <hr class="hr-red">
-        
-        <div class="row-fluid">
-            <div class="col-lg-12">
-                <div class="caption text-center">
-                    <h3>Map</h3>
-                    <p>Sri Lanka</p>
+        <jsp:include page="navbar.jsp"></jsp:include>
+        <jsp:include page="slider.jsp"></jsp:include>
+
+            <hr class="hr-red">
+
+            <div class="row-fluid">
+                <div class="col-lg-12">
+                    <div class="caption text-center">
+                        <h3>Map</h3>
+                        <p>Sri Lanka</p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <hr class="hr-blue"/>
+            <hr class="hr-blue"/>
 
-        <div class="row-fluid container">
+            <div class="row-fluid container">
             <jsp:include page="browse_categories.jsp"></jsp:include>                
             </div>
-            
+
             <div class="row-fluid">
                 <br>
                 <br>

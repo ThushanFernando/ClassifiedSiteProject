@@ -8,7 +8,9 @@
 
 <script>
     $(document).ready(function () {
-        $("#login_form").submit(function () {
+        $("#login_form").submit(function (e) {
+            e.preventDefault();
+
             $("#loading_animation").html("<img src='media/images/Gif_Animations/loading.gif' width='25' height='25' alt='Loading...'/>");
 
             var login = $("#login").val();
@@ -18,17 +20,23 @@
 
             $.ajax({
                 type: "POST",
-                url: "client_ajax_login",
+                url: "Ajax_login",
                 data: data,
                 dataType: "xml",
                 success: function (xml) {
                     var loginDetails = $(xml).find('login').text();
                     var loginStatus = $(xml).find('loginStatus').text().toString();
 
-                    window.alert(loginStatus);
+                    $('#login_model').modal('toggle');
+
+                    $("#message_model_content").html(loginStatus);
+                    $('#message_model').modal('toggle');
                 },
                 error: function () {
-                    window.alert('Request Failed!');
+                    $('#login_model').modal('toggle');
+
+                    $("#message_model_content").html("Request Failed!");
+                    $('#message_model').modal('toggle');
                 }
             });
         });
@@ -80,3 +88,22 @@
         </div>
     </div>
 </form>
+
+<!--Message Model-->
+
+<div class="modal fade bs-example-modal-sm" id="message_model">
+    <div class="modal-dialog modal-dialog modal-sm">
+        <div class="modal-content" style="background-color: #00cccc;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Superb.lk</h4>
+            </div>
+            <div class="modal-body" id="message_model_content">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

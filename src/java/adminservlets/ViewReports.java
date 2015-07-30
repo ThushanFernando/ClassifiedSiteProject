@@ -3,25 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlets;
+package adminservlets;
 
-import classes.User_Class;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Indunil
+ * @author SithuDewmi
  */
-public class client_ajax_login extends HttpServlet {
+public class ViewReports extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,50 +29,18 @@ public class client_ajax_login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            HttpSession session = request.getSession();
-            PrintWriter out = response.getWriter();
-
-            String login = request.getParameter("login");
-            String password = request.getParameter("password");
-
-            User_Class user = new User_Class();
-            boolean userLogin = user.login(login, password);
-
-            if (userLogin == true) {
-                session.setAttribute("Login", login);
-                session.setAttribute("LoginStatus", userLogin);
-            } else {
-                session.setAttribute("Login", null);
-                session.setAttribute("LoginStatus", null);
-            }
-            
-            
-            String status;
-            if(userLogin == true){
-                status = "Login Success!";
-            }else{
-                status = "Login Failed!";
-            }
-
-            response.setContentType("text/xml");
-            response.setCharacterEncoding("UTF-8");
-
-            String content = "<userdata>\n"
-                    + "<user>\n"
-                    + "<login>\n"
-                    + login.toString()
-                    + "</login>\n"
-                    + "<loginStatus>\n"
-                    + status
-                    + "</loginStatus>\n"
-                    + "</user>\n"
-                    + "</userdata>";
-
-            response.getWriter().write(content);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(client_ajax_login.class.getName()).log(Level.SEVERE, null, ex);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ViewReports</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ViewReports at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

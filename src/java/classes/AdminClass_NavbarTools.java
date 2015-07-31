@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import classes.DbClass;
 import java.util.ArrayList;
 
 /**
@@ -24,6 +23,7 @@ public class AdminClass_NavbarTools {
     private String content=null;
     private String cntentId=null;
     private String timeStamp=null;
+    private String type=null;
 
     /**
      * @return the id
@@ -93,6 +93,20 @@ public class AdminClass_NavbarTools {
      */
     public void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
+    }
+    
+    /**
+     * @return the type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(String type) {
+        this.type = type;
     }
     
     public int notificationCount(){
@@ -211,10 +225,65 @@ public class AdminClass_NavbarTools {
                     status=0;
                 }
             }
+            dbc.endConnection();
         } catch (SQLException ex) {
             Logger.getLogger(AdminClass_NavbarTools.class.getName()).log(Level.SEVERE, null, ex);
         }
         return status;
     }
+
     
+   public ArrayList searchResult(String sid){
+       ArrayList al=new ArrayList();
+        try {
+            dbc.getConnection();
+            Statement stmt=dbc.conn.createStatement();
+            
+            
+            String query="SELECT `item_number` FROM `item` WHERE `item_number` LIKE '%"+sid+"%'";
+            ResultSet rs=stmt.executeQuery(query);
+            while(rs.next()){
+                AdminClass_NavbarTools an=new AdminClass_NavbarTools();
+                an.setType("Ads");
+                an.setId("A"+rs.getString("item_number"));
+                an.setContent("DetailedView?type=Ads&id="+rs.getString("item_number"));
+                al.add(an);
+            }
+            
+            query="SELECT `username` FROM `user` WHERE `username` LIKE '%"+sid+"%' AND `user_type`!='Admin'";
+            rs=stmt.executeQuery(query);
+            while(rs.next()){
+                AdminClass_NavbarTools an=new AdminClass_NavbarTools();
+                an.setType("Users");
+                an.setId("U"+rs.getString("username"));
+                an.setContent("DetailedView?type=Users&id="+rs.getString("username"));
+                al.add(an);
+            }
+            
+            query="SELECT `message_id` FROM `user_messages` WHERE `message_id` LIKE '%"+sid+"%'";
+            rs=stmt.executeQuery(query);
+            while(rs.next()){
+                AdminClass_NavbarTools an=new AdminClass_NavbarTools();
+                an.setType("Messages");
+                an.setId("M"+rs.getString("message_id"));
+                an.setContent("DetailedView?type=Messages&id="+rs.getString("message_id"));
+                al.add(an);
+            }
+            query="SELECT `report_id` FROM `admin_reported_items` WHERE `report_id` LIKE '%"+sid+"%'";
+            rs=stmt.executeQuery(query);
+            while(rs.next()){
+                AdminClass_NavbarTools an=new AdminClass_NavbarTools();
+                an.setType("Reports");
+                an.setId("R"+rs.getString("report_id"));
+                an.setContent("DetailedView?type=Reports&id="+rs.getString("report_id"));
+                al.add(an);
+                
+            }
+            
+            dbc.endConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_NavbarTools.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return al;
+   } 
 }

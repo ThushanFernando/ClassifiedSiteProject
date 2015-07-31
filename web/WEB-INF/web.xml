@@ -56,6 +56,14 @@
         <servlet-name>CustomDataXMLAds</servlet-name>
         <servlet-class>adminservlets.CustomDataXMLAds</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchResult</servlet-name>
+        <servlet-class>adminservlets.SearchResult</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailedView</servlet-name>
+        <servlet-class>adminservlets.DetailedView</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/Dashboard</url-pattern>
@@ -111,6 +119,14 @@
     <servlet-mapping>
         <servlet-name>CustomDataXMLAds</servlet-name>
         <url-pattern>/CustomDataXMLAds</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchResult</servlet-name>
+        <url-pattern>/SearchResult</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailedView</servlet-name>
+        <url-pattern>/DetailedView</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

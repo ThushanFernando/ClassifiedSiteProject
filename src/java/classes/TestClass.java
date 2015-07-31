@@ -36,11 +36,13 @@ public class TestClass {
     
 
     public static void main(String[] args) throws Exception {
-    AdminClass_Overviewstats ao=new AdminClass_Overviewstats();
+    AdminClass_DetailedView ao=new AdminClass_DetailedView();
+    ArrayList al=ao.userDetailedView("TEST2");
+    for(int i=0; i<al.size(); i++){
+        System.out.println(al.get(i));
+    }
     
-    
-    ArrayList al=ao.usersCustom("2015-01-01", "2015-08-01");
-        System.out.println(al.get(0)+" "+al.get(1));
+   
 //    Iterator itr = al.iterator();
 //    AdminClass_Overviewstats received = null;
 //

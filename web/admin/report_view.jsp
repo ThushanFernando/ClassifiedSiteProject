@@ -819,11 +819,7 @@
 		<script src="js/main.js"></script>
 		<!-- end: MAIN JAVASCRIPTS -->
 		<!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
-		<script src="plugins/flot/jquery.flot.js"></script>
-		<script src="plugins/flot/jquery.flot.pie.js"></script>
-		<script src="plugins/flot/jquery.flot.resize.min.js"></script>
-		<script src="plugins/jquery.sparkline/jquery.sparkline.js"></script>
-		<script src="plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+		
 		<script src="plugins/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
 		<script src="plugins/fullcalendar/fullcalendar/fullcalendar.js"></script>
 		<script src="js/index.js"></script>

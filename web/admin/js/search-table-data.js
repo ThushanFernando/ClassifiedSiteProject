@@ -24,7 +24,7 @@ var TableData = function () {
                 [5, 10, 15, 20, "All"] // change per page values here
             ],
             // set the initial value
-            "iDisplayLength": 5,
+            "iDisplayLength": 15,
         });
         $('#sample_1_wrapper .dataTables_filter input').addClass("form-control input-sm").attr("placeholder", "Filter Search");
         // modify table search input

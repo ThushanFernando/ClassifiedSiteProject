@@ -294,76 +294,8 @@
 
                                     <div class="drop-down-wrapper">
                                         <ul>
-                                            <li>
-                                                <a href="javascript:;">
-                                                    <div class="clearfix">
-                                                        <div class="thread-image">
-                                                            <img alt="" src="./admin/images/avatar-2.jpg">
-                                                        </div>
-                                                        <div class="thread-content">
-                                                            <span class="author">Nicole Bell</span>
-                                                            <span class="preview">Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</span>
-                                                            <span class="time"> Just Now</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;">
-                                                    <div class="clearfix">
-                                                        <div class="thread-image">
-                                                            <img alt="" src="./admin/images/avatar-1.jpg">
-                                                        </div>
-                                                        <div class="thread-content">
-                                                            <span class="author">Peter Clark</span>
-                                                            <span class="preview">Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</span>
-                                                            <span class="time">2 mins</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;">
-                                                    <div class="clearfix">
-                                                        <div class="thread-image">
-                                                            <img alt="" src="./admin/images/avatar-3.jpg">
-                                                        </div>
-                                                        <div class="thread-content">
-                                                            <span class="author">Steven Thompson</span>
-                                                            <span class="preview">Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</span>
-                                                            <span class="time">8 hrs</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;">
-                                                    <div class="clearfix">
-                                                        <div class="thread-image">
-                                                            <img alt="" src="./admin/images/avatar-1.jpg">
-                                                        </div>
-                                                        <div class="thread-content">
-                                                            <span class="author">Peter Clark</span>
-                                                            <span class="preview">Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</span>
-                                                            <span class="time">9 hrs</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;">
-                                                    <div class="clearfix">
-                                                        <div class="thread-image">
-                                                            <img alt="" src="./admin/images/avatar-5.jpg">
-                                                        </div>
-                                                        <div class="thread-content">
-                                                            <span class="author">Kenneth Ross</span>
-                                                            <span class="preview">Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</span>
-                                                            <span class="time">14 hrs</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
+                                            <div id="MsgXML"></div>
+
                                         </ul>
                                     </div>
                                 </li>
@@ -730,7 +662,7 @@
                         <!-- start: FORM VALIDATION 1 PANEL -->
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Step 1. Enter current login details	
+                                <span class="badge">Enter current login details	</span>
                             </div>
                             <div class="panel-body">
                                 <h2><i class="fa fa-pencil-square teal"></i> Change Your password</h2>
@@ -852,7 +784,7 @@
                                                     <td><%=twoDForm.format(Integer.parseInt((String) pvcount.get(i)) / totalVisit * 100)%>%</td>
 
                                                 </tr>
-                                                <%    }%>
+                                                <%}%>
 
                                             </tbody>
                                         </table>
@@ -860,14 +792,22 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="row">
-                                        <div class="col-md-5"><span class="badge">Site visits for the past 12 Months:</span></div>
-                                        <div class="col-md-1"><span class="badge"><%=Math.round(totalVisit)%></span></div>
+                                        <div class="col-md-5"><span class="badge">For the past 12 Months:</span></div>
+                                        <div class="col-md-1"><span class="badge badge-success"><%=Math.round(totalVisit)%></span></div>
                                     </div><br>
                                     <div class="row">
-                                        <div class="col-md-5"><span class="badge">Site visits for the past 6 Years:</span></div>
-                                        <div class="col-md-1"><span class="badge"><%=Math.round(totalVisitYear)%></span></div>
+                                        <div class="col-md-5"><span class="badge">For the past 6 Years:</span></div>
+                                        <div class="col-md-1"><span class="badge badge-success"><%=Math.round(totalVisitYear)%></span></div>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+
+                                    <br><span class="badge">Custom Visit count</span>
+                                    <br> <input id="firstdate" type="text" placeholder="Ex-2015-01-31" > to<input type="text" placeholder="Ex-2015-01-31" id="seconddate">
+
+                                    <button onclick="customData()" class="btn btn-blue btn-xs">Search</button>&nbsp;<button onclick="clr()" class="btn btn-danger btn-xs">clear</button>
+                                    <br><br><div><span class="badge badge-success" id="CustomDataXML"></span></div>
+                                </div><br>
 
                                 <div class="col-md-6">
                                     <div class="table-responsive"><br>
@@ -921,6 +861,8 @@
             for (int i = 0; i < uycount.size(); i++) {
                 totalUsersYear += Integer.parseInt((String) uycount.get(i));
             }
+            c1.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH), 01);
+            c1.add(Calendar.MONTH, -12);
 
         %>
 
@@ -981,14 +923,21 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-5"><span class="badge">Users for the past 12 Months:</span></div>
-                                        <div class="col-md-1"><span class="badge"><%=Math.round(totalUsers)%></span></div>
+                                        <div class="col-md-1"><span class="badge badge-success"><%=Math.round(totalUsers)%></span></div>
                                     </div><br>
                                     <div class="row">
                                         <div class="col-md-5"><span class="badge">Users for the past 6 Years:</span></div>
-                                        <div class="col-md-1"><span class="badge"><%=Math.round(totalUsersYear)%></span></div>
+                                        <div class="col-md-1"><span class="badge badge-success"><%=Math.round(totalUsersYear)%></span></div>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
 
+                                    <br><span class="badge">Custom User count</span>
+                                    <br> <input id="firstdateuser" type="text" placeholder="Ex-2015-01-31" > to<input type="text" placeholder="Ex-2015-01-31" id="seconddateuser">
+
+                                    <button onclick="customDataUser()" class="btn btn-blue btn-xs">Search</button>&nbsp;<button onclick="clr()" class="btn btn-danger btn-xs">clear</button>
+                                    <br><br><div><span class="badge badge-success" id="CustomDataXMLUser"></span></div>
+                                </div><br>
                                 <div class="col-md-6">
                                     <div class="table-responsive"><br>
                                         <table class="table table-bordered table-hover" id="sample-table-1">
@@ -1042,6 +991,8 @@
             for (int i = 0; i < aycount.size(); i++) {
                 totalAdsYear += Integer.parseInt((String) aycount.get(i));
             }
+            c1.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH), 01);
+            c1.add(Calendar.MONTH, -12);
 
         %>                                    
 
@@ -1102,14 +1053,22 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-5"><span class="badge">Ads for the past 12 Months:</span></div>
-                                        <div class="col-md-1"><span class="badge"><%=Math.round(totalAds)%></span></div>
+                                        <div class="col-md-1"><span class="badge badge-success"><%=Math.round(totalAds)%></span></div>
                                     </div><br>
                                     <div class="row">
                                         <div class="col-md-5"><span class="badge">Ads for the past 6 Years:</span></div>
-                                        <div class="col-md-1"><span class="badge"><%=Math.round(totalAdsYear)%></span></div>
+                                        <div class="col-md-1"><span class="badge badge-success"><%=Math.round(totalAdsYear)%></span></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
+
+                                    <br><span class="badge">Custom Ads count</span>
+                                    <br> <input id="firstdateads" type="text" placeholder="Ex-2015-01-31" > to<input type="text" placeholder="Ex-2015-01-31" id="seconddateads">
+
+                                    <button onclick="customDataAds()" class="btn btn-blue btn-xs">Search</button>&nbsp;<button onclick="clr()" class="btn btn-danger btn-xs">clear</button>
+                                    <br><br><div><span class="badge badge-success" id="CustomDataXMLAds"></span></div>
+                                </div><br>    
+                                <div class="col-md-6  ">
                                     <div class="table-responsive"><br>
                                         <table class="table table-bordered table-hover" id="sample-table-1">
                                             <thead>
@@ -1188,44 +1147,180 @@
         <script type="text/javascript" src="admin/js/chart.js"></script>
 
         <script>
-        google.load("visualization", "1", {packages: ["corechart"]});
-        google.setOnLoadCallback(drawChart);
+                                        google.load("visualization", "1", {packages: ["corechart"]});
+                                        google.setOnLoadCallback(drawChart);
 
-        function abc() {
+                                        function abc() {
 
-            $.ajax({
-                type: "GET",
-                url: "DataCounts",
-                dataType: "xml",
-                success: function (xml) {
-                    $("#MC").html("");
+                                            $.ajax({
+                                                type: "GET",
+                                                url: "DataCountsXML",
+                                                dataType: "xml",
+                                                success: function (xml) {
+                                                    $("#MC").html("");
 
-                    $(xml).find('values').each(function () {
+                                                    $(xml).find('values').each(function () {
 
-                        var msgcount = $(this).find('msgcount').text();
-                        var notcount = $(this).find('notcount').text();
-                        var reviewads = $(this).find('reviewads').text();
-                        var topads = $(this).find('topads').text();
-                        var viewreports = $(this).find('viewreports').text();
+                                                        var msgcount = $(this).find('msgcount').text();
+                                                        var notcount = $(this).find('notcount').text();
+                                                        var reviewads = $(this).find('reviewads').text();
+                                                        var topads = $(this).find('topads').text();
+                                                        var viewreports = $(this).find('viewreports').text();
 
-                        $("#MC").append(msgcount);
-                        $("#MC1").append(msgcount);
-                        $("#MC2").append(msgcount);
-                        $("#NC").append(notcount);
-                        $("#RA").append(reviewads);
-                        $("#TA").append(topads);
-                        $("#VR").append(viewreports);
+                                                        $("#MC").append(msgcount);
+                                                        $("#MC1").append(msgcount);
+                                                        $("#MC2").append(msgcount);
+                                                        $("#NC").append(notcount);
+                                                        $("#RA").append(reviewads);
+                                                        $("#TA").append(topads);
+                                                        $("#VR").append(viewreports);
 
-                    });
-
-
-                }
-            });
+                                                    });
 
 
-        }
-        ;
+                                                }
+                                            });
+                                            $.ajax({
+                                                type: "GET",
+                                                url: "MsgXML",
+                                                dataType: "xml",
+                                                success: function (xml) {
+                                                    $("#MsgXML").html("");
 
+                                                    $(xml).find('value').each(function () {
+
+                                                        var sender = $(this).find('sender').text();
+                                                        var content = $(this).find('content').text();
+                                                        var time = $(this).find('time').text();
+                                                        var status = $(this).find('status').text();
+                                                        var item;
+                                                        item = $('<li' + status + '>\n'
+                                                                + '<a href="javascript:;">\n'
+                                                                + '<div class="clearfix">\n'
+                                                                + '<div class="thread-image "><i class="clip-user-5 circle-icon circle-blue" style="background-color:#0099c6;"></i></div>\n'
+                                                                + '<div class="thread-content">\n'
+                                                                + '<span class="author">' + sender + '</span>\n'
+                                                                + '<span class="preview">' + content.substring(0, 50) + '.....</span>\n'
+                                                                + '<span class="time">' + time + '</span>\n'
+                                                                + '</div>\n'
+                                                                + '</div>\n'
+                                                                + '</a>\n'
+                                                                + '</li>\n');
+                                                        $("#MsgXML").append(item);
+
+
+                                                    });
+
+
+                                                }
+                                            });
+
+
+
+
+
+                                        }
+                                        ;
+
+                                        function customData() {
+                                            var firstDate = document.getElementById('firstdate').value + ' 00:00:00';
+                                            var secondDate = document.getElementById('seconddate').value + ' 00:00:00';
+                                            $.ajax({
+                                                type: "GET",
+                                                url: "CustomDataXML",
+                                                dataType: "xml",
+                                                data: {
+                                                    fd: firstDate,
+                                                    sd: secondDate
+                                                },
+                                                success: function (xml) {
+                                                    $("#CustomDataXML").html("");
+
+                                                    $(xml).find('value').each(function () {
+
+                                                        var result = $(this).find('Result').text();
+
+
+
+                                                        $("#CustomDataXML").append(result);
+
+
+                                                    });
+
+
+                                                }
+                                            });
+                                        }
+                                        function customDataUser() {
+                                            var firstDate = document.getElementById('firstdateuser').value + ' 00:00:00';
+                                            var secondDate = document.getElementById('seconddateuser').value + ' 00:00:00';
+                                            $.ajax({
+                                                type: "GET",
+                                                url: "CustomDataXMLUser",
+                                                dataType: "xml",
+                                                data: {
+                                                    fd: firstDate,
+                                                    sd: secondDate
+                                                },
+                                                success: function (xml) {
+                                                    $("#CustomDataXMLUser").html("");
+
+                                                    $(xml).find('value').each(function () {
+
+                                                        var result = $(this).find('Result').text();
+
+
+
+                                                        $("#CustomDataXMLUser").append(result);
+
+
+                                                    });
+
+
+                                                }
+                                            });
+                                        }
+                                        function customDataAds() {
+                                            var firstDate = document.getElementById('firstdateads').value + ' 00:00:00';
+                                            var secondDate = document.getElementById('seconddateads').value + ' 00:00:00';
+                                            $.ajax({
+                                                type: "GET",
+                                                url: "CustomDataXMLAds",
+                                                dataType: "xml",
+                                                data: {
+                                                    fd: firstDate,
+                                                    sd: secondDate
+                                                },
+                                                success: function (xml) {
+                                                    $("#CustomDataXMLAds").html("");
+
+                                                    $(xml).find('value').each(function () {
+
+                                                        var result = $(this).find('Result').text();
+
+
+
+                                                        $("#CustomDataXMLAds").append(result);
+
+
+                                                    });
+
+
+                                                }
+                                            });
+                                        }
+                                        function clr() {
+                                            document.getElementById("firstdate").value = "";
+                                            document.getElementById("firstdateuser").value = "";
+                                            document.getElementById("firstdateads").value = "";
+                                            document.getElementById("seconddate").value = "";
+                                            document.getElementById("seconddateuser").value = "";
+                                            document.getElementById("seconddateads").value = "";
+                                            document.getElementById("CustomDataXML").innerHTML = "";
+                                            document.getElementById("CustomDataXMLUser").innerHTML = "";
+                                            document.getElementById("CustomDataXMLAds").innerHTML = "";
+
+                                        }
         </script>
 
 

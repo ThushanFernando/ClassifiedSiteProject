@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -180,7 +181,7 @@ public class AdminClass_Overviewstats {
                 String thisMonth = (String) sdf.format(c1.getTime());
                 c1.add(Calendar.MONTH, +1);
                 String nextMonth = (String) sdf.format(c1.getTime());
-                
+
                 String query = "SELECT count(`time_stamp`) FROM  `site_visits` WHERE  `time_stamp` BETWEEN  '" + thisMonth + " 00:00:00' AND '" + nextMonth + " 00:00:00'";
                 ResultSet rs = stmt.executeQuery(query);
 
@@ -198,7 +199,7 @@ public class AdminClass_Overviewstats {
         }
         return al;
     }
-    
+
     public ArrayList pagevisitYear() {
         ArrayList al = new ArrayList();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -215,17 +216,42 @@ public class AdminClass_Overviewstats {
                 String thisYear = (String) sdf.format(c1.getTime());
                 c1.add(Calendar.YEAR, +1);
                 String nextYear = (String) sdf.format(c1.getTime());
-                
+
                 String query = "SELECT count(`time_stamp`) FROM  `site_visits` WHERE  `time_stamp` BETWEEN  '" + thisYear + " 00:00:00' AND '" + nextYear + " 00:00:00'";
                 ResultSet rs = stmt.executeQuery(query);
 
                 while (rs.next()) {
                     AdminClass_Overviewstats ao = new AdminClass_Overviewstats();
-                    ao.setTimePeriod(String.valueOf(thisYear+" to "+nextYear));
+                    ao.setTimePeriod(String.valueOf(thisYear + " to " + nextYear));
                     ao.setCount(rs.getString("COUNT(`time_stamp`)"));
                     al.add(ao);
 
                 }
+            }
+            dbc.endConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_Overviewstats.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return al;
+    }
+
+    public ArrayList pagevisitCustom(String firstdate, String seconddate) {
+        ArrayList al = new ArrayList();
+        try {
+            
+            dbc.getConnection();
+            Statement stmt = dbc.conn.createStatement();
+            String query = "SELECT count(`time_stamp`) FROM  `site_visits`";
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+            al.add(rs.getString("count(`time_stamp`)"));
+            }
+            query = "SELECT count(`time_stamp`) FROM  `site_visits` WHERE  `time_stamp` BETWEEN  '" + firstdate + "' AND '" + seconddate + "'";
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+            al.add(rs.getString("count(`time_stamp`)"));
             }
             dbc.endConnection();
         } catch (SQLException ex) {
@@ -250,7 +276,7 @@ public class AdminClass_Overviewstats {
                 String thisMonth = (String) sdf.format(c1.getTime());
                 c1.add(Calendar.MONTH, +1);
                 String nextMonth = (String) sdf.format(c1.getTime());
-                
+
                 String query = "SELECT COUNT(`activated_time_stamp`) FROM `user_account_status` WHERE  `activated_time_stamp` BETWEEN  '" + thisMonth + " 00:00:00' AND '" + nextMonth + " 00:00:00' AND `status`='Activated'";
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
@@ -268,7 +294,7 @@ public class AdminClass_Overviewstats {
         }
         return al;
     }
-    
+
     public ArrayList usersYear() {
         ArrayList al = new ArrayList();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -285,13 +311,13 @@ public class AdminClass_Overviewstats {
                 String thisYear = (String) sdf.format(c1.getTime());
                 c1.add(Calendar.YEAR, +1);
                 String nextYear = (String) sdf.format(c1.getTime());
-                
+
                 String query = "SELECT COUNT(`activated_time_stamp`) FROM `user_account_status` WHERE  `activated_time_stamp` BETWEEN  '" + thisYear + " 00:00:00' AND '" + nextYear + " 00:00:00' AND `status`='Activated'";
                 ResultSet rs = stmt.executeQuery(query);
 
                 while (rs.next()) {
                     AdminClass_Overviewstats ao = new AdminClass_Overviewstats();
-                    ao.setTimePeriod(String.valueOf(thisYear+" to "+nextYear));
+                    ao.setTimePeriod(String.valueOf(thisYear + " to " + nextYear));
                     ao.setCount(rs.getString("COUNT(`activated_time_stamp`)"));
                     al.add(ao);
 
@@ -303,10 +329,36 @@ public class AdminClass_Overviewstats {
         }
         return al;
     }
+    
+    public ArrayList usersCustom(String firstdate, String seconddate) {
+        ArrayList al = new ArrayList();
+        try {
+            
+            dbc.getConnection();
+            Statement stmt = dbc.conn.createStatement();
+            String query = "SELECT COUNT(`activated_time_stamp`) FROM `user_account_status` WHERE `status`='Activated'";
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+            al.add(rs.getString("COUNT(`activated_time_stamp`)"));
+            }
+            query = "SELECT COUNT(`activated_time_stamp`) FROM `user_account_status` WHERE `status`='Activated' AND  `activated_time_stamp` BETWEEN  '" + firstdate + "' AND '" + seconddate + "'";
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+            al.add(rs.getString("COUNT(`activated_time_stamp`)"));
+            }
+            dbc.endConnection();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_Overviewstats.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return al;
+    }
 
     public ArrayList adsMonth() {
         ArrayList al = new ArrayList();
-        
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c1 = Calendar.getInstance();
         Calendar now = Calendar.getInstance();
@@ -321,7 +373,7 @@ public class AdminClass_Overviewstats {
                 String thisMonth = (String) sdf.format(c1.getTime());
                 c1.add(Calendar.MONTH, +1);
                 String nextMonth = (String) sdf.format(c1.getTime());
-                
+
                 String query = "SELECT COUNT(`time_stamp`) FROM `item` WHERE  `time_stamp` BETWEEN  '" + thisMonth + " 00:00:00' AND '" + nextMonth + " 00:00:00' AND status='Active'";
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
@@ -339,7 +391,7 @@ public class AdminClass_Overviewstats {
         }
         return al;
     }
-    
+
     public ArrayList adsYear() {
         ArrayList al = new ArrayList();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -356,19 +408,45 @@ public class AdminClass_Overviewstats {
                 String thisYear = (String) sdf.format(c1.getTime());
                 c1.add(Calendar.YEAR, +1);
                 String nextYear = (String) sdf.format(c1.getTime());
-                
+
                 String query = "SELECT COUNT(`time_stamp`) FROM `item` WHERE  `time_stamp` BETWEEN  '" + thisYear + " 00:00:00' AND '" + nextYear + " 00:00:00' AND status='Active'";
                 ResultSet rs = stmt.executeQuery(query);
 
                 while (rs.next()) {
                     AdminClass_Overviewstats ao = new AdminClass_Overviewstats();
-                    ao.setTimePeriod(String.valueOf(thisYear+" to "+nextYear));
+                    ao.setTimePeriod(String.valueOf(thisYear + " to " + nextYear));
                     ao.setCount(rs.getString("COUNT(`time_stamp`)"));
                     al.add(ao);
 
                 }
             }
             dbc.endConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_Overviewstats.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return al;
+    }
+    
+    public ArrayList adsCustom(String firstdate, String seconddate) {
+        ArrayList al = new ArrayList();
+        try {
+            
+            dbc.getConnection();
+            Statement stmt = dbc.conn.createStatement();
+            String query = "SELECT COUNT(`time_stamp`) FROM `item` WHERE status='Active'";
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+            al.add(rs.getString("COUNT(`time_stamp`)"));
+            }
+            query = "SELECT COUNT(`time_stamp`) FROM `item` WHERE status='Active' AND  `time_stamp` BETWEEN  '" + firstdate + "' AND '" + seconddate + "'";
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+            al.add(rs.getString("COUNT(`time_stamp`)"));
+            }
+            dbc.endConnection();
+            
         } catch (SQLException ex) {
             Logger.getLogger(AdminClass_Overviewstats.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -407,6 +485,17 @@ public class AdminClass_Overviewstats {
         }
         return al2;
 
+    }
+
+    public boolean isValidDate(String inDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        try {
+            dateFormat.parse(inDate.trim());
+        } catch (ParseException pe) {
+            return false;
+        }
+        return true;
     }
 
 }

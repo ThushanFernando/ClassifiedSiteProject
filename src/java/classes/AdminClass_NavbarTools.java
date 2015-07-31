@@ -129,7 +129,7 @@ public class AdminClass_NavbarTools {
             }
             else{
             while(rs.next()){
-                count=rs.getInt("count(notification_id)");
+                count=rs.getInt("count(`message_id`)");
             }
             }
             dbc.endConnection();

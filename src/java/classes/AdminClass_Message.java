@@ -10,6 +10,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import classes.DbClass;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -163,6 +165,62 @@ public class AdminClass_Message {
             Logger.getLogger(AdminClass_Message.class.getName()).log(Level.SEVERE, null, ex);
         }
         return al;
+    }
+
+    public String timeDiff(String time) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        String dateStart = time;
+        String dateStop = format.format(date);
+        String result = null;
+        Date d1 = null;
+        Date d2 = null;
+
+        try {
+            d1 = format.parse(dateStart);
+            d2 = format.parse(dateStop);
+
+            //in milliseconds
+            long diff = d2.getTime() - d1.getTime();
+
+            long diffSeconds = diff / 1000 % 60;
+            long diffMinutes = diff / (60 * 1000) % 60;
+            long diffHours = diff / (60 * 60 * 1000) % 24;
+            long diffDays = diff / (24 * 60 * 60 * 1000);
+            if (diffSeconds < 60 && diffDays == 0 && diffHours == 0 && diffMinutes == 0) {
+                result = "Just now";
+            } else if (diffDays == 0 && diffHours == 0 && diffSeconds == 0) {
+                result = diffMinutes + " min";
+
+            } else if (diffDays == 0 && diffHours == 0 && diffSeconds != 0) {
+                result = diffMinutes + " min " + diffSeconds + " sec";
+            } else if (diffDays == 0 && diffHours != 0 && diffMinutes == 0) {
+                result = diffHours + " hrs";
+
+            } else if (diffDays == 0 && diffHours != 0 && diffMinutes != 0) {
+                result = diffHours + " hrs " + diffMinutes + " min";
+            } else if (diffDays != 0 && diffHours != 0 && diffDays < 8) {
+                result = diffDays + " days " + diffHours + " hrs";
+            } else if (diffDays != 0 && diffHours == 0 && diffDays < 8) {
+
+                result = diffDays + " days";
+
+            } else {
+                final String OLD_FORMAT = "yyyy-MM-dd HH:mm:ss";
+                final String NEW_FORMAT = "dd MMM yyyy";
+                String newDateString;
+
+                SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
+                Date d = sdf.parse(dateStart);
+                sdf.applyPattern(NEW_FORMAT);
+                newDateString = sdf.format(d);
+                result = newDateString;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
 }

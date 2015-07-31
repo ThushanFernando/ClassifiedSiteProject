@@ -37,8 +37,24 @@
         <servlet-class>adminservlets.ViewReports</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DataCounts</servlet-name>
-        <servlet-class>adminservlets.DataCounts</servlet-class>
+        <servlet-name>DataCountsXML</servlet-name>
+        <servlet-class>adminservlets.DataCountsXML</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MsgXML</servlet-name>
+        <servlet-class>adminservlets.MsgXML</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomDataXML</servlet-name>
+        <servlet-class>adminservlets.CustomDataXML</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomDataXMLUser</servlet-name>
+        <servlet-class>adminservlets.CustomDataXMLUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomDataXMLAds</servlet-name>
+        <servlet-class>adminservlets.CustomDataXMLAds</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
@@ -77,8 +93,24 @@
         <url-pattern>/ViewReports</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DataCounts</servlet-name>
-        <url-pattern>/DataCounts</url-pattern>
+        <servlet-name>DataCountsXML</servlet-name>
+        <url-pattern>/DataCountsXML</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MsgXML</servlet-name>
+        <url-pattern>/MsgXML</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomDataXML</servlet-name>
+        <url-pattern>/CustomDataXML</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomDataXMLUser</servlet-name>
+        <url-pattern>/CustomDataXMLUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomDataXMLAds</servlet-name>
+        <url-pattern>/CustomDataXMLAds</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

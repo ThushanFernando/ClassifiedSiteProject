@@ -5,8 +5,11 @@
  */
 package adminservlets;
 
+import classes.AdminClass_Overviewstats;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author SithuDewmi
  */
-public class DataCounts extends HttpServlet {
+public class CustomDataXML extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +38,10 @@ public class DataCounts extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DataCounts</title>");            
+            out.println("<title>Servlet CustomDataXML</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DataCounts at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CustomDataXML at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,20 +59,32 @@ public class DataCounts extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("test/xml");
-       response.setCharacterEncoding("UTF-8");
-       String messageCount="7";
-       String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-               +"<values>\n"
-               +"   <msgcount>"+messageCount+"</msgcount>\n"
-               +"   <notcount>"+messageCount+"</notcount>\n"
-               +"   <reviewads>"+messageCount+"</reviewads>\n"
-               +"   <topads>N/A</topads>\n"
-               +"   <viewreports>"+messageCount+"</viewreports>\n"
-               +"</values>\n";
-       
-               
-       response.getWriter().write(content);
+        response.setContentType("text/xml");
+        response.setCharacterEncoding("UTF-8");
+        String fd = request.getParameter("fd");
+        String sd = request.getParameter("sd");
+        String result;
+        AdminClass_Overviewstats ao = new AdminClass_Overviewstats();
+        boolean checkFD = ao.isValidDate(fd);
+        boolean checkSD = ao.isValidDate(sd);
+        
+         
+        if (checkFD == true && checkSD == true) {
+            ArrayList al=ao.pagevisitCustom(fd, sd);
+            DecimalFormat twoDForm = new DecimalFormat("#.#");
+             result="Site visit: "+(String)al.get(1) +" Percentage: "+twoDForm.format(Float.parseFloat((String) al.get(1)) / Float.parseFloat((String) al.get(0))* 100)+"%";
+        } else {
+             result = "Incorrect entry";
+        }
+
+        String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                + "<values>\n"
+                + "	<value>\n"
+                + "		<Result>" + result + "</Result>\n"
+                + "	</value>\n"
+                + "</values>";
+
+        response.getWriter().write(content);
     }
 
     /**

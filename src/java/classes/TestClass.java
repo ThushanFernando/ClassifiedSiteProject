@@ -5,7 +5,10 @@
  */
 package classes;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 /**
@@ -13,18 +16,47 @@ import java.util.Iterator;
  * @author SithuDewmi
  */
 public class TestClass {
+//    public  boolean isValidDate(String inDate) {
+//    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//    dateFormat.setLenient(false);
+//    try {
+//      dateFormat.parse(inDate.trim());
+//    } catch (ParseException pe) {
+//      return false;
+//    }
+//    return true;
+//  }
+//
+//  public static void main(String[] args) {
+// AdminClass_Overviewstats ao=new AdminClass_Overviewstats();
+//    System.out.println(ao.isValidDate("2004/02-29"));
+//    System.out.println(ao.isValidDate("2005-02-28"));
+//  }
+    
+    
+
     public static void main(String[] args) throws Exception {
     AdminClass_Overviewstats ao=new AdminClass_Overviewstats();
     
-    ArrayList al=ao.usersYear();
-    Iterator itr = al.iterator();
-    AdminClass_Overviewstats received = null;
+    
+    ArrayList al=ao.usersCustom("2015-01-01", "2015-08-01");
+        System.out.println(al.get(0)+" "+al.get(1));
+//    Iterator itr = al.iterator();
+//    AdminClass_Overviewstats received = null;
+//
+//        while (itr.hasNext()) {
+//            Object a = itr.next();
+//            received = (AdminClass_Overviewstats) a;
+//
+//        
+//        String test=ao.timeDiff(received.getTimeStamp());
+//           
+//            System.out.println(received.getSender()+" "+received.getContent()+" "+test);
+//        }
+        
 
-        while (itr.hasNext()) {
-            Object a = itr.next();
-            received = (AdminClass_Overviewstats) a;
-
-            System.out.println(received.getTimePeriod()+" "+received.getCount());
-        }
- }
+        //HH converts hour in 24 hours format (0-23), day calculation
+        
+        
+    }
 }

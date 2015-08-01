@@ -794,7 +794,7 @@
 
                                                     <td><%=thisMonth%> to <%=nextMonth%></td>
                                                     <td><%=ucount.get(i)%></td>
-                                                    <td><%=twoDForm.format(Integer.parseInt((String) ucount.get(i)) / totalVisit * 100)%>%</td>
+                                                    <td><%=twoDForm.format(Integer.parseInt((String) ucount.get(i)) / totalUsers * 100)%>%</td>
 
                                                 </tr>
                                                 <%    }%>

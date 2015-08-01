@@ -550,11 +550,12 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            <div class="col-md-6" id="testsr">
+                                            <div class="col-md-6" >
+                                                <div id="PlaceData"> 
 
-                                                <div id="PlaceData">            
-            <hr>
-        </div>
+                                                </div>
+
+
                                             </div>            
                                         </div>
 
@@ -727,7 +728,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
 
                             </div>
                             <!-- start: MAIN JAVASCRIPTS -->
@@ -773,78 +774,115 @@
                             <script src="admin/plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
                             <script src="admin/js/ui-modals.js"></script>
                             <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
-                            
+
                             <script>
-                                                    $(document).on('click', 'clickedID', function () {
-                                                        
-                                                        var selection = this.id;
-                                                        $.ajax({
-                                                            type: "GET",
-                                                            url: "DetailedView",
-                                                            data: {
-                                                                id: selection
-                                                            },
-                                                            dataType: "xml",
-                                                            success: function (xml) {
-                                                                $("#PlaceData").html("<hr>");
+                                $(document).on('click', 'clickedID', function () {
 
-                                                                $(xml).find('value').each(function () {
-                                                                    if (selection.charAt(0) === "U") {
-                                                                        var username = $(this).find('username').text();
-                                                                        var email = $(this).find('email').text();
-                                                                        var tel = $(this).find('tel').text();
-                                                                        var status = $(this).find('status').text();
-                                                                        var activation = $(this).find('activation').text();
-                                                                        var login = $(this).find('login').text();
-                                                                        var ads = $(this).find('ads').text();
-
-                                                                        $("#PlaceData").append(username + "<br>");
-                                                                        $("#PlaceData").append(email + "<br>");
-                                                                        $("#PlaceData").append(tel + "<br>");
-                                                                        $("#PlaceData").append(status + "<br>");
-                                                                        $("#PlaceData").append(activation + "<br>");
-                                                                        $("#PlaceData").append(login + "<br>");
-                                                                        $("#PlaceData").append(ads + "<br>");
-                                                                        $("#PlaceData").append("<hr>");
-                                                                    }
-                                                                    else if (selection.charAt(0) === "M") {
-                                                                        var id = $(this).find('id').text();
-                                                                        var sender = $(this).find('sender').text();
-                                                                        var reciever = $(this).find('reciever').text();
-                                                                        var content = $(this).find('content').text();
-                                                                        var time = $(this).find('time').text();
-                                                                        var state = $(this).find('state').text();
-
+                                    var selection = this.id;
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "DetailedView",
+                                        data: {
+                                            id: selection
+                                        },
+                                        dataType: "xml",
+                                        success: function (xml) {
+                                            $("#PlaceData").html("<br>");
+                                            $(xml).find('value').each(function () {
+                                                if (selection.charAt(0) === "U") {
+                                                    var username = $(this).find('username').text();
+                                                    var email = $(this).find('email').text();
+                                                    var tel = $(this).find('tel').text();
+                                                    var status = $(this).find('status').text();
+                                                    var activation = $(this).find('activation').text();
+                                                    var login = $(this).find('login').text();
+                                                    var ads = $(this).find('ads').text();
+                                                    $("#PlaceData").append("<div class='tabbable'>");
+                                                    $("#PlaceData").append("<div class='tab-pane in active' id='panel_tab2_example1'>");
+                                                    $("#PlaceData").append("<div class='alert alert-info'>"
+                                                            + "<h3>User Detailed view</h3>"
+                                                            + "<hr>"
+                                                            + "<b>User name: </b>" + username + "<br>"
+                                                            + "<b>Email: </b>" + email + "<br>"
+                                                            + "<b>Tel: </b>" + tel + "<br>"
+                                                            + "<b>Status: </b>" + status + "<br>"
+                                                            + "<b>Activation: </b>" + activation + "<br>"
+                                                            + "<b>Last login: </b>" + login + "<br>"
+                                                            + "<b>No. of ads: </b>" + ads + "<br>"
+                                                            + "<hr>");
+                                                    $("#PlaceData").append();
+                                                    $("#PlaceData").append("</div>");
+                                                    $("#PlaceData").append("</div>");
+                                                    $("#PlaceData").append("</div>");
 
 
-                                                                        $("#PlaceData").append(id + "<br>");
-                                                                        $("#PlaceData").append(sender + "<br>");
-                                                                        $("#PlaceData").append(reciever + "<br>");
-                                                                        $("#PlaceData").append(content + "<br>");
-                                                                        $("#PlaceData").append(time + "<br>");
-                                                                        $("#PlaceData").append(state + "<br>");
-                                                                        $("#PlaceData").append("<hr>");
-                                                                    }
-                                                                    else if (selection.charAt(0) === "R") {
-                                                                        var id = $(this).find('id').text();
-                                                                        $("#PlaceData").append(id + "<br>");
-                                                                        $("#PlaceData").append("<hr>");
-                                                                    } else {
-                                                                        var id = $(this).find('id').text();
-                                                                        $("#PlaceData").append("<a href='' target='blank'>click to view " + id + "</a><br>");
-                                                                        $("#PlaceData").append("<hr>");
-                                                                    }
-                                                                });
+                                                }
+                                                else if (selection.charAt(0) === "M") {
+                                                    var id = $(this).find('id').text();
+                                                    var sender = $(this).find('sender').text();
+                                                    var reciever = $(this).find('reciever').text();
+                                                    var content = $(this).find('content').text();
+                                                    var time = $(this).find('time').text();
+                                                    var state = $(this).find('state').text();
+                                                    
+                                                    $("#PlaceData").append("<div class='tabbable'>");
+                                                    $("#PlaceData").append("<div class='tab-pane in active' id='panel_tab2_example1'>");
+                                                    $("#PlaceData").append("<div class='alert alert-info'>"
+                                                            + "<h3>Message Detailed view</h3>"
+                                                            + "<hr>"
+                                                            + "<b>Id: </b>" + id + "<br>"
+                                                            + "<b>Sender: </b>" + sender + "<br>"
+                                                            + "<b>Reciever: </b>" + reciever + "<br>"
+                                                            + "<b>Content: </b>" + content + "<br>"
+                                                            + "<b>Sent at: </b>" + time + "<br>"
+                                                            + "<b>Read state: </b>" + state + "<br>"
+                                                            + "<hr>");
+                                                    $("#PlaceData").append("</div>");
+                                                    $("#PlaceData").append("</div>");
+                                                    $("#PlaceData").append("</div>");
+                                                    
+                                                    
 
-                                                                $("#GetData").html('AJAX Request is succeded!');
-                                                            },
-                                                            error: function () {
-                                                                $("#GetData").html('An error occurred while processing XML file!');
-                                                            }
-                                                        });
-                                                    });
-
-                            </script>
+                                                }
+                                                else if (selection.charAt(0) === "R") {
+                                                    var id = $(this).find('id').text();
+                                                    
+                                                    $("#PlaceData").append("<div class='tabbable'>");
+                                                    $("#PlaceData").append("<div class='tab-pane in active' id='panel_tab2_example1'>");
+                                                    $("#PlaceData").append("<div class='alert alert-info'>"
+                                                            + "<h3>Report Detailed view</h3>"
+                                                            + "<hr>"
+                                                            + id + "<br>"
+                                                            + "<hr>");
+                                                    $("#PlaceData").append("</div>");
+                                                    $("#PlaceData").append("</div>");
+                                                    $("#PlaceData").append("</div>");
+                                                    
+                                                    
+                                                } else {
+                                                    var id = $(this).find('id').text();
+                                                    
+                                                     $("#PlaceData").append("<div class='tabbable'>");
+                                                    $("#PlaceData").append("<div class='tab-pane in active' id='panel_tab2_example1'>");
+                                                    $("#PlaceData").append("<div class='alert alert-info'>"
+                                                            + "<h3>Item Detailed view</h3>"
+                                                            + "<hr>"
+                                                            + "<a href='www.google.com' target='blank'>Click to view the ad \"" + id +"\"</a><br>"
+                                                            + "<hr>");
+                                                    $("#PlaceData").append("</div>");
+                                                    $("#PlaceData").append("</div>");
+                                                    $("#PlaceData").append("</div>");
+                                                    
+                                                   
+                                                }
+                                            });
+                                            $("#GetData").html('AJAX Request is succeded!');
+                                        },
+                                        error: function () {
+                                            $("#GetData").html('An error occurred while processing XML file!');
+                                        }
+                                    });
+                                });</script>
                             <script>
                                 jQuery(document).ready(function () {
                                     Main.init();

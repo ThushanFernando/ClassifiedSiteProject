@@ -130,7 +130,7 @@ public class AdminClass_Message {
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT `sender`,`content`,`time_stamp` FROM `user_messages` WHERE `receiver`='Admin' AND `read_state`='0'";
+            String query = "SELECT `sender`,`content`,`time_stamp` FROM `user_messages` WHERE `receiver`='Admin' AND `read_state`='0' ORDER BY `time_stamp` DESC";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 AdminClass_Message am = new AdminClass_Message();

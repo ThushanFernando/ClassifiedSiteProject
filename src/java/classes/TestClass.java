@@ -36,12 +36,9 @@ public class TestClass {
     
 
     public static void main(String[] args) throws Exception {
-    AdminClass_DetailedView ao=new AdminClass_DetailedView();
-    ArrayList al=ao.userDetailedView("TEST2");
-    for(int i=0; i<al.size(); i++){
-        System.out.println(al.get(i));
-    }
-    
+    AdminClass_Overviewstats ao=new AdminClass_Overviewstats();
+    int test=ao.reviewAdsCount();
+        System.out.println(test);
    
 //    Iterator itr = al.iterator();
 //    AdminClass_Overviewstats received = null;

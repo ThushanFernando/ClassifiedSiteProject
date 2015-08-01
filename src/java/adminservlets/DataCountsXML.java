@@ -6,6 +6,7 @@
 package adminservlets;
 
 import classes.AdminClass_NavbarTools;
+import classes.AdminClass_Overviewstats;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -60,17 +61,19 @@ public class DataCountsXML extends HttpServlet {
        response.setContentType("test/xml");
        response.setCharacterEncoding("UTF-8");
         AdminClass_NavbarTools an=new AdminClass_NavbarTools();
+        AdminClass_Overviewstats ao=new AdminClass_Overviewstats();
         
        String messageCount=String.valueOf(an.messageCount());
        if("0".equals(messageCount)){
            messageCount="";
        }
+       int ads=ao.reviewAdsCount();
        String temp="111";
        String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                +"<values>\n"
                +"   <msgcount>"+messageCount+"</msgcount>\n"
                +"   <notcount>"+temp+"</notcount>\n"
-               +"   <reviewads>"+temp+"</reviewads>\n"
+               +"   <reviewads>"+ads+"</reviewads>\n"
                +"   <topads>N/A</topads>\n"
                +"   <viewreports>"+temp+"</viewreports>\n"
                +"</values>\n";

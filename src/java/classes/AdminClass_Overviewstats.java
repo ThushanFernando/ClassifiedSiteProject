@@ -107,13 +107,13 @@ public class AdminClass_Overviewstats {
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "";
+            String query = "SELECT COUNT(`item_number`) FROM `item` WHERE `status`='Pending'";
             ResultSet rs = stmt.executeQuery(query);
             if (!rs.isBeforeFirst()) {
                 count = 0;
             } else {
                 while (rs.next()) {
-                    count = rs.getInt("");
+                    count = rs.getInt("COUNT(`item_number`)");
                 }
             }
             dbc.endConnection();

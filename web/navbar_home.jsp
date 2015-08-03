@@ -85,7 +85,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="#">View & Edit Profile</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#"><b>Log Out</b></a></li>
+                            <li><a href="ClearAll"><b>Log Out</b></a></li>
                         </ul>
                     </li>
                 </ul>

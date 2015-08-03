@@ -9,8 +9,6 @@
 <script>
     $(document).ready(function () {
         $("#login_form").submit(function (e) {
-            e.preventDefault();
-
             $("#loading_animation").html("<img src='media/images/Gif_Animations/loading.gif' width='25' height='25' alt='Loading...'/>");
 
             var login = $("#login").val();
@@ -37,6 +35,7 @@
 
                     $("#message_model_content").html("Request Failed!");
                     $('#message_model').modal('toggle');
+                    e.preventDefault();
                 }
             });
         });

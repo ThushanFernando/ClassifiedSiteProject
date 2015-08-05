@@ -136,7 +136,7 @@ public class AdminClass_NavbarTools {
         try {
             dbc.getConnection();
             Statement stmt=dbc.conn.createStatement();
-            String query="SELECT  count(`message_id`) from user_messages where `read_state`='0' AND receiver='Admin'";
+            String query="SELECT  count(`message_id`) FROM `user_messages` WHERE  `time_stamp` IN (SELECT MAX(`time_stamp`) FROM `user_messages` WHERE`receiver`='Admin' AND `read_state`='0' GROUP BY `sender`) ";
             ResultSet rs=stmt.executeQuery(query);
             if(!rs.isBeforeFirst()){
                 count=0;
@@ -285,5 +285,25 @@ public class AdminClass_NavbarTools {
             Logger.getLogger(AdminClass_NavbarTools.class.getName()).log(Level.SEVERE, null, ex);
         }
         return al;
-   } 
+   }
+   
+   public boolean checkPass(String username,String password){
+       boolean result=false;
+        try {
+            
+            dbc.getConnection();
+            Statement stmt=dbc.conn.createStatement();
+            String query="SELECT `username`,`pass` FROM `user` WHERE `username`='"+username+"' AND `pass`='"+password+"' AND `user_type`='Admin'";
+            ResultSet rs=stmt.executeQuery(query);
+            while(rs.next()){
+                if(rs.getString("username").equals(username) && rs.getString("pass").equals(password) ){
+                    result=true;
+                }
+            }
+            dbc.endConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_NavbarTools.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+   }
 }

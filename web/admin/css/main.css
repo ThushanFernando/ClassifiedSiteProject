@@ -4292,7 +4292,7 @@ body.header-default .daterangepicker {
 }
 .discussion .avatar {
 	position: relative;
-	width: 50px;
+	width: auto;
 	height: 50px;
 	display: inline;
 	overflow: hidden;
@@ -4314,7 +4314,7 @@ body.header-default .daterangepicker {
 	width: 0;
 }
 .other .messages {
-	margin-left: 62px;
+	margin-left: 100px;
 	background: #E5E5EA;
 }
 .other .avatar {

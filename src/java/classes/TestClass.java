@@ -5,11 +5,13 @@
  */
 package classes;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Scanner;
 
 /**
  *
@@ -36,22 +38,9 @@ public class TestClass {
     
 
     public static void main(String[] args) throws Exception {
-    AdminClass_Overviewstats ao=new AdminClass_Overviewstats();
-    int test=ao.reviewAdsCount();
-        System.out.println(test);
-   
-//    Iterator itr = al.iterator();
-//    AdminClass_Overviewstats received = null;
-//
-//        while (itr.hasNext()) {
-//            Object a = itr.next();
-//            received = (AdminClass_Overviewstats) a;
-//
-//        
-//        String test=ao.timeDiff(received.getTimeStamp());
-//           
-//            System.out.println(received.getSender()+" "+received.getContent()+" "+test);
-//        }
+    
+        AdminClass_ReviewAds ar=new AdminClass_ReviewAds();
+        System.out.println(ar.approveAd("3"));
         
 
         //HH converts hour in 24 hours format (0-23), day calculation

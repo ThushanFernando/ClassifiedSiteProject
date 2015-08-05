@@ -61,8 +61,24 @@
         <servlet-class>adminservlets.SearchResult</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DetailedView</servlet-name>
-        <servlet-class>adminservlets.DetailedView</servlet-class>
+        <servlet-name>CheckPassXML</servlet-name>
+        <servlet-class>adminservlets.CheckPassXML</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConversationXML</servlet-name>
+        <servlet-class>adminservlets.ConversationXML</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailedViewXML</servlet-name>
+        <servlet-class>adminservlets.DetailedViewXML</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdReviewAction</servlet-name>
+        <servlet-class>adminservlets.AdReviewAction</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ModifyAds</servlet-name>
+        <servlet-class>adminservlets.ModifyAds</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
@@ -125,8 +141,24 @@
         <url-pattern>/SearchResult</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DetailedView</servlet-name>
-        <url-pattern>/DetailedView</url-pattern>
+        <servlet-name>CheckPassXML</servlet-name>
+        <url-pattern>/CheckPassXML</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConversationXML</servlet-name>
+        <url-pattern>/ConversationXML</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailedViewXML</servlet-name>
+        <url-pattern>/DetailedViewXML</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdReviewAction</servlet-name>
+        <url-pattern>/AdReviewAction</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ModifyAds</servlet-name>
+        <url-pattern>/ModifyAds</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

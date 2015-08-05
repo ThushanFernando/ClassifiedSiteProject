@@ -25,6 +25,7 @@ public class AdminClass_DetailedView {
     private String activated_time = null;
     private String last_login = null;
     private String num_of_adds = null;
+    private String registration=null;
     DbClass dbc = new DbClass();
 
     /**
@@ -124,13 +125,28 @@ public class AdminClass_DetailedView {
     public void setNum_of_adds(String num_of_adds) {
         this.num_of_adds = num_of_adds;
     }
+    
+    /**
+     * @return the registration
+     */
+    public String getRegistration() {
+        return registration;
+    }
+
+    /**
+     * @param registration the registration to set
+     */
+    public void setRegistration(String registration) {
+        this.registration = registration;
+    }
 
     public ArrayList userDetailedView(String user) {
         ArrayList al = new ArrayList();
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT `username`, `email`, `voice` FROM `user` WHERE `username`='" + user + "'";
+            String query="SELECT `username`, `email`, `voice`, `status`, `activated_time_stamp`, `registration`, `last_login`, `total_ads` FROM `userview` WHERE `username`='" + user + "'";
+            
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 al.add(rs.getString("username"));
@@ -141,10 +157,7 @@ public class AdminClass_DetailedView {
                 }else{
                 al.add(rs.getString("voice"));
                 }
-            }
-            query = "SELECT  `status`, `activated_time_stamp` FROM `user_account_status` WHERE `username`='" + user + "'";
-            rs = stmt.executeQuery(query);
-            while (rs.next()) {
+                al.add(rs.getString("registration"));
                 al.add(rs.getString("status"));
                 
                 if(rs.getString("activated_time_stamp")==null){
@@ -152,17 +165,15 @@ public class AdminClass_DetailedView {
                 }else{
                 al.add(rs.getString("activated_time_stamp"));
                 }
-            }
-            query = "SELECT  `last_login`, `total_ads` FROM `user_info` WHERE `username`='"+user+"'";
-            rs = stmt.executeQuery(query);
-            while (rs.next()) {
                 if(rs.getString("last_login")==null){
                     al.add("Not logged yet");
                 }else{
                 al.add(rs.getString("last_login"));
                 }
                 al.add(rs.getString("total_ads"));
+                
             }
+            
             dbc.endConnection();
         } catch (SQLException ex) {
             Logger.getLogger(AdminClass_DetailedView.class.getName()).log(Level.SEVERE, null, ex);
@@ -175,19 +186,15 @@ public class AdminClass_DetailedView {
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT `message_id`, `sender`, `receiver`, `content`, `time_stamp`, `read_state` FROM `user_messages` WHERE `message_id`='"+messageId+"'";
+            String query = "SELECT `message_id`, `msg_to`, `msg_from`, `content`, `time_stamp` FROM `user_messages` WHERE `message_id`='"+messageId+"'";
             ResultSet rs = stmt.executeQuery(query);
             while(rs.next()){
                 al.add(rs.getString("message_id"));
-                al.add(rs.getString("sender"));
-                al.add(rs.getString("receiver"));
+                al.add(rs.getString("msg_from"));
+                al.add(rs.getString("msg_to"));
                 al.add(rs.getString("content"));
                 al.add(rs.getString("time_stamp"));
-                if("1".equals(rs.getString("read_state"))){
-                    al.add("Read");
-                }else{
-                    al.add("Unread");
-                }
+                
                 
             }
         } catch (SQLException ex) {
@@ -218,5 +225,7 @@ public class AdminClass_DetailedView {
         }
         return title;
     }
+
+    
 }
 

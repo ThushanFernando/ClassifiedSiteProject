@@ -26,6 +26,7 @@ public class AdminClass_Message {
     private String sender = null;
     private String content = null;
     private String timeStamp = null;
+    private String state=null;
 
     /**
      * @return the sender
@@ -82,19 +83,33 @@ public class AdminClass_Message {
     public void setUser(String user) {
         this.user = user;
     }
+    /**
+     * @return the state
+     */
+    public String getState() {
+        return state;
+    }
+
+    /**
+     * @param state the state to set
+     */
+    public void setState(String state) {
+        this.state = state;
+    }
 
     public ArrayList allMessages() {
         ArrayList al = new ArrayList();
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT `sender`,`content`,`time_stamp` FROM `user_messages` WHERE `receiver`='Admin'";
+            String query = "SELECT  `sender`, `content`,`time_stamp`,`receiver`,`read_state` FROM `user_messages` WHERE  `time_stamp` IN (SELECT MAX(`time_stamp`) FROM `user_messages` WHERE`receiver`='Admin'  GROUP BY `sender`) ORDER BY `time_stamp` DESC";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 AdminClass_Message am = new AdminClass_Message();
                 am.setSender(rs.getString("sender"));
                 am.setContent(rs.getString("content"));
                 am.setTimeStamp(rs.getString("time_stamp"));
+                am.setState(rs.getString("read_state"));
                 al.add(am);
             }
             dbc.endConnection();
@@ -109,7 +124,7 @@ public class AdminClass_Message {
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT `sender`,`content`,`time_stamp` FROM `user_messages` WHERE `receiver`='Admin' AND `read_state`='1'";
+            String query = "SELECT `sender`,`content`,`time_stamp` FROM `user_messages` WHERE `receiver`='Admin' AND `read_state`='1'  ORDER BY `time_stamp` DESC";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 AdminClass_Message am = new AdminClass_Message();
@@ -130,7 +145,7 @@ public class AdminClass_Message {
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT `sender`,`content`,`time_stamp` FROM `user_messages` WHERE `receiver`='Admin' AND `read_state`='0' ORDER BY `time_stamp` DESC";
+            String query = "SELECT  `sender`, `content`,`time_stamp`,`receiver` FROM `user_messages` WHERE  `time_stamp` IN (SELECT MAX(`time_stamp`) FROM `user_messages` WHERE`receiver`='Admin' AND `read_state`='0' GROUP BY `sender`) ORDER BY `time_stamp` DESC";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 AdminClass_Message am = new AdminClass_Message();
@@ -146,12 +161,12 @@ public class AdminClass_Message {
         return al;
     }
 
-    public ArrayList getConversation() {
+    public ArrayList getConversation(String user) {
         ArrayList al = new ArrayList();
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT `sender`,`content`,`time_stamp` FROM `user_messages` WHERE `sender`='" + getUser() + "' AND `receiver`='Admin' OR `sender`='Admin' AND `receiver`='" + getUser() + "'";
+            String query = "SELECT `sender`,`content`,`time_stamp` FROM `user_messages` WHERE `sender`='" +user+ "' AND `receiver`='Admin' OR `sender`='Admin' AND `receiver`='" +user+ "'";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 AdminClass_Message am = new AdminClass_Message();
@@ -222,5 +237,7 @@ public class AdminClass_Message {
         }
         return result;
     }
+
+    
 
 }

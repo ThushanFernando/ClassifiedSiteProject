@@ -5,11 +5,12 @@
  */
 package adminservlets;
 
-import classes.AdminClass_Message;
+import classes.AdminClass_NavbarTools;
+import classes.AdminClass_Overviewstats;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author SithuDewmi
  */
-public class MsgXML extends HttpServlet {
+public class CheckPassXML extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +39,10 @@ public class MsgXML extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet MsgXML</title>");
+            out.println("<title>Servlet CheckPassXML</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet MsgXML at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CheckPassXML at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,66 +60,19 @@ public class MsgXML extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("test/xml");
+        response.setContentType("text/xml");
         response.setCharacterEncoding("UTF-8");
-        AdminClass_Message am = new AdminClass_Message();
+        AdminClass_NavbarTools an=new AdminClass_NavbarTools();
         
-        ArrayList al = am.allMessages();
-        Iterator itr = al.iterator();
-        AdminClass_Message received = null;
+        boolean result=an.checkPass(request.getParameter("username"), request.getParameter("password"));
         String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                + "<values>\n";
-        while (itr.hasNext()) {
-            Object a = itr.next();
-            received = (AdminClass_Message) a;
-            if(request.getParameter("sid")==null || "".equals(request.getParameter("sid")) ){
-            String time = am.timeDiff(received.getTimeStamp());
-            if ("0".equals(received.getState())) {
-                content = content
-                        + "	<value>\n"
-                        + "		<sender>" + received.getSender() + "</sender>\n"
-                        + "		<content>" + received.getContent() + "</content>\n"
-                        + "		<time>" + time + "</time>\n"
-                        + "		<status> style=\"background-color:#E2DEE3;\"</status>\n"
-                        + "	</value>\n";
-            } else {
-                content = content
-                        + "	<value>\n"
-                        + "		<sender>" + received.getSender() + "</sender>\n"
-                        + "		<content>" + received.getContent() + "</content>\n"
-                        + "		<time>" + time + "</time>\n"
-                        + "		<status></status>\n"
-                        + "	</value>\n";
+                + "<values>\n"
+                + "	<value>\n"
+                + "		<Result>" + result + "</Result>\n"
+                + "	</value>\n"
+                + "</values>";
 
-            }}else{
-                if(received.getSender().contains(request.getParameter("sid"))){
-                   String time = am.timeDiff(received.getTimeStamp());
-                    if ("0".equals(received.getState())) {
-                content = content
-                        + "	<value>\n"
-                        + "		<sender>" + received.getSender() + "</sender>\n"
-                        + "		<content>" + received.getContent() + "</content>\n"
-                        + "		<time>" + time + "</time>\n"
-                        + "		<status> style=\"background-color:#E2DEE3;\"</status>\n"
-                        + "	</value>\n";
-            } else {
-                content = content
-                        + "	<value>\n"
-                        + "		<sender>" + received.getSender() + "</sender>\n"
-                        + "		<content>" + received.getContent() + "</content>\n"
-                        + "		<time>" + time + "</time>\n"
-                        + "		<status></status>\n"
-                        + "	</value>\n";
-
-            }
-                    
-                }
-            }
-            
-        }
-        content = content + "</values>";
         response.getWriter().write(content);
-
     }
 
     /**

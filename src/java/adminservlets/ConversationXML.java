@@ -5,10 +5,13 @@
  */
 package adminservlets;
 
-import classes.AdminClass_DetailedView;
+import classes.AdminClass_Message;
+import classes.AdminClass_Overviewstats;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author SithuDewmi
  */
-public class DetailedView extends HttpServlet {
+public class ConversationXML extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +40,10 @@ public class DetailedView extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DetailedView</title>");            
+            out.println("<title>Servlet ConversationXML</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DetailedView at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ConversationXML at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,72 +61,45 @@ public class DetailedView extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        response.setContentType("text/xml");
+        response.setContentType("test/xml");
         response.setCharacterEncoding("UTF-8");
-        String id = request.getParameter("id");
-        ArrayList al;
-        AdminClass_DetailedView ad=new AdminClass_DetailedView();
-        String content=null;
-        if("U".equals(String.valueOf(id.charAt(0)))){
-           
-          al=ad.userDetailedView(id.substring(1));
+        AdminClass_Message am = new AdminClass_Message();
+        String type=null;
+        String sender=null;
+        String style=null;
+        ArrayList al = am.getConversation(request.getParameter("selected_con"));
+        Iterator itr = al.iterator();
+        AdminClass_Message received = null;
+        String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                + "<values>\n";
+        while (itr.hasNext()) {
+            Object a = itr.next();
+            received = (AdminClass_Message) a;
             
-             content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                + "<values>\n"
-                + "	<value>\n"
-                + "		<username>"+al.get(0)+"</username>\n"
-                + "		<email>"+al.get(1)+"</email>\n"
-                + "		<tel>"+al.get(2)+"</tel>\n"
-                + "		<status>"+al.get(3)+"</status>\n"
-                + "		<activation>"+al.get(4)+"</activation>\n"
-                + "		<login>"+al.get(5)+"</login>\n"
-                + "		<ads>"+al.get(6)+"</ads>\n"
-                + "	</value>\n"
-                + "</values>";
-
-        }else if("M".equals(String.valueOf(id.charAt(0)))){
-           
-          al=ad.messageDetailedView(id.substring(1));
-           
-             content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                + "<values>\n"
-                + "	<value>\n"
-                + "		<id>"+al.get(0)+"</id>\n"
-                + "		<sender>"+al.get(1)+"</sender>\n"
-                + "		<reciever>"+al.get(2)+"</reciever>\n"
-                + "		<content>"+al.get(3)+"</content>\n"
-                + "		<time>"+al.get(4)+"</time>\n"
-                + "		<state>"+al.get(5)+"</state>\n"
-                + "	</value>\n"
-                + "</values>";
-
-        }
-        else if("R".equals(String.valueOf(id.charAt(0)))){
-           
-          al=ad.messageDetailedView(id.substring(1));
-           
-             content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                + "<values>\n"
-                + "	<value>\n"
-                + "		<id>To be developed</id>\n"
-                + "	</value>\n"
-                + "</values>";
-
-        }else{
-            String tilte=ad.itemDetailedView(String.valueOf(id.charAt(0)));
-             content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                + "<values>\n"
-                + "	<value>\n"
-                + "		<id>"+tilte+"</id>\n"
-                + "	</value>\n"
-                + "</values>";
+            String time = am.timeDiff(received.getTimeStamp());
+            if("Admin".equals(received.getSender())){
+                type="self";
+                sender="You";
+                style="style=\"text-align: right\"";
+            }else{
+                type="other";
+                sender=received.getSender();
+                style="";
+            }
+                content = content
+                        + "	<value>\n"
+                        + "		<type>" + type + "</type>\n"
+                        + "		<sender>" + sender + "</sender>\n"
+                        + "		<content>" + received.getContent() + "</content>\n"
+                        + "		<time>" + time + "</time>\n"
+                        + "		<style>"+style+"</style>\n"
+                        + "	</value>\n";
+             
             
         }
-        
+        content = content + "</values>";
+        System.out.println(content);
         response.getWriter().write(content);
-    
-
     }
 
     /**

@@ -67,7 +67,10 @@ public class DataCountsXML extends HttpServlet {
        if("0".equals(messageCount)){
            messageCount="";
        }
-       int ads=ao.reviewAdsCount();
+       String ads=ao.reviewAdsCount();
+       if("0".equals(ads)){
+           ads="";
+       }
        String temp="111";
        String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                +"<values>\n"

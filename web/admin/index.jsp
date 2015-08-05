@@ -154,7 +154,7 @@
                     </button>
                     <!-- end: RESPONSIVE MENU TOGGLER -->
                     <!-- start: LOGO -->
-                    <a class="navbar-brand" href="index.jsp">
+                    <a class="navbar-brand" href="Dashboard">
                         <img  src="admin/images/logo.jpg" style="width: 100px;"/>
 
                     </a>
@@ -163,11 +163,11 @@
                 <div class="navbar-tools">
                     <!-- start: TOP NAVIGATION MENU -->
                     <ul class="nav navbar-right">
-                    <!-- start: MESSAGE DROPDOWN -->
+                        <!-- start: MESSAGE DROPDOWN -->
 
                         <li class="dropdown">
 
-                            <a class="dropdown-toggle" data-close-others="true" data-hover="dropdown" data-toggle="dropdown" href="#">
+                            <a class="dropdown-toggle" data-close-others="true" data-hover="" data-toggle="dropdown" href="#">
                                 <i class="clip-bubble-3"></i>
                                 <span id="MC" class="badge"></span>
                             </a>
@@ -202,7 +202,7 @@
 
 
                                 <li>
-                                    <a href="#responsive" data-toggle="modal"><i class="clip-key"></i>
+                                    <a href="#responsive" onclick="clr()" data-toggle="modal"><i class="clip-key"></i>
                                         &nbsp;Change password </a>
                                 </li>
                                 <li>
@@ -235,7 +235,7 @@
                     <!-- start: MAIN NAVIGATION MENU -->
                     <ul class="main-navigation-menu">
                         <li class="active open">
-                            <a href="index.jsp"><i class="clip-home-3"></i>
+                            <a href="Dashboard"><i class="clip-home-3"></i>
                                 <span class="title"> Dashboard </span><span class="selected"></span>
                             </a>
                         </li>
@@ -253,25 +253,25 @@
                             </a>
                             <ul class="sub-menu">
                                 <li>
-                                    <a href="msg_all.jsp">
+                                    <a href="">
                                         <span class="title"> All </span>
                                         <span class="badge badge-new">new</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="msg_read.jsp">
+                                    <a href="">
                                         <span class="title"> Read </span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="msg_unread.jsp">
+                                    <a href="">
                                         <span class="title"> Unread </span>
                                         <span class="badge badge-new">new</span>
                                         <span id="MC2" class="badge"></span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="msg_spam.jsp">
+                                    <a href="">
                                         <span class="title"> Spam </span>
                                     </a>
                                 </li>
@@ -280,28 +280,28 @@
                         </li>
 
                         <li>
-                            <a href="user_blocked.jsp" ><i class="clip-user-block"></i>
+                            <a href="" ><i class="clip-user-block"></i>
                                 <span class="title"> Blocked Users</span><span class="selected"></span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="ads_blocked.jsp" ><i class="clip-note"></i>
+                            <a href="" ><i class="clip-note"></i>
                                 <span class="title"> Blocked Ads</span><span class="selected"></span>
                             </a>
                         </li>
                         <li>
-                            <a href="ads_review.jsp" ><i class="clip-user-4"></i>
+                            <a href="" ><i class="clip-user-4"></i>
                                 <span class="title"> Review Ads</span><span class="selected"></span>
                             </a>
                         </li>
                         <li>
-                            <a href="upgrade.jsp" ><i class="clip-thumbs-up"></i>
+                            <a href="" ><i class="clip-thumbs-up"></i>
                                 <span class="title"> Upgrade Top Ads</span><span class="selected"></span>
                             </a>
                         </li>
                         <li>
-                            <a href="report_view.jsp" ><i class="clip-clip"></i>
+                            <a href="" ><i class="clip-clip"></i>
                                 <span class="title"> View Reports</span><span class="selected"></span>
                             </a>
                         </li>
@@ -380,7 +380,7 @@
                         <div class="col-sm-4">
                             <div class="core-box">
                                 <div class="heading">
-                                    <a href="#">
+                                    <a href="ReviewAds">
                                         <i class="clip-user-4 circle-icon circle-green"></i>  
                                         <span id="RA" class="badge"></span>
                                         <h2>Review Ads</h2>
@@ -561,34 +561,37 @@
                                                 <i class="fa fa-ok"></i> Your form validation is successful!
                                             </div>
                                         </div>
+                                        <div id="CheckPassXML" style="color: red;"></div>
                                         <div class="col-md-6">
+
                                             <div class="form-group">
                                                 <label class="control-label">
                                                     User Name <span class="symbol required"></span>
                                                 </label>
-                                                <input type="text" placeholder="Insert your User Name" class="form-control" id="username" name="username">
+                                                <input type="text" placeholder="Insert your User Name" onclick="clr()" class="form-control" id="username">
                                             </div>
 
                                             <div class="form-group">
                                                 <label class="control-label">
                                                     Password <span class="symbol required"></span>
                                                 </label>
-                                                <input type="password" class="form-control" name="password" id="password">
+                                                <input type="password" class="form-control" onclick="clr()"  id="password">
                                             </div>
 
                                         </div>
 
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <button class="btn btn-blue btn-block" type="submit">
-                                                Proceed <i class="fa fa-arrow-circle-right"></i>
-                                            </button>
-                                        </div>
 
-                                    </div>
                                 </form>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <button class="btn btn-blue btn-block" onclick="login_check()" type="">
+                                            Proceed <i class="fa fa-arrow-circle-right"></i>
+                                        </button>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                         <!-- end: FORM VALIDATION 1 PANEL -->
@@ -607,12 +610,12 @@
 
             c1.add(Calendar.MONTH, -12);
 
-            float totalVisit = 0;
+            double totalVisit = 0;
             for (int i = 0; i < pvcount.size(); i++) {
                 totalVisit += Integer.parseInt((String) pvcount.get(i));
             }
 
-            float totalVisitYear = 0;
+            double totalVisitYear = 0;
             for (int i = 0; i < pvycount.size(); i++) {
                 totalVisitYear += Integer.parseInt((String) pvycount.get(i));
             }
@@ -645,9 +648,9 @@
                                             <thead>
                                                 <tr>
 
-                                                    <th>Time period(Month)</th>
-                                                    <th>Visit count</th>
-                                                    <th>Percentage </th>
+                                                    <th class="hidden-xs">Time period(Month)</th><th class="visible-xs">By Month</th>
+                                                    <th class="hidden-xs">Visit count</th><th class="visible-xs">Visits</th>
+                                                    <th class="hidden-xs">Percentage</th><th class="visible-xs">%</th>
 
 
                                                 </tr>
@@ -658,13 +661,17 @@
                                                         c1.add(Calendar.MONTH, +1);
                                                         String nextMonth = (String) sdf.format(c1.getTime());
                                                         DecimalFormat twoDForm = new DecimalFormat("#.#");
+                                                        String percentage = twoDForm.format(Integer.parseInt((String) pvcount.get(i)) / totalVisit * 100);
+                                                        if (totalVisit == 0) {
+                                                            percentage = "0";
+                                                        }
                                                 %>
 
                                                 <tr>
 
-                                                    <td><%=thisMonth%> to <%=nextMonth%></td>
+                                                    <td class="hidden-xs"><%=thisMonth%> to <%=nextMonth%></td><td class="visible-xs"><%=nextMonth%></td>
                                                     <td><%=pvcount.get(i)%></td>
-                                                    <td><%=twoDForm.format(Integer.parseInt((String) pvcount.get(i)) / totalVisit * 100)%>%</td>
+                                                    <td><%=percentage%>%</td>
 
                                                 </tr>
                                                 <%}%>
@@ -698,24 +705,26 @@
                                             <thead>
                                                 <tr>
 
-                                                    <th>Time period(Year)</th>
-                                                    <th>Visit count</th>
-                                                    <th>Percentage </th>
-
-
+                                                    <th class="hidden-xs">Time period(Year)</th><th class="visible-xs">By Year</th>
+                                                    <th class="hidden-xs">Visit count</th><th class="visible-xs">Visits</th>
+                                                    <th class="hidden-xs">Percentage</th><th class="visible-xs">%</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <%for (int i = 0; i < 7; i++) {
 
                                                         DecimalFormat twoDForm = new DecimalFormat("#.#");
+                                                        String percentage = twoDForm.format(Integer.parseInt((String) pvycount.get(i)) / totalVisitYear * 100);
+                                                        if (totalVisitYear == 0) {
+                                                            percentage = "0";
+                                                        }
                                                 %>
 
                                                 <tr>
 
-                                                    <td><%=pvyear.get(i)%></td>
+                                                    <td class="hidden-xs"><%=pvyear.get(i)%></td><td class="visible-xs"><%=String.valueOf(pvyear.get(i)).substring(13)%></td>
                                                     <td><%=pvycount.get(i)%></td>
-                                                    <td><%=twoDForm.format(Integer.parseInt((String) pvycount.get(i)) / totalVisitYear * 100)%>%</td>
+                                                    <td><%=percentage%>%</td>
 
                                                 </tr>
                                                 <%    }%>
@@ -775,9 +784,9 @@
                                             <thead>
                                                 <tr>
 
-                                                    <th>Time period(Month)</th>
-                                                    <th>Users count</th>
-                                                    <th>Percentage </th>
+                                                    <th class="hidden-xs">Time period(Month)</th><th class="visible-xs">By Month</th>
+                                                    <th class="hidden-xs">Users count</th><th class="visible-xs">Users</th>
+                                                    <th class="hidden-xs">Percentage</th><th class="visible-xs">%</th>
 
 
                                                 </tr>
@@ -788,13 +797,17 @@
                                                         c1.add(Calendar.MONTH, +1);
                                                         String nextMonth = (String) sdf.format(c1.getTime());
                                                         DecimalFormat twoDForm = new DecimalFormat("#.#");
+                                                        String percentage = twoDForm.format(Integer.parseInt((String) ucount.get(i)) / totalUsers * 100);
+                                                        if (totalUsers == 0) {
+                                                            percentage = "0";
+                                                        }
                                                 %>
 
                                                 <tr>
 
-                                                    <td><%=thisMonth%> to <%=nextMonth%></td>
+                                                    <td class="hidden-xs"><%=thisMonth%> to <%=nextMonth%></td><td class="visible-xs"><%=nextMonth%></td>
                                                     <td><%=ucount.get(i)%></td>
-                                                    <td><%=twoDForm.format(Integer.parseInt((String) ucount.get(i)) / totalUsers * 100)%>%</td>
+                                                    <td><%=percentage%>%</td>
 
                                                 </tr>
                                                 <%    }%>
@@ -827,9 +840,10 @@
                                             <thead>
                                                 <tr>
 
-                                                    <th>Time period(Year)</th>
-                                                    <th>Visit count</th>
-                                                    <th>Percentage </th>
+
+                                                    <th class="hidden-xs">Time period(Year)</th><th class="visible-xs">By Year</th>
+                                                    <th class="hidden-xs">Users count</th><th class="visible-xs">Users</th>
+                                                    <th class="hidden-xs">Percentage</th><th class="visible-xs">%</th>
 
 
                                                 </tr>
@@ -838,13 +852,17 @@
                                                 <%for (int i = 0; i < 7; i++) {
 
                                                         DecimalFormat twoDForm = new DecimalFormat("#.#");
+                                                        String percentage = twoDForm.format(Integer.parseInt((String) uycount.get(i)) / totalUsersYear * 100);
+                                                        if (totalUsersYear == 0) {
+                                                            percentage = "0";
+                                                        }
                                                 %>
 
                                                 <tr>
 
-                                                    <td><%=uyear.get(i)%></td>
+                                                    <td class="hidden-xs"><%=uyear.get(i)%></td><td class="visible-xs"><%=String.valueOf(uyear.get(i)).substring(13)%></td>
                                                     <td><%=uycount.get(i)%></td>
-                                                    <td><%=twoDForm.format(Integer.parseInt((String) uycount.get(i)) / totalUsersYear * 100)%>%</td>
+                                                    <td><%=percentage%>%</td>
 
                                                 </tr>
                                                 <%    }%>
@@ -905,9 +923,10 @@
                                             <thead>
                                                 <tr>
 
-                                                    <th>Time period(Month)</th>
-                                                    <th>Ads count</th>
-                                                    <th>Percentage </th>
+                                                    <th class="hidden-xs">Time period(Month)</th><th class="visible-xs">By Month</th>
+                                                    <th class="hidden-xs">Ads count</th><th class="visible-xs">Ads</th>
+                                                    <th class="hidden-xs">Percentage</th><th class="visible-xs">%</th>
+
 
 
                                                 </tr>
@@ -918,13 +937,17 @@
                                                         c1.add(Calendar.MONTH, +1);
                                                         String nextMonth = (String) sdf.format(c1.getTime());
                                                         DecimalFormat twoDForm = new DecimalFormat("#.#");
+                                                        String percentage = twoDForm.format(Integer.parseInt((String) acount.get(i)) / totalAds * 100);
+                                                        if (totalAds == 0) {
+                                                            percentage = "0";
+                                                        }
                                                 %>
 
                                                 <tr>
 
-                                                    <td><%=thisMonth%> to <%=nextMonth%></td>
+                                                    <td class="hidden-xs"><%=thisMonth%> to <%=nextMonth%></td><td class="visible-xs"><%=nextMonth%></td>
                                                     <td><%=acount.get(i)%></td>
-                                                    <td><%=twoDForm.format(Integer.parseInt((String) acount.get(i)) / totalAds * 100)%>%</td>
+                                                    <td><%=percentage%>%</td>
 
                                                 </tr>
                                                 <%    }%>
@@ -957,9 +980,9 @@
                                             <thead>
                                                 <tr>
 
-                                                    <th>Time period(Year)</th>
-                                                    <th>Ads count</th>
-                                                    <th>Percentage </th>
+                                                    <th class="hidden-xs">Time period(Year)</th><th class="visible-xs">By Year</th>
+                                                    <th class="hidden-xs">Ads count</th><th class="visible-xs">Ads</th>
+                                                    <th class="hidden-xs">Percentage</th><th class="visible-xs">%</th>
 
 
                                                 </tr>
@@ -968,13 +991,17 @@
                                                 <%for (int i = 0; i < 7; i++) {
 
                                                         DecimalFormat twoDForm = new DecimalFormat("#.#");
+                                                        String percentage = twoDForm.format(Integer.parseInt((String) aycount.get(i)) / totalAdsYear * 100);
+                                                        if (totalAdsYear == 0) {
+                                                            percentage = "0";
+                                                        }
                                                 %>
 
                                                 <tr>
 
-                                                    <td><%=ayear.get(i)%></td>
+                                                    <td class="hidden-xs"><%=ayear.get(i)%></td><td class="visible-xs"><%=String.valueOf(ayear.get(i)).substring(13)%></td>
                                                     <td><%=aycount.get(i)%></td>
-                                                    <td><%=twoDForm.format(Integer.parseInt((String) aycount.get(i)) / totalAdsYear * 100)%>%</td>
+                                                    <td><%=percentage%>%</td>
 
                                                 </tr>
                                                 <%    }%>
@@ -1041,6 +1068,8 @@
                                                 dataType: "xml",
                                                 success: function (xml) {
                                                     $("#MC").html("");
+                                                    $("#MC1").html("");
+                                                    $("#MC2").html("");
 
                                                     $(xml).find('values').each(function () {
 
@@ -1074,6 +1103,10 @@
 
                                                         var sender = $(this).find('sender').text();
                                                         var content = $(this).find('content').text();
+                                                        var lngth = "";
+                                                        if (content.length > 30) {
+                                                            lngth = ".....";
+                                                        }
                                                         var time = $(this).find('time').text();
                                                         var status = $(this).find('status').text();
                                                         var item;
@@ -1083,7 +1116,7 @@
                                                                 + '<div class="thread-image "><i class="clip-user-5 circle-icon circle-blue" style="background-color:#0099c6;"></i></div>\n'
                                                                 + '<div class="thread-content">\n'
                                                                 + '<span class="author">' + sender + '</span>\n'
-                                                                + '<span class="preview">' + content.substring(0, 50) + '.....</span>\n'
+                                                                + '<span class="preview">' + content.substring(0, 30) + lngth + '</span>\n'
                                                                 + '<span class="time">' + time + '</span>\n'
                                                                 + '</div>\n'
                                                                 + '</div>\n'
@@ -1202,7 +1235,47 @@
                                             document.getElementById("CustomDataXML").innerHTML = "";
                                             document.getElementById("CustomDataXMLUser").innerHTML = "";
                                             document.getElementById("CustomDataXMLAds").innerHTML = "";
+                                            document.getElementById("CheckPassXML").innerHTML = "";
+                                            document.getElementById("username").value = "";
+                                            document.getElementById("password").value = "";
 
+
+                                        }
+                                        function login_check() {
+                                            var username = document.getElementById('username').value;
+
+                                            var password = document.getElementById('password').value;
+
+                                            if (username === "" || password === "") {
+                                                document.getElementById('CheckPassXML').innerHTML = "&nbsp&nbsp&nbsp Enter current login details";
+                                            } else {
+
+                                                $.ajax({
+                                                    type: "GET",
+                                                    url: "CheckPassXML",
+                                                    dataType: "xml",
+                                                    data: {
+                                                        username: username,
+                                                        password: password
+
+                                                    },
+                                                    success: function (xml) {
+                                                        $("#CheckPassXML").html("");
+
+                                                        $(xml).find('value').each(function () {
+
+                                                            var result = $(this).find('Result').text();
+                                                            if (result === "true") {
+                                                                window.location.replace("admin/change_pass.jsp");
+                                                            } else {
+                                                                document.getElementById('CheckPassXML').innerHTML = "&nbsp&nbsp&nbsp Check your username or password";
+                                                            }
+                                                        });
+
+
+                                                    }
+                                                });
+                                            }
                                         }
         </script>
 

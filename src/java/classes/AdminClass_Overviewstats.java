@@ -10,12 +10,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  *
@@ -102,18 +100,18 @@ public class AdminClass_Overviewstats {
         this.timePeriod = timePeriod;
     }
 
-    public int reviewAdsCount() {
-        int count = 0;
+    public String reviewAdsCount() {
+        String count = null;
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
             String query = "SELECT COUNT(`item_number`) FROM `item` WHERE `status`='Pending'";
             ResultSet rs = stmt.executeQuery(query);
             if (!rs.isBeforeFirst()) {
-                count = 0;
+                count = "0";
             } else {
                 while (rs.next()) {
-                    count = rs.getInt("COUNT(`item_number`)");
+                    count = rs.getString("COUNT(`item_number`)");
                 }
             }
             dbc.endConnection();
@@ -182,7 +180,7 @@ public class AdminClass_Overviewstats {
                 c1.add(Calendar.MONTH, +1);
                 String nextMonth = (String) sdf.format(c1.getTime());
 
-                String query = "SELECT count(`time_stamp`) FROM  `site_visits` WHERE  `time_stamp` BETWEEN  '" + thisMonth + " 00:00:00' AND '" + nextMonth + " 00:00:00'";
+                String query = "SELECT count(`time_stamp`) FROM  `site_visits` WHERE  `time_stamp` BETWEEN  '" + thisMonth + " 00:00:00' AND '" + nextMonth + " 00:00:00' AND `time_stamp` != '" + nextMonth + " 00:00:00'";
                 ResultSet rs = stmt.executeQuery(query);
 
                 while (rs.next()) {
@@ -217,7 +215,7 @@ public class AdminClass_Overviewstats {
                 c1.add(Calendar.YEAR, +1);
                 String nextYear = (String) sdf.format(c1.getTime());
 
-                String query = "SELECT count(`time_stamp`) FROM  `site_visits` WHERE  `time_stamp` BETWEEN  '" + thisYear + " 00:00:00' AND '" + nextYear + " 00:00:00'";
+                String query = "SELECT count(`time_stamp`) FROM  `site_visits` WHERE  `time_stamp` BETWEEN  '" + thisYear + " 00:00:00' AND '" + nextYear + " 00:00:00'  AND `time_stamp` != '" + nextYear + " 00:00:00'";
                 ResultSet rs = stmt.executeQuery(query);
 
                 while (rs.next()) {
@@ -247,7 +245,7 @@ public class AdminClass_Overviewstats {
             while (rs.next()) {
             al.add(rs.getString("count(`time_stamp`)"));
             }
-            query = "SELECT count(`time_stamp`) FROM  `site_visits` WHERE  `time_stamp` BETWEEN  '" + firstdate + "' AND '" + seconddate + "'";
+            query = "SELECT count(`time_stamp`) FROM  `site_visits` WHERE  `time_stamp` BETWEEN  '" + firstdate + "' AND '" + seconddate + "'  AND `time_stamp` != '" + seconddate + "'";
             rs = stmt.executeQuery(query);
 
             while (rs.next()) {
@@ -277,7 +275,7 @@ public class AdminClass_Overviewstats {
                 c1.add(Calendar.MONTH, +1);
                 String nextMonth = (String) sdf.format(c1.getTime());
 
-                String query = "SELECT COUNT(`activated_time_stamp`) FROM `user_account_status` WHERE  `activated_time_stamp` BETWEEN  '" + thisMonth + " 00:00:00' AND '" + nextMonth + " 00:00:00' AND `status`='Activated'";
+                String query = "SELECT COUNT(`activated_time_stamp`) FROM `userview` WHERE  `activated_time_stamp` BETWEEN  '" + thisMonth + " 00:00:00' AND '" + nextMonth + " 00:00:00' AND `status`='Activated' AND `user_type`='Member' AND `activated_time_stamp`!='" + nextMonth + " 00:00:00'";
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
                     AdminClass_Overviewstats ao = new AdminClass_Overviewstats();
@@ -312,7 +310,7 @@ public class AdminClass_Overviewstats {
                 c1.add(Calendar.YEAR, +1);
                 String nextYear = (String) sdf.format(c1.getTime());
 
-                String query = "SELECT COUNT(`activated_time_stamp`) FROM `user_account_status` WHERE  `activated_time_stamp` BETWEEN  '" + thisYear + " 00:00:00' AND '" + nextYear + " 00:00:00' AND `status`='Activated'";
+                String query = "SELECT COUNT(`activated_time_stamp`) FROM `userview` WHERE  `activated_time_stamp` BETWEEN  '" + thisYear + " 00:00:00' AND '" + nextYear + " 00:00:00'  AND `status`='Activated' AND `user_type`='Member' AND `activated_time_stamp`!='" + nextYear + " 00:00:00'";
                 ResultSet rs = stmt.executeQuery(query);
 
                 while (rs.next()) {
@@ -336,13 +334,13 @@ public class AdminClass_Overviewstats {
             
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT COUNT(`activated_time_stamp`) FROM `user_account_status` WHERE `status`='Activated'";
+            String query = "SELECT COUNT(`activated_time_stamp`) FROM `userview` WHERE `status`='Activated' AND user_type='Member'";
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
             al.add(rs.getString("COUNT(`activated_time_stamp`)"));
             }
-            query = "SELECT COUNT(`activated_time_stamp`) FROM `user_account_status` WHERE `status`='Activated' AND  `activated_time_stamp` BETWEEN  '" + firstdate + "' AND '" + seconddate + "'";
+            query = "SELECT COUNT(`activated_time_stamp`) FROM `userview` WHERE  `activated_time_stamp` BETWEEN  '" + firstdate + "' AND '" + seconddate + "'AND `status`='Activated' AND `user_type`='Member' AND `activated_time_stamp`!='" + seconddate + "'";
             rs = stmt.executeQuery(query);
 
             while (rs.next()) {
@@ -374,7 +372,7 @@ public class AdminClass_Overviewstats {
                 c1.add(Calendar.MONTH, +1);
                 String nextMonth = (String) sdf.format(c1.getTime());
 
-                String query = "SELECT COUNT(`time_stamp`) FROM `item` WHERE  `time_stamp` BETWEEN  '" + thisMonth + " 00:00:00' AND '" + nextMonth + " 00:00:00' AND status='Active'";
+                String query = "SELECT COUNT(`time_stamp`) FROM `item` WHERE  `time_stamp` BETWEEN  '" + thisMonth + " 00:00:00' AND '" + nextMonth + " 00:00:00' AND status='Active'  AND `time_stamp` != '" + nextMonth + " 00:00:00'";
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
                     AdminClass_Overviewstats ao = new AdminClass_Overviewstats();
@@ -409,7 +407,7 @@ public class AdminClass_Overviewstats {
                 c1.add(Calendar.YEAR, +1);
                 String nextYear = (String) sdf.format(c1.getTime());
 
-                String query = "SELECT COUNT(`time_stamp`) FROM `item` WHERE  `time_stamp` BETWEEN  '" + thisYear + " 00:00:00' AND '" + nextYear + " 00:00:00' AND status='Active'";
+                String query = "SELECT COUNT(`time_stamp`) FROM `item` WHERE  `time_stamp` BETWEEN  '" + thisYear + " 00:00:00' AND '" + nextYear + " 00:00:00' AND status='Active'  AND `time_stamp` != '" + nextYear + " 00:00:00'";
                 ResultSet rs = stmt.executeQuery(query);
 
                 while (rs.next()) {
@@ -439,7 +437,7 @@ public class AdminClass_Overviewstats {
             while (rs.next()) {
             al.add(rs.getString("COUNT(`time_stamp`)"));
             }
-            query = "SELECT COUNT(`time_stamp`) FROM `item` WHERE status='Active' AND  `time_stamp` BETWEEN  '" + firstdate + "' AND '" + seconddate + "'";
+            query = "SELECT COUNT(`time_stamp`) FROM `item` WHERE status='Active' AND  `time_stamp` BETWEEN  '" + firstdate + "' AND '" + seconddate + "'  AND `time_stamp` != '" + seconddate + "'";
             rs = stmt.executeQuery(query);
 
             while (rs.next()) {

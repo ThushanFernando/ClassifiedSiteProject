@@ -531,7 +531,7 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="panel panel-default">
-                                                    <div class="panel-heading">
+                                                    <div class="panel-heading hidden-xs">
                                                         <i class="clip-user-4"></i>
 
                                                         
@@ -557,7 +557,7 @@
 
                                                                 <tr>
                                                                     <td class="center hidden-xs"><%=received.getItem_number()%></td>
-                                                                    <td><input type="hidden" id="<%=received.getUsername()%>" name="<%=received.getItem_number()%>" value="<%=received.getTitle()%>"><%=received.getTitle()%></td>
+                                                                    <td><%=received.getTitle()%></td>
                                                                     <td class="center hidden-xs"><%=received.getTime_stamp()%></td>
                                                                     <td class="center"><%=received.getStatus()%></td>
                                                                     <td class="center">
@@ -583,7 +583,10 @@
                                                                                     </li>
                                                                                     <li role="presentation">
                                                                                         <a role="menuitem" tabindex="-1"  href="#message" data-toggle="modal">
-                                                                                            <i class="fa clip-bulb"></i><clickedAction id="<%=received.getUsername()%>" name="hello">Modify</clickedAction>
+                                                                                            <i class="fa clip-bulb"></i><clickedAction id="<%=received.getItem_number()%>" name="hello">Modify</clickedAction>
+                                                                                            <input type="hidden" id="MIN<%=received.getItem_number()%>" value="<%=received.getItem_number()%>">
+                                                                                            <input type="hidden" id="MIT<%=received.getItem_number()%>" value="<%=received.getTitle()%>">
+                                                                                            <input type="hidden" id="MIU<%=received.getItem_number()%>" value="<%=received.getUsername()%>">
                                                                                         </a>
                                                                                     </li>
                                                                                     <li role="presentation">
@@ -842,10 +845,10 @@
                             <script>
                                 $(document).on('click', 'clickedAction', function () {
 
-                                    document.getElementById("toid").value = this.id;
-                                    document.getElementById("subjectid").value = 'Your ad "' + document.getElementById(this.id).value + '" needs to be edited';
-                                    document.getElementById("form-field-24").innerHTML = 'Hello,\n\nYour ad "' + document.getElementById(this.id).value + ' ", posted on Superb.lk, does not follow our rules. You must make some changes to the ad before we can publish it.\n\nThe reason why we could not approve your ad:\n\n*****************Type the reason here*****************\n- Illegal item or service\nYour ad features an item or service that is illegal, which we cannot allow on our site. Please change the item or service that you are offering in your ad.\n\n**************************************************************\n\n\nTo edit your ad, please click the following link:\nhttp://Superb.lk/en/post_item/Samsung-galaxy-note-n7000 for-sale-colombo/edit\nYour password is: the password you selected\n\nIf you have any questions, feel free to reply to the email and we will get back to you.\n\nRegards,\nThe support team at Superb.lk\n\n--------------------------------------------\n\nDid you know that Superb.lk has the best second-hand mobile deals in Sri Lanka? Click here: http://Superb.lk/mobile-phones\n\nFollow us on Facebook:\nhttps://www.facebook.com/Superb.lk';
-                                    document.getElementById("itemid").value = document.getElementById(this.id).name;
+                                    document.getElementById("toid").value = document.getElementById('MIU'+this.id).value;
+                                    document.getElementById("subjectid").value = 'Your ad "' + document.getElementById('MIT'+this.id).value+ '" needs to be edited';
+                                    document.getElementById("form-field-24").innerHTML = 'Hello,\n\nYour ad "' + document.getElementById('MIT'+this.id).value+ ' ", posted on Superb.lk, does not follow our rules. You must make some changes to the ad before we can publish it.\n\nThe reason why we could not approve your ad:\n\n************Type the reason here************\n- Illegal item or service\nYour ad features an item or service that is illegal, which we cannot allow on our site. Please change the item or service that you are offering in your ad.\n\n***************************************************\n\n\nTo edit your ad, please click the following link:\nhttp://Superb.lk/en/post_item/Samsung-galaxy-note-n7000 for-sale-colombo/edit\nYour password is: the password you selected\n\nIf you have any questions, feel free to reply to the email and we will get back to you.\n\nRegards,\nThe support team at Superb.lk\n\n--------------------------------------------\n\nDid you know that Superb.lk has the best second-hand mobile deals in Sri Lanka? Click here: http://Superb.lk/mobile-phones\n\nFollow us on Facebook:\nhttps://www.facebook.com/Superb.lk';
+                                    document.getElementById("itemid").value = document.getElementById('MIN'+this.id).value;
                                 });
                             </script>
                             <script>

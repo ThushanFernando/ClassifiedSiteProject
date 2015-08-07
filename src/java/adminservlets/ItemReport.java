@@ -5,20 +5,18 @@
  */
 package adminservlets;
 
-import classes.AdminClass_ReviewAds;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author SithuDewmi
  */
-public class ModifyAds extends HttpServlet {
+public class ItemReport extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +35,10 @@ public class ModifyAds extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ModifyAds</title>");            
+            out.println("<title>Servlet ItemReport</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ModifyAds at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ItemReport at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,7 +56,7 @@ public class ModifyAds extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doPost(request, response);
     }
 
     /**
@@ -72,16 +70,9 @@ public class ModifyAds extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AdminClass_ReviewAds ar=new AdminClass_ReviewAds();
-        String reciever=ar.getUserEmail(request.getParameter("to"));
-        String subject=request.getParameter("subject");
-        String content=request.getParameter("content").replace("************Type the reason here************","");
-        content=content.replace("***************************************************", "");
-        String itemId=request.getParameter("itemname");
-        int result=ar.modifyAds(itemId);
-        HttpSession session=request.getSession();
-        session.setAttribute("alert", "success");
-        response.sendRedirect("ReviewAds");
+        if(request.getParameter("itemIdB")!=null){
+            
+        }
     }
 
     /**

@@ -5,8 +5,12 @@
  */
 package adminservlets;
 
+import classes.AdminClass_BlockedItems;
+import classes.AdminClass_ReportedItems;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +39,7 @@ public class ViewReports extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ViewReports</title>");            
+            out.println("<title>Servlet ViewReports</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ViewReports at " + request.getContextPath() + "</h1>");
@@ -56,7 +60,7 @@ public class ViewReports extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doPost(request, response);
     }
 
     /**
@@ -70,7 +74,44 @@ public class ViewReports extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        AdminClass_ReportedItems art = new AdminClass_ReportedItems();
+        
+        if (request.getParameter("itemIdB") != null && request.getParameter("reportIdB") != null) {
+            
+            AdminClass_BlockedItems ab = new AdminClass_BlockedItems();
+            int result = ab.blockItem(request.getParameter("itemIdB"));
+            int state =art.updateViewState(request.getParameter("reportIdB"));
+            
+            if (result == 1 && state==1) {
+                String alert = "<div class=\"alert alert-success\">\n"
+                        + "<button data-dismiss=\"alert\" class=\"close\">\n"
+                        + "&times;\n"
+                        + "</button>\n"
+                        + "<i class=\"fa fa-check-circle\"></i>\n"
+                        + "<strong>Blocked !</strong>  Advertiesment number " + request.getParameter("itemIdB") + "  .\n"
+                        + "</div>";
+                request.setAttribute("alert", alert);
+            } else {
+                String alert = "<div class=\"alert alert-danger\">\n"
+                        + "<button data-dismiss=\"alert\" class=\"close\">\n"
+                        + "&times;\n"
+                        + "</button>\n"
+                        + "<i class=\"fa fa-times-circle\"></i>\n"
+                        + "<strong>Failed!</strong> Advertiesment number '" + request.getParameter("itemIdB") + "' Try again.\n"
+                        + "</div>";
+                request.setAttribute("alert", alert);
+            }
+        }
+        if(request.getParameter("removeReport")!=null){
+             System.out.println(request.getParameter("removeReport"));
+        }
+        
+        int reportCount=art.getItemReportCount();
+        request.setAttribute("reportCount", reportCount);
+        ArrayList ReportedItems = art.getItemReports();
+        request.setAttribute("ReportedItems", ReportedItems);
+        RequestDispatcher rd = request.getRequestDispatcher("admin/report_view.jsp");
+        rd.forward(request, response);
     }
 
     /**

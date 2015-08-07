@@ -514,7 +514,7 @@
 								Step 2. Enter new login details		
 								</div>
 								<div class="panel-body">
-									<h2><i class="fa fa-pencil-square teal"></i> Change Your password</h2>
+                                                                    <h2 class="hidden-xs"><i class="fa fa-pencil-square teal"></i> Change Your password</h2>
 									
 									<hr>
 									<form action="#" role="form" id="form">

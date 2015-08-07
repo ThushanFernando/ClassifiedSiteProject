@@ -80,6 +80,14 @@
         <servlet-name>ModifyAds</servlet-name>
         <servlet-class>adminservlets.ModifyAds</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ItemReport</servlet-name>
+        <servlet-class>adminservlets.ItemReport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminClass_BlockedItems</servlet-name>
+        <servlet-class>classes.AdminClass_BlockedItems</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/Dashboard</url-pattern>
@@ -159,6 +167,14 @@
     <servlet-mapping>
         <servlet-name>ModifyAds</servlet-name>
         <url-pattern>/ModifyAds</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ItemReport</servlet-name>
+        <url-pattern>/ItemReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminClass_BlockedItems</servlet-name>
+        <url-pattern>/AdminClass_BlockedItems</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

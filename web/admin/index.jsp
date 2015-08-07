@@ -669,7 +669,7 @@
 
                                                 <tr>
 
-                                                    <td class="hidden-xs"><%=thisMonth%> to <%=nextMonth%></td><td class="visible-xs"><%=nextMonth%></td>
+                                                    <td class="hidden-xs"><%=thisMonth%> to <%=nextMonth%></td><td class="visible-xs"><%=thisMonth%></td>
                                                     <td><%=pvcount.get(i)%></td>
                                                     <td><%=percentage%>%</td>
 
@@ -693,7 +693,7 @@
                                 <div class="col-md-6">
 
                                     <br><span class="badge">Custom Visit count</span>
-                                    <br> <input id="firstdate" type="text" placeholder="Ex-2015-01-31" > to<input type="text" placeholder="Ex-2015-01-31" id="seconddate">
+                                    <br><input id="firstdate" type="text" placeholder="Ex-2015-01-31" >To<br class="visible-xs"><input type="text" placeholder="Ex-2015-01-31" id="seconddate">
 
                                     <button onclick="customData()" class="btn btn-blue btn-xs">Search</button>&nbsp;<button onclick="clr()" class="btn btn-danger btn-xs">clear</button>
                                     <br><br><div><span class="badge badge-success" id="CustomDataXML"></span></div>
@@ -722,7 +722,7 @@
 
                                                 <tr>
 
-                                                    <td class="hidden-xs"><%=pvyear.get(i)%></td><td class="visible-xs"><%=String.valueOf(pvyear.get(i)).substring(13)%></td>
+                                                    <td class="hidden-xs"><%=pvyear.get(i)%></td><td class="visible-xs"><%=String.valueOf(pvyear.get(i)).substring(0,10)%></td>
                                                     <td><%=pvycount.get(i)%></td>
                                                     <td><%=percentage%>%</td>
 
@@ -805,7 +805,7 @@
 
                                                 <tr>
 
-                                                    <td class="hidden-xs"><%=thisMonth%> to <%=nextMonth%></td><td class="visible-xs"><%=nextMonth%></td>
+                                                    <td class="hidden-xs"><%=thisMonth%> to <%=nextMonth%></td><td class="visible-xs"><%=thisMonth%></td>
                                                     <td><%=ucount.get(i)%></td>
                                                     <td><%=percentage%>%</td>
 
@@ -829,7 +829,7 @@
                                 <div class="col-md-6">
 
                                     <br><span class="badge">Custom User count</span>
-                                    <br> <input id="firstdateuser" type="text" placeholder="Ex-2015-01-31" > to<input type="text" placeholder="Ex-2015-01-31" id="seconddateuser">
+                                    <br> <input id="firstdateuser" type="text" placeholder="Ex-2015-01-31" >To<br class="visible-xs"><input type="text" placeholder="Ex-2015-01-31" id="seconddateuser">
 
                                     <button onclick="customDataUser()" class="btn btn-blue btn-xs">Search</button>&nbsp;<button onclick="clr()" class="btn btn-danger btn-xs">clear</button>
                                     <br><br><div><span class="badge badge-success" id="CustomDataXMLUser"></span></div>
@@ -860,7 +860,7 @@
 
                                                 <tr>
 
-                                                    <td class="hidden-xs"><%=uyear.get(i)%></td><td class="visible-xs"><%=String.valueOf(uyear.get(i)).substring(13)%></td>
+                                                    <td class="hidden-xs"><%=uyear.get(i)%></td><td class="visible-xs"><%=String.valueOf(uyear.get(i)).substring(0,10)%></td>
                                                     <td><%=uycount.get(i)%></td>
                                                     <td><%=percentage%>%</td>
 
@@ -945,7 +945,7 @@
 
                                                 <tr>
 
-                                                    <td class="hidden-xs"><%=thisMonth%> to <%=nextMonth%></td><td class="visible-xs"><%=nextMonth%></td>
+                                                    <td class="hidden-xs"><%=thisMonth%> to <%=nextMonth%></td><td class="visible-xs"><%=thisMonth%></td>
                                                     <td><%=acount.get(i)%></td>
                                                     <td><%=percentage%>%</td>
 
@@ -969,7 +969,7 @@
                                 <div class="col-md-6">
 
                                     <br><span class="badge">Custom Ads count</span>
-                                    <br> <input id="firstdateads" type="text" placeholder="Ex-2015-01-31" > to<input type="text" placeholder="Ex-2015-01-31" id="seconddateads">
+                                    <br> <input id="firstdateads" type="text" placeholder="Ex-2015-01-31" >To<br class="visible-xs"><input type="text" placeholder="Ex-2015-01-31" id="seconddateads">
 
                                     <button onclick="customDataAds()" class="btn btn-blue btn-xs">Search</button>&nbsp;<button onclick="clr()" class="btn btn-danger btn-xs">clear</button>
                                     <br><br><div><span class="badge badge-success" id="CustomDataXMLAds"></span></div>
@@ -999,7 +999,7 @@
 
                                                 <tr>
 
-                                                    <td class="hidden-xs"><%=ayear.get(i)%></td><td class="visible-xs"><%=String.valueOf(ayear.get(i)).substring(13)%></td>
+                                                    <td class="hidden-xs"><%=ayear.get(i)%></td><td class="visible-xs"><%=String.valueOf(ayear.get(i)).substring(0,10)%></td>
                                                     <td><%=aycount.get(i)%></td>
                                                     <td><%=percentage%>%</td>
 

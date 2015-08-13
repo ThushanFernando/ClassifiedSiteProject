@@ -146,7 +146,7 @@ public class AdminClass_ReportedItems {
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT `item_number`, `report_id`, `reporter_email`, `report_reason`, `reporter_message`, `status`, `title`,`username` FROM `admin_reported_itemsview` WHERE  `read_state`='0'";
+            String query = "SELECT `item_number`, `report_id`, `reporter_email`, `report_reason`, `reporter_message`, `status`, `title`,`username` FROM `admin_reported_itemview` WHERE  `read_state`='0'";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 AdminClass_ReportedItems ar = new AdminClass_ReportedItems();
@@ -160,10 +160,27 @@ public class AdminClass_ReportedItems {
                 ar.setUsername(rs.getString("username"));
                 al.add(ar);
             }
+            dbc.endConnection();
         } catch (SQLException ex) {
             Logger.getLogger(AdminClass_ReportedItems.class.getName()).log(Level.SEVERE, null, ex);
         }
         return al;
+    }
+    
+    public String getUserEmail(String user){
+        String email=null;
+        try {
+            dbc.getConnection();
+            Statement stmt = dbc.conn.createStatement();
+            String query = "SELECT `email` FROM `user` WHERE `username`='"+user+"'";
+            ResultSet rs=stmt.executeQuery(query);
+            while(rs.next()){
+                email=rs.getString("email");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_ReviewAds.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return email;
     }
     
     public int updateViewState(String id){
@@ -171,7 +188,7 @@ public class AdminClass_ReportedItems {
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "UPDATE `admin_reported_items` SET `read_state`='1' WHERE `report_id`='"+id+"'";
+            String query = "UPDATE `admin_reported_itemview` SET `read_state`='1' WHERE `report_id`='"+id+"'";
             result=stmt.executeUpdate(query);
         } catch (SQLException ex) {
             Logger.getLogger(AdminClass_ReportedItems.class.getName()).log(Level.SEVERE, null, ex);
@@ -184,11 +201,12 @@ public class AdminClass_ReportedItems {
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT COUNT(`report_id`) FROM `admin_reported_itemsview` WHERE `read_state`='0'";
+            String query = "SELECT COUNT(`report_id`) FROM `admin_reported_itemview` WHERE `read_state`='0'";
             ResultSet rs=stmt.executeQuery(query);
             while(rs.next()){
                 result=rs.getInt("COUNT(`report_id`)");
             }
+            dbc.endConnection();
         } catch (SQLException ex) {
             Logger.getLogger(AdminClass_ReportedItems.class.getName()).log(Level.SEVERE, null, ex);
         }

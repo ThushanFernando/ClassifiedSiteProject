@@ -39,9 +39,17 @@ public class TestClass {
 
     public static void main(String[] args) throws Exception {
     
-        AdminClass_ReviewAds ar=new AdminClass_ReviewAds();
-        System.out.println(ar.approveAd("3"));
-        
+       AdminClass_ReportedMessages arm=new AdminClass_ReportedMessages();
+        ArrayList al = arm.getMessageReports();
+            Iterator itr = al.iterator();
+            AdminClass_ReportedMessages received = null;
+             while (itr.hasNext()) {
+                Object a = itr.next();
+                received = (AdminClass_ReportedMessages) a;
+                 System.out.println(received.getMessage_id());
+                 System.out.println(received.getReceiver());
+            }
+    
 
         //HH converts hour in 24 hours format (0-23), day calculation
         

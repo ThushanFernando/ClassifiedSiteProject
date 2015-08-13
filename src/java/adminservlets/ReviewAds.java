@@ -137,7 +137,7 @@ public class ReviewAds extends HttpServlet {
 
         ArrayList reviewAds = ar.reviewAds();
         request.setAttribute("reviewAds", reviewAds);
-        RequestDispatcher rd = request.getRequestDispatcher("admin/ads_review.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("ads_review.jsp");
         rd.forward(request, response);
     }
 

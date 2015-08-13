@@ -98,7 +98,7 @@ public class AdminClass_ReviewAds {
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT `item_number`, `username`, `time_stamp`, `status`,  `title` FROM `itemview` WHERE `status`='Pending' OR `status`='Modify'";
+            String query = "SELECT `item_number`, `username`, `time_stamp`, `status`,  `title` FROM `itemview` WHERE `status`='Pending' OR `status`='Modifying'";
             ResultSet rs = stmt.executeQuery(query);
             while(rs.next()){
                 AdminClass_ReviewAds ar=new AdminClass_ReviewAds();
@@ -123,7 +123,7 @@ public class AdminClass_ReviewAds {
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "UPDATE `item` SET `status`='Active' WHERE `item_number`='"+id+"'";
+            String query = "UPDATE `itemview` SET `status`='Active',`reason`=null WHERE `item_number`='"+id+"'";
             result=stmt.executeUpdate(query);
             dbc.endConnection();
         } catch (SQLException ex) {
@@ -139,7 +139,7 @@ public class AdminClass_ReviewAds {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
             String query = "DELETE FROM `item` WHERE `item_number`='"+id+"'";
-            result=stmt.executeUpdate(query);
+           result=stmt.executeUpdate(query);
             dbc.endConnection();
         } catch (SQLException ex) {
             Logger.getLogger(AdminClass_ReviewAds.class.getName()).log(Level.SEVERE, null, ex);
@@ -163,12 +163,12 @@ public class AdminClass_ReviewAds {
         return email;
     }
     
-    public int modifyAds(String id){
+    public int modifyAds(String id,String reason){
         int result=0;
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "UPDATE `item` SET `status`='Modify'  WHERE `item_number`='"+id+"'";
+            String query = "UPDATE `itemview` SET `status`='Modifying',`reason`='"+reason+"' WHERE `item_number`='"+id+"'";
             result=stmt.executeUpdate(query);
             dbc.endConnection();
         } catch (SQLException ex) {

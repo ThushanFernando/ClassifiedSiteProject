@@ -14,16 +14,15 @@ import java.util.logging.Logger;
  *
  * @author SithuDewmi
  */
-public class AdminClass_BlockedItems {
-
+public class AdminClass_BlockedInquiries {
     DbClass dbc = new DbClass();
 
-    public int blockItem(String item,String reason) {
+    public int blockInquiries(String id) {
         int result=0;
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "UPDATE `itemview` SET `status`='Modifying',`reason`='"+reason+"' WHERE `item_number`='"+item+"'";
+            String query = "DELETE FROM `item_inquiry` WHERE `inquiry_id`='"+id+"'";
             result=stmt.executeUpdate(query);
             dbc.endConnection();
         } catch (SQLException ex) {
@@ -32,5 +31,4 @@ public class AdminClass_BlockedItems {
         return result;
 
     }
-
 }

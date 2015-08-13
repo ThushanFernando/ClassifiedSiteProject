@@ -105,7 +105,7 @@ public class AdminClass_Overviewstats {
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT COUNT(`item_number`) FROM `item` WHERE `status`='Pending'";
+            String query = "SELECT COUNT(`item_number`) FROM `itemview` WHERE `status`='Pending'";
             ResultSet rs = stmt.executeQuery(query);
             if (!rs.isBeforeFirst()) {
                 count = "0";
@@ -119,6 +119,31 @@ public class AdminClass_Overviewstats {
             Logger.getLogger(AdminClass_NavbarTools.class.getName()).log(Level.SEVERE, null, ex);
         }
         return count;
+    }
+
+    public String reportCount() {
+        int count = 0;
+        try {
+            dbc.getConnection();
+            Statement stmt = dbc.conn.createStatement();
+            String query = "select (SELECT COUNT(`report_id`) FROM `admin_reported_itemview` WHERE `read_state`='0') as t1, \n"
+                    + "(SELECT Count(`inquiry_id`) FROM `admin_reported_inquiries` WHERE `read_state`='0') as t2, \n"
+                    + "(SELECT Count(`message_id`) FROM `admin_reported_messages` WHERE `read_state`='0') as t3";
+            ResultSet rs = stmt.executeQuery(query);
+            if (!rs.isBeforeFirst()) {
+                count = 0;
+            } else {
+                while (rs.next()) {
+                    count = rs.getInt("t1");
+                    count = count + rs.getInt("t2");
+                    count = count + rs.getInt("t3");
+                }
+            }
+            dbc.endConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_NavbarTools.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return String.valueOf(count);
     }
 
     public int reviewTopAdsCount() {
@@ -236,20 +261,20 @@ public class AdminClass_Overviewstats {
     public ArrayList pagevisitCustom(String firstdate, String seconddate) {
         ArrayList al = new ArrayList();
         try {
-            
+
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
             String query = "SELECT count(`time_stamp`) FROM  `site_visits`";
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-            al.add(rs.getString("count(`time_stamp`)"));
+                al.add(rs.getString("count(`time_stamp`)"));
             }
             query = "SELECT count(`time_stamp`) FROM  `site_visits` WHERE  `time_stamp` BETWEEN  '" + firstdate + "' AND '" + seconddate + "'  AND `time_stamp` != '" + seconddate + "'";
             rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-            al.add(rs.getString("count(`time_stamp`)"));
+                al.add(rs.getString("count(`time_stamp`)"));
             }
             dbc.endConnection();
         } catch (SQLException ex) {
@@ -327,27 +352,27 @@ public class AdminClass_Overviewstats {
         }
         return al;
     }
-    
+
     public ArrayList usersCustom(String firstdate, String seconddate) {
         ArrayList al = new ArrayList();
         try {
-            
+
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
             String query = "SELECT COUNT(`activated_time_stamp`) FROM `userview` WHERE `status`='Activated' AND user_type='Member'";
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-            al.add(rs.getString("COUNT(`activated_time_stamp`)"));
+                al.add(rs.getString("COUNT(`activated_time_stamp`)"));
             }
             query = "SELECT COUNT(`activated_time_stamp`) FROM `userview` WHERE  `activated_time_stamp` BETWEEN  '" + firstdate + "' AND '" + seconddate + "'AND `status`='Activated' AND `user_type`='Member' AND `activated_time_stamp`!='" + seconddate + "'";
             rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-            al.add(rs.getString("COUNT(`activated_time_stamp`)"));
+                al.add(rs.getString("COUNT(`activated_time_stamp`)"));
             }
             dbc.endConnection();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(AdminClass_Overviewstats.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -372,7 +397,7 @@ public class AdminClass_Overviewstats {
                 c1.add(Calendar.MONTH, +1);
                 String nextMonth = (String) sdf.format(c1.getTime());
 
-                String query = "SELECT COUNT(`time_stamp`) FROM `item` WHERE  `time_stamp` BETWEEN  '" + thisMonth + " 00:00:00' AND '" + nextMonth + " 00:00:00' AND status='Active'  AND `time_stamp` != '" + nextMonth + " 00:00:00'";
+                String query = "SELECT COUNT(`time_stamp`) FROM `itemview` WHERE  `time_stamp` BETWEEN  '" + thisMonth + " 00:00:00' AND '" + nextMonth + " 00:00:00' AND status='Active'  AND `time_stamp` != '" + nextMonth + " 00:00:00'";
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
                     AdminClass_Overviewstats ao = new AdminClass_Overviewstats();
@@ -407,7 +432,7 @@ public class AdminClass_Overviewstats {
                 c1.add(Calendar.YEAR, +1);
                 String nextYear = (String) sdf.format(c1.getTime());
 
-                String query = "SELECT COUNT(`time_stamp`) FROM `item` WHERE  `time_stamp` BETWEEN  '" + thisYear + " 00:00:00' AND '" + nextYear + " 00:00:00' AND status='Active'  AND `time_stamp` != '" + nextYear + " 00:00:00'";
+                String query = "SELECT COUNT(`time_stamp`) FROM `itemview` WHERE  `time_stamp` BETWEEN  '" + thisYear + " 00:00:00' AND '" + nextYear + " 00:00:00' AND status='Active'  AND `time_stamp` != '" + nextYear + " 00:00:00'";
                 ResultSet rs = stmt.executeQuery(query);
 
                 while (rs.next()) {
@@ -424,27 +449,27 @@ public class AdminClass_Overviewstats {
         }
         return al;
     }
-    
+
     public ArrayList adsCustom(String firstdate, String seconddate) {
         ArrayList al = new ArrayList();
         try {
-            
+
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT COUNT(`time_stamp`) FROM `item` WHERE status='Active'";
+            String query = "SELECT COUNT(`time_stamp`) FROM `itemview` WHERE status='Active'";
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-            al.add(rs.getString("COUNT(`time_stamp`)"));
+                al.add(rs.getString("COUNT(`time_stamp`)"));
             }
-            query = "SELECT COUNT(`time_stamp`) FROM `item` WHERE status='Active' AND  `time_stamp` BETWEEN  '" + firstdate + "' AND '" + seconddate + "'  AND `time_stamp` != '" + seconddate + "'";
+            query = "SELECT COUNT(`time_stamp`) FROM ` itemview` WHERE status='Active' AND  `time_stamp` BETWEEN  '" + firstdate + "' AND '" + seconddate + "'  AND `time_stamp` != '" + seconddate + "'";
             rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-            al.add(rs.getString("COUNT(`time_stamp`)"));
+                al.add(rs.getString("COUNT(`time_stamp`)"));
             }
             dbc.endConnection();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(AdminClass_Overviewstats.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -466,7 +491,7 @@ public class AdminClass_Overviewstats {
                 al.add(rs.getString("main_name"));
             }
             for (int i = 0; i < al.size(); i++) {
-                query = "SELECT count(`time_stamp`) from `item` where `category_main`='" + al.get(i) + "' and status='Active'";
+                query = "SELECT count(`time_stamp`) from `itemview` where `category_main`='" + al.get(i) + "' and status='Active'";
                 rs = stmt.executeQuery(query);
                 while (rs.next()) {
                     AdminClass_Overviewstats ao = new AdminClass_Overviewstats();

@@ -78,7 +78,8 @@ public class ModifyAds extends HttpServlet {
         String content=request.getParameter("content").replace("************Type the reason here************","");
         content=content.replace("***************************************************", "");
         String itemId=request.getParameter("itemname");
-        int result=ar.modifyAds(itemId);
+        String reason=request.getParameter("reason");
+        int result=ar.modifyAds(itemId,reason);
         HttpSession session=request.getSession();
         session.setAttribute("alert", "success");
         response.sendRedirect("ReviewAds");

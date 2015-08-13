@@ -71,14 +71,17 @@ public class DataCountsXML extends HttpServlet {
        if("0".equals(ads)){
            ads="";
        }
+       String reports=ao.reportCount();
+       if("0".equals(reports)){
+           reports="";
+       }
        String temp="111";
        String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                +"<values>\n"
                +"   <msgcount>"+messageCount+"</msgcount>\n"
-               +"   <notcount>"+temp+"</notcount>\n"
                +"   <reviewads>"+ads+"</reviewads>\n"
                +"   <topads>N/A</topads>\n"
-               +"   <viewreports>"+temp+"</viewreports>\n"
+               +"   <viewreports>"+reports+"</viewreports>\n"
                +"</values>\n";
        
                

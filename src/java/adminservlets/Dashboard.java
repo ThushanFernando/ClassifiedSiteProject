@@ -71,7 +71,7 @@ public class Dashboard extends HttpServlet {
         request.setAttribute("adsYear", adsYear);
         
         
-        RequestDispatcher rd=request.getRequestDispatcher("admin/index.jsp");
+        RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
         rd.forward(request, response);
        
     }

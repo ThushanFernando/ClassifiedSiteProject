@@ -214,7 +214,6 @@ public class AdminClass_NavbarTools {
                 AdminClass_NavbarTools an = new AdminClass_NavbarTools();
                 an.setType("Ads");
                 an.setId("A" + rs.getString("item_number"));
-                an.setContent("DetailedView?type=Ads&id=" + rs.getString("item_number"));
                 al.add(an);
             }
 
@@ -224,7 +223,6 @@ public class AdminClass_NavbarTools {
                 AdminClass_NavbarTools an = new AdminClass_NavbarTools();
                 an.setType("Users");
                 an.setId("U" + rs.getString("username"));
-                an.setContent("DetailedView?type=Users&id=" + rs.getString("username"));
                 al.add(an);
             }
 
@@ -234,19 +232,36 @@ public class AdminClass_NavbarTools {
                 AdminClass_NavbarTools an = new AdminClass_NavbarTools();
                 an.setType("Messages");
                 an.setId("M" + rs.getString("message_id"));
-                an.setContent("DetailedView?type=Messages&id=" + rs.getString("message_id"));
-                al.add(an);
+               al.add(an);
             }
-            query = "SELECT `report_id` FROM `admin_reported_items` WHERE `report_id` LIKE '%" + sid + "%'";
+            query = "SELECT `report_id` FROM `admin_reported_itemview` WHERE `report_id` LIKE '%"+ sid +"%'";
             rs = stmt.executeQuery(query);
             while (rs.next()) {
                 AdminClass_NavbarTools an = new AdminClass_NavbarTools();
-                an.setType("Reports");
-                an.setId("R" + rs.getString("report_id"));
-                an.setContent("DetailedView?type=Reports&id=" + rs.getString("report_id"));
+                an.setType("Reports of Items");
+                an.setId("1" + rs.getString("report_id"));
                 al.add(an);
 
             }
+            query = "SELECT `inquiry_id` FROM `admin_reported_inquiryview` WHERE `inquiry_id` LIKE '%"+ sid +"%'";
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                AdminClass_NavbarTools an = new AdminClass_NavbarTools();
+                an.setType("Reports of Inquiries");
+                an.setId("2" + rs.getString("inquiry_id"));
+                al.add(an);
+
+            }
+            query = "SELECT `message_id` FROM `admin_reported_messages` WHERE `message_id` LIKE '%"+ sid +"%'";
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                AdminClass_NavbarTools an = new AdminClass_NavbarTools();
+                an.setType("Reports of Messages");
+                an.setId("3" + rs.getString("message_id"));
+                al.add(an);
+
+            }
+            
 
             dbc.endConnection();
         } catch (SQLException ex) {

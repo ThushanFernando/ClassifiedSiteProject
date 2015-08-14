@@ -63,7 +63,7 @@ public class SearchResult extends HttpServlet {
         AdminClass_NavbarTools an=new AdminClass_NavbarTools();
         ArrayList al=an.searchResult(sid);
         request.setAttribute("searchResult", al);
-        RequestDispatcher rd=request.getRequestDispatcher("admin/search_result.jsp");
+        RequestDispatcher rd=request.getRequestDispatcher("search_results.jsp");
         rd.forward(request, response);
     }
 

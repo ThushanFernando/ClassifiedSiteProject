@@ -4,9 +4,9 @@
     Author     : SithuDewmi
 --%>
 
-<%@page import="classes.AdminClass_NavbarTools"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="classes.AdminClass_BlacklistedEmails"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -24,27 +24,28 @@
         <meta content="" name="author" />
         <!-- end: META -->
         <!-- start: MAIN CSS -->
-        <link rel="stylesheet" href="admin/plugins/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="admin/plugins/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="admin/fonts/style.css">
-        <link rel="stylesheet" href="admin/css/main.css">
-        <link rel="stylesheet" href="admin/css/main-responsive.css">
-        <link rel="stylesheet" href="admin/plugins/iCheck/skins/all.css">
-        <link rel="stylesheet" href="admin/plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css">
-        <link rel="stylesheet" href="admin/plugins/perfect-scrollbar/src/perfect-scrollbar.css">
-        <link rel="stylesheet" href="admin/css/theme_light.css" type="text/css" id="skin_color">
-        <link rel="stylesheet" href="admin/css/print.css" type="text/css" media="print"/>
+        <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="fonts/style.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/main-responsive.css">
+        <link rel="stylesheet" href="plugins/iCheck/skins/all.css">
+        <link rel="stylesheet" href="plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css">
+        <link rel="stylesheet" href="plugins/perfect-scrollbar/src/perfect-scrollbar.css">
+        <link rel="stylesheet" href="css/theme_light.css" type="text/css" id="skin_color">
+        <link rel="stylesheet" href="css/print.css" type="text/css" media="print"/>
         <!--[if IE 7]>
-        <link rel="stylesheet" href="admin/plugins/font-awesome/css/font-awesome-ie7.min.css">
+        <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome-ie7.min.css">
         <![endif]-->
         <!-- end: MAIN CSS -->
         <!-- start: CSS REQUIRED FOR THIS PAGE ONLY -->
-        <link rel="stylesheet" href="admin/plugins/fullcalendar/fullcalendar/fullcalendar.css">
-        <link href="admin/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
-        <link href="admin/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" type="text/css" href="admin/plugins/select2/select2.css" />
-        <link rel="stylesheet" href="admin/plugins/DataTables/media/css/DT_bootstrap.css" />
-        <link rel="stylesheet" href="admin/plugins/summernote/build/summernote.css">
+        <link rel="stylesheet" href="plugins/fullcalendar/fullcalendar/fullcalendar.css">
+        <link rel="stylesheet" type="text/css" href="plugins/select2/select2.css" />
+        <link rel="stylesheet" href="plugins/DataTables/media/css/DT_bootstrap.css" />
+        <link rel="stylesheet" href="plugins/summernote/build/summernote.css">
+        <link rel="stylesheet" href="plugins/summernote/build/summernote.css">
+        <link href="plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+        <link href="plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
 
         <!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
         <link rel="shortcut icon" href="favicon.ico" />
@@ -54,11 +55,9 @@
     <body>
         <%
             int msg_count = 1;
-
-            ArrayList al = (ArrayList) request.getAttribute("searchResult");
-            Iterator itr = al.iterator();
-            AdminClass_NavbarTools received = null;
-
+            ArrayList blacklistedEmails = (ArrayList) request.getAttribute("blacklistedEmails");
+            Iterator itr = blacklistedEmails.iterator();
+            AdminClass_BlacklistedEmails received = null;
         %>
         <!-- start: HEADER -->
         <div class="navbar navbar-inverse navbar-fixed-top">
@@ -72,7 +71,7 @@
                     <!-- end: RESPONSIVE MENU TOGGLER -->
                     <!-- start: LOGO -->
                     <a class="navbar-brand" href="index.jsp">
-                        <img  src="admin/images/logo.jpg" style="width: 100px;"/>
+                        <img  src="images/logo.jpg" style="width: 100px;"/>
                     </a>
                     <!-- end: LOGO -->
                 </div>
@@ -226,7 +225,7 @@
                                                         <a href="javascript:;">
                                                             <div class="clearfix">
                                                                 <div class="thread-image">
-                                                                    <img alt="" src="./admin/images/avatar-2.jpg">
+                                                                    <img alt="" src="./images/avatar-2.jpg">
                                                                 </div>
                                                                 <div class="thread-content">
                                                                     <span class="author">Nicole Bell</span>
@@ -240,7 +239,7 @@
                                                         <a href="javascript:;">
                                                             <div class="clearfix">
                                                                 <div class="thread-image">
-                                                                    <img alt="" src="./admin/images/avatar-1.jpg">
+                                                                    <img alt="" src="./images/avatar-1.jpg">
                                                                 </div>
                                                                 <div class="thread-content">
                                                                     <span class="author">Peter Clark</span>
@@ -254,7 +253,7 @@
                                                         <a href="javascript:;">
                                                             <div class="clearfix">
                                                                 <div class="thread-image">
-                                                                    <img alt="" src="./admin/images/avatar-3.jpg">
+                                                                    <img alt="" src="./images/avatar-3.jpg">
                                                                 </div>
                                                                 <div class="thread-content">
                                                                     <span class="author">Steven Thompson</span>
@@ -268,7 +267,7 @@
                                                         <a href="javascript:;">
                                                             <div class="clearfix">
                                                                 <div class="thread-image">
-                                                                    <img alt="" src="./admin/images/avatar-1.jpg">
+                                                                    <img alt="" src="./images/avatar-1.jpg">
                                                                 </div>
                                                                 <div class="thread-content">
                                                                     <span class="author">Peter Clark</span>
@@ -282,7 +281,7 @@
                                                         <a href="javascript:;">
                                                             <div class="clearfix">
                                                                 <div class="thread-image">
-                                                                    <img alt="" src="./admin/images/avatar-5.jpg">
+                                                                    <img alt="" src="./images/avatar-5.jpg">
                                                                 </div>
                                                                 <div class="thread-content">
                                                                     <span class="author">Kenneth Ross</span>
@@ -307,7 +306,7 @@
                                 <!-- start: USER DROPDOWN -->
                                 <li class="dropdown current-user">
                                     <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
-                                        <img src="admin/images/profile_img.jpg" class="circle-img" alt="">
+                                        <img src="images/profile_img.jpg" class="circle-img" alt="">
                                         <span class="username">Ishan Madurasinghe</span>
                                         <i class="clip-chevron-down"></i>
                                     </a>
@@ -336,7 +335,6 @@
                             <!-- end: HEADER -->
                             <!-- start: MAIN CONTAINER -->
                             <div class="main-container">
-
                                 <div class="navbar-content">
                                     <!-- start: SIDEBAR -->
                                     <div class="main-navigation navbar-collapse collapse">
@@ -425,7 +423,7 @@
                                                 </ul>
                                             </li>
                                             <%}%>
-                                            <li>
+                                            <li  class="active open">
                                                 <a href="user_blocked.jsp" ><i class="clip-user-block"></i>
                                                     <span class="title"> Blocked Users</span><span class="selected"></span>
                                                 </a>
@@ -446,7 +444,7 @@
                                                     <span class="title"> Upgrade Top Ads</span><span class="selected"></span>
                                                 </a>
                                             </li>
-                                            <li >
+                                            <li>
                                                 <a href="report_view.jsp" ><i class="clip-clip"></i>
                                                     <span class="title"> View Reports</span><span class="selected"></span>
                                                 </a>
@@ -461,7 +459,6 @@
                                 <div class="main-content">
                                     <!-- start: PANEL CONFIGURATION MODAL FORM -->
                                     <div class="modal fade" id="panel-config" tabindex="-1" role="dialog" aria-hidden="true">
-                                        <a href="upgrade.jsp"></a>
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -502,12 +499,12 @@
                                                         </a>
                                                     </li>
                                                     <li class="active">
-                                                        Search Result
+                                                        Blacklisted Users
                                                     </li>
                                                     <li class="search-box">
-                                                        <form class="sidebar-search" action="SearchResult" method="GET">
+                                                        <form class="sidebar-search">
                                                             <div class="form-group">
-                                                                <input type="text" placeholder="Start Searching..." name="sid">
+                                                                <input type="text" placeholder="Start Searching...">
                                                                 <button class="submit">
                                                                     <i class="clip-search-3"></i>
                                                                 </button>
@@ -515,48 +512,103 @@
                                                         </form>
                                                     </li>
                                                 </ol>
+                                                <div class="page-header">
+                                                    <h1>Users <small>blacklisted</small></h1>
+                                                </div>
+                                                <%if (request.getAttribute("alert") != null) {%>
+                                                <div>
+                                                    <%=request.getAttribute("alert")%>    
 
+                                                </div>
+                                                <%}%>
                                                 <!-- end: PAGE TITLE & BREADCRUMB -->
                                             </div>
                                         </div>
                                         <!-- end: PAGE HEADER -->
                                         <!-- start: PAGE CONTENT -->
                                         <div class="row">
-                                            <div class="col-sm-6"  style="padding-top:  5px;">
+                                            <div class="col-sm-5 container-fluid" >
+                                                <div class="col-sm-6">
+                                                    <input type="email" id="emailId" value=""  placeholder="Enter email " onkeyup="email_val()">
+                                                </div>
+                                                <div class="">
+                                                    <div class="col-sm-2">
+                                                        <a href="#confirm_block" data-toggle="modal">
+                                                            <button class="btn btn-blue next-step btn-block" id="B1" style="display: none" onclick="email_block()" >
+                                                                <span class="fa clip-locked"></span> <i class="fa fa-arrow-circle-right"></i>
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <a href="#confirm_unblock" data-toggle="modal">
+                                                            <button class="btn btn-blue next-step btn-block" id="B2" style="display: none" onclick="email_unblock()" >
+                                                                <span class="fa fa-unlock"></span> <i class="fa fa-arrow-circle-right"></i>
+                                                            </button>
+                                                        </a>
 
-                                                <table class="table table-striped table-hover pull-right" id="sample_1">
-                                                    <thead>
-                                                        <tr>
-
-                                                            <th>Type</th>
-                                                            <th>ID</th>
-
-
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <%
-
-                                                            while (itr.hasNext()) {
-                                                                Object a = itr.next();
-                                                                received = (AdminClass_NavbarTools) a;
-                                                        %>
-                                                        <tr>
-                                                            <td><%=received.getType()%></td>
-                                                            <td><a style="cursor:pointer"><clickedID id="<%=received.getId()%>" ><%=String.valueOf(received.getId()).substring(1)%></clickedid></a></td>
-                                                        </tr>
-                                                        <%}%>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="col-md-6" >
-                                                <div id="PlaceData"> 
-
+                                                    </div>
                                                 </div>
 
+                                                <br>
 
-                                            </div>            
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <i class="clip-users-2"></i>
+                                                        Blacklisted Users
+                                                        <div class="panel-tools">
+                                                            <a class="btn btn-xs btn-link panel-close" href="#">
+                                                                <i class="fa fa-times"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <table class="table table-striped table-hover" id="sample_1">
+                                                            <thead>
+                                                                <tr>
+
+                                                                    <th >Email</th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+
+                                                                <%
+
+                                                                    while (itr.hasNext()) {
+                                                                        Object a = itr.next();
+                                                                        received = (AdminClass_BlacklistedEmails) a;
+                                                                %>
+                                                                <tr>
+                                                                    <td><%=received.getEmail_address()%></td>
+                                                                    <td class="center">
+                                                                        <div>
+                                                                            <div class="btn-group">
+                                                                                <a class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
+                                                                                    <i class="fa fa-cog"></i> <span class="caret"></span>
+                                                                                </a>
+                                                                                <ul role="menu" class="dropdown-menu pull-right">
+                                                                                    <li role="presentation">
+                                                                                    <clickedUnblockingEmail id="<%=received.getEmail_address()%>">&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                        <a role="menuitem" tabindex="-1" href="#confirm_unblock" data-toggle="modal">
+                                                                                            <i class="fa fa-unlock"></i> Unblock
+                                                                                        </a>
+                                                                                    </clickedUnblockingEmail>
+                                                                                    </li>
+
+
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div></td>
+                                                                </tr>
+                                                                <%}%>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>                                                                              
+                                                </div>
+                                            </div>
+
                                         </div>
 
 
@@ -576,68 +628,6 @@
                                 </div>
                             </div>
                             <!-- end: FOOTER -->
-                            <div id="message" class="modal fade" tabindex="-1" data-width="760" style="display: none;">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                        &times;
-                                    </button>
-
-
-
-                                    <h4 class="modal-title"><input type="radio" class="square-green" value="" checked="checked" name="optionsRadios12">Message to the user</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-md-14">
-                                            <form action="#" role="form" class="smart-wizard form-horizontal" id="form">
-                                                <div class="form-group">
-                                                    <label class="col-sm-3 control-label">
-                                                        From: <span class="symbol required"></span>
-                                                    </label>
-                                                    <div class="col-sm-7">
-                                                        <input type="text" class="form-control" id="fromid" name="fromname" placeholder="">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3 control-label">
-                                                        To: <span class="symbol required"></span>
-                                                    </label>
-                                                    <div class="col-sm-7">
-                                                        <input type="text" class="form-control" id="toid" name="toname" placeholder="">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3 control-label">
-                                                        Subject: <span class="symbol required"></span>
-                                                    </label>
-                                                    <div class="col-sm-7">
-                                                        <input type="text" class="form-control" id="subjectid" name="subjectname" placeholder="">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3 control-label">
-                                                        Content: <span class="symbol required"></span>
-                                                    </label>
-                                                    <div class="col-sm-7">
-                                                        <textarea class="autosize form-control" name="content" id="form-field-24" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 69px;"></textarea>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="form-group">
-                                                    <div class="col-sm-4 col-sm-offset-6">
-                                                        <button class="btn btn-blue next-step btn-block">
-                                                            Send <i class="fa fa-arrow-circle-right"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>    
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
                             <div id="event-management" class="modal fade" tabindex="-1" data-width="760" style="display: none;">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -729,170 +719,67 @@
                                     </div>
                                 </div>
 
-
                             </div>
+                            <jsp:include page="page-elements/user_blacklist_modals.jsp"/>
+
+                            
                             <!-- start: MAIN JAVASCRIPTS -->
                             <!--[if lt IE 9]>
-                            <script src="admin/plugins/respond.min.js"></script>
-                            <script src="admin/plugins/excanvas.min.js"></script>
+                            <script src="plugins/respond.min.js"></script>
+                            <script src="plugins/excanvas.min.js"></script>
                             <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
                             <![endif]-->
                             <!--[if gte IE 9]><!-->
                             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
                             <!--<![endif]-->
-                            <script src="admin/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js"></script>
-                            <script src="admin/plugins/bootstrap/js/bootstrap.min.js"></script>
-                            <script src="admin/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
-                            <script src="admin/plugins/blockUI/jquery.blockUI.js"></script>
-                            <script src="admin/plugins/iCheck/jquery.icheck.min.js"></script>
-                            <script src="admin/plugins/perfect-scrollbar/src/jquery.mousewheel.js"></script>
-                            <script src="admin/plugins/perfect-scrollbar/src/perfect-scrollbar.js"></script>
-                            <script src="admin/plugins/less/less-1.5.0.min.js"></script>
-                            <script src="admin/plugins/jquery-cookie/jquery.cookie.js"></script>
-                            <script src="admin/plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js"></script>
-                            <script src="admin/js/main.js"></script>
+                            <script src="plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js"></script>
+                            <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+                            <script src="plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+                            <script src="plugins/blockUI/jquery.blockUI.js"></script>
+                            <script src="plugins/iCheck/jquery.icheck.min.js"></script>
+                            <script src="plugins/perfect-scrollbar/src/jquery.mousewheel.js"></script>
+                            <script src="plugins/perfect-scrollbar/src/perfect-scrollbar.js"></script>
+                            <script src="plugins/less/less-1.5.0.min.js"></script>
+                            <script src="plugins/jquery-cookie/jquery.cookie.js"></script>
+                            <script src="plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js"></script>
+                            <script src="js/main.js"></script>
                             <!-- end: MAIN JAVASCRIPTS -->
                             <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
-
-                            <script src="admin/plugins/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
-                            <script src="admin/plugins/fullcalendar/fullcalendar/fullcalendar.js"></script>
-                            <script src="admin/js/index.js"></script>
-                            <script src="admin/plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
-                            <script src="admin/plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
-                            <script src="admin/js/ui-modals.js"></script>
-                            <script src="admin/plugins/jquery-inputlimiter/jquery.inputlimiter.1.3.1.min.js"></script>
-                            <script src="admin/plugins/autosize/jquery.autosize.min.js"></script>
-                            <script type="text/javascript" src="admin/plugins/DataTables/media/js/jquery.dataTables.min.js"></script>
-                            <script type="text/javascript" src="admin/plugins/DataTables/media/js/DT_bootstrap.js"></script>
-                            <script src="admin/js/search-table-data.js"></script>
-                            <script src="admin/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
-                            <script src="admin/plugins/summernote/build/summernote.min.js"></script>
-                            <script src="admin/plugins/ckeditor/ckeditor.js"></script>
-                            <script src="admin/plugins/ckeditor/adapters/jquery.js"></script>
-                            <script src="admin/js/form-validation.js"></script>
-                            <script src="admin/plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
-                            <script src="admin/plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
-                            <script src="admin/js/ui-modals.js"></script>
+                            <script src="plugins/flot/jquery.flot.js"></script>
+                            <script src="plugins/flot/jquery.flot.pie.js"></script>
+                            <script src="plugins/flot/jquery.flot.resize.min.js"></script>
+                            <script src="plugins/jquery.sparkline/jquery.sparkline.js"></script>
+                            <script src="plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+                            <script src="plugins/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+                            <script src="plugins/fullcalendar/fullcalendar/fullcalendar.js"></script>
+                            <script src="js/index.js"></script>
+                            <script type="text/javascript" src="plugins/DataTables/media/js/jquery.dataTables.min.js"></script>
+                            <script type="text/javascript" src="plugins/DataTables/media/js/DT_bootstrap.js"></script>
+                            <script src="js/table-data.js"></script>
+                            <script src="plugins/jquery-validation/dist/jquery.validate.min.js"></script>
+                            <script src="plugins/summernote/build/summernote.min.js"></script>
+                            <script src="plugins/ckeditor/ckeditor.js"></script>
+                            <script src="plugins/ckeditor/adapters/jquery.js"></script>
+                            <script src="js/form-validation.js"></script>
+                            <script src="plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
+                            <script src="plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
+                            <script src="js/ui-modals.js"></script>
+                            <script src="js/user-blacklist-clickevents.js"></script>
+                            <script src="js/user-blacklist-functions.js"></script>
                             <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
-
-                            <script>
-                                $(document).on('click', 'clickedID', function () {
-
-                                    var selection = this.id;
-                                    $.ajax({
-                                        type: "GET",
-                                        url: "DetailedViewXML",
-                                        data: {
-                                            id: selection
-                                        },
-                                        dataType: "xml",
-                                        success: function (xml) {
-                                            $("#PlaceData").html("<br>");
-                                            $(xml).find('value').each(function () {
-                                                if (selection.charAt(0) === "U") {
-                                                    var username = $(this).find('username').text();
-                                                    var email = $(this).find('email').text();
-                                                    var tel = $(this).find('tel').text();
-                                                    var reg = $(this).find('reg').text();
-                                                    var status = $(this).find('status').text();
-                                                    var activation = $(this).find('activation').text();
-                                                    var login = $(this).find('login').text();
-                                                    var ads = $(this).find('ads').text();
-                                                    $("#PlaceData").append("<div class='tabbable'>");
-                                                    $("#PlaceData").append("<div class='tab-pane in active' id='panel_tab2_example1'>");
-                                                    $("#PlaceData").append("<div class='alert alert-info'>"
-                                                            + "<h3>User Detailed view</h3>"
-                                                            + "<hr>"
-                                                            + "<b>User name: </b>" + username + "<br><br>"
-                                                            + "<b>Email: </b>" + email + "<br><br>"
-                                                            + "<b>Tel: </b>" + tel + "<br><br>"
-                                                            + "<b>Registration: </b>" + reg + "<br><br>"
-                                                            + "<b>Status: </b>" + status + "<br><br>"
-                                                            + "<b>Activation: </b>" + activation + "<br><br>"
-                                                            + "<b>Last login: </b>" + login + "<br><br>"
-                                                            + "<b>No. of ads: </b>" + ads + "<br>"
-                                                            + "<hr>");
-                                                    $("#PlaceData").append();
-                                                    $("#PlaceData").append("</div>");
-                                                    $("#PlaceData").append("</div>");
-                                                    $("#PlaceData").append("</div>");
-
-
-                                                }
-                                                else if (selection.charAt(0) === "M") {
-                                                    var id = $(this).find('id').text();
-                                                    var sender = $(this).find('sender').text();
-                                                    var reciever = $(this).find('reciever').text();
-                                                    var content = $(this).find('content').text();
-                                                    var time = $(this).find('time').text();
-                                                    
-                                                    $("#PlaceData").append("<div class='tabbable'>");
-                                                    $("#PlaceData").append("<div class='tab-pane in active' id='panel_tab2_example1'>");
-                                                    $("#PlaceData").append("<div class='alert alert-info'>"
-                                                            + "<h3>Message Detailed view</h3>"
-                                                            + "<hr>"
-                                                            + "<b>Id: </b>" + id + "<br><br>"
-                                                            + "<b>Sender: </b>" + sender + "<br><br>"
-                                                            + "<b>Reciever: </b>" + reciever + "<br><br>"
-                                                            + "<b>Content: </b>" + content + "<br><br>"
-                                                            + "<b>Sent on: </b>" + time + "<br><br>"
-                                                            + "<hr>");
-                                                    $("#PlaceData").append("</div>");
-                                                    $("#PlaceData").append("</div>");
-                                                    $("#PlaceData").append("</div>");
-
-
-
-                                                }
-                                                else if (selection.charAt(0) === "R") {
-                                                    var id = $(this).find('id').text();
-
-                                                    $("#PlaceData").append("<div class='tabbable'>");
-                                                    $("#PlaceData").append("<div class='tab-pane in active' id='panel_tab2_example1'>");
-                                                    $("#PlaceData").append("<div class='alert alert-info'>"
-                                                            + "<h3>Report Detailed view</h3>"
-                                                            + "<hr>"
-                                                            + id + "<br>"
-                                                            + "<hr>");
-                                                    $("#PlaceData").append("</div>");
-                                                    $("#PlaceData").append("</div>");
-                                                    $("#PlaceData").append("</div>");
-
-
-                                                } else {
-                                                    var id = $(this).find('id').text();
-
-                                                    $("#PlaceData").append("<div class='tabbable'>");
-                                                    $("#PlaceData").append("<div class='tab-pane in active' id='panel_tab2_example1'>");
-                                                    $("#PlaceData").append("<div class='alert alert-info'>"
-                                                            + "<h3>Item Detailed view</h3>"
-                                                            + "<hr>"
-                                                            + "<a href='www.google.com' target='blank'>Click to view the ad \"" + id + "\"</a><br>"
-                                                            + "<hr>");
-                                                    $("#PlaceData").append("</div>");
-                                                    $("#PlaceData").append("</div>");
-                                                    $("#PlaceData").append("</div>");
-
-
-                                                }
-                                            });
-                                            $("#GetData").html('AJAX Request is succeded!');
-                                        },
-                                        error: function () {
-                                            $("#GetData").html('An error occurred while processing XML file!');
-                                        }
-                                    });
-                                });</script>
+                           
                             <script>
                                 jQuery(document).ready(function () {
                                     Main.init();
-                                    TableData.init();
                                     UIModals.init();
                                     FormValidator.init();
+                                    TableData.init();
                                     Index.init();
-                                });
-                            </script>
 
+
+                                }
+                                );
+                            </script>
                             </body>
                             <!-- end: BODY -->
                             </html>

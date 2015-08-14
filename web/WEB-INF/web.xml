@@ -21,10 +21,6 @@
         <servlet-class>adminservlets.MsgSpam</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>BlockedUsers</servlet-name>
-        <servlet-class>adminservlets.BlockedUsers</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>BlockedAds</servlet-name>
         <servlet-class>adminservlets.BlockedAds</servlet-class>
     </servlet>
@@ -88,6 +84,10 @@
         <servlet-name>AdminClass_BlockedItems</servlet-name>
         <servlet-class>classes.AdminClass_BlockedItems</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BlacklistedUsers</servlet-name>
+        <servlet-class>adminservlets.BlacklistedUsers</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/Dashboard</url-pattern>
@@ -107,10 +107,6 @@
     <servlet-mapping>
         <servlet-name>MsgSpam</servlet-name>
         <url-pattern>/MsgSpam</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BlockedUsers</servlet-name>
-        <url-pattern>/BlockedUsers</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BlockedAds</servlet-name>
@@ -175,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>AdminClass_BlockedItems</servlet-name>
         <url-pattern>/AdminClass_BlockedItems</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlacklistedUsers</servlet-name>
+        <url-pattern>/BlacklistedUsers</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -8,8 +8,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
     </head>
     <body>
         <div id="view_message" class="modal fade" tabindex="-1" data-width="760" style="display: none;">

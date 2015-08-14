@@ -203,8 +203,75 @@ public class AdminClass_DetailedView {
         return al;
     }
     
-    public ArrayList reportDetailedView(String repId){
+    public ArrayList reportItemDetailedView(String id){
         ArrayList al=new ArrayList();
+        try {
+            dbc.getConnection();
+            Statement stmt = dbc.conn.createStatement();
+            String query = "SELECT `item_number`, `report_id`, `reporter_email`, `report_reason`, `reporter_message`,`title` FROM `admin_reported_itemview` WHERE `report_id`='"+id+"'";
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()){
+                al.add(rs.getString("report_id"));
+                al.add(rs.getString("reporter_email"));
+                al.add(rs.getString("report_reason"));
+                al.add(rs.getString("reporter_message"));
+                al.add(rs.getString("item_number"));
+                al.add(rs.getString("title"));
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_DetailedView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return al;
+    }
+    
+    public ArrayList reportInquiryDetailedView(String id){
+        ArrayList al=new ArrayList();
+        try {
+            dbc.getConnection();
+            Statement stmt = dbc.conn.createStatement();
+            String query = "SELECT `inquiry_id`, `reported_user`, `reason`, `item_number`, `message_to`, `message_from`, `inquiry_message`, `inquiry_time_stamp`, `inquiry_response`, `response_time_stamp` FROM `admin_reported_inquiryview` WHERE `inquiry_id`='"+id+"'";
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()){
+                al.add(rs.getString("inquiry_id"));
+                al.add(rs.getString("reported_user"));
+                al.add(rs.getString("reason"));
+                al.add(rs.getString("item_number"));
+                al.add(rs.getString("message_to"));
+                al.add(rs.getString("message_from"));
+                al.add(rs.getString("inquiry_message"));
+                al.add(rs.getString("inquiry_time_stamp"));
+                al.add(rs.getString("inquiry_response"));
+                al.add(rs.getString("response_time_stamp"));
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_DetailedView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return al;
+    }
+    
+     public ArrayList reportMessageDetailedView(String id){
+        ArrayList al=new ArrayList();
+        try {
+            dbc.getConnection();
+            Statement stmt = dbc.conn.createStatement();
+            String query = "SELECT `message_id`, `sender`, `receiver`, `content`, `message_time_stamp`, `reason`, `reported_time_stamp` FROM `admin_reported_messages` WHERE `message_id`='"+id+"'";
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()){
+                al.add(rs.getString("message_id"));
+                al.add(rs.getString("sender"));
+                al.add(rs.getString("receiver"));
+                al.add(rs.getString("content"));
+                al.add(rs.getString("message_time_stamp"));
+                al.add(rs.getString("reason"));
+                al.add(rs.getString("reported_time_stamp"));
+                
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_DetailedView.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return al;
     }
     

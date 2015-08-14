@@ -97,14 +97,51 @@ public class DetailedViewXML extends HttpServlet {
                     + "	</value>\n"
                     + "</values>";
 
-        } else if ("R".equals(String.valueOf(id.charAt(0)))) {
+        } else if ("1".equals(String.valueOf(id.charAt(0)))) {
 
-            al = ad.messageDetailedView(id.substring(1));
+            al = ad.reportItemDetailedView(id.substring(1));
 
             content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                     + "<values>\n"
                     + "	<value>\n"
-                    + "		<id>To be developed</id>\n"
+                    + "		<id>" + al.get(0) + "</id>\n"
+                    + "		<email>" + al.get(1) + "</email>\n"
+                    + "		<reason>" + al.get(2) + "</reason>\n"
+                    + "		<message>" + al.get(3) + "</message>\n"
+                    + "		<item>" + al.get(4) + "</item>\n"
+                    + "		<title>" + al.get(5) + "</title>\n"
+                    + "	</value>\n"
+                    + "</values>";
+
+        } else if ("2".equals(String.valueOf(id.charAt(0)))) {
+            al = ad.reportInquiryDetailedView(id.substring(1));
+            content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                    + "<values>\n"
+                    + "	<value>\n"
+                    + "		<id>" + al.get(0) + "</id>\n"
+                    + "		<user>" + al.get(1) + "</user>\n"
+                    + "		<reason>" + al.get(2) + "</reason>\n"
+                    + "		<item>" + al.get(3) + "</item>\n"
+                    + "		<message_to>" + al.get(4) + "</message_to>\n"
+                    + "		<message_from>" + al.get(5) + "</message_from>\n"
+                    + "		<message>" + al.get(6) + "</message>\n"
+                    + "		<message_time>" + al.get(7) + "</message_time>\n"
+                    + "		<response>" + al.get(8) + "</response>\n"
+                    + "		<response_time>" + al.get(9) + "</response_time>\n"
+                    + "	</value>\n"
+                    + "</values>";
+        } else if ("3".equals(String.valueOf(id.charAt(0)))) {
+            al = ad.reportMessageDetailedView(id.substring(1));
+            content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                    + "<values>\n"
+                    + "	<value>\n"
+                    + "		<id>" + al.get(0) + "</id>\n"
+                    + "		<sender>" + al.get(1) + "</sender>\n"
+                    + "		<reciever>" + al.get(2) + "</reciever>\n"
+                    + "		<content>" + al.get(3) + "</content>\n"
+                    + "		<message_time>" + al.get(4) + "</message_time>\n"
+                    + "		<reason>" + al.get(5) + "</reason>\n"
+                    + "		<reported_time>" + al.get(6) + "</reported_time>\n"
                     + "	</value>\n"
                     + "</values>";
 

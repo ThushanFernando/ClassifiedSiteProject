@@ -88,6 +88,26 @@
         <servlet-name>BlacklistedUsers</servlet-name>
         <servlet-class>adminservlets.BlacklistedUsers</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateInterfaces</servlet-name>
+        <servlet-class>adminservlets.UpdateInterfaces</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetSliderItems</servlet-name>
+        <servlet-class>adminservlets.GetSliderItems</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SetSliderItems</servlet-name>
+        <servlet-class>adminservlets.SetSliderItems</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckLogin</servlet-name>
+        <servlet-class>adminservlets.CheckLogin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckLogout</servlet-name>
+        <servlet-class>adminservlets.CheckLogout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/Dashboard</url-pattern>
@@ -175,6 +195,26 @@
     <servlet-mapping>
         <servlet-name>BlacklistedUsers</servlet-name>
         <url-pattern>/BlacklistedUsers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateInterfaces</servlet-name>
+        <url-pattern>/UpdateInterfaces</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetSliderItems</servlet-name>
+        <url-pattern>/GetSliderItems</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetSliderItems</servlet-name>
+        <url-pattern>/SetSliderItems</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckLogin</servlet-name>
+        <url-pattern>/CheckLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckLogout</servlet-name>
+        <url-pattern>/CheckLogout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

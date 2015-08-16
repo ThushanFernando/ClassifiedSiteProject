@@ -50,7 +50,7 @@
     <body>
 
         <!-- start: HEADER -->
-        <jsp:include page="page-elements/header.jsp"/>
+        <jsp:include page="page-elements/header_custom.jsp"/>
         <!-- end: HEADER -->
         <!-- start: MAIN CONTAINER -->
         <div class="main-container">
@@ -77,7 +77,7 @@
                             </a>
                         </li>
 
-                        <li class="active open">
+                        <li>
                             <a href="javascript:void(0)"><i class="clip-bubble"></i>
                                 <span class="title"> Messages </span><span id="MC1" class="badge"></span><i class="icon-arrow"></i>
                                 <span class="selected"></span>
@@ -89,7 +89,7 @@
                                         <span class="badge badge-new">new</span>
                                     </a>
                                 </li>
-                                <li class="active open">
+                                <li>
                                     <a href="">
                                         <span class="title"> Read </span>
                                     </a>
@@ -181,7 +181,7 @@
                                     </a>
                                 </li>
                                 <li class="active">
-                                    Messages &nbsp;/&nbsp; Read
+                                    Change log-in
                                 </li>
                                 <li class="search-box">
                                     <form class="sidebar-search" action="SearchResult" method="GET">
@@ -194,80 +194,73 @@
                                     </form>
                                 </li>
                             </ol>
-                            <div class="page-header">
-                                <h1 class=" hidden-xs">Read <small class=" hidden-xs">messages</small></h1>
-                            </div>
+
                             <!-- end: PAGE TITLE & BREADCRUMB -->
                         </div>
                     </div>
                     <!-- end: PAGE HEADER -->
                     <!-- start: PAGE CONTENT -->
-                    <div class="row">
+                    <div class="row" style="margin-top: 5px">
                         <div class="col-md-12">
-                            <!-- start: INBOX PANEL -->
+                            <!-- start: FORM VALIDATION 1 PANEL -->
                             <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <i class="fa fa-envelope-o"></i>
-                                    Inbox
-                                    <div class="panel-tools">
-                                        <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
-                                        </a>
-                                        <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal">
-                                            <i class="fa fa-wrench"></i>
-                                        </a>
-                                        <a class="btn btn-xs btn-link panel-refresh" href="#">
-                                            <i class="fa fa-refresh"></i>
-                                        </a>
-                                        <a class="btn btn-xs btn-link panel-expand" href="#">
-                                            <i class="fa fa-resize-full"></i>
-                                        </a>
-                                        <a class="btn btn-xs btn-link panel-close" href="#">
-                                            <i class="fa fa-times"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="panel-body messages">
-                                    <ul class="messages-list">
-                                        <li class="messages-search" >
-                                            <form action="#" class="form-inline">
-                                                <div class="input-group">
-                                                    <input type="text" id="searchmessage" onkeyup=" search()" class="form-control" placeholder="Search messages...">
-                                                    <div class="input-group-btn">
+                                
+                                <div class="panel-body">
+                                    <h2 class="hidden-xs"><i class="fa fa-pencil-square teal"></i> Change Your Log-in</h2>
 
-                                                    </div>
+                                    <hr>
+                                    <form action="#" role="form" id="form">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="errorHandler alert alert-danger no-display">
+                                                    <i class="fa fa-times-sign"></i> You have some form errors. Please check below.
                                                 </div>
-                                            </form>
-                                        </li>
-                                        <div style="overflow-y:  auto; height: 565px;" id="MsgAllXML" class="hidden-xs ">   
+                                                <div class="successHandler alert alert-success no-display">
+                                                    <i class="fa fa-ok"></i> Your form validation is successful!
+                                                </div>
+                                            </div>
+                                        </div>    
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label">
+                                                        New User Name 
+                                                    </label>
+                                                    <input type="text" placeholder="Insert your User Name(if you want to change)" class="form-control" id="usernamenew" name="usernamenew">
+                                                </div>
 
-                                        </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">
+                                                        New Password <span class="symbol required"></span>
+                                                    </label>
+                                                    <input type="password" class="form-control" name="password" id="password">
+                                                </div>
 
-                                    </ul>
-                                    <div class="messages-content" style="height: 365px;">
-                                        <div class="message-header">
-
-                                            <div class="message-actions">
-                                                <a title="Move to trash" href="#"><i class="fa fa-trash-o"></i></a>
-                                                <a title="Report" href="#"><i class="fa fa-ban"></i></a>
-
+                                                <div class="form-group">
+                                                    <label class="control-label">
+                                                        Confirm Password <span class="symbol required"></span>
+                                                    </label>
+                                                    <input type="password" class="form-control" name="password_again" id="password_again">
+                                                </div>
 
                                             </div>
-                                        </div>
-                                        <div class="message-content">
-                                            <ol class="discussion">
 
-                                                <div id="conversation"></div>
-
-                                            </ol>
                                         </div>
-                                    </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <button class="btn btn-blue btn-block" type="submit">
+                                                    Proceed <i class="fa fa-arrow-circle-right"></i>
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                            <!-- end: INBOX PANEL -->
+                            <!-- end: FORM VALIDATION 1 PANEL -->
                         </div>
                     </div>
-
-
                     <!-- end: PAGE CONTENT-->
                 </div>
             </div>
@@ -284,10 +277,7 @@
             </div>
         </div>
         <!-- end: FOOTER -->
-        
 
-        <!-- start: BOOTSTRAP EXTENDED MODALS -->
-        <jsp:include page="page-elements/login_update_modals.jsp"/>
         <!-- start: MAIN JAVASCRIPTS -->
         <!--[if lt IE 9]>
         <script src="plugins/respond.min.js"></script>
@@ -326,6 +316,7 @@
         <script src="plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
         <script src="plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
         <script src="js/ui-modals.js"></script>
+
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
         <script>
             jQuery(document).ready(function () {
@@ -334,9 +325,11 @@
                     refresh_data();
                 }, 3000);
                 Main.init();
-                Index.init();
+
                 UIModals.init();
                 FormValidator.init();
+                Index.init();
+
             });
         </script>
     </body>

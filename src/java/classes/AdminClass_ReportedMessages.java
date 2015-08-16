@@ -173,6 +173,7 @@ public class AdminClass_ReportedMessages {
             Statement stmt = dbc.conn.createStatement();
             String query = "UPDATE `admin_reported_messages` SET `read_state`='1' WHERE `message_id`='"+id+"'";
             result=stmt.executeUpdate(query);
+            dbc.endConnection();
         } catch (SQLException ex) {
             Logger.getLogger(AdminClass_ReportedItems.class.getName()).log(Level.SEVERE, null, ex);
         }

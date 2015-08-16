@@ -4,6 +4,7 @@
     Author     : SithuDewmi
 --%>
 
+<%@page import="java.util.TimeZone"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -144,83 +145,7 @@
 
         %>
         <!-- start: HEADER -->
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <!-- start: TOP NAVIGATION CONTAINER -->
-            <div class="container">
-                <div class="navbar-header">
-                    <!-- start: RESPONSIVE MENU TOGGLER -->
-
-                    <button  data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
-                        <span class="clip-list-2"></span>
-                    </button>
-                    <!-- end: RESPONSIVE MENU TOGGLER -->
-                    <!-- start: LOGO -->
-                    <a class="navbar-brand" href="Dashboard">
-                        <img  src="images/logo.jpg" style="width: 100px;"/>
-
-                    </a>
-                    <!-- end: LOGO -->
-                </div>
-                <div class="navbar-tools">
-                    <!-- start: TOP NAVIGATION MENU -->
-                    <ul class="nav navbar-right">
-                        <!-- start: MESSAGE DROPDOWN -->
-
-                        <li class="dropdown">
-
-                            <a class="dropdown-toggle" data-close-others="true" data-hover="" data-toggle="dropdown" href="#">
-                                <i class="clip-bubble-3"></i>
-                                <span id="MC" class="badge"></span>
-                            </a>
-                            <ul class="dropdown-menu posts">
-
-                                <li>
-
-                                    <div class="drop-down-wrapper">
-                                        <ul>
-                                            <div id="MsgXML"></div>
-
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="view-all">
-                                    <a href="msg_all.jsp">
-                                        See all messages <i class="fa fa-arrow-circle-o-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <!-- end: MESSAGE DROPDOWN -->
-                        <!-- start: USER DROPDOWN -->
-                        <li class="dropdown current-user">
-                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
-                                <img src="images/profile_img.jpg" class="circle-img" alt="">
-                                <span class="username">Ishan Madurasinghe</span>
-                                <i class="clip-chevron-down"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-
-
-                                <li>
-                                    <a href="#responsive" onclick="clr()" data-toggle="modal"><i class="clip-key"></i>
-                                        &nbsp;Change password </a>
-                                </li>
-                                <li>
-                                    <a href="login_example1.html">
-                                        <i class="clip-exit"></i>
-                                        &nbsp;Log Out
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- end: USER DROPDOWN -->
-                    </ul>
-                    <!-- end: TOP NAVIGATION MENU -->
-                </div>
-            </div>
-            <!-- end: TOP NAVIGATION CONTAINER -->
-        </div>
+        <jsp:include page="page-elements/header.jsp"/>
         <!-- end: HEADER -->
         <!-- start: MAIN CONTAINER -->
         <div class="main-container">
@@ -271,35 +196,34 @@
                                         <span id="MC2" class="badge"></span>
                                     </a>
                                 </li>
-                                
+
 
                             </ul>
                         </li>
 
                         <li>
-                            <a href="" ><i class="clip-user-block"></i>
-                                <span class="title"> Blocked Users</span><span class="selected"></span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="" ><i class="clip-note"></i>
-                                <span class="title"> Blocked Ads</span><span class="selected"></span>
+                            <a href="BlacklistedUsers" ><i class="clip-user-block"></i>
+                                <span class="title"> Blacklisted Users</span><span class="selected"></span>
                             </a>
                         </li>
                         <li>
-                            <a href="" ><i class="clip-user-4"></i>
+                            <a href="ReviewAds" ><i class="clip-user-4"></i>
                                 <span class="title"> Review Ads</span><span class="selected"></span>
                             </a>
                         </li>
                         <li>
-                            <a href="" ><i class="clip-thumbs-up"></i>
+                            <a href="upgrade.jsp" ><i class="clip-thumbs-up"></i>
                                 <span class="title"> Upgrade Top Ads</span><span class="selected"></span>
                             </a>
                         </li>
                         <li>
-                            <a href="" ><i class="clip-clip"></i>
+                            <a href="ViewReports" ><i class="clip-clip"></i>
                                 <span class="title"> View Reports</span><span class="selected"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="UpdateInterfaces" ><i class="clip-pictures"></i>
+                                <span class="title"> Update Interfaces</span><span class="selected"></span>
                             </a>
                         </li>
 
@@ -404,7 +328,7 @@
                         <div class="col-sm-4">
                             <div class="core-box">
                                 <div class="heading">
-                                    <a href="#">	
+                                    <a href="upgrade.jsp">	
                                         <i class="clip-thumbs-up circle-icon circle-bricky"></i>
                                         <span id="TA" class="badge"></span>
                                         <h2>Upgrade Top Ads</h2>
@@ -463,19 +387,19 @@
                         <div class="col-sm-12">
                             <div class="row space12">
                                 <ul class="mini-stats col-sm-12">
-                                    <a href="#sitevisit" data-toggle="modal">
+                                    <a href="#sitevisit" data-toggle="modal" onclick="clr()">
                                         <li class="col-sm-4">
                                             <div id="columnchart_sitevisit" style="width: 250px; height: 170px;"></div>
                                             <div id="columnchart_sitevisit_date" style="text-align: left"></div>
                                         </li>
                                     </a>
-                                    <a href="#allusers" data-toggle="modal">
+                                    <a href="#allusers" data-toggle="modal" onclick="clr()">
                                         <li class="col-sm-4">
                                             <div id="columnchart_users" style="width: 250px; height: 170px;"></div>
                                             <div id="columnchart_users_date" style="text-align: left"></div>
                                         </li>
                                     </a>
-                                    <a href="#allads" data-toggle="modal">
+                                    <a href="#allads" data-toggle="modal" onclick="clr()">
                                         <li class="col-sm-4">
                                             <div id="columnchart_ads" style="width: 250px; height: 170px;"></div>
                                             <div id="columnchart_ads_date" style="text-align: left"></div>
@@ -504,105 +428,11 @@
             </div>
         </div>
         <!-- end: FOOTER -->
-        <div id="event-management" class="modal fade" tabindex="-1" data-width="760" style="display: none;">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            &times;
-                        </button>
-                        <h4 class="modal-title">Event Management</h4>
-                    </div>
-                    <div class="modal-body"></div>
-                    <div class="modal-footer">
-                        <button type="button" data-dismiss="modal" class="btn btn-light-grey">
-                            Close
-                        </button>
-                        <button type="button" class="btn btn-danger remove-event no-display">
-                            <i class='fa fa-trash-o'></i> Delete Event
-                        </button>
-                        <button type='submit' class='btn btn-success save-event'>
-                            <i class='fa fa-check'></i> Save
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <jsp:include page="page-elements/login_update_modals.jsp"/>
 
-
-        <div id="responsive" class="modal fade" tabindex="-1" data-width="500" style="display: none;">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-                <h2></h2>
-
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- start: FORM VALIDATION 1 PANEL -->
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <span class="badge">Enter current login details	</span>
-                            </div>
-                            <div class="panel-body">
-                                <h2><i class="fa fa-pencil-square teal"></i> Change Your password</h2>
-
-                                <hr>
-                                <form action="#" role="form" id="form">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="errorHandler alert alert-danger no-display">
-                                                <i class="fa fa-times-sign"></i> You have some form errors. Please check below.
-                                            </div>
-                                            <div class="successHandler alert alert-success no-display">
-                                                <i class="fa fa-ok"></i> Your form validation is successful!
-                                            </div>
-                                        </div>
-                                        <div id="CheckPassXML" style="color: red;"></div>
-                                        <div class="col-md-6">
-
-                                            <div class="form-group">
-                                                <label class="control-label">
-                                                    User Name <span class="symbol required"></span>
-                                                </label>
-                                                <input type="text" placeholder="Insert your User Name" onclick="clr()" class="form-control" id="username">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="control-label">
-                                                    Password <span class="symbol required"></span>
-                                                </label>
-                                                <input type="password" class="form-control" onclick="clr()"  id="password">
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-
-                                </form>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <button class="btn btn-blue btn-block" onclick="login_check()" type="">
-                                            Proceed <i class="fa fa-arrow-circle-right"></i>
-                                        </button>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end: FORM VALIDATION 1 PANEL -->
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-
-
-        <%  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        <%            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String timeZone = "Asia/Colombo";
+            sdf.setTimeZone(TimeZone.getTimeZone(timeZone));
             Calendar c1 = Calendar.getInstance();
             Calendar now = Calendar.getInstance();
             c1.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH), 01);
@@ -1216,13 +1046,15 @@
                 chart.draw(data);
             }
         </script>
+        
+
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
         <script>
             jQuery(document).ready(function () {
                 refresh_data();
                 window.setInterval(function () {
                     refresh_data();
-                }, 2000);
+                }, 3000);
                 Main.init();
                 Index.init();
                 UIModals.init();

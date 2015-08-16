@@ -5,10 +5,9 @@
  */
 package adminservlets;
 
-import classes.AdminClass_Overviewstats;
+import classes.AdminClass_NavbarTools;
 import java.io.IOException;
-import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author SithuDewmi
  */
-public class Dashboard extends HttpServlet {
+public class CheckLogin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +31,19 @@ public class Dashboard extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet CheckLogin</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet CheckLogin at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -47,38 +58,7 @@ public class Dashboard extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("loggin_state") == "success") {
-AdminClass_Overviewstats ao = new AdminClass_Overviewstats();
-
-        ArrayList categoriesPresentage = ao.categoriesPresentage();
-        request.setAttribute("categoriesPresentage", categoriesPresentage);
-
-        ArrayList pagevisitMonth = ao.pagevisitMonth();
-        request.setAttribute("pagevisitMonth", pagevisitMonth);
-
-        ArrayList usersMonth = ao.usersMonth();
-        request.setAttribute("usersMonth", usersMonth);
-
-        ArrayList adsMonth = ao.adsMonth();
-        request.setAttribute("adsMonth", adsMonth);
-
-        ArrayList pagevisitYear = ao.pagevisitYear();
-        request.setAttribute("pagevisitYear", pagevisitYear);
-
-        ArrayList usersYear = ao.usersYear();
-        request.setAttribute("usersYear", usersYear);
-
-        ArrayList adsYear = ao.adsYear();
-        request.setAttribute("adsYear", adsYear);
-
-        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-        rd.forward(request, response);
-        
-        }else{
-            response.sendRedirect("superb_admin.jsp");
-        }
-
+        processRequest(request, response);
     }
 
     /**
@@ -92,7 +72,26 @@ AdminClass_Overviewstats ao = new AdminClass_Overviewstats();
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        HttpSession session=request.getSession();
+         AdminClass_NavbarTools an=new AdminClass_NavbarTools();
+         boolean result=an.checkPass(request.getParameter("uname"), request.getParameter("pass"));
+         if(result==true){
+             session.setAttribute("loggin_state", "success");
+             session.setAttribute("Admin", request.getParameter("uname"));
+             response.sendRedirect("Dashboard");
+         }else{
+             session.setAttribute("loggin_state", "failed");
+             String alert = "<div class=\"alert alert-danger\">\n"
+                        + "<button data-dismiss=\"alert\" class=\"close\">\n"
+                        + "&times;\n"
+                        + "</button>\n"
+                        + "<i class=\"fa fa-times-circle\"></i>\n"
+                        + "<strong>Error!</strong> PLease check your log-in details.\n"
+                        + "</div>";
+             session.setAttribute("alert", alert);
+             response.sendRedirect("superb_admin.jsp");
+         }
+         
     }
 
     /**

@@ -161,16 +161,5 @@
                                                 }
                                             });
                                         }
-                                        function clr() {
-                                            document.getElementById("firstdate").value = "";
-                                            document.getElementById("firstdateuser").value = "";
-                                            document.getElementById("firstdateads").value = "";
-                                            document.getElementById("seconddate").value = "";
-                                            document.getElementById("seconddateuser").value = "";
-                                            document.getElementById("seconddateads").value = "";
-                                            document.getElementById("CustomDataXML").innerHTML = "";
-                                            document.getElementById("CustomDataXMLUser").innerHTML = "";
-                                            document.getElementById("CustomDataXMLAds").innerHTML = "";
-
-                                        }
+                                       
         

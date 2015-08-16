@@ -152,8 +152,6 @@ public class AdminClass_NavbarTools {
         return count;
     }
 
-   
-
     public ArrayList unreadMessages() {
         ArrayList al = new ArrayList();
         try {
@@ -173,7 +171,7 @@ public class AdminClass_NavbarTools {
                     al.add(an);
                 }
             }
-
+            dbc.endConnection();
         } catch (SQLException ex) {
             Logger.getLogger(AdminClass_NavbarTools.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -232,9 +230,9 @@ public class AdminClass_NavbarTools {
                 AdminClass_NavbarTools an = new AdminClass_NavbarTools();
                 an.setType("Messages");
                 an.setId("M" + rs.getString("message_id"));
-               al.add(an);
+                al.add(an);
             }
-            query = "SELECT `report_id` FROM `admin_reported_itemview` WHERE `report_id` LIKE '%"+ sid +"%'";
+            query = "SELECT `report_id` FROM `admin_reported_itemview` WHERE `report_id` LIKE '%" + sid + "%'";
             rs = stmt.executeQuery(query);
             while (rs.next()) {
                 AdminClass_NavbarTools an = new AdminClass_NavbarTools();
@@ -243,7 +241,7 @@ public class AdminClass_NavbarTools {
                 al.add(an);
 
             }
-            query = "SELECT `inquiry_id` FROM `admin_reported_inquiryview` WHERE `inquiry_id` LIKE '%"+ sid +"%'";
+            query = "SELECT `inquiry_id` FROM `admin_reported_inquiryview` WHERE `inquiry_id` LIKE '%" + sid + "%'";
             rs = stmt.executeQuery(query);
             while (rs.next()) {
                 AdminClass_NavbarTools an = new AdminClass_NavbarTools();
@@ -252,7 +250,7 @@ public class AdminClass_NavbarTools {
                 al.add(an);
 
             }
-            query = "SELECT `message_id` FROM `admin_reported_messages` WHERE `message_id` LIKE '%"+ sid +"%'";
+            query = "SELECT `message_id` FROM `admin_reported_messages` WHERE `message_id` LIKE '%" + sid + "%'";
             rs = stmt.executeQuery(query);
             while (rs.next()) {
                 AdminClass_NavbarTools an = new AdminClass_NavbarTools();
@@ -261,7 +259,6 @@ public class AdminClass_NavbarTools {
                 al.add(an);
 
             }
-            
 
             dbc.endConnection();
         } catch (SQLException ex) {
@@ -289,4 +286,6 @@ public class AdminClass_NavbarTools {
         }
         return result;
     }
+    
+   
 }

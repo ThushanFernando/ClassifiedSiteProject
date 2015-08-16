@@ -1,6 +1,6 @@
 <%-- 
-    Document   : page_header
-    Created on : Aug 10, 2015, 2:18:07 PM
+    Document   : header
+    Created on : Aug 15, 2015, 8:09:03 AM
     Author     : SithuDewmi
 --%>
 
@@ -8,8 +8,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
     </head>
     <body>
         <div class="navbar navbar-inverse navbar-fixed-top">
@@ -52,7 +50,7 @@
                                     </div>
                                 </li>
                                 <li class="view-all">
-                                    <a href="msg_all.jsp">
+                                    <a href="">
                                         See all messages <i class="fa fa-arrow-circle-o-right"></i>
                                     </a>
                                 </li>
@@ -64,18 +62,18 @@
                         <li class="dropdown current-user">
                             <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
                                 <img src="images/profile_img.jpg" class="circle-img" alt="">
-                                <span class="username">Ishan Madurasinghe</span>
+                                <span class="username"><%=session.getAttribute("Admin")%></span>
                                 <i class="clip-chevron-down"></i>
                             </a>
                             <ul class="dropdown-menu">
 
 
                                 <li>
-                                    <a href="#responsive" onclick="clr()" data-toggle="modal"><i class="clip-key"></i>
-                                        &nbsp;Change password </a>
+                                    <a href="#login-update" onclick="clr()" data-toggle="modal"><i class="clip-key"></i>
+                                        &nbsp;Change your Log-in </a>
                                 </li>
                                 <li>
-                                    <a href="login_example1.html">
+                                    <a href="CheckLogout">
                                         <i class="clip-exit"></i>
                                         &nbsp;Log Out
                                     </a>

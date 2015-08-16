@@ -53,10 +53,10 @@ public class TimeStamp {
     public String getTimestamp() {
         Date date = new Date();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
+        System.out.println(df.format(date));
         // Use time zone to format the date in
         df.setTimeZone(TimeZone.getTimeZone(timeZone));
-
+        
         System.out.println(df.format(date));
 
         return (df.format(date));

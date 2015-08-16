@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.TimeZone;
 
 /**
  *
@@ -191,8 +192,11 @@ public class AdminClass_Overviewstats {
     public ArrayList pagevisitMonth() {
         ArrayList al = new ArrayList();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String timeZone = "Asia/Colombo";
+        sdf.setTimeZone(TimeZone.getTimeZone(timeZone));
         Calendar c1 = Calendar.getInstance();
         Calendar now = Calendar.getInstance();
+        
         c1.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH), 01);
 
         c1.add(Calendar.MONTH, -12); // substract 12month
@@ -226,6 +230,8 @@ public class AdminClass_Overviewstats {
     public ArrayList pagevisitYear() {
         ArrayList al = new ArrayList();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String timeZone = "Asia/Colombo";
+        sdf.setTimeZone(TimeZone.getTimeZone(timeZone));
         Calendar c1 = Calendar.getInstance();
         Calendar now = Calendar.getInstance();
         c1.set(now.get(Calendar.YEAR), 00, 01);
@@ -286,6 +292,8 @@ public class AdminClass_Overviewstats {
     public ArrayList usersMonth() {
         ArrayList al = new ArrayList();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String timeZone = "Asia/Colombo";
+        sdf.setTimeZone(TimeZone.getTimeZone(timeZone));
         Calendar c1 = Calendar.getInstance();
         Calendar now = Calendar.getInstance();
         c1.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH), 01);
@@ -321,6 +329,8 @@ public class AdminClass_Overviewstats {
     public ArrayList usersYear() {
         ArrayList al = new ArrayList();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String timeZone = "Asia/Colombo";
+        sdf.setTimeZone(TimeZone.getTimeZone(timeZone));
         Calendar c1 = Calendar.getInstance();
         Calendar now = Calendar.getInstance();
         c1.set(now.get(Calendar.YEAR), 00, 01);
@@ -383,6 +393,8 @@ public class AdminClass_Overviewstats {
         ArrayList al = new ArrayList();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String timeZone = "Asia/Colombo";
+        sdf.setTimeZone(TimeZone.getTimeZone(timeZone));
         Calendar c1 = Calendar.getInstance();
         Calendar now = Calendar.getInstance();
         c1.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH), 01);
@@ -418,6 +430,8 @@ public class AdminClass_Overviewstats {
     public ArrayList adsYear() {
         ArrayList al = new ArrayList();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String timeZone = "Asia/Colombo";
+        sdf.setTimeZone(TimeZone.getTimeZone(timeZone));
         Calendar c1 = Calendar.getInstance();
         Calendar now = Calendar.getInstance();
         c1.set(now.get(Calendar.YEAR), 00, 01);

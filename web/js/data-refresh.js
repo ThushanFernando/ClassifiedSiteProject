@@ -33,44 +33,44 @@ function refresh_data() {
 
         }
     });
-    $.ajax({
-        type: "GET",
-        url: "MsgXML",
-        dataType: "xml",
-        success: function (xml) {
-            $("#MsgXML").html("");
-
-            $(xml).find('value').each(function () {
-
-                var sender = $(this).find('sender').text();
-                var content = $(this).find('content').text();
-                var lngth = "";
-                if (content.length > 30) {
-                    lngth = ".....";
-                }
-                var time = $(this).find('time').text();
-                var status = $(this).find('status').text();
-                var item;
-                item = $('<li' + status + '>\n'
-                        + '<a href="javascript:;">\n'
-                        + '<div class="clearfix">\n'
-                        + '<div class="thread-image "><i class="clip-user-5 circle-icon circle-blue" style="background-color:#0099c6;"></i></div>\n'
-                        + '<div class="thread-content">\n'
-                        + '<span class="author">' + sender + '</span>\n'
-                        + '<span class="preview">' + content.substring(0, 30) + lngth + '</span>\n'
-                        + '<span class="time">' + time + '</span>\n'
-                        + '</div>\n'
-                        + '</div>\n'
-                        + '</a>\n'
-                        + '</li>\n');
-                $("#MsgXML").append(item);
-
-
-            });
-
-
-        }
-    });
+//    $.ajax({
+//        type: "GET",
+//        url: "MsgXML",
+//        dataType: "xml",
+//        success: function (xml) {
+//            $("#MsgXML").html("");
+//
+//            $(xml).find('value').each(function () {
+//
+//                var sender = $(this).find('sender').text();
+//                var content = $(this).find('content').text();
+//                var lngth = "";
+//                if (content.length > 30) {
+//                    lngth = ".....";
+//                }
+//                var time = $(this).find('time').text();
+//                var status = $(this).find('status').text();
+//                var item;
+//                item = $('<li' + status + '>\n'
+//                        + '<a href="javascript:;">\n'
+//                        + '<div class="clearfix">\n'
+//                        + '<div class="thread-image "><i class="clip-user-5 circle-icon circle-blue" style="background-color:#0099c6;"></i></div>\n'
+//                        + '<div class="thread-content">\n'
+//                        + '<span class="author">' + sender + '</span>\n'
+//                        + '<span class="preview">' + content.substring(0, 30) + lngth + '</span>\n'
+//                        + '<span class="time">' + time + '</span>\n'
+//                        + '</div>\n'
+//                        + '</div>\n'
+//                        + '</a>\n'
+//                        + '</li>\n');
+//                $("#MsgXML").append(item);
+//
+//
+//            });
+//
+//
+//        }
+//    });
 
 
 
@@ -179,16 +179,22 @@ function clr() {
     document.getElementById("CheckPassXML").innerHTML = "";
     document.getElementById("username").value = "";
     document.getElementById("password").value = "";
-
-
+    
 }
+
 function login_check() {
     var username = document.getElementById('username').value;
 
     var password = document.getElementById('password').value;
 
     if (username === "" || password === "") {
-        document.getElementById('CheckPassXML').innerHTML = "&nbsp&nbsp&nbsp Enter current login details";
+        $("#CheckPassXML").append("<div class=\"alert alert-danger\">\n"
+                + "<button data-dismiss=\"alert\" class=\"close\">\n"
+                + "&times;\n"
+                + "</button>\n"
+                + "<i class=\"fa fa-times-circle\"></i>\n"
+                + "<strong>Failed!</strong>&nbsp;Enter current login details\n"
+                + "</div>");
     } else {
 
         $.ajax({
@@ -207,9 +213,15 @@ function login_check() {
 
                     var result = $(this).find('Result').text();
                     if (result === "true") {
-                        window.location.replace("admin/change_pass.jsp");
+                        window.location.replace("change_log-in.jsp");
                     } else {
-                        document.getElementById('CheckPassXML').innerHTML = "&nbsp&nbsp&nbsp Check your username or password";
+                        $("#CheckPassXML").append("<div class=\"alert alert-danger\">\n"
+                                + "<button data-dismiss=\"alert\" class=\"close\">\n"
+                                + "&times;\n"
+                                + "</button>\n"
+                                + "<i class=\"fa fa-times-circle\"></i>\n"
+                                + "<strong>Failed!</strong>&nbsp; Enter current login details\n"
+                                + "</div>");
                     }
                 });
 

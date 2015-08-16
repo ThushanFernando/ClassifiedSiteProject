@@ -177,6 +177,7 @@ public class AdminClass_ReportedItems {
             while(rs.next()){
                 email=rs.getString("email");
             }
+            dbc.endConnection();
         } catch (SQLException ex) {
             Logger.getLogger(AdminClass_ReviewAds.class.getName()).log(Level.SEVERE, null, ex);
         }

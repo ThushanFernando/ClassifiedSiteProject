@@ -197,6 +197,7 @@ public class AdminClass_DetailedView {
                 
                 
             }
+            dbc.endConnection();
         } catch (SQLException ex) {
             Logger.getLogger(AdminClass_DetailedView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -219,6 +220,7 @@ public class AdminClass_DetailedView {
                 al.add(rs.getString("title"));
                 
             }
+            dbc.endConnection();
         } catch (SQLException ex) {
             Logger.getLogger(AdminClass_DetailedView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -245,6 +247,7 @@ public class AdminClass_DetailedView {
                 al.add(rs.getString("response_time_stamp"));
                 
             }
+            dbc.endConnection();
         } catch (SQLException ex) {
             Logger.getLogger(AdminClass_DetailedView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -269,6 +272,7 @@ public class AdminClass_DetailedView {
                 
                 
             }
+            dbc.endConnection();
         } catch (SQLException ex) {
             Logger.getLogger(AdminClass_DetailedView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -286,7 +290,7 @@ public class AdminClass_DetailedView {
             while(rs.next()){
                 title="";
             }
-            
+            dbc.endConnection();
         } catch (SQLException ex) {
             Logger.getLogger(AdminClass_DetailedView.class.getName()).log(Level.SEVERE, null, ex);
         }

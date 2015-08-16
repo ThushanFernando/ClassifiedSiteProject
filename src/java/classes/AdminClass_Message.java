@@ -12,6 +12,7 @@ import classes.DbClass;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -102,7 +103,7 @@ public class AdminClass_Message {
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT  `sender`, `content`,`time_stamp`,`receiver`,`read_state` FROM `user_messages` WHERE  `time_stamp` IN (SELECT MAX(`time_stamp`) FROM `user_messages` WHERE`receiver`='Admin'  GROUP BY `sender`) ORDER BY `time_stamp` DESC";
+            String query = "SELECT `sender`,`content`,`time_stamp`,`read_state`FROM `messageview` WHERE`receiver`='Admin'";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 AdminClass_Message am = new AdminClass_Message();
@@ -184,6 +185,8 @@ public class AdminClass_Message {
 
     public String timeDiff(String time) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String timeZone = "Asia/Colombo";
+        format.setTimeZone(TimeZone.getTimeZone(timeZone));
         Date date = new Date();
         String dateStart = time;
         String dateStop = format.format(date);
@@ -226,6 +229,7 @@ public class AdminClass_Message {
                 String newDateString;
 
                 SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
+                sdf.setTimeZone(TimeZone.getTimeZone(timeZone));
                 Date d = sdf.parse(dateStart);
                 sdf.applyPattern(NEW_FORMAT);
                 newDateString = sdf.format(d);

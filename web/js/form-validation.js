@@ -28,7 +28,7 @@ var FormValidator = function () {
             ignore: "",
             rules: {
                 firstname: {
-                    minlength: 2,
+                    minlength: 5,
                     required: true
                 },
                 userid: {
@@ -52,12 +52,13 @@ var FormValidator = function () {
                     email: true
                 },
                 password: {
-                    minlength: 6,
-                    required: true
+                    minlength: 6
+                    
+                    
                 },
                 password_again: {
                     required: true,
-                    minlength: 5,
+                    minlength: 6,
                     equalTo: "#password"
                 },
                 yyyy: "FullDate",
@@ -67,8 +68,8 @@ var FormValidator = function () {
                 zipcode: {
                     required: true,
                     number: true,
-                    minlength: 5,
                     minlength: 5
+                    
                 },
                 city: {
                     required: true
@@ -129,6 +130,14 @@ var FormValidator = function () {
             }
         });
     };
+    
+    function checkPassword(str)
+  {
+    // at least one number, one lowercase and one uppercase letter
+    // at least six characters
+    var re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+    return re.test(str);
+  }
     // function to initiate Validation Sample 2
     var runValidator2 = function () {
         var form2 = $('#form2');

@@ -54,6 +54,9 @@
     <!-- start: BODY -->
     <body>
         <%
+            if (session.getAttribute("loggin_state") != "success") {
+                response.sendRedirect("superb_admin.jsp");
+            }
             ArrayList reviewAds = (ArrayList) request.getAttribute("reviewAds");
             Iterator itr = reviewAds.iterator();
             AdminClass_ReviewAds received = null;
@@ -233,7 +236,7 @@
                                                 <th class="center hidden-xs">Ad-ID</th>
                                                 <th>Title</th>
                                                 <th  class="center hidden-xs">Time</th>
-                                                <th class="center">Status</th>
+                                                <th>Status</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -249,7 +252,7 @@
                                                 <td class="center hidden-xs"><%=received.getItem_number()%></td>
                                                 <td><%=received.getTitle()%></td>
                                                 <td class="center hidden-xs"><%=received.getTime_stamp()%></td>
-                                                <td class="center"><%=received.getStatus()%></td>
+                                                <td><div data-content="<%=received.getReason()%>" data-placement="right" data-trigger="hover" class="btn popovers"><%=received.getStatus()%></div></td>
                                                 <td class="center">
                                                     <div>
                                                         <div class="btn-group">
@@ -402,18 +405,18 @@
         <script src="js/ui-modals.js"></script>
         <script src="js/ads-review-clickevents.js"></script>
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
-       <script>
-            jQuery(document).ready(function () {
-                refresh_data();
-                window.setInterval(function () {
-                    refresh_data();
-                }, 3000);
-                Main.init();
-                TableData.init();
-                UIModals.init();
-                FormValidator.init();
-                Index.init();
-            });
+        <script>
+                                                                                jQuery(document).ready(function () {
+                                                                                    refresh_data();
+                                                                                    window.setInterval(function () {
+                                                                                        refresh_data();
+                                                                                    }, 3000);
+                                                                                    Main.init();
+                                                                                    TableData.init();
+                                                                                    UIModals.init();
+                                                                                    FormValidator.init();
+                                                                                    Index.init();
+                                                                                });
         </script>
 
     </body>

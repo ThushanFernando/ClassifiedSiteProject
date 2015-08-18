@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -61,16 +62,20 @@ public class GetSliderItems extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        int img_id = Integer.parseInt(request.getParameter("slider_id"));
-        OutputStream oImage;
-        AdminClass_SliderItems as=new AdminClass_SliderItems();
-        byte barray[]=as.getSlider(img_id);
-        response.setContentType("image/gif");
-        oImage = response.getOutputStream();
-        oImage.write(barray);
-        oImage.flush();
-        oImage.close();
+        HttpSession session = request.getSession();
+        if (session.getAttribute("loggin_state") == "success") {
+            int img_id = Integer.parseInt(request.getParameter("slider_id"));
+            OutputStream oImage;
+            AdminClass_SliderItems as = new AdminClass_SliderItems();
+            byte barray[] = as.getSlider(img_id);
+            response.setContentType("image/gif");
+            oImage = response.getOutputStream();
+            oImage.write(barray);
+            oImage.flush();
+            oImage.close();
+        } else {
+            response.sendRedirect("superb_admin.jsp");
+        }
 
     }
 

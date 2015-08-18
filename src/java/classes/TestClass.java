@@ -5,16 +5,8 @@
  */
 package classes;
 
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Scanner;
-import java.util.TimeZone;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 /**
  *
@@ -22,11 +14,17 @@ import java.util.TimeZone;
  */
 public class TestClass {
 
-
     public static void main(String[] args) throws Exception {
-       
-        TimeStamp ts=new TimeStamp();
-        ts.getTimestamp();
-
+        System.out.println(isVld("batta1"));
+        System.out.println(isVld("mypasS123"));
     }
+    private static final Pattern VALID_LOGIN_DETAILS = Pattern.compile(
+            "[0-9a-zA-Z]{6,20}");
+
+    public static boolean isVld(String s) {
+        return VALID_LOGIN_DETAILS.matcher(s).matches();
+    }
+    
+    
+    
 }

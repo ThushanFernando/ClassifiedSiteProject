@@ -48,7 +48,11 @@
     <!-- end: HEAD -->
     <!-- start: BODY -->
     <body>
-
+        <%
+            if (session.getAttribute("loggin_state") != "success") {
+                response.sendRedirect("superb_admin.jsp");
+            }
+        %>
         <!-- start: HEADER -->
         <jsp:include page="page-elements/header_custom.jsp"/>
         <!-- end: HEADER -->
@@ -204,43 +208,47 @@
                         <div class="col-md-12">
                             <!-- start: FORM VALIDATION 1 PANEL -->
                             <div class="panel panel-default">
-                                
+
                                 <div class="panel-body">
                                     <h2 class="hidden-xs"><i class="fa fa-pencil-square teal"></i> Change Your Log-in</h2>
 
                                     <hr>
-                                    <form action="#" role="form" id="form">
+                                    <form action="LoginUpdate" method="POST" >
                                         <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="errorHandler alert alert-danger no-display">
-                                                    <i class="fa fa-times-sign"></i> You have some form errors. Please check below.
-                                                </div>
-                                                <div class="successHandler alert alert-success no-display">
-                                                    <i class="fa fa-ok"></i> Your form validation is successful!
-                                                </div>
+                                            <%if (session.getAttribute("alert") != null) {%>
+                                            <div id="alert-id">
+                                                <%=session.getAttribute("alert")%>    
+
                                             </div>
+                                            <%}
+
+                                                session.setAttribute("alert", null);
+                                            %>
                                         </div>    
                                         <div class="row">
                                             <div class="col-md-4">
+
                                                 <div class="form-group">
                                                     <label class="control-label">
                                                         New User Name 
                                                     </label>
-                                                    <input type="text" placeholder="Insert your User Name(if you want to change)" class="form-control" id="usernamenew" name="usernamenew">
+                                                    <input type="text" placeholder="Insert your User Name(if you want to change)" class="form-control" id="usernamenew" name="usernamenew" pattern=".{8,20}"   title="8-20 characters minimum" >
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label class="control-label">
                                                         New Password <span class="symbol required"></span>
                                                     </label>
-                                                    <input type="password" class="form-control" name="password" id="password">
+                                                    <input type="password" class="form-control" name="password" id="password" required="true" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" title="Password must contain at least 8-20 characters, including UPPER/lowercase and number" onclick="document.getElementById('password').value = null;
+                                                            document.getElementById('password_again').value = null;
+                                                            document.getElementById('alert-id').innerHTML = null">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label class="control-label">
                                                         Confirm Password <span class="symbol required"></span>
                                                     </label>
-                                                    <input type="password" class="form-control" name="password_again" id="password_again">
+                                                    <input type="password" class="form-control" name="password_again" id="password_again" required="true" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" onclick="document.getElementById('alert-id').innerHTML = null">
                                                 </div>
 
                                             </div>
@@ -249,13 +257,26 @@
 
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <button class="btn btn-blue btn-block" type="submit">
+                                                <button class="btn btn-blue btn-block" type="submit" onclick="triggerCustomMsg()">
                                                     Proceed <i class="fa fa-arrow-circle-right"></i>
                                                 </button>
                                             </div>
 
                                         </div>
                                     </form>
+                                    <script>
+                                        function triggerCustomMsg()
+                                        {
+                                            if (document.getElementById("password").value !== document.getElementById("password_again").value) {
+                                                document.getElementById("password_again").setCustomValidity("Password mismatch");
+
+                                            }
+                                            else {
+                                                document.getElementById("password_again").setCustomValidity(null);
+                                            }
+
+                                        }
+                                    </script>
                                 </div>
                             </div>
                             <!-- end: FORM VALIDATION 1 PANEL -->
@@ -312,25 +333,24 @@
         <script src="plugins/summernote/build/summernote.min.js"></script>
         <script src="plugins/ckeditor/ckeditor.js"></script>
         <script src="plugins/ckeditor/adapters/jquery.js"></script>
-        <script src="js/form-validation.js"></script>
         <script src="plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
         <script src="plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
         <script src="js/ui-modals.js"></script>
+        <script src="js/ui-elements.js"></script>
 
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
         <script>
-            jQuery(document).ready(function () {
-                refresh_data();
-                window.setInterval(function () {
-                    refresh_data();
-                }, 3000);
-                Main.init();
+                                        jQuery(document).ready(function () {
+                                            refresh_data();
+                                            window.setInterval(function () {
+                                                refresh_data();
+                                            }, 3000);
+                                            Main.init();
+                                            UIModals.init();
+                                            UIElements.init();
+                                            Index.init();
 
-                UIModals.init();
-                FormValidator.init();
-                Index.init();
-
-            });
+                                        });
         </script>
     </body>
     <!-- end: BODY -->

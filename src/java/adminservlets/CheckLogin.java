@@ -5,6 +5,7 @@
  */
 package adminservlets;
 
+import classes.AdminClass_LoginMethods;
 import classes.AdminClass_NavbarTools;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -73,20 +74,19 @@ public class CheckLogin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session=request.getSession();
-         AdminClass_NavbarTools an=new AdminClass_NavbarTools();
-         boolean result=an.checkPass(request.getParameter("uname"), request.getParameter("pass"));
+        AdminClass_LoginMethods lm=new AdminClass_LoginMethods();
+         boolean result=lm.checkPass(request.getParameter("uname"), request.getParameter("pass"));
          if(result==true){
              session.setAttribute("loggin_state", "success");
              session.setAttribute("Admin", request.getParameter("uname"));
              response.sendRedirect("Dashboard");
          }else{
              session.setAttribute("loggin_state", "failed");
-             String alert = "<div class=\"alert alert-danger\">\n"
+             String alert = "<div class=\"errorHandler alert alert-danger \">\n"
                         + "<button data-dismiss=\"alert\" class=\"close\">\n"
                         + "&times;\n"
                         + "</button>\n"
-                        + "<i class=\"fa fa-times-circle\"></i>\n"
-                        + "<strong>Error!</strong> PLease check your log-in details.\n"
+                        + "<strong>Error !</strong> Please check your log-in details.\n"
                         + "</div>";
              session.setAttribute("alert", alert);
              response.sendRedirect("superb_admin.jsp");

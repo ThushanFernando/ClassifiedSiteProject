@@ -21,6 +21,7 @@ public class AdminClass_ReviewAds {
     private String username=null;
     private String time_stamp=null;
     private String status=null;
+    private String reason=null;
     private String title=null;
     DbClass dbc=new DbClass();
     /**
@@ -93,12 +94,26 @@ public class AdminClass_ReviewAds {
         this.status = status;
     }
     
+    /**
+     * @return the reason
+     */
+    public String getReason() {
+        return reason;
+    }
+
+    /**
+     * @param reason the reason to set
+     */
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+    
     public ArrayList reviewAds(){
         ArrayList al=new ArrayList();
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT `item_number`, `username`, `time_stamp`, `status`,  `title` FROM `itemview` WHERE `status`='Pending' OR `status`='Modifying'";
+            String query = "SELECT `item_number`, `username`, `time_stamp`, `status`,`reason`, `title` FROM `itemview` WHERE `status`='Pending' OR `status`='Modifying'";
             ResultSet rs = stmt.executeQuery(query);
             while(rs.next()){
                 AdminClass_ReviewAds ar=new AdminClass_ReviewAds();
@@ -106,6 +121,11 @@ public class AdminClass_ReviewAds {
                 ar.setUsername(rs.getString("username"));
                 ar.setTime_stamp(rs.getString("time_stamp"));
                 ar.setStatus(rs.getString("status"));
+                if(rs.getString("reason")==null){
+                    ar.setReason("Waiting for approval");
+                }else{
+                    ar.setReason(rs.getString("reason"));
+                }
                 ar.setTitle(rs.getString("title"));
                 al.add(ar);
                   
@@ -177,5 +197,7 @@ public class AdminClass_ReviewAds {
         }
         return result;
     }
+
+    
     
 }

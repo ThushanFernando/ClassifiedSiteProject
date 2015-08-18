@@ -1,12 +1,18 @@
 <%-- 
-    Document   : superb_admin
-    Created on : Aug 16, 2015, 10:51:04 AM
+    Document   : index
+    Created on : Jun 22, 2015, 6:48:51 PM
     Author     : SithuDewmi
 --%>
 
+<%@page import="classes.AdminClass_ReviewAds"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en" class="no-js">
+    <!--<![endif]-->
+    <!-- start: HEAD -->
     <head>
         <title>Superb.lk-Admin</title>
         <!-- start: META -->
@@ -27,18 +33,19 @@
         <link rel="stylesheet" href="plugins/iCheck/skins/all.css">
         <link rel="stylesheet" href="plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css">
         <link rel="stylesheet" href="plugins/perfect-scrollbar/src/perfect-scrollbar.css">
-        <link rel="stylesheet" href="css/theme_light.css" type="text/css" id="skin_color">
-        <link rel="stylesheet" href="css/print.css" type="text/css" media="print"/>
         <!--[if IE 7]>
         <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome-ie7.min.css">
         <![endif]-->
         <!-- end: MAIN CSS -->
         <!-- start: CSS REQUIRED FOR THIS PAGE ONLY -->
+        <link href="plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+        <link href="plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
         <!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
+        <link rel="shortcut icon" href="favicon.ico" />
     </head>
     <!-- end: HEAD -->
     <!-- start: BODY -->
-    <body class="login example2">
+    <body class="login superb">
         <div class="main-login col-sm-4 col-sm-offset-4">
             <div class="logo">SUPERB<i class=""></i>.lk
             </div>
@@ -50,8 +57,8 @@
 
                 </div>
                 <%}
-                session.setAttribute("loggin_state", null);
-                session.setAttribute("alert", null);
+                    session.setAttribute("loggin_state", null);
+                    session.setAttribute("alert", null);
                 %>
                 <h3>Sign in to your account</h3>
                 <p>
@@ -64,20 +71,20 @@
                     <fieldset>
                         <div class="form-group">
                             <span class="input-icon">
-                                <input type="text" class="form-control" name="uname" placeholder="Username" onclick="document.getElementById('alert-id').innerHTML=''">
+                                <input type="text" class="form-control" name="uname" placeholder="Username" onclick="document.getElementById('alert-id').innerHTML = ''" required="true">
                                 <i class="fa fa-user"></i> </span>
                         </div>
                         <div class="form-group form-actions">
                             <span class="input-icon">
-                                <input type="password" class="form-control password" name="pass" placeholder="Password" onclick="document.getElementById('alert-id').innerHTML=''">
+                                <input type="password" class="form-control password" name="pass" placeholder="Password" onclick="document.getElementById('alert-id').innerHTML = ''" required="true" >
                                 <i class="fa fa-lock"></i>
-                                <a class="forgot" href="#">
+                                <a class="forgot" href="#box-forgot" data-toggle="modal">
                                     I forgot my password
                                 </a> </span>
                         </div>
                         <div class="form-actions">
 
-                            <button type="submit" class="btn btn-bricky pull-right">
+                            <button type="submit" class="btn btn-primary pull-right">
                                 Login <i class="fa fa-arrow-circle-right"></i>
                             </button>
                         </div>
@@ -86,117 +93,55 @@
                 </form>
             </div>
             <!-- end: LOGIN BOX -->
-            <!-- start: FORGOT BOX -->
-            <div class="box-forgot">
-                <h3>Forget Password?</h3>
-                <p>
-                    Enter your e-mail address below to reset your password.
-                </p>
-                <form class="form-forgot">
-                    <div class="errorHandler alert alert-danger no-display">
-                        <i class="fa fa-remove-sign"></i> You have some form errors. Please check below.
-                    </div>
-                    <fieldset>
-                        <div class="form-group">
-                            <span class="input-icon">
-                                <input type="email" class="form-control" name="email" placeholder="Email">
-                                <i class="fa fa-envelope"></i> </span>
-                        </div>
-                        <div class="form-actions">
-                            <a class="btn btn-light-grey go-back">
-                                <i class="fa fa-circle-arrow-left"></i> Back
-                            </a>
-                            <button type="submit" class="btn btn-bricky pull-right">
-                                Submit <i class="fa fa-arrow-circle-right"></i>
-                            </button>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-            <!-- end: FORGOT BOX -->
-            <!-- start: REGISTER BOX -->
-            <div class="box-register">
-                <h3>Sign Up</h3>
-                <p>
-                    Enter your personal details below:
-                </p>
-                <form class="form-register">
-                    <div class="errorHandler alert alert-danger no-display">
-                        <i class="fa fa-remove-sign"></i> You have some form errors. Please check below.
-                    </div>
-                    <fieldset>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="full_name" placeholder="Full Name">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="address" placeholder="Address">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="city" placeholder="City">
-                        </div>
-                        <div class="form-group">
-                            <div>
-                                <label class="radio-inline">
-                                    <input type="radio" class="grey" value="F" name="gender">
-                                    Female
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" class="grey" value="M" name="gender">
-                                    Male
-                                </label>
-                            </div>
-                        </div>
-                        <p>
-                            Enter your account details below:
-                        </p>
-                        <div class="form-group">
-                            <span class="input-icon">
-                                <input type="email" class="form-control" name="email" placeholder="Email">
-                                <i class="fa fa-envelope"></i> </span>
-                        </div>
-                        <div class="form-group">
-                            <span class="input-icon">
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                                <i class="fa fa-lock"></i> </span>
-                        </div>
-                        <div class="form-group">
-                            <span class="input-icon">
-                                <input type="password" class="form-control" name="password_again" placeholder="Password Again">
-                                <i class="fa fa-lock"></i> </span>
-                        </div>
-                        <div class="form-group">
-                            <div>
-                                <label for="agree" class="checkbox-inline">
-                                    <input type="checkbox" class="grey agree" id="agree" name="agree">
-                                    I agree to the Terms of Service and Privacy Policy
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-actions">
-                            <a class="btn btn-light-grey go-back">
-                                <i class="fa fa-circle-arrow-left"></i> Back
-                            </a>
-                            <button type="submit" class="btn btn-bricky pull-right">
-                                Submit <i class="fa fa-arrow-circle-right"></i>
-                            </button>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-            <!-- end: REGISTER BOX -->
+
             <!-- start: COPYRIGHT -->
             <div class="copyright">
                 2015 &copy; NextGlow.com
             </div>
             <!-- end: COPYRIGHT -->
         </div>
+        <div id="box-forgot"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">
+            <div class="modal-header">
+                <h3>Forget Password?</h3>
+                <p>
+                    Enter your e-mail address below to reset your password.
+                </p>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-forgot" method="POST">
+                    <div class="errorHandler alert alert-danger no-display">
+                        <i class="fa fa-remove-sign"></i> You have some form errors. Please check below.
+                    </div>
+                    <fieldset>
+                        <div class="form-group">
+                            <span class="input-icon">
+                                <input type="email" class="form-control" required="true" name="email" placeholder="Email">
+                                <i class="fa fa-envelope"></i> </span>
+                        </div>
+                        <div class="form-actions">
+                            <a class="btn btn-light-grey go-back " data-dismiss="modal">
+                                <i class="fa fa-circle-arrow-left"></i> Back
+                            </a>
+                            <button type="submit" class="btn btn-bricky pull-right">
+                                Submit <i class="fa fa-arrow-circle-right"></i>
+                            </button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+        <!-- end: FOOTER -->
+        <!-- start: BOOTSTRAP EXTENDED MODALS -->
         <!-- start: MAIN JAVASCRIPTS -->
         <!--[if lt IE 9]>
-        <script src="plugins/respond.min.js"></script>
-        <script src="plugins/excanvas.min.js"></script>
+        <script src="admin/plugins/respond.min.js"></script>
+        <script src="admin/plugins/excanvas.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <![endif]-->
         <!--[if gte IE 9]><!-->
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
         <!--<![endif]-->
         <script src="plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js"></script>
@@ -212,15 +157,18 @@
         <script src="js/main.js"></script>
         <!-- end: MAIN JAVASCRIPTS -->
         <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
-        <script src="plugins/jquery-validation/dist/jquery.validate.min.js"></script>
-        <script src="js/login.js"></script>
+        <script src="plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
+        <script src="plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
+        <script src="js/ui-modals.js"></script>
+
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
         <script>
-            jQuery(document).ready(function () {
-                Main.init();
-                Login.init();
-            });
+                                    jQuery(document).ready(function () {
+                                        Main.init();
+                                        Login.init();
+                                    });
         </script>
+
     </body>
     <!-- end: BODY -->
 </html>

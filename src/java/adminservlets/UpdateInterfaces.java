@@ -73,30 +73,34 @@ public class UpdateInterfaces extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("setSlider") == "success") {
-            String alert = "<div class=\"alert alert-success\">\n"
-                    + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                    + "&times;\n"
-                    + "</button>\n"
-                    + "<i class=\"fa fa-check-circle\"></i>\n"
-                    + "<strong>Updated !</strong> Slider item successfully.\n"
-                    + "</div>";
-            session.setAttribute("setSlider", null);
-            request.setAttribute("alert", alert);
-        } else if (session.getAttribute("setSlider") == "failed") {
-            String alert = "<div class=\"alert alert-danger\">\n"
-                    + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                    + "&times;\n"
-                    + "</button>\n"
-                    + "<i class=\"fa fa-times-circle\"></i>\n"
-                    + "<strong>Failed!</strong> Slider item updating.\n"
-                    + "</div>";
-            session.setAttribute("setSlider", null);
-            request.setAttribute("alert", alert);
+        if (session.getAttribute("loggin_state") == "success") {
+            if (session.getAttribute("setSlider") == "success") {
+                String alert = "<div class=\"alert alert-success\">\n"
+                        + "<button data-dismiss=\"alert\" class=\"close\">\n"
+                        + "&times;\n"
+                        + "</button>\n"
+                        + "<i class=\"fa fa-check-circle\"></i>\n"
+                        + "<strong>Updated !</strong> Slider item successfully.\n"
+                        + "</div>";
+                session.setAttribute("setSlider", null);
+                request.setAttribute("alert", alert);
+            } else if (session.getAttribute("setSlider") == "failed") {
+                String alert = "<div class=\"alert alert-danger\">\n"
+                        + "<button data-dismiss=\"alert\" class=\"close\">\n"
+                        + "&times;\n"
+                        + "</button>\n"
+                        + "<i class=\"fa fa-times-circle\"></i>\n"
+                        + "<strong>Failed!</strong> Slider item updating.\n"
+                        + "</div>";
+                session.setAttribute("setSlider", null);
+                request.setAttribute("alert", alert);
 
+            }
+            RequestDispatcher rd = request.getRequestDispatcher("interface_updates.jsp");
+            rd.forward(request, response);
+        } else {
+            response.sendRedirect("superb_admin.jsp");
         }
-        RequestDispatcher rd = request.getRequestDispatcher("interface_updates.jsp");
-        rd.forward(request, response);
     }
 
     /**

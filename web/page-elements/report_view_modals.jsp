@@ -58,7 +58,7 @@
                                     Reason: <span class="symbol required"></span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <textarea class="form-control" id="reasonVMId" name="reasonVM" rows="2" readonly style="resize: none"></textarea>
+                                    <textarea class="form-control" id="reasonVMId" name="reasonVM" rows="2" readonly style="resize: none; overflow-y: auto;"></textarea>
                                 </div>
                             </div>
                         </form>
@@ -99,7 +99,7 @@
                                     Subject: <span class="symbol required"></span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <textarea class="form-control" id="subjectidBA" name="subjectBA" rows="2" readonly style="resize: none"></textarea>
+                                    <textarea class="form-control" id="subjectidBA" name="subjectBA" rows="2" readonly style="resize: none; overflow-y: auto;"></textarea>
 
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                                     Reason for Ad block: <span class="symbol required"></span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <textarea class="autosize form-control" name="contentBA" id="contentidBA" rows="12" style="overflow-y: auto; word-wrap: break-word;"></textarea>
+                                    <textarea class="autosize form-control" name="contentBA" id="contentidBA" rows="12" style="overflow-y: auto; resize: none; word-wrap: break-word;"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -164,7 +164,7 @@
                                     Subject: <span class="symbol required"></span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <textarea class="form-control" id="subjectidBU" name="subjectBU" rows="2" readonly style="resize: none"></textarea>
+                                    <textarea class="form-control" id="subjectidBU" name="subjectBU" rows="2" readonly style="overflow-y: auto; resize: none"></textarea>
 
                                 </div>
                             </div>
@@ -173,7 +173,7 @@
                                     Reason for User block: <span class="symbol required"></span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <textarea class="autosize form-control" name="contentBU" id="contentidBU" rows="12" style="overflow-y: auto; word-wrap: break-word;"></textarea>
+                                    <textarea class="autosize form-control" name="contentBU" id="contentidBU" rows="12" style="overflow-y: auto; resize: none; word-wrap: break-word;"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -227,7 +227,7 @@
                                     Reason: 
                                 </label>
                                 <div class="col-sm-7">
-                                    <textarea class="autosize form-control" readonly="true" id="itemreason" style="overflow-y: auto; word-wrap: break-word; resize: horizontal; height: 69px;"></textarea>
+                                    <textarea class="autosize form-control" readonly="true" id="itemreason" style="overflow-y: auto; word-wrap: break-word; resize: none; height: 69px;"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -235,7 +235,7 @@
                                     Message: 
                                 </label>
                                 <div class="col-sm-7">
-                                    <textarea class="autosize form-control" readonly="true" id="itemreportmessage" style="overflow-y: auto; word-wrap: break-word; resize: horizontal; height: 69px;"></textarea>
+                                    <textarea class="autosize form-control" readonly="true" id="itemreportmessage" style="overflow-y: auto; word-wrap: break-word; resize: none; height: 69px;"></textarea>
                                 </div>
                             </div>
 
@@ -279,7 +279,7 @@
                                     Subject: <span class="symbol required"></span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <textarea class="form-control" id="subjectidBM" name="subjectBM" rows="2" readonly style="resize: none"></textarea>
+                                    <textarea class="form-control" id="subjectidBM" name="subjectBM" rows="2" readonly style="overflow-y: auto; resize: none"></textarea>
 
                                 </div>
                             </div>
@@ -288,7 +288,7 @@
                                     Reason for Message block: <span class="symbol required"></span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <textarea class="autosize form-control" name="contentBM" id="contentidBM" rows="12" style="overflow-y: auto; word-wrap: break-word;"></textarea>
+                                    <textarea class="autosize form-control" name="contentBM" id="contentidBM" rows="12" style="overflow-y: auto; resize: none; word-wrap: break-word;"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -342,7 +342,7 @@
                                     Subject: <span class="symbol required"></span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <textarea class="form-control" id="subjectidBMU" name="subjectBMU" rows="2" readonly style="resize: none"></textarea>
+                                    <textarea class="form-control" id="subjectidBMU" name="subjectBMU" rows="2" readonly style="overflow-y: auto; resize: none"></textarea>
 
                                 </div>
                             </div>
@@ -351,7 +351,7 @@
                                     Reason for User block: <span class="symbol required"></span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <textarea class="autosize form-control" name="contentBMU" id="contentidBMU" rows="12" style="overflow-y: auto; word-wrap: break-word;"></textarea>
+                                    <textarea class="autosize form-control" name="contentBMU" id="contentidBMU" rows="12" style="overflow-y: auto; resize: none; word-wrap: break-word;"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -489,7 +489,7 @@
                                     Subject: <span class="symbol required"></span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <textarea class="form-control" id="subjectidBI" name="subjectBI" rows="2" readonly style="resize: none"></textarea>
+                                    <textarea class="form-control" id="subjectidBI" name="subjectBI" rows="2" readonly style=" overflow-y: auto; resize: none"></textarea>
 
                                 </div>
                             </div>
@@ -498,7 +498,7 @@
                                     Reason for Inquiry block: <span class="symbol required"></span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <textarea class="autosize form-control" name="contentBI" id="contentidBI" rows="12" style="overflow-y: auto; word-wrap: break-word;"></textarea>
+                                    <textarea class="autosize form-control" name="contentBI" id="contentidBI" rows="12" style="overflow-y: auto; resize: none; word-wrap: break-word;"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -553,7 +553,7 @@
                                     Subject: <span class="symbol required"></span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <textarea class="form-control" id="subjectidBIU" name="subjectBIU" rows="2" readonly style="resize: none"></textarea>
+                                    <textarea class="form-control" id="subjectidBIU" name="subjectBIU" rows="2" readonly style="overflow-y: auto; resize: none"></textarea>
 
                                 </div>
                             </div>
@@ -562,7 +562,7 @@
                                     Reason for User block: <span class="symbol required"></span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <textarea class="autosize form-control" name="contentBIU" id="contentidBIU" rows="12" style="overflow-y: auto; word-wrap: break-word;"></textarea>
+                                    <textarea class="autosize form-control" name="contentBIU" id="contentidBIU" rows="12" style="overflow-y: auto; resize: none; word-wrap: break-word;"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">

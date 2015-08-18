@@ -48,7 +48,11 @@
     <!-- end: HEAD -->
     <!-- start: BODY -->
     <body>
-
+        <%
+            if (session.getAttribute("loggin_state") != "success") {
+                response.sendRedirect("superb_admin.jsp");
+            }
+        %>
         <!-- start: HEADER -->
         <jsp:include page="page-elements/header.jsp"/>
         <!-- end: HEADER -->
@@ -243,7 +247,7 @@
             </div>
         </div>
         <!-- end: FOOTER -->
-        
+
 
         <!-- start: BOOTSTRAP EXTENDED MODALS -->
         <jsp:include page="page-elements/login_update_modals.jsp"/>

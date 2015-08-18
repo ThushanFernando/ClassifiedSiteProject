@@ -179,23 +179,17 @@ function clr() {
     document.getElementById("CheckPassXML").innerHTML = "";
     document.getElementById("username").value = "";
     document.getElementById("password").value = "";
-    
+
 }
 
 function login_check() {
-    var username = document.getElementById('username').value;
+    $("#CheckPassXML").html("");
+    var username = document.getElementById('username').innerHTML;
 
     var password = document.getElementById('password').value;
 
-    if (username === "" || password === "") {
-        $("#CheckPassXML").append("<div class=\"alert alert-danger\">\n"
-                + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                + "&times;\n"
-                + "</button>\n"
-                + "<i class=\"fa fa-times-circle\"></i>\n"
-                + "<strong>Failed!</strong>&nbsp;Enter current login details\n"
-                + "</div>");
-    } else {
+    if ( password !== "") {
+
 
         $.ajax({
             type: "GET",
@@ -219,8 +213,7 @@ function login_check() {
                                 + "<button data-dismiss=\"alert\" class=\"close\">\n"
                                 + "&times;\n"
                                 + "</button>\n"
-                                + "<i class=\"fa fa-times-circle\"></i>\n"
-                                + "<strong>Failed!</strong>&nbsp; Enter current login details\n"
+                                + "<strong>Failed!</strong>&nbsp;Password is incorrect\n"
                                 + "</div>");
                     }
                 });

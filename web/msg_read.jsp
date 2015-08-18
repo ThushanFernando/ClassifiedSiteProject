@@ -48,7 +48,11 @@
     <!-- end: HEAD -->
     <!-- start: BODY -->
     <body>
-
+        <%
+            if (session.getAttribute("loggin_state") != "success") {
+                response.sendRedirect("superb_admin.jsp");
+            }
+        %>
         <!-- start: HEADER -->
         <jsp:include page="page-elements/header.jsp"/>
         <!-- end: HEADER -->
@@ -284,7 +288,7 @@
             </div>
         </div>
         <!-- end: FOOTER -->
-        
+
 
         <!-- start: BOOTSTRAP EXTENDED MODALS -->
         <jsp:include page="page-elements/login_update_modals.jsp"/>
@@ -328,16 +332,16 @@
         <script src="js/ui-modals.js"></script>
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
         <script>
-            jQuery(document).ready(function () {
-                refresh_data();
-                window.setInterval(function () {
-                    refresh_data();
-                }, 3000);
-                Main.init();
-                Index.init();
-                UIModals.init();
-                FormValidator.init();
-            });
+                                                        jQuery(document).ready(function () {
+                                                            refresh_data();
+                                                            window.setInterval(function () {
+                                                                refresh_data();
+                                                            }, 3000);
+                                                            Main.init();
+                                                            Index.init();
+                                                            UIModals.init();
+                                                            FormValidator.init();
+                                                        });
         </script>
     </body>
     <!-- end: BODY -->

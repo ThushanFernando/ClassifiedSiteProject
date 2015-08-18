@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -38,7 +39,7 @@ public class SearchResult extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SearchResult</title>");            
+            out.println("<title>Servlet SearchResult</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet SearchResult at " + request.getContextPath() + "</h1>");
@@ -59,12 +60,17 @@ public class SearchResult extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String sid=request.getParameter("sid");
-        AdminClass_NavbarTools an=new AdminClass_NavbarTools();
-        ArrayList al=an.searchResult(sid);
-        request.setAttribute("searchResult", al);
-        RequestDispatcher rd=request.getRequestDispatcher("search_results.jsp");
-        rd.forward(request, response);
+        HttpSession session = request.getSession();
+        if (session.getAttribute("loggin_state") == "success") {
+            String sid = request.getParameter("sid");
+            AdminClass_NavbarTools an = new AdminClass_NavbarTools();
+            ArrayList al = an.searchResult(sid);
+            request.setAttribute("searchResult", al);
+            RequestDispatcher rd = request.getRequestDispatcher("search_results.jsp");
+            rd.forward(request, response);
+        } else {
+            response.sendRedirect("superb_admin.jsp");
+        }
     }
 
     /**

@@ -55,6 +55,9 @@
     <!-- start: BODY -->
     <body>
         <%
+            if (session.getAttribute("loggin_state") != "success") {
+                response.sendRedirect("superb_admin.jsp");
+            }
             String reportCount = (String) request.getAttribute("reportCount");
             String message_report_count = (String) request.getAttribute("message_report_count");
             String Inquiry_report_count = (String) request.getAttribute("Inquiry_report_count");

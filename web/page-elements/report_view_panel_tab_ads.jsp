@@ -11,13 +11,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-               
+
     </head>
     <body>
         <%
-        ArrayList ReportedItems = (ArrayList) request.getAttribute("ReportedItems");
-        Iterator itr = ReportedItems.iterator();
-        AdminClass_ReportedItems received = null;
+            ArrayList ReportedItems = (ArrayList) request.getAttribute("ReportedItems");
+            Iterator itr = ReportedItems.iterator();
+            AdminClass_ReportedItems received = null;
         %>
         <div class="tab-pane in active" id="panel_tab_Ads">
             <table class="table table-striped table-hover" id="sample_1">
@@ -33,7 +33,6 @@
                 </thead>
                 <tbody>
                     <%
-
                         while (itr.hasNext()) {
                             Object a = itr.next();
                             received = (AdminClass_ReportedItems) a;
@@ -88,7 +87,7 @@
                                                     <input type="hidden" id="itemUBA<%=received.getReport_id()%>" value="<%=received.getUsername()%>">
                                                     <div class="form-group">
                                                         <div>
-                                                            <textarea class="autosize form-control" id="itemRBA<%=received.getReport_id()%>" required=""  rows="5" style="overflow-y: auto; word-wrap: break-word;">
+                                                            <textarea class="autosize form-control" id="itemRBA<%=received.getReport_id()%>" required=""  rows="5"  style="overflow-y: auto; word-wrap: break-word; resize: none;">
                                                             </textarea>
                                                         </div>
                                                     </div>
@@ -127,10 +126,6 @@
                                                 <input type="hidden" name="removeReport" value="<%=received.getReport_id()%>">
                                             </form>
                                         </li>
-
-
-
-
                                     </ul>
                                 </div>
                             </div></td>

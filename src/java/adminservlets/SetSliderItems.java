@@ -78,24 +78,28 @@ public class SetSliderItems extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AdminClass_SliderItems as = new AdminClass_SliderItems();
         HttpSession session = request.getSession();
-        int result = 0;
-        InputStream inputStream = null; // input stream of the upload file
-        // obtains the upload file part in this multipart request
-        Part filePart = request.getPart("slider_item");
-        String itemId = request.getParameter("slider_id");
-        if (filePart != null) {
-            // obtains input stream of the upload file
-            inputStream = filePart.getInputStream();
-            result = as.setSlider(inputStream, itemId);
-        }
-        if (result == 1) {
-            session.setAttribute("setSlider", "success");
+        if (session.getAttribute("loggin_state") == "success") {
+            AdminClass_SliderItems as = new AdminClass_SliderItems();
+            int result = 0;
+            InputStream inputStream = null; // input stream of the upload file
+            // obtains the upload file part in this multipart request
+            Part filePart = request.getPart("slider_item");
+            String itemId = request.getParameter("slider_id");
+            if (filePart != null) {
+                // obtains input stream of the upload file
+                inputStream = filePart.getInputStream();
+                result = as.setSlider(inputStream, itemId);
+            }
+            if (result == 1) {
+                session.setAttribute("setSlider", "success");
+            } else {
+                session.setAttribute("setSlider", "failed");
+            }
+            response.sendRedirect("UpdateInterfaces");
         } else {
-            session.setAttribute("setSlider", "failed");
+            response.sendRedirect("superb_admin.jsp");
         }
-        response.sendRedirect("UpdateInterfaces");
     }
 
     /**

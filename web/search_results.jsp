@@ -56,6 +56,9 @@
     <!-- start: BODY -->
     <body>
         <%
+            if (session.getAttribute("loggin_state") != "success") {
+                response.sendRedirect("superb_admin.jsp");
+            }
             ArrayList al = (ArrayList) request.getAttribute("searchResult");
             Iterator itr = al.iterator();
             AdminClass_NavbarTools received = null;

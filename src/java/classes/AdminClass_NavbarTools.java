@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -267,25 +268,5 @@ public class AdminClass_NavbarTools {
         return al;
     }
 
-    public boolean checkPass(String username, String password) {
-        boolean result = false;
-        try {
-
-            dbc.getConnection();
-            Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT `username`,`pass` FROM `user` WHERE `username`='" + username + "' AND `pass`='" + password + "' AND `user_type`='Admin'";
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                if (rs.getString("username").equals(username) && rs.getString("pass").equals(password)) {
-                    result = true;
-                }
-            }
-            dbc.endConnection();
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminClass_NavbarTools.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
-    }
     
-   
 }

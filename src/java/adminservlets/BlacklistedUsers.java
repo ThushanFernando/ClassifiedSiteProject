@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -73,81 +74,86 @@ public class BlacklistedUsers extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AdminClass_BlacklistedEmails ab = new AdminClass_BlacklistedEmails();
-        if (request.getParameter("email_unblock") != null) {
-            boolean exists = ab.getEnteredEmail(request.getParameter("email_unblock"));
-            if (exists == true) {
-                int result = ab.unblockEmail(request.getParameter("email_unblock"));
-                if (result == 1) {
-                    String alert = "<div class=\"alert alert-success\">\n"
-                            + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                            + "&times;\n"
-                            + "</button>\n"
-                            + "<i class=\"fa fa-check-circle\"></i>\n"
-                            + "<strong>Unblocked !</strong>  Email- " + request.getParameter("email_unblock") + "  .\n"
-                            + "</div>";
-                    request.setAttribute("alert", alert);
+        HttpSession session = request.getSession();
+        if (session.getAttribute("loggin_state") == "success") {
+            AdminClass_BlacklistedEmails ab = new AdminClass_BlacklistedEmails();
+            if (request.getParameter("email_unblock") != null) {
+                boolean exists = ab.getEnteredEmail(request.getParameter("email_unblock"));
+                if (exists == true) {
+                    int result = ab.unblockEmail(request.getParameter("email_unblock"));
+                    if (result == 1) {
+                        String alert = "<div class=\"alert alert-success\">\n"
+                                + "<button data-dismiss=\"alert\" class=\"close\">\n"
+                                + "&times;\n"
+                                + "</button>\n"
+                                + "<i class=\"fa fa-check-circle\"></i>\n"
+                                + "<strong>Unblocked !</strong>  Email- " + request.getParameter("email_unblock") + "  .\n"
+                                + "</div>";
+                        request.setAttribute("alert", alert);
+                    } else {
+                        String alert = "<div class=\"alert alert-danger\">\n"
+                                + "<button data-dismiss=\"alert\" class=\"close\">\n"
+                                + "&times;\n"
+                                + "</button>\n"
+                                + "<i class=\"fa fa-times-circle\"></i>\n"
+                                + "<strong>Failed!</strong> Email- '" + request.getParameter("email_unblock") + "' Try again.\n"
+                                + "</div>";
+                        request.setAttribute("alert", alert);
+                    }
                 } else {
                     String alert = "<div class=\"alert alert-danger\">\n"
                             + "<button data-dismiss=\"alert\" class=\"close\">\n"
                             + "&times;\n"
                             + "</button>\n"
                             + "<i class=\"fa fa-times-circle\"></i>\n"
-                            + "<strong>Failed!</strong> Email- '" + request.getParameter("email_unblock") + "' Try again.\n"
+                            + "<strong>Failed!</strong> Email- '" + request.getParameter("email_unblock") + "' Doesn't exsist in the list.\n"
                             + "</div>";
                     request.setAttribute("alert", alert);
                 }
-            } else {
-                String alert = "<div class=\"alert alert-danger\">\n"
-                        + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                        + "&times;\n"
-                        + "</button>\n"
-                        + "<i class=\"fa fa-times-circle\"></i>\n"
-                        + "<strong>Failed!</strong> Email- '" + request.getParameter("email_unblock") + "' Doesn't exsist in the list.\n"
-                        + "</div>";
-                request.setAttribute("alert", alert);
-            }
-        } else if (request.getParameter("email_block") != null) {
-            boolean exists = ab.getEnteredEmail(request.getParameter("email_block"));
-            if (exists == true) {
-                String alert = "<div class=\"alert alert-danger\">\n"
-                        + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                        + "&times;\n"
-                        + "</button>\n"
-                        + "<i class=\"fa fa-times-circle\"></i>\n"
-                        + "<strong>Failed!</strong> Email- '" + request.getParameter("email_block") + "' Already blacklisted.\n"
-                        + "</div>";
-                request.setAttribute("alert", alert);
-
-            }else{
-                int result = ab.blockEmail(request.getParameter("email_block"));
-                if(result==1){
-                    String alert = "<div class=\"alert alert-success\">\n"
-                            + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                            + "&times;\n"
-                            + "</button>\n"
-                            + "<i class=\"fa fa-check-circle\"></i>\n"
-                            + "<strong>Blocked !</strong>  Email- " + request.getParameter("email_block") + "  .\n"
-                            + "</div>";
-                    request.setAttribute("alert", alert);
-                }else{
+            } else if (request.getParameter("email_block") != null) {
+                boolean exists = ab.getEnteredEmail(request.getParameter("email_block"));
+                if (exists == true) {
                     String alert = "<div class=\"alert alert-danger\">\n"
                             + "<button data-dismiss=\"alert\" class=\"close\">\n"
                             + "&times;\n"
                             + "</button>\n"
                             + "<i class=\"fa fa-times-circle\"></i>\n"
-                            + "<strong>Failed!</strong> Email- '" + request.getParameter("email_block") + "' Try again.\n"
+                            + "<strong>Failed!</strong> Email- '" + request.getParameter("email_block") + "' Already blacklisted.\n"
                             + "</div>";
                     request.setAttribute("alert", alert);
-                    
+
+                } else {
+                    int result = ab.blockEmail(request.getParameter("email_block"));
+                    if (result == 1) {
+                        String alert = "<div class=\"alert alert-success\">\n"
+                                + "<button data-dismiss=\"alert\" class=\"close\">\n"
+                                + "&times;\n"
+                                + "</button>\n"
+                                + "<i class=\"fa fa-check-circle\"></i>\n"
+                                + "<strong>Blocked !</strong>  Email- " + request.getParameter("email_block") + "  .\n"
+                                + "</div>";
+                        request.setAttribute("alert", alert);
+                    } else {
+                        String alert = "<div class=\"alert alert-danger\">\n"
+                                + "<button data-dismiss=\"alert\" class=\"close\">\n"
+                                + "&times;\n"
+                                + "</button>\n"
+                                + "<i class=\"fa fa-times-circle\"></i>\n"
+                                + "<strong>Failed!</strong> Email- '" + request.getParameter("email_block") + "' Try again.\n"
+                                + "</div>";
+                        request.setAttribute("alert", alert);
+
+                    }
                 }
             }
-        }
 
-        ArrayList blacklistedEmails = (ArrayList) ab.getBlacklistedEmails();
-        request.setAttribute("blacklistedEmails", blacklistedEmails);
-        RequestDispatcher rd = request.getRequestDispatcher("user_blacklisted.jsp");
-        rd.forward(request, response);
+            ArrayList blacklistedEmails = (ArrayList) ab.getBlacklistedEmails();
+            request.setAttribute("blacklistedEmails", blacklistedEmails);
+            RequestDispatcher rd = request.getRequestDispatcher("user_blacklisted.jsp");
+            rd.forward(request, response);
+        } else {
+            response.sendRedirect("superb_admin.jsp");
+        }
     }
 
     /**

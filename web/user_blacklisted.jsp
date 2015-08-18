@@ -55,6 +55,9 @@
     <!-- start: BODY -->
     <body>
         <%
+            if (session.getAttribute("loggin_state") != "success") {
+                response.sendRedirect("superb_admin.jsp");
+            }
             ArrayList blacklistedEmails = (ArrayList) request.getAttribute("blacklistedEmails");
             Iterator itr = blacklistedEmails.iterator();
             AdminClass_BlacklistedEmails received = null;

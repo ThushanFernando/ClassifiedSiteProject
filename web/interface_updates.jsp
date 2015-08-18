@@ -48,7 +48,11 @@
     <!-- end: HEAD -->
     <!-- start: BODY -->
     <body>
-
+        <%
+            if (session.getAttribute("loggin_state") != "success") {
+                response.sendRedirect("superb_admin.jsp");
+            }
+        %>
         <!-- start: HEADER -->
         <jsp:include page="page-elements/header.jsp"/>
         <!-- end: HEADER -->
@@ -471,15 +475,15 @@
 
 
         <script>
-            jQuery(document).ready(function () {
-                refresh_data();
-                window.setInterval(function () {
-                    refresh_data();
-                }, 3000);
-                Main.init();
-                Index.init();
-                FormElements.init();
-            });
+                                                jQuery(document).ready(function () {
+                                                    refresh_data();
+                                                    window.setInterval(function () {
+                                                        refresh_data();
+                                                    }, 3000);
+                                                    Main.init();
+                                                    Index.init();
+                                                    FormElements.init();
+                                                });
         </script>
     </body>
     <!-- end: BODY -->

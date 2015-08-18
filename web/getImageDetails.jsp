@@ -15,6 +15,9 @@
     </head>
     <body>
         <%
+            if (session.getAttribute("loggin_state") != "success") {
+                response.sendRedirect("superb_admin.jsp");
+            }
             int img_id = Integer.parseInt(request.getParameter("your_id"));
             DbClass dbc = new DbClass();
             dbc.getConnection();//get your connection object here ;
@@ -34,7 +37,7 @@
                     oImage.close();
                 }
             } catch (Exception ex) {
-    //ex.printStackTrace();
+                //ex.printStackTrace();
             } finally {
                 try {
                     if (dbc.conn != null) {

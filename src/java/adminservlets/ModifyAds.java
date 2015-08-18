@@ -37,7 +37,7 @@ public class ModifyAds extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ModifyAds</title>");            
+            out.println("<title>Servlet ModifyAds</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ModifyAds at " + request.getContextPath() + "</h1>");
@@ -72,17 +72,22 @@ public class ModifyAds extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AdminClass_ReviewAds ar=new AdminClass_ReviewAds();
-        String reciever=ar.getUserEmail(request.getParameter("to"));
-        String subject=request.getParameter("subject");
-        String content=request.getParameter("content").replace("************Type the reason here************","");
-        content=content.replace("***************************************************", "");
-        String itemId=request.getParameter("itemname");
-        String reason=request.getParameter("reason");
-        int result=ar.modifyAds(itemId,reason);
-        HttpSession session=request.getSession();
-        session.setAttribute("alert", "success");
-        response.sendRedirect("ReviewAds");
+        HttpSession session = request.getSession();
+        if (session.getAttribute("loggin_state") == "success") {
+            AdminClass_ReviewAds ar = new AdminClass_ReviewAds();
+            String reciever = ar.getUserEmail(request.getParameter("to"));
+            String subject = request.getParameter("subject");
+            String content = request.getParameter("content").replace("************Type the reason here************", "");
+            content = content.replace("***************************************************", "");
+            String itemId = request.getParameter("itemname");
+            String reason = request.getParameter("reason");
+            int result = ar.modifyAds(itemId, reason);
+
+            session.setAttribute("alert", "success");
+            response.sendRedirect("ReviewAds");
+        } else {
+            response.sendRedirect("superb_admin.jsp");
+        }
     }
 
     /**

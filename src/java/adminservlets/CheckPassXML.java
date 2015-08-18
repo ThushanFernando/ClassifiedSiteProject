@@ -5,6 +5,7 @@
  */
 package adminservlets;
 
+import classes.AdminClass_LoginMethods;
 import classes.AdminClass_NavbarTools;
 import classes.AdminClass_Overviewstats;
 import java.io.IOException;
@@ -62,9 +63,9 @@ public class CheckPassXML extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/xml");
         response.setCharacterEncoding("UTF-8");
-        AdminClass_NavbarTools an=new AdminClass_NavbarTools();
+        AdminClass_LoginMethods lm=new AdminClass_LoginMethods();
         
-        boolean result=an.checkPass(request.getParameter("username"), request.getParameter("password"));
+        boolean result=lm.checkPass(request.getParameter("username"), request.getParameter("password"));
         String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                 + "<values>\n"
                 + "	<value>\n"

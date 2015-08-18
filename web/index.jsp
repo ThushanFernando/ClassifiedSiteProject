@@ -58,7 +58,9 @@
     <!-- start: BODY -->
     <body onload="">
         <%
-
+            if (session.getAttribute("loggin_state") != "success") {
+                response.sendRedirect("superb_admin.jsp");
+            }
             ArrayList al = (ArrayList) request.getAttribute("categoriesPresentage");
             Iterator itr = al.iterator();
             AdminClass_Overviewstats received = null;
@@ -1046,7 +1048,7 @@
                 chart.draw(data);
             }
         </script>
-        
+
 
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
         <script>

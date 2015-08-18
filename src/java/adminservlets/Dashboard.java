@@ -49,33 +49,33 @@ public class Dashboard extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session.getAttribute("loggin_state") == "success") {
-AdminClass_Overviewstats ao = new AdminClass_Overviewstats();
+            AdminClass_Overviewstats ao = new AdminClass_Overviewstats();
 
-        ArrayList categoriesPresentage = ao.categoriesPresentage();
-        request.setAttribute("categoriesPresentage", categoriesPresentage);
+            ArrayList categoriesPresentage = ao.categoriesPresentage();
+            request.setAttribute("categoriesPresentage", categoriesPresentage);
 
-        ArrayList pagevisitMonth = ao.pagevisitMonth();
-        request.setAttribute("pagevisitMonth", pagevisitMonth);
+            ArrayList pagevisitMonth = ao.pagevisitMonth();
+            request.setAttribute("pagevisitMonth", pagevisitMonth);
 
-        ArrayList usersMonth = ao.usersMonth();
-        request.setAttribute("usersMonth", usersMonth);
+            ArrayList usersMonth = ao.usersMonth();
+            request.setAttribute("usersMonth", usersMonth);
 
-        ArrayList adsMonth = ao.adsMonth();
-        request.setAttribute("adsMonth", adsMonth);
+            ArrayList adsMonth = ao.adsMonth();
+            request.setAttribute("adsMonth", adsMonth);
 
-        ArrayList pagevisitYear = ao.pagevisitYear();
-        request.setAttribute("pagevisitYear", pagevisitYear);
+            ArrayList pagevisitYear = ao.pagevisitYear();
+            request.setAttribute("pagevisitYear", pagevisitYear);
 
-        ArrayList usersYear = ao.usersYear();
-        request.setAttribute("usersYear", usersYear);
+            ArrayList usersYear = ao.usersYear();
+            request.setAttribute("usersYear", usersYear);
 
-        ArrayList adsYear = ao.adsYear();
-        request.setAttribute("adsYear", adsYear);
+            ArrayList adsYear = ao.adsYear();
+            request.setAttribute("adsYear", adsYear);
 
-        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-        rd.forward(request, response);
-        
-        }else{
+            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+            rd.forward(request, response);
+
+        } else {
             response.sendRedirect("superb_admin.jsp");
         }
 

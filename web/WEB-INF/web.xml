@@ -108,6 +108,10 @@
         <servlet-name>CheckLogout</servlet-name>
         <servlet-class>adminservlets.CheckLogout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginUpdate</servlet-name>
+        <servlet-class>adminservlets.LoginUpdate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/Dashboard</url-pattern>
@@ -215,6 +219,10 @@
     <servlet-mapping>
         <servlet-name>CheckLogout</servlet-name>
         <url-pattern>/CheckLogout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginUpdate</servlet-name>
+        <url-pattern>/LoginUpdate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

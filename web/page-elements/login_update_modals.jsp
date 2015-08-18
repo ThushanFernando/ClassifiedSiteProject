@@ -27,43 +27,41 @@
                                 <span class="badge">Enter current login details	</span>
                             </div>
                             <div class="panel-body">
-                                <h2><i class="fa fa-pencil-square teal"></i> Change Your Log-in</h2>
+                                <h2><i class="fa fa-pencil-square teal"></i> Change <l class="hidden-xs">Your</l> Log-in</h2>
 
                                 <hr>
-                                <form action="#" role="form" id="form">
+                                <form role="form" id="form" onsubmit="return false;" >
                                     <div class="row">
-                                        
+
                                         <div id="CheckPassXML"></div>
                                         <div class="col-md-6">
 
                                             <div class="form-group">
-                                                <label class="control-label">
-                                                    User Name <span class="symbol required"></span>
-                                                </label>
-                                                <input type="text" placeholder="Insert your User Name" onclick="clr()" class="form-control" id="username">
+                                                <span class="badge btn-blue"><span>Admin id -</span> <span id="username"><%=session.getAttribute("Admin")%></span></span>
+                                               
                                             </div>
 
                                             <div class="form-group">
                                                 <label class="control-label">
                                                     Password <span class="symbol required"></span>
                                                 </label>
-                                                <input type="password" class="form-control"   id="password">
+                                                <input type="password" class="form-control" onclick="clr()"  id="password" required="true">
                                             </div>
 
                                         </div>
 
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <button class="btn btn-blue btn-block" onclick="login_check()" type="submit">
+                                                Proceed <i class="fa fa-arrow-circle-right"></i>
+                                            </button>
+                                        </div>
 
-
-                                </form>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <button class="btn btn-blue btn-block" onclick="login_check()" type="">
-                                            Proceed <i class="fa fa-arrow-circle-right"></i>
-                                        </button>
                                     </div>
 
-                                </div>
+                                </form>
+
                             </div>
                         </div>
                         <!-- end: FORM VALIDATION 1 PANEL -->

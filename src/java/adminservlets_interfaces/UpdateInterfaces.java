@@ -3,23 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminservlets;
+package adminservlets_interfaces;
 
-import classes.AdminClass_Overviewstats;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author SithuDewmi
  */
-public class CustomDataXML extends HttpServlet {
+public class UpdateInterfaces extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +37,10 @@ public class CustomDataXML extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CustomDataXML</title>");
+            out.println("<title>Servlet UpdateInterfaces</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CustomDataXML at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateInterfaces at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,32 +58,7 @@ public class CustomDataXML extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/xml");
-        response.setCharacterEncoding("UTF-8");
-        String fd = request.getParameter("fd");
-        String sd = request.getParameter("sd");
-        String result;
-        AdminClass_Overviewstats ao = new AdminClass_Overviewstats();
-        boolean checkFD = ao.isValidDate(fd);
-        boolean checkSD = ao.isValidDate(sd);
-        
-         
-        if (checkFD == true && checkSD == true) {
-            ArrayList al=ao.pagevisitCustom(fd, sd);
-            DecimalFormat twoDForm = new DecimalFormat("#.#");
-             result="Site visit: "+(String)al.get(1) +" Percentage: "+twoDForm.format(Float.parseFloat((String) al.get(1)) / Float.parseFloat((String) al.get(0))* 100)+"%";
-        } else {
-             result = "Incorrect entry";
-        }
-
-        String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                + "<values>\n"
-                + "	<value>\n"
-                + "		<Result>" + result + "</Result>\n"
-                + "	</value>\n"
-                + "</values>";
-
-        response.getWriter().write(content);
+        doPost(request, response);
     }
 
     /**
@@ -98,7 +72,35 @@ public class CustomDataXML extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        if (session.getAttribute("loggin_state") == "success") {
+            if (session.getAttribute("setSlider") == "success") {
+                String alert = "<div class=\"alert alert-success\">\n"
+                        + "<button data-dismiss=\"alert\" class=\"close\">\n"
+                        + "&times;\n"
+                        + "</button>\n"
+                        + "<i class=\"fa fa-check-circle\"></i>\n"
+                        + "<strong>Updated !</strong> Slider item successfully.\n"
+                        + "</div>";
+                session.setAttribute("setSlider", null);
+                request.setAttribute("alert", alert);
+            } else if (session.getAttribute("setSlider") == "failed") {
+                String alert = "<div class=\"alert alert-danger\">\n"
+                        + "<button data-dismiss=\"alert\" class=\"close\">\n"
+                        + "&times;\n"
+                        + "</button>\n"
+                        + "<i class=\"fa fa-times-circle\"></i>\n"
+                        + "<strong>Failed!</strong> Slider item updating.\n"
+                        + "</div>";
+                session.setAttribute("setSlider", null);
+                request.setAttribute("alert", alert);
+
+            }
+            RequestDispatcher rd = request.getRequestDispatcher("interface_updates.jsp");
+            rd.forward(request, response);
+        } else {
+            response.sendRedirect("superb_admin.jsp");
+        }
     }
 
     /**

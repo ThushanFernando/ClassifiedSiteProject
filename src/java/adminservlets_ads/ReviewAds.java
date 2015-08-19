@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminservlets;
+package adminservlets_ads;
 
-import classes.AdminClass_LoginMethods;
+import classes.AdminClass_ReviewAds;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author SithuDewmi
  */
-public class LoginUpdate extends HttpServlet {
+public class ReviewAds extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +34,18 @@ public class LoginUpdate extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        doPost(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ReviewAds</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ReviewAds at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -48,6 +61,7 @@ public class LoginUpdate extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);
+
     }
 
     /**
@@ -63,77 +77,72 @@ public class LoginUpdate extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session.getAttribute("loggin_state") == "success") {
-            request.getParameter("password");
-
-            boolean result = false;
-
-            AdminClass_LoginMethods lm = new AdminClass_LoginMethods();
-
-            if ("".equals(request.getParameter("usernamenew"))) {
-                result = lm.updateAdminCustom((String) session.getAttribute("Admin"), request.getParameter("password"));
-                if (result == true) {
-                    session.setAttribute("loggin_state", "failed");
-                    String alert = "<div class=\"alert alert-success\">\n"
+            AdminClass_ReviewAds ar = new AdminClass_ReviewAds();
+            String item = request.getParameter("item");
+            String action = request.getParameter("action");
+            int result = 0;
+            String alert = null;
+            if ("Approve".equals(action) && item != null) {
+                result = ar.approveAd(item);
+                if (result == 1) {
+                    alert = "<div class=\"alert alert-success\">\n"
                             + "<button data-dismiss=\"alert\" class=\"close\">\n"
                             + "&times;\n"
                             + "</button>\n"
                             + "<i class=\"fa fa-check-circle\"></i>\n"
-                            + "<strong>Success !</strong> Login detils are upto date, Please log-in again.\n"
+                            + "<strong>Approved!</strong> Advertiesment number '" + request.getParameter("item") + "' .\n"
                             + "</div>";
-                    session.setAttribute("alert", alert);
-                    response.sendRedirect("superb_admin.jsp");
                 } else {
-                    String alert = "<div class=\"alert alert-danger\">\n"
+                    alert = "<div class=\"alert alert-danger\">\n"
                             + "<button data-dismiss=\"alert\" class=\"close\">\n"
                             + "&times;\n"
                             + "</button>\n"
-                            + "<strong>Note! </strong><li> Use only  alphanumeric characters for your password (both numbers and letters ).</li>"
-                            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<li>Password must contain at least 8-20 characters, including UPPER/lowercase and number.</li>"
+                            + "<i class=\"fa fa-times-circle\"></i>\n"
+                            + "<strong>Failed!</strong> Advertiesment number '" + request.getParameter("item") + "' Try again.\n"
                             + "</div>";
-                    session.setAttribute("alert", alert);
-                    response.sendRedirect("change_log-in.jsp");
                 }
-            } else {
-                String res = lm.updateAdmin((String) session.getAttribute("Admin"), request.getParameter("usernamenew"), request.getParameter("password"));
-
-                if ("success".equals(res)) {
-                    session.setAttribute("loggin_state", "failed");
-                    String alert = "<div class=\"alert alert-success\">\n"
+                request.setAttribute("alert", alert);
+            } else if (("Remove".equals(action) && item != null)) {
+                result = ar.removeAd(item);
+                if (result == 1) {
+                    alert = "<div class=\"alert alert-success\">\n"
                             + "<button data-dismiss=\"alert\" class=\"close\">\n"
                             + "&times;\n"
                             + "</button>\n"
                             + "<i class=\"fa fa-check-circle\"></i>\n"
-                            + "<strong>Success !</strong> Login detils are upto date, Please log-in again.\n"
+                            + "<strong>Removed!</strong> Advertiesment number '" + request.getParameter("item") + "' .\n"
                             + "</div>";
-                    session.setAttribute("alert", alert);
-                    response.sendRedirect("superb_admin.jsp");
-                } else if ("unavailable".equals(res)) {
-                    String alert = "<div class=\"alert alert-danger\">\n"
-                            + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                            + "&times;\n"
-                            + "</button>\n"
-                            + "<strong>Note! </strong><li> User name isn't Available.</li>\n"
-                            + "</div>";
-                    session.setAttribute("alert", alert);
-                    response.sendRedirect("change_log-in.jsp");
                 } else {
-                    String alert = "<div class=\"alert alert-danger\">\n"
+                    alert = "<div class=\"alert alert-danger\">\n"
                             + "<button data-dismiss=\"alert\" class=\"close\">\n"
                             + "&times;\n"
                             + "</button>\n"
-                            + "<strong>Note! </strong><li> Use only  alphanumeric characters for your Username & password (both numbers and letters ).</li>"
-                            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<li>Password must contain at least 8-20 characters, including UPPER/lowercase and number.</li>"
-                            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<li>User name must contain at least 8-20 characters.</li>\n"
+                            + "<i class=\"fa fa-times-circle\"></i>\n"
+                            + "<strong>Failed!</strong> Advertiesment number '" + request.getParameter("item") + "' Try again.\n"
                             + "</div>";
-                    session.setAttribute("alert", alert);
-                    response.sendRedirect("change_log-in.jsp");
                 }
+                request.setAttribute("alert", alert);
 
             }
+            if (session.getAttribute("alert") != null && session.getAttribute("alert") == "success") {
+                alert = "<div class=\"alert alert-success\">\n"
+                        + "<button data-dismiss=\"alert\" class=\"close\">\n"
+                        + "&times;\n"
+                        + "</button>\n"
+                        + "<i class=\"fa fa-check-circle\"></i>\n"
+                        + "<strong>Sent !</strong>  .\n"
+                        + "</div>";
+                request.setAttribute("alert", alert);
+                session.setAttribute("alert", null);
+            }
+
+            ArrayList reviewAds = ar.reviewAds();
+            request.setAttribute("reviewAds", reviewAds);
+            RequestDispatcher rd = request.getRequestDispatcher("ads_review.jsp");
+            rd.forward(request, response);
         } else {
             response.sendRedirect("superb_admin.jsp");
         }
-
     }
 
     /**

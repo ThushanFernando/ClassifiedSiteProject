@@ -3,22 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminservlets;
+package adminservlets_XML;
 
-import classes.AdminClass_ReviewAds;
+import classes.AdminClass_Overviewstats;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author SithuDewmi
  */
-public class ModifyAds extends HttpServlet {
+public class CustomDataXML extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +38,10 @@ public class ModifyAds extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ModifyAds</title>");
+            out.println("<title>Servlet CustomDataXML</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ModifyAds at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CustomDataXML at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,7 +59,32 @@ public class ModifyAds extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/xml");
+        response.setCharacterEncoding("UTF-8");
+        String fd = request.getParameter("fd");
+        String sd = request.getParameter("sd");
+        String result;
+        AdminClass_Overviewstats ao = new AdminClass_Overviewstats();
+        boolean checkFD = ao.isValidDate(fd);
+        boolean checkSD = ao.isValidDate(sd);
+        
+         
+        if (checkFD == true && checkSD == true) {
+            ArrayList al=ao.pagevisitCustom(fd, sd);
+            DecimalFormat twoDForm = new DecimalFormat("#.#");
+             result="Site visit: "+(String)al.get(1) +" Percentage: "+twoDForm.format(Float.parseFloat((String) al.get(1)) / Float.parseFloat((String) al.get(0))* 100)+"%";
+        } else {
+             result = "Incorrect entry";
+        }
+
+        String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                + "<values>\n"
+                + "	<value>\n"
+                + "		<Result>" + result + "</Result>\n"
+                + "	</value>\n"
+                + "</values>";
+
+        response.getWriter().write(content);
     }
 
     /**
@@ -72,22 +98,7 @@ public class ModifyAds extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("loggin_state") == "success") {
-            AdminClass_ReviewAds ar = new AdminClass_ReviewAds();
-            String reciever = ar.getUserEmail(request.getParameter("to"));
-            String subject = request.getParameter("subject");
-            String content = request.getParameter("content").replace("************Type the reason here************", "");
-            content = content.replace("***************************************************", "");
-            String itemId = request.getParameter("itemname");
-            String reason = request.getParameter("reason");
-            int result = ar.modifyAds(itemId, reason);
-
-            session.setAttribute("alert", "success");
-            response.sendRedirect("ReviewAds");
-        } else {
-            response.sendRedirect("superb_admin.jsp");
-        }
+        processRequest(request, response);
     }
 
     /**

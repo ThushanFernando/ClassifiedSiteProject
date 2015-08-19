@@ -3,11 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminservlets;
+package adminservlets_XML;
 
+import classes.AdminClass_LoginMethods;
+import classes.AdminClass_NavbarTools;
+import classes.AdminClass_Overviewstats;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author SithuDewmi
  */
-public class MsgAll extends HttpServlet {
+public class CheckPassXML extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,7 +35,19 @@ public class MsgAll extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet CheckPassXML</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet CheckPassXML at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -46,13 +62,23 @@ public class MsgAll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("loggin_state") == "success") {
-            RequestDispatcher rd = request.getRequestDispatcher("admin/msg_all.jsp");
-            rd.forward(request, response);
-        } else {
-            response.sendRedirect("superb_admin.jsp");
+        response.setContentType("text/xml");
+        response.setCharacterEncoding("UTF-8");
+        AdminClass_LoginMethods lm = new AdminClass_LoginMethods();
+
+        boolean result = lm.checkPass(request.getParameter("username"), request.getParameter("password"));
+        if (result == true) {
+            HttpSession session = request.getSession();
+            session.setAttribute("login_change", "true");
         }
+        String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                + "<values>\n"
+                + "	<value>\n"
+                + "		<Result>" + result + "</Result>\n"
+                + "	</value>\n"
+                + "</values>";
+
+        response.getWriter().write(content);
     }
 
     /**

@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminservlets;
+package adminservlets_XML;
 
-import classes.AdminClass_NavbarTools;
 import classes.AdminClass_Overviewstats;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author SithuDewmi
  */
-public class DataCountsXML extends HttpServlet {
+public class CustomDataXMLAds extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +38,10 @@ public class DataCountsXML extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DataCountsXML</title>");            
+            out.println("<title>Servlet CustomDataXMLAds</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DataCountsXML at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CustomDataXMLAds at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,34 +59,32 @@ public class DataCountsXML extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       response.setContentType("test/xml");
-       response.setCharacterEncoding("UTF-8");
-        AdminClass_NavbarTools an=new AdminClass_NavbarTools();
-        AdminClass_Overviewstats ao=new AdminClass_Overviewstats();
+        response.setContentType("text/xml");
+        response.setCharacterEncoding("UTF-8");
+        String fd = request.getParameter("fd");
+        String sd = request.getParameter("sd");
+        String result;
+        AdminClass_Overviewstats ao = new AdminClass_Overviewstats();
+        boolean checkFD = ao.isValidDate(fd);
+        boolean checkSD = ao.isValidDate(sd);
         
-       String messageCount=String.valueOf(an.messageCount());
-       if("0".equals(messageCount)){
-           messageCount="";
-       }
-       String ads=ao.reviewAdsCount();
-       if("0".equals(ads)){
-           ads="";
-       }
-       String reports=ao.reportCount();
-       if("0".equals(reports)){
-           reports="";
-       }
-       String temp="111";
-       String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-               +"<values>\n"
-               +"   <msgcount>"+messageCount+"</msgcount>\n"
-               +"   <reviewads>"+ads+"</reviewads>\n"
-               +"   <topads>N/A</topads>\n"
-               +"   <viewreports>"+reports+"</viewreports>\n"
-               +"</values>\n";
-       
-               
-       response.getWriter().write(content);
+         
+        if (checkFD == true && checkSD == true) {
+            ArrayList al=ao.adsCustom(fd, sd);
+            DecimalFormat twoDForm = new DecimalFormat("#.#");
+             result="Ads: "+(String)al.get(1) +" Percentage: "+twoDForm.format(Float.parseFloat((String) al.get(1)) / Float.parseFloat((String) al.get(0))* 100)+"%";
+        } else {
+             result = "Incorrect entry";
+        }
+
+        String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                + "<values>\n"
+                + "	<value>\n"
+                + "		<Result>" + result + "</Result>\n"
+                + "	</value>\n"
+                + "</values>";
+
+        response.getWriter().write(content);
     }
 
     /**

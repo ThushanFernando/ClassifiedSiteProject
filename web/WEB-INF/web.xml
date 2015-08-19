@@ -6,19 +6,15 @@
     </servlet>
     <servlet>
         <servlet-name>MsgAll</servlet-name>
-        <servlet-class>adminservlets.MsgAll</servlet-class>
+        <servlet-class>adminservlets_messages.MsgAll</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MsgRead</servlet-name>
-        <servlet-class>adminservlets.MsgRead</servlet-class>
+        <servlet-class>adminservlets_messages.MsgRead</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MsgUnread</servlet-name>
-        <servlet-class>adminservlets.MsgUnread</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>MsgSpam</servlet-name>
-        <servlet-class>adminservlets.MsgSpam</servlet-class>
+        <servlet-class>adminservlets_messages.MsgUnread</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BlockedAds</servlet-name>
@@ -26,31 +22,31 @@
     </servlet>
     <servlet>
         <servlet-name>ReviewAds</servlet-name>
-        <servlet-class>adminservlets.ReviewAds</servlet-class>
+        <servlet-class>adminservlets_ads.ReviewAds</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ViewReports</servlet-name>
-        <servlet-class>adminservlets.ViewReports</servlet-class>
+        <servlet-class>adminservlets_reports.ViewReports</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DataCountsXML</servlet-name>
-        <servlet-class>adminservlets.DataCountsXML</servlet-class>
+        <servlet-class>adminservlets_XML.DataCountsXML</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MsgXML</servlet-name>
-        <servlet-class>adminservlets.MsgXML</servlet-class>
+        <servlet-class>adminservlets_XML.MsgXML</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CustomDataXML</servlet-name>
-        <servlet-class>adminservlets.CustomDataXML</servlet-class>
+        <servlet-class>adminservlets_XML.CustomDataXML</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CustomDataXMLUser</servlet-name>
-        <servlet-class>adminservlets.CustomDataXMLUser</servlet-class>
+        <servlet-class>adminservlets_XML.CustomDataXMLUser</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CustomDataXMLAds</servlet-name>
-        <servlet-class>adminservlets.CustomDataXMLAds</servlet-class>
+        <servlet-class>adminservlets_XML.CustomDataXMLAds</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SearchResult</servlet-name>
@@ -58,15 +54,15 @@
     </servlet>
     <servlet>
         <servlet-name>CheckPassXML</servlet-name>
-        <servlet-class>adminservlets.CheckPassXML</servlet-class>
+        <servlet-class>adminservlets_XML.CheckPassXML</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ConversationXML</servlet-name>
-        <servlet-class>adminservlets.ConversationXML</servlet-class>
+        <servlet-class>adminservlets_XML.ConversationXML</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DetailedViewXML</servlet-name>
-        <servlet-class>adminservlets.DetailedViewXML</servlet-class>
+        <servlet-class>adminservlets_XML.DetailedViewXML</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdReviewAction</servlet-name>
@@ -74,7 +70,7 @@
     </servlet>
     <servlet>
         <servlet-name>ModifyAds</servlet-name>
-        <servlet-class>adminservlets.ModifyAds</servlet-class>
+        <servlet-class>adminservlets_ads.ModifyAds</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ItemReport</servlet-name>
@@ -90,27 +86,59 @@
     </servlet>
     <servlet>
         <servlet-name>UpdateInterfaces</servlet-name>
-        <servlet-class>adminservlets.UpdateInterfaces</servlet-class>
+        <servlet-class>adminservlets_interfaces.UpdateInterfaces</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GetSliderItems</servlet-name>
-        <servlet-class>adminservlets.GetSliderItems</servlet-class>
+        <servlet-class>adminservlets_interfaces.GetSliderItems</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SetSliderItems</servlet-name>
-        <servlet-class>adminservlets.SetSliderItems</servlet-class>
+        <servlet-class>adminservlets_interfaces.SetSliderItems</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CheckLogin</servlet-name>
-        <servlet-class>adminservlets.CheckLogin</servlet-class>
+        <servlet-class>adminservlets_login.CheckLogin</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CheckLogout</servlet-name>
-        <servlet-class>adminservlets.CheckLogout</servlet-class>
+        <servlet-class>adminservlets_login.CheckLogout</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginUpdate</servlet-name>
-        <servlet-class>adminservlets.LoginUpdate</servlet-class>
+        <servlet-class>adminservlets_login.LoginUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginChange</servlet-name>
+        <servlet-class>adminservlets_login.LoginChange</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdBlocked_ViewReports</servlet-name>
+        <servlet-class>adminservlets_reports.AdBlocked_ViewReports</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserBlocked_ViewReports</servlet-name>
+        <servlet-class>adminservlets_reports.UserBlocked_ViewReports</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Removed_ViewReports</servlet-name>
+        <servlet-class>adminservlets_reports.Removed_ViewReports</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MessageBlocked_ViewReports</servlet-name>
+        <servlet-class>adminservlets_reports.MessageBlocked_ViewReports</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MessageUBlocked_ViewReports</servlet-name>
+        <servlet-class>adminservlets_reports.MessageUBlocked_ViewReports</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InquiryBlocked_ViewReports</servlet-name>
+        <servlet-class>adminservlets_reports.InquiryBlocked_ViewReports</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InquiryUBlocked_ViewReports</servlet-name>
+        <servlet-class>adminservlets_reports.InquiryUBlocked_ViewReports</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
@@ -127,10 +155,6 @@
     <servlet-mapping>
         <servlet-name>MsgUnread</servlet-name>
         <url-pattern>/MsgUnread</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>MsgSpam</servlet-name>
-        <url-pattern>/MsgSpam</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BlockedAds</servlet-name>
@@ -223,6 +247,38 @@
     <servlet-mapping>
         <servlet-name>LoginUpdate</servlet-name>
         <url-pattern>/LoginUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginChange</servlet-name>
+        <url-pattern>/LoginChange</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdBlocked_ViewReports</servlet-name>
+        <url-pattern>/AdBlocked_ViewReports</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserBlocked_ViewReports</servlet-name>
+        <url-pattern>/UserBlocked_ViewReports</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Removed_ViewReports</servlet-name>
+        <url-pattern>/Removed_ViewReports</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MessageBlocked_ViewReports</servlet-name>
+        <url-pattern>/MessageBlocked_ViewReports</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MessageUBlocked_ViewReports</servlet-name>
+        <url-pattern>/MessageUBlocked_ViewReports</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InquiryBlocked_ViewReports</servlet-name>
+        <url-pattern>/InquiryBlocked_ViewReports</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InquiryUBlocked_ViewReports</servlet-name>
+        <url-pattern>/InquiryUBlocked_ViewReports</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

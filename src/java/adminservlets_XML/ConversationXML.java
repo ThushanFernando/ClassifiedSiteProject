@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminservlets;
+package adminservlets_XML;
 
 import classes.AdminClass_Message;
 import classes.AdminClass_Overviewstats;

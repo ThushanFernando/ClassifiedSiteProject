@@ -3,28 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminservlets;
+package adminservlets_login;
 
-import classes.AdminClass_SliderItems;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 /**
  *
  * @author SithuDewmi
  */
-@WebServlet("/uploadServlet")
-@MultipartConfig(maxFileSize = 16177215)    // upload file's size up to 16MB
-public class SetSliderItems extends HttpServlet {
+public class CheckLogout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +36,10 @@ public class SetSliderItems extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SetSliderItems</title>");
+            out.println("<title>Servlet CheckLogout</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SetSliderItems at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CheckLogout at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,7 +57,11 @@ public class SetSliderItems extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request, response);
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        response.sendRedirect("superb_admin.jsp");
     }
 
     /**
@@ -78,28 +75,7 @@ public class SetSliderItems extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("loggin_state") == "success") {
-            AdminClass_SliderItems as = new AdminClass_SliderItems();
-            int result = 0;
-            InputStream inputStream = null; // input stream of the upload file
-            // obtains the upload file part in this multipart request
-            Part filePart = request.getPart("slider_item");
-            String itemId = request.getParameter("slider_id");
-            if (filePart != null) {
-                // obtains input stream of the upload file
-                inputStream = filePart.getInputStream();
-                result = as.setSlider(inputStream, itemId);
-            }
-            if (result == 1) {
-                session.setAttribute("setSlider", "success");
-            } else {
-                session.setAttribute("setSlider", "failed");
-            }
-            response.sendRedirect("UpdateInterfaces");
-        } else {
-            response.sendRedirect("superb_admin.jsp");
-        }
+        processRequest(request, response);
     }
 
     /**

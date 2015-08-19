@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminservlets;
+package adminservlets_reports;
 
-import classes.AdminClass_ReviewAds;
+import classes.AdminClass_BlockedMessages;
+import classes.AdminClass_ReportedInquiries;
+import classes.AdminClass_ReportedItems;
+import classes.AdminClass_ReportedMessages;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -20,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author SithuDewmi
  */
-public class ReviewAds extends HttpServlet {
+public class MessageBlocked_ViewReports extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +42,10 @@ public class ReviewAds extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ReviewAds</title>");
+            out.println("<title>Servlet MessageBlocked_ViewReports</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ReviewAds at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet MessageBlocked_ViewReports at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,7 +64,6 @@ public class ReviewAds extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);
-
     }
 
     /**
@@ -77,68 +79,66 @@ public class ReviewAds extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session.getAttribute("loggin_state") == "success") {
-            AdminClass_ReviewAds ar = new AdminClass_ReviewAds();
-            String item = request.getParameter("item");
-            String action = request.getParameter("action");
-            int result = 0;
-            String alert = null;
-            if ("Approve".equals(action) && item != null) {
-                result = ar.approveAd(item);
-                if (result == 1) {
-                    alert = "<div class=\"alert alert-success\">\n"
+            AdminClass_ReportedItems art = new AdminClass_ReportedItems();
+            AdminClass_ReportedMessages arm = new AdminClass_ReportedMessages();
+            AdminClass_ReportedInquiries ari = new AdminClass_ReportedInquiries();
+            
+            if (request.getParameter("toBM") != null && request.getParameter("messageBM") != null) {
+                AdminClass_BlockedMessages ab = new AdminClass_BlockedMessages();
+                String reciever = art.getUserEmail(request.getParameter("toBM"));
+                String subject = request.getParameter("subjectBM");
+                String content = request.getParameter("contentBM");
+                int result = ab.blockMessage(request.getParameter("messageBM"));
+                int state = arm.updateViewState(request.getParameter("messageBM"));
+
+                if (result == 1 && state == 1) {
+                    String alert = "<div class=\"alert alert-success\">\n"
                             + "<button data-dismiss=\"alert\" class=\"close\">\n"
                             + "&times;\n"
                             + "</button>\n"
                             + "<i class=\"fa fa-check-circle\"></i>\n"
-                            + "<strong>Approved!</strong> Advertiesment number '" + request.getParameter("item") + "' .\n"
+                            + "<strong>Blocked !</strong>  message id " + request.getParameter("messageBM") + "  .\n"
                             + "</div>";
+                    request.setAttribute("alert", alert);
                 } else {
-                    alert = "<div class=\"alert alert-danger\">\n"
+                    String alert = "<div class=\"alert alert-danger\">\n"
                             + "<button data-dismiss=\"alert\" class=\"close\">\n"
                             + "&times;\n"
                             + "</button>\n"
                             + "<i class=\"fa fa-times-circle\"></i>\n"
-                            + "<strong>Failed!</strong> Advertiesment number '" + request.getParameter("item") + "' Try again.\n"
+                            + "<strong>Failed!</strong> message id '" + request.getParameter("messageBM") + "' Try again.\n"
                             + "</div>";
+                    request.setAttribute("alert", alert);
                 }
-                request.setAttribute("alert", alert);
-            } else if (("Remove".equals(action) && item != null)) {
-                result = ar.removeAd(item);
-                if (result == 1) {
-                    alert = "<div class=\"alert alert-success\">\n"
-                            + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                            + "&times;\n"
-                            + "</button>\n"
-                            + "<i class=\"fa fa-check-circle\"></i>\n"
-                            + "<strong>Removed!</strong> Advertiesment number '" + request.getParameter("item") + "' .\n"
-                            + "</div>";
-                } else {
-                    alert = "<div class=\"alert alert-danger\">\n"
-                            + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                            + "&times;\n"
-                            + "</button>\n"
-                            + "<i class=\"fa fa-times-circle\"></i>\n"
-                            + "<strong>Failed!</strong> Advertiesment number '" + request.getParameter("item") + "' Try again.\n"
-                            + "</div>";
-                }
-                request.setAttribute("alert", alert);
 
             }
-            if (session.getAttribute("alert") != null && session.getAttribute("alert") == "success") {
-                alert = "<div class=\"alert alert-success\">\n"
-                        + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                        + "&times;\n"
-                        + "</button>\n"
-                        + "<i class=\"fa fa-check-circle\"></i>\n"
-                        + "<strong>Sent !</strong>  .\n"
-                        + "</div>";
-                request.setAttribute("alert", alert);
-                session.setAttribute("alert", null);
-            }
+            
+            
+            
 
-            ArrayList reviewAds = ar.reviewAds();
-            request.setAttribute("reviewAds", reviewAds);
-            RequestDispatcher rd = request.getRequestDispatcher("ads_review.jsp");
+            String reportCount = String.valueOf(art.getItemReportCount());
+            if ("0".equals(reportCount)) {
+                reportCount = "";
+            }
+            request.setAttribute("reportCount", reportCount);
+            String message_report_count = String.valueOf(arm.getMessageReportCount());
+            if ("0".equals(message_report_count)) {
+                message_report_count = "";
+            }
+            request.setAttribute("message_report_count", message_report_count);
+            String Inquiry_report_count = String.valueOf(ari.getInquiryReportCount());
+            if ("0".equals(Inquiry_report_count)) {
+                Inquiry_report_count = "";
+            }
+            request.setAttribute("Inquiry_report_count", Inquiry_report_count);
+
+            ArrayList ReportedItems = art.getItemReports();
+            request.setAttribute("ReportedItems", ReportedItems);
+            ArrayList ReportedMessages = arm.getMessageReports();
+            request.setAttribute("ReportedMessages", ReportedMessages);
+            ArrayList ReportedInquiries = ari.getInquiryReports();
+            request.setAttribute("ReportedInquiries", ReportedInquiries);
+            RequestDispatcher rd = request.getRequestDispatcher("report_view.jsp");
             rd.forward(request, response);
         } else {
             response.sendRedirect("superb_admin.jsp");

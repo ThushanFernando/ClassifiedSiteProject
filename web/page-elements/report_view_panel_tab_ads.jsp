@@ -122,7 +122,7 @@
                                             <a role="menuitem" tabindex="-1" href="#" onclick="document.getElementById('RR<%=received.getReport_id()%>').submit()">
                                                 <i class="fa clip-remove"></i> Remove Report
                                             </a>
-                                            <form action="ViewReports" method="POST" id="RR<%=received.getReport_id()%>">
+                                            <form action="Removed_ViewReports" method="POST" id="RR<%=received.getReport_id()%>">
                                                 <input type="hidden" name="removeReport" value="<%=received.getReport_id()%>">
                                             </form>
                                         </li>

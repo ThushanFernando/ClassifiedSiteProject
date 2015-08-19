@@ -3,25 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminservlets;
+package adminservlets_reports;
 
-import classes.AdminClass_LoginMethods;
-import classes.AdminClass_NavbarTools;
-import classes.AdminClass_Overviewstats;
+import classes.AdminClass_BlockedInquiries;
+import classes.AdminClass_BlockedItems;
+import classes.AdminClass_BlockedMessages;
+import classes.AdminClass_BlockedUsers;
+import classes.AdminClass_ReportedInquiries;
+import classes.AdminClass_ReportedItems;
+import classes.AdminClass_ReportedMessages;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author SithuDewmi
  */
-public class CheckPassXML extends HttpServlet {
+public class ViewReports extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +45,10 @@ public class CheckPassXML extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CheckPassXML</title>");            
+            out.println("<title>Servlet ViewReports</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CheckPassXML at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ViewReports at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,19 +66,7 @@ public class CheckPassXML extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/xml");
-        response.setCharacterEncoding("UTF-8");
-        AdminClass_LoginMethods lm=new AdminClass_LoginMethods();
-        
-        boolean result=lm.checkPass(request.getParameter("username"), request.getParameter("password"));
-        String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                + "<values>\n"
-                + "	<value>\n"
-                + "		<Result>" + result + "</Result>\n"
-                + "	</value>\n"
-                + "</values>";
-
-        response.getWriter().write(content);
+        doPost(request, response);
     }
 
     /**
@@ -87,7 +80,39 @@ public class CheckPassXML extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        if (session.getAttribute("loggin_state") == "success") {
+            AdminClass_ReportedItems art = new AdminClass_ReportedItems();
+            AdminClass_ReportedMessages arm = new AdminClass_ReportedMessages();
+            AdminClass_ReportedInquiries ari = new AdminClass_ReportedInquiries();
+
+            String reportCount = String.valueOf(art.getItemReportCount());
+            if ("0".equals(reportCount)) {
+                reportCount = "";
+            }
+            request.setAttribute("reportCount", reportCount);
+            String message_report_count = String.valueOf(arm.getMessageReportCount());
+            if ("0".equals(message_report_count)) {
+                message_report_count = "";
+            }
+            request.setAttribute("message_report_count", message_report_count);
+            String Inquiry_report_count = String.valueOf(ari.getInquiryReportCount());
+            if ("0".equals(Inquiry_report_count)) {
+                Inquiry_report_count = "";
+            }
+            request.setAttribute("Inquiry_report_count", Inquiry_report_count);
+
+            ArrayList ReportedItems = art.getItemReports();
+            request.setAttribute("ReportedItems", ReportedItems);
+            ArrayList ReportedMessages = arm.getMessageReports();
+            request.setAttribute("ReportedMessages", ReportedMessages);
+            ArrayList ReportedInquiries = ari.getInquiryReports();
+            request.setAttribute("ReportedInquiries", ReportedInquiries);
+            RequestDispatcher rd = request.getRequestDispatcher("report_view.jsp");
+            rd.forward(request, response);
+        } else {
+            response.sendRedirect("superb_admin.jsp");
+        }
     }
 
     /**

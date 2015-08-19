@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminservlets;
+package adminservlets_login;
 
-import classes.AdminClass_SliderItems;
-import classes.DbClass;
+import classes.AdminClass_LoginMethods;
+import classes.AdminClass_NavbarTools;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author SithuDewmi
  */
-public class GetSliderItems extends HttpServlet {
+public class CheckLogin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +38,10 @@ public class GetSliderItems extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet GetSliderItems</title>");
+            out.println("<title>Servlet CheckLogin</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet GetSliderItems at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CheckLogin at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,21 +59,7 @@ public class GetSliderItems extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("loggin_state") == "success") {
-            int img_id = Integer.parseInt(request.getParameter("slider_id"));
-            OutputStream oImage;
-            AdminClass_SliderItems as = new AdminClass_SliderItems();
-            byte barray[] = as.getSlider(img_id);
-            response.setContentType("image/gif");
-            oImage = response.getOutputStream();
-            oImage.write(barray);
-            oImage.flush();
-            oImage.close();
-        } else {
-            response.sendRedirect("superb_admin.jsp");
-        }
-
+        processRequest(request, response);
     }
 
     /**
@@ -90,7 +73,25 @@ public class GetSliderItems extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session=request.getSession();
+        AdminClass_LoginMethods lm=new AdminClass_LoginMethods();
+         boolean result=lm.checkPass(request.getParameter("uname"), request.getParameter("pass"));
+         if(result==true){
+             session.setAttribute("loggin_state", "success");
+             session.setAttribute("Admin", request.getParameter("uname"));
+             response.sendRedirect("Dashboard");
+         }else{
+             session.setAttribute("loggin_state", "failed");
+             String alert = "<div class=\"errorHandler alert alert-danger \">\n"
+                        + "<button data-dismiss=\"alert\" class=\"close\">\n"
+                        + "&times;\n"
+                        + "</button>\n"
+                        + "<strong>Error !</strong> Please check your log-in details.\n"
+                        + "</div>";
+             session.setAttribute("alert", alert);
+             response.sendRedirect("superb_admin.jsp");
+         }
+         
     }
 
     /**

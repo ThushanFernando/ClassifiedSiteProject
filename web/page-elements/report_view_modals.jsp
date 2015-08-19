@@ -77,7 +77,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-14">
-                        <form action="ViewReports" method="POST" role="form" class="smart-wizard form-horizontal" id="">
+                        <form action="AdBlocked_ViewReports" method="POST" role="form" class="smart-wizard form-horizontal" id="">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">
                                     From: <span class="symbol required"></span>
@@ -142,7 +142,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-14">
-                        <form action="ViewReports" method="POST" role="form" class="smart-wizard form-horizontal" id="">
+                        <form action="UserBlocked_ViewReports" method="POST" role="form" class="smart-wizard form-horizontal" id="">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">
                                     From: <span class="symbol required"></span>
@@ -257,7 +257,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-14">
-                        <form action="ViewReports?tabId=panel_tab_Message" method="POST" role="form" class="smart-wizard form-horizontal" id="">
+                        <form action="MessageBlocked_ViewReports?tabId=panel_tab_Message" method="POST" role="form" class="smart-wizard form-horizontal" id="">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">
                                     From: <span class="symbol required"></span>
@@ -320,7 +320,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-14">
-                        <form action="ViewReports?tabId=panel_tab_Message" method="POST" role="form" class="smart-wizard form-horizontal" id="">
+                        <form action="MessageUBlocked_ViewReports?tabId=panel_tab_Message" method="POST" role="form" class="smart-wizard form-horizontal" id="">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">
                                     From: <span class="symbol required"></span>
@@ -467,7 +467,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-14">
-                        <form action="ViewReports?tabId=panel_tab_Inquiry" method="POST" role="form" class="smart-wizard form-horizontal" id="">
+                        <form action="InquiryBlocked_ViewReports?tabId=panel_tab_Inquiry" method="POST" role="form" class="smart-wizard form-horizontal" id="">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">
                                     From: <span class="symbol required"></span>
@@ -531,7 +531,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-14">
-                        <form action="ViewReports?tabId=panel_tab_Inquiry" method="POST" role="form" class="smart-wizard form-horizontal" id="">
+                        <form action="InquiryUBlocked_ViewReports?tabId=panel_tab_Inquiry" method="POST" role="form" class="smart-wizard form-horizontal" id="">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">
                                     From: <span class="symbol required"></span>

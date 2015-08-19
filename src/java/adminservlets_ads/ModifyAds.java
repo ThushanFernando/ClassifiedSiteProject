@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminservlets;
+package adminservlets_ads;
 
+import classes.AdminClass_ReviewAds;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author SithuDewmi
  */
-public class UpdateInterfaces extends HttpServlet {
+public class ModifyAds extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +37,10 @@ public class UpdateInterfaces extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UpdateInterfaces</title>");
+            out.println("<title>Servlet ModifyAds</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UpdateInterfaces at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ModifyAds at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,7 +58,7 @@ public class UpdateInterfaces extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -74,30 +74,17 @@ public class UpdateInterfaces extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session.getAttribute("loggin_state") == "success") {
-            if (session.getAttribute("setSlider") == "success") {
-                String alert = "<div class=\"alert alert-success\">\n"
-                        + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                        + "&times;\n"
-                        + "</button>\n"
-                        + "<i class=\"fa fa-check-circle\"></i>\n"
-                        + "<strong>Updated !</strong> Slider item successfully.\n"
-                        + "</div>";
-                session.setAttribute("setSlider", null);
-                request.setAttribute("alert", alert);
-            } else if (session.getAttribute("setSlider") == "failed") {
-                String alert = "<div class=\"alert alert-danger\">\n"
-                        + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                        + "&times;\n"
-                        + "</button>\n"
-                        + "<i class=\"fa fa-times-circle\"></i>\n"
-                        + "<strong>Failed!</strong> Slider item updating.\n"
-                        + "</div>";
-                session.setAttribute("setSlider", null);
-                request.setAttribute("alert", alert);
+            AdminClass_ReviewAds ar = new AdminClass_ReviewAds();
+            String reciever = ar.getUserEmail(request.getParameter("to"));
+            String subject = request.getParameter("subject");
+            String content = request.getParameter("content").replace("************Type the reason here************", "");
+            content = content.replace("***************************************************", "");
+            String itemId = request.getParameter("itemname");
+            String reason = request.getParameter("reason");
+            int result = ar.modifyAds(itemId, reason);
 
-            }
-            RequestDispatcher rd = request.getRequestDispatcher("interface_updates.jsp");
-            rd.forward(request, response);
+            session.setAttribute("alert", "success");
+            response.sendRedirect("ReviewAds");
         } else {
             response.sendRedirect("superb_admin.jsp");
         }

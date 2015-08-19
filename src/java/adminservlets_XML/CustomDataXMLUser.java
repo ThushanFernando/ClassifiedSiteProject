@@ -3,23 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminservlets;
+package adminservlets_XML;
 
-import classes.AdminClass_LoginMethods;
-import classes.AdminClass_NavbarTools;
+import classes.AdminClass_Overviewstats;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author SithuDewmi
  */
-public class CheckLogin extends HttpServlet {
+public class CustomDataXMLUser extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +38,10 @@ public class CheckLogin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CheckLogin</title>");            
+            out.println("<title>Servlet CustomDataXMLUser</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CheckLogin at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CustomDataXMLUser at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,7 +59,32 @@ public class CheckLogin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/xml");
+        response.setCharacterEncoding("UTF-8");
+        String fd = request.getParameter("fd");
+        String sd = request.getParameter("sd");
+        String result;
+        AdminClass_Overviewstats ao = new AdminClass_Overviewstats();
+        boolean checkFD = ao.isValidDate(fd);
+        boolean checkSD = ao.isValidDate(sd);
+        
+         
+        if (checkFD == true && checkSD == true) {
+            ArrayList al=ao.usersCustom(fd, sd);
+            DecimalFormat twoDForm = new DecimalFormat("#.#");
+             result="Users: "+(String)al.get(1) +" Percentage: "+twoDForm.format(Float.parseFloat((String) al.get(1)) / Float.parseFloat((String) al.get(0))* 100)+"%";
+        } else {
+             result = "Incorrect entry";
+        }
+
+        String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                + "<values>\n"
+                + "	<value>\n"
+                + "		<Result>" + result + "</Result>\n"
+                + "	</value>\n"
+                + "</values>";
+
+        response.getWriter().write(content);
     }
 
     /**
@@ -73,25 +98,7 @@ public class CheckLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session=request.getSession();
-        AdminClass_LoginMethods lm=new AdminClass_LoginMethods();
-         boolean result=lm.checkPass(request.getParameter("uname"), request.getParameter("pass"));
-         if(result==true){
-             session.setAttribute("loggin_state", "success");
-             session.setAttribute("Admin", request.getParameter("uname"));
-             response.sendRedirect("Dashboard");
-         }else{
-             session.setAttribute("loggin_state", "failed");
-             String alert = "<div class=\"errorHandler alert alert-danger \">\n"
-                        + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                        + "&times;\n"
-                        + "</button>\n"
-                        + "<strong>Error !</strong> Please check your log-in details.\n"
-                        + "</div>";
-             session.setAttribute("alert", alert);
-             response.sendRedirect("superb_admin.jsp");
-         }
-         
+        processRequest(request, response);
     }
 
     /**

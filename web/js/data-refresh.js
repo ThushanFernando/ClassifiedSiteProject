@@ -207,7 +207,7 @@ function login_check() {
 
                     var result = $(this).find('Result').text();
                     if (result === "true") {
-                        window.location.replace("change_log-in.jsp");
+                        window.location.replace("LoginChange");
                     } else {
                         $("#CheckPassXML").append("<div class=\"alert alert-danger\">\n"
                                 + "<button data-dismiss=\"alert\" class=\"close\">\n"

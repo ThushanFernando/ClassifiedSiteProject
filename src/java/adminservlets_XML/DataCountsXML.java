@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminservlets;
+package adminservlets_XML;
 
+import classes.AdminClass_NavbarTools;
+import classes.AdminClass_Overviewstats;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -16,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author SithuDewmi
  */
-public class MsgRead extends HttpServlet {
+public class DataCountsXML extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +37,10 @@ public class MsgRead extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet MsgRead</title>");            
+            out.println("<title>Servlet DataCountsXML</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet MsgRead at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DataCountsXML at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,7 +58,34 @@ public class MsgRead extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       response.setContentType("test/xml");
+       response.setCharacterEncoding("UTF-8");
+        AdminClass_NavbarTools an=new AdminClass_NavbarTools();
+        AdminClass_Overviewstats ao=new AdminClass_Overviewstats();
+        
+       String messageCount=String.valueOf(an.messageCount());
+       if("0".equals(messageCount)){
+           messageCount="";
+       }
+       String ads=ao.reviewAdsCount();
+       if("0".equals(ads)){
+           ads="";
+       }
+       String reports=ao.reportCount();
+       if("0".equals(reports)){
+           reports="";
+       }
+       String temp="111";
+       String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+               +"<values>\n"
+               +"   <msgcount>"+messageCount+"</msgcount>\n"
+               +"   <reviewads>"+ads+"</reviewads>\n"
+               +"   <topads>N/A</topads>\n"
+               +"   <viewreports>"+reports+"</viewreports>\n"
+               +"</values>\n";
+       
+               
+       response.getWriter().write(content);
     }
 
     /**

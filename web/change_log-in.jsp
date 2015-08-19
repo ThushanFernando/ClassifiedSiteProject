@@ -51,6 +51,10 @@
         <%
             if (session.getAttribute("loggin_state") != "success") {
                 response.sendRedirect("superb_admin.jsp");
+            }else if( session.getAttribute("login_change") != "true" ){
+                response.sendRedirect("Dashboard");
+            }else{
+            session.setAttribute("login_change", null);
             }
         %>
         <!-- start: HEADER -->

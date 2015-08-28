@@ -48,6 +48,9 @@
     <!-- end: HEAD -->
     <!-- start: BODY -->
     <body>
+        <div class="loader">
+            <jsp:include page="page-elements/javascript_required.jsp"/>
+        </div>
         <%
             if (session.getAttribute("loggin_state") != "success") {
                 response.sendRedirect("superb_admin.jsp");
@@ -292,6 +295,7 @@
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
         <script>
             jQuery(document).ready(function () {
+                $(".loader").fadeOut("slow");
                 refresh_data();
                 window.setInterval(function () {
                     refresh_data();

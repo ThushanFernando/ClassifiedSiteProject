@@ -63,7 +63,7 @@ public class MsgXML extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         AdminClass_Message am = new AdminClass_Message();
         
-        ArrayList al = am.allMessages();
+        ArrayList al = am.msg();
         Iterator itr = al.iterator();
         AdminClass_Message received = null;
         String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -72,7 +72,7 @@ public class MsgXML extends HttpServlet {
             Object a = itr.next();
             received = (AdminClass_Message) a;
             if(request.getParameter("sid")==null || "".equals(request.getParameter("sid")) ){
-            String time = am.timeDiff(received.getTimeStamp());
+            String time = received.getTimeStamp();
             if ("0".equals(received.getState())) {
                 content = content
                         + "	<value>\n"

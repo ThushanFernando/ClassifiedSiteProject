@@ -53,10 +53,14 @@
         <!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
         <link rel="shortcut icon" href="favicon.ico" />
         <script type="text/javascript" src="js/data-refresh.js"></script>
+
     </head>
     <!-- end: HEAD -->
     <!-- start: BODY -->
-    <body onload="">
+    <body>
+        <div class="loader">
+            <jsp:include page="page-elements/javascript_required.jsp"/>
+        </div>
         <%
             if (session.getAttribute("loggin_state") != "success") {
                 response.sendRedirect("superb_admin.jsp");
@@ -1051,8 +1055,11 @@
 
 
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+
         <script>
             jQuery(document).ready(function () {
+
+                $(".loader").fadeOut("slow");
                 refresh_data();
                 window.setInterval(function () {
                     refresh_data();

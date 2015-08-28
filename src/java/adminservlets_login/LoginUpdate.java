@@ -8,6 +8,7 @@ package adminservlets_login;
 import classes.AdminClass_LoginMethods;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -47,7 +48,12 @@ public class LoginUpdate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request, response);
+        Enumeration<String> parameterNames = request.getParameterNames();
+        if (parameterNames.hasMoreElements()) {
+            processRequest(request, response);
+        } else {
+            doPost(request, response);
+        }
     }
 
     /**
@@ -83,14 +89,10 @@ public class LoginUpdate extends HttpServlet {
                     session.setAttribute("alert", alert);
                     response.sendRedirect("superb_admin.jsp");
                 } else {
-                    String alert = "<div class=\"alert alert-danger\">\n"
-                            + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                            + "&times;\n"
-                            + "</button>\n"
-                            + "<strong>Note! </strong><li> Use only  alphanumeric characters for your password (both numbers and letters ).</li>"
-                            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<li>Password must contain at least 8-20 characters, including UPPER/lowercase and number.</li>"
-                            + "</div>";
+                    String alert = "<button class=\"btn btn-red\"><i  class=\"glyphicon glyphicon-remove-circle\"></i></button><strong> Note! </strong><br><li> Use only  alphanumeric characters for your password (both numbers and letters ).</li>"
+                            + "<br><li>Password must contain at least 8-20 characters, including UPPER/lowercase and number.</li>";
                     session.setAttribute("alert", alert);
+                    session.setAttribute("login_change", "true");
                     response.sendRedirect("change_log-in.jsp");
                 }
             } else {
@@ -108,24 +110,18 @@ public class LoginUpdate extends HttpServlet {
                     session.setAttribute("alert", alert);
                     response.sendRedirect("superb_admin.jsp");
                 } else if ("unavailable".equals(res)) {
-                    String alert = "<div class=\"alert alert-danger\">\n"
-                            + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                            + "&times;\n"
-                            + "</button>\n"
-                            + "<strong>Note! </strong><li> User name isn't Available.</li>\n"
-                            + "</div>";
+                    String alert = "<button class=\"btn btn-red\"><i  class=\"glyphicon glyphicon-remove-circle\"></i></button><strong> Failed! </strong><li>User name is not available.</li>";
+
                     session.setAttribute("alert", alert);
+                    session.setAttribute("login_change", "true");
                     response.sendRedirect("change_log-in.jsp");
                 } else {
-                    String alert = "<div class=\"alert alert-danger\">\n"
-                            + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                            + "&times;\n"
-                            + "</button>\n"
-                            + "<strong>Note! </strong><li> Use only  alphanumeric characters for your Username & password (both numbers and letters ).</li>"
-                            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<li>Password must contain at least 8-20 characters, including UPPER/lowercase and number.</li>"
-                            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<li>User name must contain at least 8-20 characters.</li>\n"
-                            + "</div>";
+                    String alert = "<button class=\"btn btn-red\"><i  class=\"glyphicon glyphicon-remove-circle\"></i></button><strong> Note! </strong><br><li> Use only  alphanumeric characters for your Username & password (both numbers and letters ).</li>"
+                            + "<br><li>Password must contain at least 8-20 characters, including UPPER/lowercase and number.</li>"
+                            + "<br><li>User name must contain at least 8-20 characters.</li>";
+
                     session.setAttribute("alert", alert);
+                    session.setAttribute("login_change", "true");
                     response.sendRedirect("change_log-in.jsp");
                 }
 

@@ -15,6 +15,7 @@ import classes.AdminClass_ReportedMessages;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -66,7 +67,12 @@ public class ViewReports extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request, response);
+        Enumeration<String> parameterNames = request.getParameterNames();
+        if (parameterNames.hasMoreElements()) {
+            processRequest(request, response);
+        } else {
+            doPost(request, response);
+        }
     }
 
     /**

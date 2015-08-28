@@ -3,28 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminservlets_interfaces;
+package adminservlets_ads;
 
-import classes.AdminClass_SliderItems;
+import classes.AdminClass_ReviewAds;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 /**
  *
  * @author SithuDewmi
  */
-@WebServlet("/uploadServlet")
-@MultipartConfig(maxFileSize = 16177215)    // upload file's size up to 16MB
-public class SetSliderItems extends HttpServlet {
+public class Apr_ReviewAds extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +40,10 @@ public class SetSliderItems extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SetSliderItems</title>");
+            out.println("<title>Servlet Apr_ReviewAds</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SetSliderItems at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Apr_ReviewAds at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,7 +61,12 @@ public class SetSliderItems extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request, response);
+        Enumeration<String> parameterNames = request.getParameterNames();
+        if (parameterNames.hasMoreElements()) {
+            processRequest(request, response);
+        } else {
+            doPost(request, response);
+        }
     }
 
     /**
@@ -80,23 +82,29 @@ public class SetSliderItems extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session.getAttribute("loggin_state") == "success") {
-            AdminClass_SliderItems as = new AdminClass_SliderItems();
-            int result = 0;
-            InputStream inputStream = null; // input stream of the upload file
-            // obtains the upload file part in this multipart request
-            Part filePart = request.getPart("slider_item");
-            String itemId = request.getParameter("slider_id");
-            if (filePart != null) {
-                // obtains input stream of the upload file
-                inputStream = filePart.getInputStream();
-                result = as.setSlider(inputStream, itemId);
+            AdminClass_ReviewAds ar = new AdminClass_ReviewAds();
+
+            String action = request.getParameter("action");
+            String item = request.getParameter("item");
+            String alert;
+            int result;
+            if ("Approve".equals(action) && item != null) {
+
+                result = ar.approveAd(item);
+                if (result == 1) {
+                    alert = "<button class=\"btn btn-green\"><i  class=\"glyphicon glyphicon-ok-sign\"></i></button><br><strong>Approved!</strong> Advertiesment number "+request.getParameter("item")+""; 
+                            
+                } else {
+                    alert = "<button class=\"btn btn-red\"><i  class=\"glyphicon glyphicon-remove-circle\"></i></button><br><strong>Failed!</strong> Advertiesment number " + request.getParameter("item") + " Try again.";
+                            
+                }
+                request.setAttribute("alert", alert);
             }
-            if (result == 1) {
-                session.setAttribute("setSlider", "success");
-            } else {
-                session.setAttribute("setSlider", "failed");
-            }
-            response.sendRedirect("UpdateInterfaces");
+
+            ArrayList reviewAds = ar.reviewAds();
+            request.setAttribute("reviewAds", reviewAds);
+            RequestDispatcher rd = request.getRequestDispatcher("ads_review.jsp");
+            rd.forward(request, response);
         } else {
             response.sendRedirect("superb_admin.jsp");
         }

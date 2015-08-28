@@ -213,6 +213,19 @@ public class AdminClass_ReportedInquiries {
         }
         return al;
     }
+      
+      public int updateViewState(String id){
+        int result =0;
+        try {
+            dbc.getConnection();
+            Statement stmt = dbc.conn.createStatement();
+            String query = "UPDATE `admin_reported_inquiryview` SET `read_state`='1' WHERE `inquiry_id`='"+id+"'";
+            result=stmt.executeUpdate(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_ReportedItems.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return result;
+    }
 
     
 }

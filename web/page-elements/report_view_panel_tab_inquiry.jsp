@@ -24,9 +24,9 @@
             <table class="table table-striped table-hover" id="sample-table-3">
                 <thead>
                     <tr>
-                        <th class="center">ID</th>
-                        <th class="center hidden-xs">Reported User</th>
-                        <th class="center">Reason</th>
+                        <th>ID</th>
+                        <th class=" hidden-xs">Reported User</th>
+                        <th>Reason</th>
                         <th class="center"></th>                                                                                                
 
                     </tr>
@@ -37,9 +37,9 @@
                             received2 = (AdminClass_ReportedInquiries) a;
                     %>
                     <tr>
-                        <td class="center"><%=received2.getInquiry_id()%></td>
-                        <td class="center hidden-xs"><%=received2.getReported_user()%></td>
-                        <td class="center"><%=received2.getReason()%></td>
+                        <td><%=received2.getInquiry_id()%></td>
+                        <td class=" hidden-xs"><%=received2.getReported_user()%></td>
+                        <td><%=received2.getReason()%></td>
                         <td class="center">
                             <div>
                                 <div class="btn-group">
@@ -79,6 +79,14 @@
                                                 <input type="hidden" id="inquiryRUBIU<%=received2.getInquiry_id()%>" value="<%=received2.getReported_user()%>">
                                             </a>
                                         </clickedBlockInquiryUser>
+                                        </li>
+                                        <li role="presentation">
+                                             <a role="menuitem" tabindex="-1" href="#" onclick="document.getElementById('RRI<%=received2.getInquiry_id()%>').submit()">
+                                                <i class="fa clip-remove"></i> Remove Report
+                                            </a>
+                                            <form action="IRemoved_ViewReports?tabId=panel_tab_Inquiry" method="POST" id="RRI<%=received2.getInquiry_id()%>">
+                                                <input type="hidden" name="removeReport" value="<%=received2.getInquiry_id()%>">
+                                            </form>
                                         </li>
                                     </ul>
                                 </div>

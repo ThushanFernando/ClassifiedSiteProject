@@ -48,28 +48,28 @@ public class Dashboard extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("loggin_state") == "success") {
+        if (session.getAttribute("loggin_state") == "success") {                //checking logged in status
             AdminClass_Overviewstats ao = new AdminClass_Overviewstats();
 
             ArrayList categoriesPresentage = ao.categoriesPresentage();
-            request.setAttribute("categoriesPresentage", categoriesPresentage);
+            request.setAttribute("categoriesPresentage", categoriesPresentage); //getting categories precentage
 
-            ArrayList pagevisitMonth = ao.pagevisitMonth();
+            ArrayList pagevisitMonth = ao.pagevisitMonth();                     //getting monthly page visit
             request.setAttribute("pagevisitMonth", pagevisitMonth);
 
-            ArrayList usersMonth = ao.usersMonth();
+            ArrayList usersMonth = ao.usersMonth();                             //getting monthly users
             request.setAttribute("usersMonth", usersMonth);
 
-            ArrayList adsMonth = ao.adsMonth();
+            ArrayList adsMonth = ao.adsMonth();                                 //getting monthly ads
             request.setAttribute("adsMonth", adsMonth);
 
-            ArrayList pagevisitYear = ao.pagevisitYear();
+            ArrayList pagevisitYear = ao.pagevisitYear();                       //getting yearly page visit
             request.setAttribute("pagevisitYear", pagevisitYear);
 
-            ArrayList usersYear = ao.usersYear();
+            ArrayList usersYear = ao.usersYear();                               //getting yearly users
             request.setAttribute("usersYear", usersYear);
 
-            ArrayList adsYear = ao.adsYear();
+            ArrayList adsYear = ao.adsYear();                                   //getting yearly ads
             request.setAttribute("adsYear", adsYear);
 
             RequestDispatcher rd = request.getRequestDispatcher("index.jsp");

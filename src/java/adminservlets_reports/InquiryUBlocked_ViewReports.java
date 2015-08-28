@@ -12,6 +12,7 @@ import classes.AdminClass_ReportedMessages;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -42,7 +43,7 @@ public class InquiryUBlocked_ViewReports extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet InquiryUBlocked_ViewReports</title>");            
+            out.println("<title>Servlet InquiryUBlocked_ViewReports</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet InquiryUBlocked_ViewReports at " + request.getContextPath() + "</h1>");
@@ -63,7 +64,12 @@ public class InquiryUBlocked_ViewReports extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request, response);
+        Enumeration<String> parameterNames = request.getParameterNames();
+        if (parameterNames.hasMoreElements()) {
+            processRequest(request, response);
+        } else {
+            doPost(request, response);
+        }
     }
 
     /**
@@ -82,7 +88,7 @@ public class InquiryUBlocked_ViewReports extends HttpServlet {
             AdminClass_ReportedItems art = new AdminClass_ReportedItems();
             AdminClass_ReportedMessages arm = new AdminClass_ReportedMessages();
             AdminClass_ReportedInquiries ari = new AdminClass_ReportedInquiries();
-            
+
             if (request.getParameter("toBIU") != null && request.getParameter("subjectBIU") != null) {
                 AdminClass_BlockedUsers ab = new AdminClass_BlockedUsers();
                 String reciever = art.getUserEmail(request.getParameter("toBIU"));
@@ -92,29 +98,14 @@ public class InquiryUBlocked_ViewReports extends HttpServlet {
                 int result2 = ab.BlacklistUser(reciever);
 
                 if (result1 == 1 && result2 == 1) {
-                    String alert = "<div class=\"alert alert-success\">\n"
-                            + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                            + "&times;\n"
-                            + "</button>\n"
-                            + "<i class=\"fa fa-check-circle\"></i>\n"
-                            + "<strong>Blocked !</strong>  User " + reciever + "  .\n"
-                            + "</div>";
+                    String alert = "<button class=\"btn btn-green\"><i  class=\"glyphicon glyphicon-ok-sign\"></i></button><br><strong>Blocked !</strong>  User " + reciever + "";
                     request.setAttribute("alert", alert);
                 } else {
-                    String alert = "<div class=\"alert alert-danger\">\n"
-                            + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                            + "&times;\n"
-                            + "</button>\n"
-                            + "<i class=\"fa fa-times-circle\"></i>\n"
-                            + "<strong>Failed!</strong> User '" + reciever + "' Try again.\n"
-                            + "</div>";
+                    String alert = "<button class=\"btn btn-red\"><i  class=\"glyphicon glyphicon-remove-circle\"></i></button><br><strong>Failed!</strong> User " + reciever + " Try again.";
                     request.setAttribute("alert", alert);
                 }
 
             }
-            
-            
-            
 
             String reportCount = String.valueOf(art.getItemReportCount());
             if ("0".equals(reportCount)) {

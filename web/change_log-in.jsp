@@ -40,6 +40,7 @@
         <link rel="stylesheet" href="plugins/summernote/build/summernote.css">
         <link href="plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
         <link href="plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="plugins/gritter/css/jquery.gritter.css">
 
         <!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
         <script type="text/javascript" src="js/data-refresh.js"></script>
@@ -48,14 +49,19 @@
     <!-- end: HEAD -->
     <!-- start: BODY -->
     <body>
+        <div class="loader">
+            <jsp:include page="page-elements/javascript_required.jsp"/>
+        </div>
         <%
             if (session.getAttribute("loggin_state") != "success") {
                 response.sendRedirect("superb_admin.jsp");
-            }else if( session.getAttribute("login_change") != "true" ){
+            } else if (session.getAttribute("login_change") != "true") {
                 response.sendRedirect("Dashboard");
-            }else{
-            session.setAttribute("login_change", null);
+            } else {
+                session.setAttribute("login_change", null);
             }
+            String alert = (String) session.getAttribute("alert");
+            session.setAttribute("alert", null);
         %>
         <!-- start: HEADER -->
         <jsp:include page="page-elements/header_custom.jsp"/>
@@ -218,17 +224,7 @@
 
                                     <hr>
                                     <form action="LoginUpdate" method="POST" >
-                                        <div class="row">
-                                            <%if (session.getAttribute("alert") != null) {%>
-                                            <div id="alert-id">
-                                                <%=session.getAttribute("alert")%>    
 
-                                            </div>
-                                            <%}
-
-                                                session.setAttribute("alert", null);
-                                            %>
-                                        </div>    
                                         <div class="row">
                                             <div class="col-md-4">
 
@@ -341,20 +337,59 @@
         <script src="plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
         <script src="js/ui-modals.js"></script>
         <script src="js/ui-elements.js"></script>
+        <script src="plugins/gritter/js/jquery.gritter.min.js"></script>
+        <script>
 
+                                        //function to initiate jquery.gritter
+                                        function runNotification() {
+                                            var i = '<%=alert%>';
+                                            if (i !== "null") {
+
+                                                var unique_id = $.gritter.add({
+                                                    // (string | mandatory) the heading of the notification
+                                                    title: 'Notification!',
+                                                    // (string | mandatory) the text inside the notification
+                                                    text: '<%=alert%>',
+                                                    // (bool | optional) if you want it to fade out on its own or just sit there
+                                                    sticky: false,
+                                                    // (int | optional) the time you want it to be alive for before fading out
+                                                    time: 4000,
+                                                    // (string | optional) the class name you want to apply to that specific message
+                                                    class_name: 'my-sticky-class'
+                                                });
+                                                // You can have it return a unique id, this can be used to manually remove it later using
+                                                /*
+                                                 setTimeout(function(){
+                                                 $.gritter.remove(unique_id, {
+                                                 fade: true,
+                                                 speed: 'slow'
+                                                 });
+                                                 }, 6000)
+                                                 */
+                                                return false;
+
+                                            }
+
+                                        }
+
+
+        </script>
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
         <script>
-                                        jQuery(document).ready(function () {
-                                            refresh_data();
-                                            window.setInterval(function () {
-                                                refresh_data();
-                                            }, 3000);
-                                            Main.init();
-                                            UIModals.init();
-                                            UIElements.init();
-                                            Index.init();
+            jQuery(document).ready(function () {
+                Main.init();
+                runNotification();
+                $(".loader").fadeOut("slow");
+                refresh_data();
+                window.setInterval(function () {
+                    refresh_data();
+                }, 3000);
 
-                                        });
+                UIModals.init();
+                UIElements.init();
+                Index.init();
+
+            });
         </script>
     </body>
     <!-- end: BODY -->

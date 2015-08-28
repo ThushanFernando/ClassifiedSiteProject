@@ -46,6 +46,10 @@
     <!-- end: HEAD -->
     <!-- start: BODY -->
     <body class="login superb">
+
+        <div class="loader">
+            <jsp:include page="page-elements/javascript_required.jsp"/>
+        </div>
         <div class="main-login col-sm-4 col-sm-offset-4">
             <div class="logo">SUPERB<i class=""></i>.lk
             </div>
@@ -71,12 +75,12 @@
                     <fieldset>
                         <div class="form-group">
                             <span class="input-icon">
-                                <input type="text" class="form-control" name="uname" placeholder="Username" onclick="document.getElementById('alert-id').innerHTML = ''" required="true">
+                                <input type="text" value="AdminIshan" class="form-control" name="uname" placeholder="Username" onclick="document.getElementById('alert-id').innerHTML = ''" required="true">
                                 <i class="fa fa-user"></i> </span>
                         </div>
                         <div class="form-group form-actions">
                             <span class="input-icon">
-                                <input type="password" class="form-control password" name="pass" placeholder="Password" onclick="document.getElementById('alert-id').innerHTML = ''" required="true" >
+                                <input type="password" value="mypasS123" class="form-control password" name="pass" placeholder="Password" onclick="document.getElementById('alert-id').innerHTML = ''" required="true" >
                                 <i class="fa fa-lock"></i>
                                 <a class="forgot" href="#box-forgot" data-toggle="modal">
                                     I forgot my password
@@ -109,7 +113,7 @@
             </div>
             <div class="modal-body">
 
-                <form class="form-forgot" method="POST">
+                <form class="form-forgot" action="ForgotPassword" method="POST">
                     <div class="errorHandler alert alert-danger no-display">
                         <i class="fa fa-remove-sign"></i> You have some form errors. Please check below.
                     </div>
@@ -164,6 +168,7 @@
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
         <script>
                                     jQuery(document).ready(function () {
+                                        $(".loader").fadeOut("slow");
                                         Main.init();
                                         Login.init();
                                     });

@@ -9,6 +9,7 @@ import classes.AdminClass_LoginMethods;
 import classes.AdminClass_NavbarTools;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +39,7 @@ public class CheckLogin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CheckLogin</title>");            
+            out.println("<title>Servlet CheckLogin</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet CheckLogin at " + request.getContextPath() + "</h1>");
@@ -60,6 +61,7 @@ public class CheckLogin extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
     }
 
     /**
@@ -73,25 +75,25 @@ public class CheckLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session=request.getSession();
-        AdminClass_LoginMethods lm=new AdminClass_LoginMethods();
-         boolean result=lm.checkPass(request.getParameter("uname"), request.getParameter("pass"));
-         if(result==true){
-             session.setAttribute("loggin_state", "success");
-             session.setAttribute("Admin", request.getParameter("uname"));
-             response.sendRedirect("Dashboard");
-         }else{
-             session.setAttribute("loggin_state", "failed");
-             String alert = "<div class=\"errorHandler alert alert-danger \">\n"
-                        + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                        + "&times;\n"
-                        + "</button>\n"
-                        + "<strong>Error !</strong> Please check your log-in details.\n"
-                        + "</div>";
-             session.setAttribute("alert", alert);
-             response.sendRedirect("superb_admin.jsp");
-         }
-         
+        HttpSession session = request.getSession();
+        AdminClass_LoginMethods lm = new AdminClass_LoginMethods();
+        boolean result = lm.checkPass(request.getParameter("uname"), request.getParameter("pass"));
+        if (result == true) {
+            session.setAttribute("loggin_state", "success");
+            session.setAttribute("Admin", request.getParameter("uname"));
+            response.sendRedirect("Dashboard");
+        } else {
+            session.setAttribute("loggin_state", "failed");
+            String alert = "<div class=\"errorHandler alert alert-danger \">\n"
+                    + "<button data-dismiss=\"alert\" class=\"close\">\n"
+                    + "&times;\n"
+                    + "</button>\n"
+                    + "<strong>Error !</strong> Please check your log-in details.\n"
+                    + "</div>";
+            session.setAttribute("alert", alert);
+            response.sendRedirect("superb_admin.jsp");
+        }
+
     }
 
     /**

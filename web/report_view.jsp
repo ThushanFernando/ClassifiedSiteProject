@@ -45,7 +45,7 @@
         <link rel="stylesheet" type="text/css" href="plugins/select2/select2.css" />
         <link rel="stylesheet" href="plugins/DataTables/media/css/DT_bootstrap.css" />
         <link rel="stylesheet" href="plugins/summernote/build/summernote.css">
-
+        <link rel="stylesheet" href="plugins/gritter/css/jquery.gritter.css">
 
         <!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
         <script type="text/javascript" src="js/data-refresh.js"></script>
@@ -54,6 +54,9 @@
     <!-- end: HEAD -->
     <!-- start: BODY -->
     <body>
+        <div class="loader">
+            <jsp:include page="page-elements/javascript_required.jsp"/>
+        </div>
         <%
             if (session.getAttribute("loggin_state") != "success") {
                 response.sendRedirect("superb_admin.jsp");
@@ -61,6 +64,8 @@
             String reportCount = (String) request.getAttribute("reportCount");
             String message_report_count = (String) request.getAttribute("message_report_count");
             String Inquiry_report_count = (String) request.getAttribute("Inquiry_report_count");
+
+            String alert = (String) request.getAttribute("alert");
 
         %>
         <!-- start: HEADER -->
@@ -213,12 +218,7 @@
                             <div class="page-header">
                                 <h1 class="hidden-xs">Reports <small class="hidden-xs">view</small></h1>
                             </div>
-                            <%if (request.getAttribute("alert") != null) {%>
-                            <div>
-                                <%=request.getAttribute("alert")%>    
 
-                            </div>
-                            <%}%>
                             <!-- end: PAGE TITLE & BREADCRUMB -->
                         </div>
                     </div>
@@ -321,22 +321,56 @@
         <script src="plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
         <script src="js/ui-modals.js"></script>
         <script src="js/report-view-clickevents.js"></script>
-
-
-        <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+        <script src="plugins/gritter/js/jquery.gritter.min.js"></script>
         <script>
 
+            //function to initiate jquery.gritter
+            function runNotification() {
+                var i = '<%=alert%>';
+                if (i !== "null") {
+
+                    var unique_id = $.gritter.add({
+                        // (string | mandatory) the heading of the notification
+                        title: 'Notification!',
+                        // (string | mandatory) the text inside the notification
+                        text: '<%=alert%>',
+                        // (bool | optional) if you want it to fade out on its own or just sit there
+                        sticky: false,
+                        // (int | optional) the time you want it to be alive for before fading out
+                        time: 4000,
+                        // (string | optional) the class name you want to apply to that specific message
+                        class_name: 'my-sticky-class'
+                    });
+                    // You can have it return a unique id, this can be used to manually remove it later using
+                    /*
+                     setTimeout(function(){
+                     $.gritter.remove(unique_id, {
+                     fade: true,
+                     speed: 'slow'
+                     });
+                     }, 6000)
+                     */
+                    return false;
+
+                }
+
+            }
 
 
         </script>
+
+        <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+
         <script>
             jQuery(document).ready(function () {
+                
+                Main.init();
+                runNotification();
+                $(".loader").fadeOut("slow");
                 refresh_data();
                 window.setInterval(function () {
                     refresh_data();
                 }, 3000);
-                Main.init();
-                FormValidator.init();
                 TableData.init();
                 UIModals.init();
                 Index.init();

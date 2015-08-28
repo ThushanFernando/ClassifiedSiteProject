@@ -69,10 +69,6 @@
         <servlet-class>adminservlets.AdReviewAction</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ModifyAds</servlet-name>
-        <servlet-class>adminservlets_ads.ModifyAds</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ItemReport</servlet-name>
         <servlet-class>adminservlets.ItemReport</servlet-class>
     </servlet>
@@ -91,10 +87,6 @@
     <servlet>
         <servlet-name>GetSliderItems</servlet-name>
         <servlet-class>adminservlets_interfaces.GetSliderItems</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SetSliderItems</servlet-name>
-        <servlet-class>adminservlets_interfaces.SetSliderItems</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CheckLogin</servlet-name>
@@ -139,6 +131,34 @@
     <servlet>
         <servlet-name>InquiryUBlocked_ViewReports</servlet-name>
         <servlet-class>adminservlets_reports.InquiryUBlocked_ViewReports</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Appr_ReviewAds</servlet-name>
+        <servlet-class>adminservlets_ads.Appr_ReviewAds</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Apr_ReviewAds</servlet-name>
+        <servlet-class>adminservlets_ads.Apr_ReviewAds</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Mod_ReviewAds</servlet-name>
+        <servlet-class>adminservlets_ads.Mod_ReviewAds</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Rmv_ReviewAds</servlet-name>
+        <servlet-class>adminservlets_ads.Rmv_ReviewAds</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MRemoved_ViewReports</servlet-name>
+        <servlet-class>adminservlets_reports.MRemoved_ViewReports</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IRemoved_ViewReports</servlet-name>
+        <servlet-class>adminservlets_reports.IRemoved_ViewReports</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ForgotPassword</servlet-name>
+        <servlet-class>adminservlets.ForgotPassword</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
@@ -209,10 +229,6 @@
         <url-pattern>/AdReviewAction</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ModifyAds</servlet-name>
-        <url-pattern>/ModifyAds</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ItemReport</servlet-name>
         <url-pattern>/ItemReport</url-pattern>
     </servlet-mapping>
@@ -231,10 +247,6 @@
     <servlet-mapping>
         <servlet-name>GetSliderItems</servlet-name>
         <url-pattern>/GetSliderItems</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SetSliderItems</servlet-name>
-        <url-pattern>/SetSliderItems</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CheckLogin</servlet-name>
@@ -279,6 +291,34 @@
     <servlet-mapping>
         <servlet-name>InquiryUBlocked_ViewReports</servlet-name>
         <url-pattern>/InquiryUBlocked_ViewReports</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Appr_ReviewAds</servlet-name>
+        <url-pattern>/Appr_ReviewAds</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Apr_ReviewAds</servlet-name>
+        <url-pattern>/Apr_ReviewAds</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Mod_ReviewAds</servlet-name>
+        <url-pattern>/Mod_ReviewAds</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Rmv_ReviewAds</servlet-name>
+        <url-pattern>/Rmv_ReviewAds</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MRemoved_ViewReports</servlet-name>
+        <url-pattern>/MRemoved_ViewReports</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IRemoved_ViewReports</servlet-name>
+        <url-pattern>/IRemoved_ViewReports</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPassword</servlet-name>
+        <url-pattern>/ForgotPassword</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

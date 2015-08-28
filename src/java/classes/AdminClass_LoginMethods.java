@@ -8,6 +8,7 @@ package classes;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -19,6 +20,36 @@ import java.util.regex.Pattern;
 public class AdminClass_LoginMethods {
 
     DbClass dbc = new DbClass();
+    private String username = null;
+    private String pass = null;
+
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * @param username the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * @return the pass
+     */
+    public String getPass() {
+        return pass;
+    }
+
+    /**
+     * @param pass the pass to set
+     */
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
 
     public boolean checkPass(String username, String password) {
         boolean result = false;
@@ -81,11 +112,40 @@ public class AdminClass_LoginMethods {
                     Logger.getLogger(AdminClass_LoginMethods.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-            }else{
-                result="unavailable";
+            } else {
+                result = "unavailable";
             }
         }
         return result;
+    }
+
+    public ArrayList checkAdmin(String email) {
+        ArrayList al = new ArrayList();
+        if (isVE(email) == true) {
+
+            try {
+                dbc.getConnection();
+                Statement stmt = dbc.conn.createStatement();
+                String query = "SELECT `username`, `pass` FROM `userview` WHERE `user_type`='Admin' AND `email`='" + email + "'";
+                ResultSet rs = stmt.executeQuery(query);
+
+                if (rs.isBeforeFirst()) {
+                    while (rs.next()) {
+                        al.add(rs.getString("username"));
+                        al.add(rs.getString("pass"));
+
+                    }
+                } else {
+                    al = null;
+                }
+                dbc.endConnection();
+            } catch (SQLException ex) {
+                Logger.getLogger(AdminClass_LoginMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            al = null;
+        }
+        return al;
     }
 
     private static final Pattern VALID_LOGIN_DETAILS = Pattern.compile(
@@ -110,6 +170,14 @@ public class AdminClass_LoginMethods {
             Logger.getLogger(AdminClass_LoginMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
+    }
+
+    private static final Pattern VALID_EMAIL = Pattern.compile(
+            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+
+    public static boolean isVE(String s) {
+        return VALID_EMAIL.matcher(s).matches();
     }
 
 }

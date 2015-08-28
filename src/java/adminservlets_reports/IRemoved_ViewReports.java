@@ -5,7 +5,6 @@
  */
 package adminservlets_reports;
 
-import classes.AdminClass_BlockedInquiries;
 import classes.AdminClass_ReportedInquiries;
 import classes.AdminClass_ReportedItems;
 import classes.AdminClass_ReportedMessages;
@@ -24,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author SithuDewmi
  */
-public class InquiryBlocked_ViewReports extends HttpServlet {
+public class IRemoved_ViewReports extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +42,10 @@ public class InquiryBlocked_ViewReports extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet InquiryBlocked_ViewReports</title>");
+            out.println("<title>Servlet IRemoved_ViewReports</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet InquiryBlocked_ViewReports at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet IRemoved_ViewReports at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -89,21 +88,15 @@ public class InquiryBlocked_ViewReports extends HttpServlet {
             AdminClass_ReportedMessages arm = new AdminClass_ReportedMessages();
             AdminClass_ReportedInquiries ari = new AdminClass_ReportedInquiries();
 
-            if (request.getParameter("toBI") != null && request.getParameter("inquiryBI") != null) {
-                AdminClass_BlockedInquiries ab = new AdminClass_BlockedInquiries();
-                String reciever = art.getUserEmail(request.getParameter("toBI"));
-                String subject = request.getParameter("subjectBI");
-                String content = request.getParameter("contentBI");
-                int result = ab.blockInquiries(request.getParameter("inquiryBI"));
-
+            if (request.getParameter("removeReport") != null) {
+                int result =ari.updateViewState(request.getParameter("removeReport"));
                 if (result == 1) {
-                    String alert = "<button class=\"btn btn-green\"><i  class=\"glyphicon glyphicon-ok-sign\"></i></button><br><strong>Blocked !</strong>  Inquiry id " + request.getParameter("inquiryBI") + "";
+                    String alert = "<button class=\"btn btn-green\"><i  class=\"glyphicon glyphicon-ok-sign\"></i></button><br><strong>Removed !</strong>  Inquiry id " + request.getParameter("removeReport") + "";
                     request.setAttribute("alert", alert);
                 } else {
-                    String alert = "<button class=\"btn btn-red\"><i  class=\"glyphicon glyphicon-remove-circle\"></i></button><br><strong>Failed!</strong> Inquiry id " + request.getParameter("inquiryBI") + " Try again.";
+                    String alert = "<button class=\"btn btn-red\"><i  class=\"glyphicon glyphicon-remove-circle\"></i></button><br><strong>Failed!</strong> Inquiry id " + request.getParameter("removeReport") + " Try again.";
                     request.setAttribute("alert", alert);
                 }
-
             }
 
             String reportCount = String.valueOf(art.getItemReportCount());

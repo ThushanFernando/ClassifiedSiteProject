@@ -55,6 +55,9 @@
     <!-- end: HEAD -->
     <!-- start: BODY -->
     <body>
+        <div class="loader">
+            <jsp:include page="page-elements/javascript_required.jsp"/>
+        </div>
         <%
             if (session.getAttribute("loggin_state") != "success") {
                 response.sendRedirect("superb_admin.jsp");
@@ -216,7 +219,7 @@
                     <!-- end: PAGE HEADER -->
                     <!-- start: PAGE CONTENT -->
                     <div class="row" style="padding-top: 5px;">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <table class="table  table-hover " id="sample_1">
                                 <thead>
                                     <tr>
@@ -300,7 +303,7 @@
         <script src="plugins/autosize/jquery.autosize.min.js"></script>
         <script type="text/javascript" src="plugins/DataTables/media/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="plugins/DataTables/media/js/DT_bootstrap.js"></script>
-        <script src="js/table-ad.js"></script>
+        <script src="js/search-table-data.js"></script>
         <script src="plugins/jquery-validation/dist/jquery.validate.min.js"></script>
         <script src="plugins/summernote/build/summernote.min.js"></script>
         <script src="plugins/ckeditor/ckeditor.js"></script>
@@ -314,6 +317,7 @@
 
         <script>
             jQuery(document).ready(function () {
+                $(".loader").fadeOut("slow");
                 refresh_data();
                 window.setInterval(function () {
                     refresh_data();
@@ -321,7 +325,6 @@
                 Main.init();
                 TableData.init();
                 UIModals.init();
-                FormValidator.init();
                 Index.init();
             });
         </script>

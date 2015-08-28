@@ -8,6 +8,9 @@ package adminservlets_ads;
 import classes.AdminClass_ReviewAds;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author SithuDewmi
  */
-public class ModifyAds extends HttpServlet {
+public class Rmv_ReviewAds extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +40,10 @@ public class ModifyAds extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ModifyAds</title>");
+            out.println("<title>Servlet Rmv_ReviewAds</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ModifyAds at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Rmv_ReviewAds at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,7 +61,12 @@ public class ModifyAds extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        Enumeration<String> parameterNames = request.getParameterNames();
+        if (parameterNames.hasMoreElements()) {
+            processRequest(request, response);
+        } else {
+            doPost(request, response);
+        }
     }
 
     /**
@@ -75,16 +83,26 @@ public class ModifyAds extends HttpServlet {
         HttpSession session = request.getSession();
         if (session.getAttribute("loggin_state") == "success") {
             AdminClass_ReviewAds ar = new AdminClass_ReviewAds();
-            String reciever = ar.getUserEmail(request.getParameter("to"));
-            String subject = request.getParameter("subject");
-            String content = request.getParameter("content").replace("************Type the reason here************", "");
-            content = content.replace("***************************************************", "");
-            String itemId = request.getParameter("itemname");
-            String reason = request.getParameter("reason");
-            int result = ar.modifyAds(itemId, reason);
 
-            session.setAttribute("alert", "success");
-            response.sendRedirect("ReviewAds");
+            String action = request.getParameter("action");
+            String item = request.getParameter("item");
+            String alert;
+            int result;
+            if (("Remove".equals(action) && item != null)) {
+                result = ar.removeAd(item);
+                if (result == 1) {
+                    alert = "<button class=\"btn btn-green\"><i  class=\"glyphicon glyphicon-ok-sign\"></i></button><br><strong>Removed!</strong> Advertiesment number "+request.getParameter("item")+""; 
+                } else {
+                    alert = "<button class=\"btn btn-red\"><i  class=\"glyphicon glyphicon-remove-circle\"></i></button><br><strong>Failed!</strong> Advertiesment number " + request.getParameter("item") + " Try again.";
+                }
+                request.setAttribute("alert", alert);
+
+            }
+
+            ArrayList reviewAds = ar.reviewAds();
+            request.setAttribute("reviewAds", reviewAds);
+            RequestDispatcher rd = request.getRequestDispatcher("ads_review.jsp");
+            rd.forward(request, response);
         } else {
             response.sendRedirect("superb_admin.jsp");
         }

@@ -5,26 +5,39 @@
  */
 package classes;
 
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author SithuDewmi
  */
 public class TestClass {
+    DbClass dbc=new DbClass();
 
     public static void main(String[] args) throws Exception {
-        System.out.println(isVld("batta1"));
-        System.out.println(isVld("mypasS123"));
+        AdminClass_Message am=new AdminClass_Message();
+        ArrayList al = am.msg();
+            Iterator itr = al.iterator();
+            AdminClass_Message received = null;
+             while (itr.hasNext()) {
+                Object a = itr.next();
+                received = (AdminClass_Message) a;
+                 System.out.println(received.getSender());
+                 System.out.println(received.getContent());
+                 System.out.println(received.getTimeStamp());
+                 System.out.println(received.getState());
+                 System.out.println("--------------------------------");
+            }
     }
-    private static final Pattern VALID_LOGIN_DETAILS = Pattern.compile(
-            "[0-9a-zA-Z]{6,20}");
-
-    public static boolean isVld(String s) {
-        return VALID_LOGIN_DETAILS.matcher(s).matches();
-    }
+     
     
+
     
     
 }

@@ -5,19 +5,27 @@
  */
 package adminservlets_interfaces;
 
+import classes.AdminClass_SliderItems;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author SithuDewmi
  */
+@WebServlet("/uploadServlet")
+@MultipartConfig(maxFileSize = 16177215)    // upload file's size up to 16MB
 public class UpdateInterfaces extends HttpServlet {
 
     /**
@@ -58,7 +66,12 @@ public class UpdateInterfaces extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request, response);
+        Enumeration<String> parameterNames = request.getParameterNames();
+        if (parameterNames.hasMoreElements()) {
+            processRequest(request, response);
+        } else {
+            doPost(request, response);
+        }
     }
 
     /**
@@ -74,27 +87,27 @@ public class UpdateInterfaces extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session.getAttribute("loggin_state") == "success") {
-            if (session.getAttribute("setSlider") == "success") {
-                String alert = "<div class=\"alert alert-success\">\n"
-                        + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                        + "&times;\n"
-                        + "</button>\n"
-                        + "<i class=\"fa fa-check-circle\"></i>\n"
-                        + "<strong>Updated !</strong> Slider item successfully.\n"
-                        + "</div>";
-                session.setAttribute("setSlider", null);
-                request.setAttribute("alert", alert);
-            } else if (session.getAttribute("setSlider") == "failed") {
-                String alert = "<div class=\"alert alert-danger\">\n"
-                        + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                        + "&times;\n"
-                        + "</button>\n"
-                        + "<i class=\"fa fa-times-circle\"></i>\n"
-                        + "<strong>Failed!</strong> Slider item updating.\n"
-                        + "</div>";
-                session.setAttribute("setSlider", null);
-                request.setAttribute("alert", alert);
 
+            if (request.getParameter("slider_id") != null) {
+                AdminClass_SliderItems as = new AdminClass_SliderItems();
+                int result = 0;
+                InputStream inputStream = null; // input stream of the upload file
+                // obtains the upload file part in this multipart request
+                Part filePart = request.getPart("slider_item");
+                String itemId = request.getParameter("slider_id");
+                if (filePart != null) {
+                    // obtains input stream of the upload file
+                    inputStream = filePart.getInputStream();
+                    result = as.setSlider(inputStream, itemId);
+                }
+                if (result == 1) {
+                    String alert = "<button class=\"btn btn-green\"><i  class=\"glyphicon glyphicon-ok-sign\"></i></button><br><strong>Updated !</strong> Slider item successfully.";
+                    request.setAttribute("alert", alert);
+                } else {
+                    String alert = "<button class=\"btn btn-red\"><i  class=\"glyphicon glyphicon-remove-circle\"></i></button><br><strong>Failed!</strong> Slider item updating.";
+                    request.setAttribute("alert", alert);
+
+                }
             }
             RequestDispatcher rd = request.getRequestDispatcher("interface_updates.jsp");
             rd.forward(request, response);

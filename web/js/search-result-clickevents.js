@@ -22,16 +22,59 @@ $(document).on('click', 'clickedID', function () {
                     var login = $(this).find('login').text();
                     var ads = $(this).find('ads').text();
                     $("#PlaceHeader").append("<h3>User Detailed view</h3>");
-                    $("#PlaceData").append("<b>User name: </b>" + username + "<br><br>"
-                            + "<b>Email: </b>" + email + "<br><br>"
-                            + "<b>Tel: </b>" + tel + "<br><br>"
-                            + "<b>Registration: </b>" + reg + "<br><br>"
-                            + "<b>Status: </b>" + status + "<br><br>"
-                            + "<b>Activation: </b>" + activation + "<br><br>"
-                            + "<b>Last login: </b>" + login + "<br><br>"
-                            + "<b>No. of ads: </b>" + ads + "<br>"
-                            + "<hr>");
-                    $("#PlaceData").append();
+
+                    $("#PlaceData").append('<form action="#" role="form" class="smart-wizard form-horizontal" >'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">User name:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + username + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Email:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + email + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Tel:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   vlaue="' + tel + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Registration:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   vlaue="' + reg + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Status:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + status + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Activation:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + activation + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Last login:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + login + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">No. of ads:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + ads + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '</form>');
+
+
                 }
                 else if (selection.charAt(0) === "M") {
                     var id = $(this).find('id').text();
@@ -40,12 +83,38 @@ $(document).on('click', 'clickedID', function () {
                     var content = $(this).find('content').text();
                     var time = $(this).find('time').text();
                     $("#PlaceHeader").append("<h3>Message Detailed view</h3>");
-                    $("#PlaceData").append("<b>Id: </b>" + id + "<br><br>"
-                            + "<b>Sender: </b>" + sender + "<br><br>"
-                            + "<b>Reciever: </b>" + reciever + "<br><br>"
-                            + "<b>Content: </b>" + content + "<br><br>"
-                            + "<b>Sent on: </b>" + time + "<br><br>"
-                            + "<hr>");
+                    $("#PlaceData").append('<form action="#" role="form" class="smart-wizard form-horizontal" >'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Id:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + id + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Sender:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + sender + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Reciever:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + reciever + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Content:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <textarea rows="3" class="form-control" readonly="true" style="resize: none; overflow-y: auto;" >' + content + '</textarea>'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Sent on:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + time + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '</form>');
                 }
                 else if (selection.charAt(0) === "1") {
                     var id = $(this).find('id').text();
@@ -55,13 +124,44 @@ $(document).on('click', 'clickedID', function () {
                     var item = $(this).find('item').text();
                     var title = $(this).find('title').text();
                     $("#PlaceHeader").append("<h3>Item report Detailed view</h3>");
-                    $("#PlaceData").append("<b>Id: </b>" + id + "<br><br>"
-                            + "<b>Reporter's email: </b>" + email + "<br><br>"
-                            + "<b>Reason for the report: </b>" + reason + "<br><br>"
-                            + "<b>Reporter's message: </b>" + message + "<br><br>"
-                            + "<b>Item id: </b>" + item + "<br><br>"
-                            + "<b>Item title: </b>" + title + "<br><br>"
-                            + "<hr>");
+                    $("#PlaceData").append('<form action="#" role="form" class="smart-wizard form-horizontal" >'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Id:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + id + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Reporter\'s email:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + email + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Reason for the report:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <textarea rows="3" class="form-control" readonly="true" style="resize: none; overflow-y: auto;" >' + reason + '</textarea>'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Reporter\'s message:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <textarea rows="3" class="form-control" readonly="true" style="resize: none; overflow-y: auto;" >' + message + '</textarea>'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Item id:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + item + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Item title:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + title + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '</form>');
                 }
                 else if (selection.charAt(0) === "2") {
                     var id = $(this).find('id').text();
@@ -75,17 +175,69 @@ $(document).on('click', 'clickedID', function () {
                     var response = $(this).find('response').text();
                     var response_time = $(this).find('response_time').text();
                     $("#PlaceHeader").append("<h3>Inquiry report Detailed view</h3>");
-                    $("#PlaceData").append("<b>Id: </b>" + id + "<br><br>"
-                            + "<b>Reported user: </b>" + user + "<br><br>"
-                            + "<b>Reason: </b>" + reason + "<br><br>"
-                            + "<b>Item id: </b>" + item + "<br><br>"
-                            + "<b>Inquiry to: </b>" + message_to + "<br><br>"
-                            + "<b>Inquiry from: </b>" + message_from + "<br><br>"
-                            + "<b>Inquiry: </b>" + message + "<br><br>"
-                            + "<b>Inquiry time: </b>" + message_time + "<br><br>"
-                            + "<b>Response: </b>" + response + "<br><br>"
-                            + "<b>Response time: </b>" + response_time + "<br><br>"
-                            + "<hr>");
+                    $("#PlaceData").append('<form action="#" role="form" class="smart-wizard form-horizontal" >'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Id:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + id + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Reported user:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + user + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Reason:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <textarea rows="3" class="form-control" readonly="true" style="resize: none; overflow-y: auto;" >' + reason + '</textarea>'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Item id:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + item + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Inquiry to:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + message_to + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Inquiry from:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + message_from + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Inquiry:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <textarea rows="3" class="form-control" readonly="true" style="resize: none; overflow-y: auto;" >' + message + '</textarea>'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Inquiry time:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + message_time + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Response:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <textarea rows="3" class="form-control" readonly="true" style="resize: none; overflow-y: auto;" >' + response + '</textarea>'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Response time:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + response_time + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '</form>');
+
 
                 } else if (selection.charAt(0) === "3") {
                     var id = $(this).find('id').text();
@@ -96,15 +248,50 @@ $(document).on('click', 'clickedID', function () {
                     var reason = $(this).find('reason').text();
                     var reported_time = $(this).find('reported_time').text();
                     $("#PlaceHeader").append("<h3>Message report Detailed view</h3>");
-                    $("#PlaceData").append("<b>Id: </b>" + id + "<br><br>"
-                            + "<b>Sender: </b>" + sender + "<br><br>"
-                            + "<b>Reciever: </b>" + reciever + "<br><br>"
-                            + "<b>Content: </b>" + content + "<br><br>"
-                            + "<b>Messaged time: </b>" + message_time + "<br><br>"
-                            + "<b>Reported reason: </b>" + reason + "<br><br>"
-                            + "<b>Reported timee: </b>" + reported_time + "<br><br>"
-                            + "<hr>");
-
+                    $("#PlaceData").append('<form action="#" role="form" class="smart-wizard form-horizontal" >'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Id:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + id + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Sender:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + sender + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Reciever:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + reciever + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Reason for the report:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <textarea rows="3" class="form-control" readonly="true" style="resize: none; overflow-y: auto;" >' + content + '</textarea>'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Messaged time:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + message_time + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Reported reason:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <textarea rows="3" class="form-control" readonly="true" style="resize: none; overflow-y: auto;" >' + reason + '</textarea>'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<label class="col-sm-3 control-label">Reported time:</label>'
+                            + '<div class="col-sm-7">'
+                            + '   <input type="text" class="form-control" readonly="true"   value="' + reported_time + '">'
+                            + '</div>'
+                            + '</div>'
+                            + '</form>');
                 } else {
                     var id = $(this).find('id').text();
                     $("#PlaceHeader").append("<h3>Item Detailed view</h3>");

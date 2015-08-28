@@ -61,11 +61,14 @@ public class SearchResult extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("loggin_state") == "success") {
-            String sid = request.getParameter("sid");
+        if (session.getAttribute("loggin_state") == "success") {                //checking logged in status
+            
+            String sid = request.getParameter("sid");                           //assigning searched value
+            
             AdminClass_NavbarTools an = new AdminClass_NavbarTools();
-            ArrayList al = an.searchResult(sid);
-            request.setAttribute("searchResult", al);
+            ArrayList al = an.searchResult(sid);                                
+            request.setAttribute("searchResult", al);                           //assigning search result
+            
             RequestDispatcher rd = request.getRequestDispatcher("search_results.jsp");
             rd.forward(request, response);
         } else {

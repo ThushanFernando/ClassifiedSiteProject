@@ -27,7 +27,7 @@ public class AdminClass_Message {
     private String sender = null;
     private String content = null;
     private String timeStamp = null;
-    private String state=null;
+    private String state = null;
 
     /**
      * @return the sender
@@ -84,6 +84,7 @@ public class AdminClass_Message {
     public void setUser(String user) {
         this.user = user;
     }
+
     /**
      * @return the state
      */
@@ -167,7 +168,7 @@ public class AdminClass_Message {
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT `sender`,`content`,`time_stamp` FROM `user_messages` WHERE `sender`='" +user+ "' AND `receiver`='Admin' OR `sender`='Admin' AND `receiver`='" +user+ "'";
+            String query = "SELECT `sender`,`content`,`time_stamp` FROM `user_messages` WHERE `sender`='" + user + "' AND `receiver`='Admin' OR `sender`='Admin' AND `receiver`='" + user + "'";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 AdminClass_Message am = new AdminClass_Message();
@@ -242,6 +243,37 @@ public class AdminClass_Message {
         return result;
     }
 
-    
+    public ArrayList msg() {
+        ArrayList al = new ArrayList();
+        ArrayList msg_from = new ArrayList();
+
+        try {
+            dbc.getConnection();
+            Statement stmt = dbc.conn.createStatement();
+            String query = "SELECT DISTINCT `msg_from`  FROM `messageview` WHERE `msg_from`!='Admin' AND `msg_to`='Admin'";
+            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs2 = null;
+            while (rs.next()) {
+                msg_from.add(rs.getString("msg_from"));
+            }
+            for (int i = 0; i < msg_from.size(); i++) {
+                query = "SELECT  `msg_from`,`content`,`time_stamp`,`read_state` FROM `messageview` WHERE `msg_to`='Admin' AND `msg_from`='" + msg_from.get(i) + "' OR `msg_to`='" + msg_from.get(i) + "' AND `msg_from`='Admin' ORDER BY `messageview`.`message_id`  DESC LIMIT 1";
+                rs2 = stmt.executeQuery(query);
+                while (rs2.next()) {
+                    AdminClass_Message am = new AdminClass_Message();
+                    am.setSender(rs.getString("msg_from"));
+                    am.setContent(rs.getString("content"));
+                    am.setTimeStamp(timeDiff(rs.getString("time_stamp")));
+                    am.setState(rs.getString("read_state"));
+                    al.add(am);
+                }
+            }
+            dbc.endConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_LoginMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return al;
+
+    }
 
 }

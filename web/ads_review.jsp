@@ -47,12 +47,16 @@
         <link rel="stylesheet" href="plugins/DataTables/media/css/DT_bootstrap.css" />
         <link rel="stylesheet" href="plugins/summernote/build/summernote.css">
         <script type="text/javascript" src="js/data-refresh.js"></script>
+        <link rel="stylesheet" href="plugins/gritter/css/jquery.gritter.css">
         <!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
         <link rel="shortcut icon" href="favicon.ico" />
     </head>
     <!-- end: HEAD -->
     <!-- start: BODY -->
     <body>
+        <div class="loader">
+            <jsp:include page="page-elements/javascript_required.jsp"/>
+        </div>
         <%
             if (session.getAttribute("loggin_state") != "success") {
                 response.sendRedirect("superb_admin.jsp");
@@ -60,6 +64,9 @@
             ArrayList reviewAds = (ArrayList) request.getAttribute("reviewAds");
             Iterator itr = reviewAds.iterator();
             AdminClass_ReviewAds received = null;
+
+            String alert = (String) request.getAttribute("alert");
+
         %>
         <!-- start: HEADER -->
         <jsp:include page="page-elements/header.jsp"/>
@@ -210,12 +217,7 @@
                                 <h1 class="hidden-xs">Ads <small class="hidden-xs">review</small></h1>
 
                             </div>
-                            <%if (request.getAttribute("alert") != null) {%>
-                            <div>
-                                <%=request.getAttribute("alert")%>    
 
-                            </div>
-                            <%}%>
                             <!-- end: PAGE TITLE & BREADCRUMB -->
                         </div>
                     </div>
@@ -241,9 +243,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <%
-
-                                                while (itr.hasNext()) {
+                                            <%                                                while (itr.hasNext()) {
                                                     Object a = itr.next();
                                                     received = (AdminClass_ReviewAds) a;
                                             %>
@@ -267,7 +267,7 @@
                                                                 </li>
                                                                 <li role="presentation">
                                                                     <a role="menuitem" tabindex="-1" href="#">
-                                                                        <form action="ReviewAds" method="POST" id="<%=received.getItem_number()%>_approve">
+                                                                        <form action="Apr_ReviewAds" method="POST" id="<%=received.getItem_number()%>_approve">
                                                                             <input type="hidden" value="<%=received.getItem_number()%>"  name="item"> 
                                                                             <input type="hidden" value="Approve"  name="action">
                                                                             <i class="fa clip-checkbox-checked"></i><span onclick="document.getElementById('<%=received.getItem_number()%>_approve').submit();"> Approve</span>
@@ -284,15 +284,15 @@
                                                                                 <span class=" badge">Reason for Modifying Ad:</span><span class="symbol required"></span>
                                                                             </label>
                                                                         </div>
+
                                                                         <div class="modal-body">
+
                                                                             <input type="hidden" id="MINMA<%=received.getItem_number()%>" value="<%=received.getItem_number()%>">
                                                                             <input type="hidden" id="MITMA<%=received.getItem_number()%>" value="<%=received.getTitle()%>">
                                                                             <input type="hidden" id="MIUMA<%=received.getItem_number()%>" value="<%=received.getUsername()%>">
                                                                             <div class="form-group">
-                                                                                <div>
-                                                                                    <textarea class="autosize form-control" id="itemRMA<%=received.getItem_number()%>" required=""  rows="5" style="overflow-y: auto; word-wrap: break-word;">
-                                                                                    </textarea>
-                                                                                </div>
+
+                                                                                <textarea class="autosize form-control" placeholder="Important !  Enter the reason for modification" id="itemRMA<%=received.getItem_number()%>" required="true"  rows="5" style="overflow-y: auto;resize: none; word-wrap: break-word;"></textarea>
                                                                             </div>
 
                                                                         </div>
@@ -301,18 +301,16 @@
                                                                                 Cancel
                                                                             </button>
                                                                             <clickedReportModifyAd id="MA<%=received.getItem_number()%>">
-                                                                                <a href="#message" data-toggle="modal">
-                                                                                    <button type="button" data-dismiss="modal" class="btn btn-primary" onclick="">
-                                                                                        Proceed
-                                                                                    </button>
-                                                                                </a>
+                                                                                <button type="submit" href="#message" data-toggle="modal" data-dismiss="modal" class="btn btn-primary" onclick="">
+                                                                                    Proceed
+                                                                                </button>
                                                                             </clickedReportModifyAd>
                                                                         </div>
                                                                     </div>
                                                                 </li>
                                                                 <li role="presentation">
                                                                     <a role="menuitem" tabindex="-1" href="#">
-                                                                        <form action="ReviewAds" method="POST" id="<%=received.getItem_number()%>_remove">
+                                                                        <form action="Rmv_ReviewAds" method="POST" id="<%=received.getItem_number()%>_remove">
                                                                             <input type="hidden" value="<%=received.getItem_number()%>"  name="item"> 
                                                                             <input type="hidden" value="Remove"  name="action">
                                                                             <i class="fa clip-remove"></i><span onclick="document.getElementById('<%=received.getItem_number()%>_remove').submit();"> Remove</span>
@@ -394,7 +392,7 @@
         <script src="plugins/autosize/jquery.autosize.min.js"></script>
         <script type="text/javascript" src="plugins/DataTables/media/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="plugins/DataTables/media/js/DT_bootstrap.js"></script>
-        <script src="js/table-ad.js"></script>
+        <script src="js/table-data.js"></script>
         <script src="plugins/jquery-validation/dist/jquery.validate.min.js"></script>
         <script src="plugins/summernote/build/summernote.min.js"></script>
         <script src="plugins/ckeditor/ckeditor.js"></script>
@@ -404,19 +402,57 @@
         <script src="plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
         <script src="js/ui-modals.js"></script>
         <script src="js/ads-review-clickevents.js"></script>
+        <script src="plugins/gritter/js/jquery.gritter.min.js"></script>
+        <script>
+
+                                                                                //function to initiate jquery.gritter
+                                                                                function runNotification() {
+                                                                                    var i = '<%=alert%>';
+                                                                                    if (i !== "null") {
+
+                                                                                        var unique_id = $.gritter.add({
+                                                                                            // (string | mandatory) the heading of the notification
+                                                                                            title: 'Notification!',
+                                                                                            // (string | mandatory) the text inside the notification
+                                                                                            text: '<%=alert%>',
+                                                                                            // (bool | optional) if you want it to fade out on its own or just sit there
+                                                                                            sticky: false,
+                                                                                            // (int | optional) the time you want it to be alive for before fading out
+                                                                                            time: 4000,
+                                                                                            // (string | optional) the class name you want to apply to that specific message
+                                                                                            class_name: 'my-sticky-class'
+                                                                                        });
+                                                                                        // You can have it return a unique id, this can be used to manually remove it later using
+                                                                                        /*
+                                                                                         setTimeout(function(){
+                                                                                         $.gritter.remove(unique_id, {
+                                                                                         fade: true,
+                                                                                         speed: 'slow'
+                                                                                         });
+                                                                                         }, 6000)
+                                                                                         */
+                                                                                        return false;
+
+                                                                                    }
+
+                                                                                }
+
+
+        </script>
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
         <script>
-                                                                                jQuery(document).ready(function () {
-                                                                                    refresh_data();
-                                                                                    window.setInterval(function () {
-                                                                                        refresh_data();
-                                                                                    }, 3000);
-                                                                                    Main.init();
-                                                                                    TableData.init();
-                                                                                    UIModals.init();
-                                                                                    FormValidator.init();
-                                                                                    Index.init();
-                                                                                });
+            jQuery(document).ready(function () {
+                Main.init();
+                runNotification();
+                $(".loader").fadeOut("slow");
+                refresh_data();
+
+
+                TableData.init();
+                UIModals.init();
+                FormValidator.init();
+                Index.init();
+            });
         </script>
 
     </body>

@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminservlets_reports;
+package adminservlets_ads;
 
-import classes.AdminClass_BlockedInquiries;
-import classes.AdminClass_ReportedInquiries;
-import classes.AdminClass_ReportedItems;
-import classes.AdminClass_ReportedMessages;
+import classes.AdminClass_ReviewAds;
+import classes.AdminClass_SendMail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -24,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author SithuDewmi
  */
-public class InquiryBlocked_ViewReports extends HttpServlet {
+public class Mod_ReviewAds extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +41,10 @@ public class InquiryBlocked_ViewReports extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet InquiryBlocked_ViewReports</title>");
+            out.println("<title>Servlet Mod_ReviewAds</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet InquiryBlocked_ViewReports at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Mod_ReviewAds at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -85,50 +83,40 @@ public class InquiryBlocked_ViewReports extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session.getAttribute("loggin_state") == "success") {
-            AdminClass_ReportedItems art = new AdminClass_ReportedItems();
-            AdminClass_ReportedMessages arm = new AdminClass_ReportedMessages();
-            AdminClass_ReportedInquiries ari = new AdminClass_ReportedInquiries();
 
-            if (request.getParameter("toBI") != null && request.getParameter("inquiryBI") != null) {
-                AdminClass_BlockedInquiries ab = new AdminClass_BlockedInquiries();
-                String reciever = art.getUserEmail(request.getParameter("toBI"));
-                String subject = request.getParameter("subjectBI");
-                String content = request.getParameter("contentBI");
-                int result = ab.blockInquiries(request.getParameter("inquiryBI"));
+            AdminClass_ReviewAds ar = new AdminClass_ReviewAds();
+            AdminClass_SendMail as = new AdminClass_SendMail();
 
-                if (result == 1) {
-                    String alert = "<button class=\"btn btn-green\"><i  class=\"glyphicon glyphicon-ok-sign\"></i></button><br><strong>Blocked !</strong>  Inquiry id " + request.getParameter("inquiryBI") + "";
-                    request.setAttribute("alert", alert);
+            if (request.getParameter("subject") != null) {
+
+                String reciever = ar.getUserEmail(request.getParameter("to"));
+                String subject = request.getParameter("subject");
+                String content = request.getParameter("content").replace("*", "");
+                String itemId = request.getParameter("itemname");
+                String reason = null;
+               
+                if ("".equals(request.getParameter("reason"))) {
+                    reason = "Modified ad, Reason isn't available !";
                 } else {
-                    String alert = "<button class=\"btn btn-red\"><i  class=\"glyphicon glyphicon-remove-circle\"></i></button><br><strong>Failed!</strong> Inquiry id " + request.getParameter("inquiryBI") + " Try again.";
-                    request.setAttribute("alert", alert);
+                    reason = "Modified due to-" + request.getParameter("reason");
                 }
 
+                int result = 1; //ar.modifyAds(itemId, reason);
+                int result2 = as.mailClass("fernandowast@gmail.com", subject, content);
+
+                if (result == 1 && result2 == 1) {
+                    String alert = "<button class=\"btn btn-green\"><i  class=\"glyphicon glyphicon-ok-sign\"></i></button><br>Email is sent to <strong> " + reciever + " !</strong>";
+                    request.setAttribute("alert", alert);
+                } else {
+                    String alert = "<button class=\"btn btn-red\"><i  class=\"glyphicon glyphicon-remove-circle\"></i></button><strong> Failed !</strong>";
+                    request.setAttribute("alert", alert);
+
+                }
             }
 
-            String reportCount = String.valueOf(art.getItemReportCount());
-            if ("0".equals(reportCount)) {
-                reportCount = "";
-            }
-            request.setAttribute("reportCount", reportCount);
-            String message_report_count = String.valueOf(arm.getMessageReportCount());
-            if ("0".equals(message_report_count)) {
-                message_report_count = "";
-            }
-            request.setAttribute("message_report_count", message_report_count);
-            String Inquiry_report_count = String.valueOf(ari.getInquiryReportCount());
-            if ("0".equals(Inquiry_report_count)) {
-                Inquiry_report_count = "";
-            }
-            request.setAttribute("Inquiry_report_count", Inquiry_report_count);
-
-            ArrayList ReportedItems = art.getItemReports();
-            request.setAttribute("ReportedItems", ReportedItems);
-            ArrayList ReportedMessages = arm.getMessageReports();
-            request.setAttribute("ReportedMessages", ReportedMessages);
-            ArrayList ReportedInquiries = ari.getInquiryReports();
-            request.setAttribute("ReportedInquiries", ReportedInquiries);
-            RequestDispatcher rd = request.getRequestDispatcher("report_view.jsp");
+            ArrayList reviewAds = ar.reviewAds();
+            request.setAttribute("reviewAds", reviewAds);
+            RequestDispatcher rd = request.getRequestDispatcher("ads_review.jsp");
             rd.forward(request, response);
         } else {
             response.sendRedirect("superb_admin.jsp");

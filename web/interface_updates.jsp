@@ -41,6 +41,7 @@
         <link href="plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
         <link href="plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="plugins/bootstrap-fileupload/bootstrap-fileupload.min.css">
+        <link rel="stylesheet" href="plugins/gritter/css/jquery.gritter.css">
         <!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
         <script type="text/javascript" src="js/data-refresh.js"></script>
         <link rel="shortcut icon" href="favicon.ico" />
@@ -48,10 +49,14 @@
     <!-- end: HEAD -->
     <!-- start: BODY -->
     <body>
+        <div class="loader">
+            <jsp:include page="page-elements/javascript_required.jsp"/>
+        </div>
         <%
             if (session.getAttribute("loggin_state") != "success") {
                 response.sendRedirect("superb_admin.jsp");
             }
+            String alert = (String) request.getAttribute("alert");
         %>
         <!-- start: HEADER -->
         <jsp:include page="page-elements/header.jsp"/>
@@ -201,12 +206,7 @@
                             <div class="page-header">
                                 <h1 class=" hidden-xs">Interface <small class=" hidden-xs">updates</small></h1>
                             </div>
-                            <%if (request.getAttribute("alert") != null) {%>
-                            <div id="alert-id">
-                                <%=request.getAttribute("alert")%>    
 
-                            </div>
-                            <%}%>
                             <!-- end: PAGE TITLE & BREADCRUMB -->
                         </div>
                     </div>
@@ -231,9 +231,9 @@
 
                                             </div>
                                             <div class="col-sm-6" style="padding-top: 5px">
-                                                <form class="form-horizontal" method="post" action="SetSliderItems" enctype="multipart/form-data">
+                                                <form class="form-horizontal" method="post" action="UpdateInterfaces" enctype="multipart/form-data">
                                                     <div class="fileupload fileupload-new" data-provides="fileupload">
-                                                        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA?text=no+image" alt=""/>
+                                                        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="images/no_image.png" alt=""/>
                                                         </div>
                                                         <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                                                         <div>
@@ -271,9 +271,9 @@
                                                     <img class="img-responsive" src="GetSliderItems?slider_id=2"  style="width: 400px;"/>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <form class="form-horizontal" method="post" action="SetSliderItems" enctype="multipart/form-data">
+                                                    <form class="form-horizontal" method="post" action="UpdateInterfaces" enctype="multipart/form-data">
                                                         <div class="fileupload fileupload-new" data-provides="fileupload">
-                                                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA?text=no+image" alt=""/>
+                                                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="images/no_image.png" alt=""/>
                                                             </div>
                                                             <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                                                             <div>
@@ -310,9 +310,9 @@
                                                     <img class="img-responsive" src="GetSliderItems?slider_id=3"  style="width: 400px;"/>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <form class="form-horizontal" method="post" action="SetSliderItems" enctype="multipart/form-data">
+                                                    <form class="form-horizontal" method="post" action="UpdateInterfaces" enctype="multipart/form-data">
                                                         <div class="fileupload fileupload-new" data-provides="fileupload">
-                                                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA?text=no+image" alt=""/>
+                                                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="images/no_image.png" alt=""/>
                                                             </div>
                                                             <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                                                             <div>
@@ -349,9 +349,9 @@
                                                     <img class="img-responsive" src="GetSliderItems?slider_id=4"  style="width: 400px;"/>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <form class="form-horizontal" method="post" action="SetSliderItems" enctype="multipart/form-data">
+                                                    <form class="form-horizontal" method="post" action="UpdateInterfaces" enctype="multipart/form-data">
                                                         <div class="fileupload fileupload-new" data-provides="fileupload">
-                                                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA?text=no+image" alt=""/>
+                                                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="images/no_image.png" alt=""/>
                                                             </div>
                                                             <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                                                             <div>
@@ -388,9 +388,9 @@
                                                     <img class="img-responsive" src="GetSliderItems?slider_id=5"  style="width: 400px;"/>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <form class="form-horizontal" method="post" action="SetSliderItems" enctype="multipart/form-data">
+                                                    <form class="form-horizontal" method="post" action="UpdateInterfaces" enctype="multipart/form-data">
                                                         <div class="fileupload fileupload-new" data-provides="fileupload">
-                                                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA?text=no+image" alt=""/>
+                                                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="images/no_image.png" alt=""/>
                                                             </div>
                                                             <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                                                             <div>
@@ -469,21 +469,59 @@
         <script src="js/ui-modals.js"></script>
         <script src="plugins/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
         <script src="js/form-elements.js"></script>
+        <script src="plugins/gritter/js/jquery.gritter.min.js"></script>
+        <script>
 
+                                                //function to initiate jquery.gritter
+                                                function runNotification() {
+                                                    var i = '<%=alert%>';
+                                                    if (i !== "null") {
+
+                                                        var unique_id = $.gritter.add({
+                                                            // (string | mandatory) the heading of the notification
+                                                            title: 'Notification!',
+                                                            // (string | mandatory) the text inside the notification
+                                                            text: '<%=alert%>',
+                                                            // (bool | optional) if you want it to fade out on its own or just sit there
+                                                            sticky: false,
+                                                            // (int | optional) the time you want it to be alive for before fading out
+                                                            time: 4000,
+                                                            // (string | optional) the class name you want to apply to that specific message
+                                                            class_name: 'my-sticky-class'
+                                                        });
+                                                        // You can have it return a unique id, this can be used to manually remove it later using
+                                                        /*
+                                                         setTimeout(function(){
+                                                         $.gritter.remove(unique_id, {
+                                                         fade: true,
+                                                         speed: 'slow'
+                                                         });
+                                                         }, 6000)
+                                                         */
+                                                        return false;
+
+                                                    }
+
+                                                }
+
+
+        </script>
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 
 
 
         <script>
-                                                jQuery(document).ready(function () {
-                                                    refresh_data();
-                                                    window.setInterval(function () {
-                                                        refresh_data();
-                                                    }, 3000);
-                                                    Main.init();
-                                                    Index.init();
-                                                    FormElements.init();
-                                                });
+            jQuery(document).ready(function () {
+                Main.init();
+                runNotification();
+                $(".loader").fadeOut("slow");
+                refresh_data();
+                window.setInterval(function () {
+                    refresh_data();
+                }, 3000);
+                Index.init();
+                FormElements.init();
+            });
         </script>
     </body>
     <!-- end: BODY -->

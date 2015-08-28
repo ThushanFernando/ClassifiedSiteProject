@@ -25,9 +25,9 @@
             <table class="table table-striped table-hover" id="sample-table-3">
                 <thead>
                     <tr>
-                        <th class="center">ID</th>
-                        <th class="center hidden-xs">Reporter</th>
-                        <th class="center">Reason</th>
+                        <th>ID</th>
+                        <th class=" hidden-xs">Reported User</th>
+                        <th>Reason</th>
                         <th class="center"></th>                                                                                                
 
                     </tr>
@@ -39,9 +39,9 @@
                             received1 = (AdminClass_ReportedMessages) a;
                     %>
                     <tr>
-                        <td class="center"><%=received1.getMessage_id()%></td>
-                        <td class="center hidden-xs"><%=received1.getReceiver()%></td>
-                        <td class="center"><%=received1.getReason()%></td>
+                        <td><%=received1.getMessage_id()%></td>
+                        <td class=" hidden-xs"><%=received1.getSender()%></td>
+                        <td><%=received1.getReason()%></td>
                         <td class="center">
                             <div>
                                 <div class="btn-group">
@@ -80,6 +80,14 @@
                                             <input type="hidden" id="messageCBMU<%=received1.getMessage_id()%>" value="<%=received1.getContent()%>">
                                             <input type="hidden" id="messageIBMU<%=received1.getMessage_id()%>" value="<%=received1.getMessage_id()%>">
                                         </clickedBlockMessageUser>
+                                        </li>
+                                        <li role="presentation">
+                                             <a role="menuitem" tabindex="-1" href="#" onclick="document.getElementById('RRM<%=received1.getMessage_id()%>').submit()">
+                                                <i class="fa clip-remove"></i> Remove Report
+                                            </a>
+                                            <form action="MRemoved_ViewReports?tabId=panel_tab_Message" method="POST" id="RRM<%=received1.getMessage_id()%>">
+                                                <input type="hidden" name="removeReport" value="<%=received1.getMessage_id()%>">
+                                            </form>
                                         </li>
                                     </ul>
                                 </div>

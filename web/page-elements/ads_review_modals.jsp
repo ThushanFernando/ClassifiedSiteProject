@@ -15,15 +15,12 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     &times;
                 </button>
-
-
-
                 <h4 class="modal-title"><input type="radio" class="square-green" value="" checked="checked" name="optionsRadios12">Message to the user</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-14">
-                        <form action="ModifyAds" method="POST" role="form" class="smart-wizard form-horizontal" id="form">
+                        <form action="Mod_ReviewAds" method="POST" role="form" class="smart-wizard form-horizontal" id="form">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">
                                     From: <span class="symbol required"></span>
@@ -66,7 +63,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-6">
-                                    <button class="btn btn-blue next-step btn-block">
+                                    <div id="Mod_ReviewAds" style="display: none"><img src="images/loading.gif" style="width: 50px;"/></div>
+                                    <button class="btn btn-blue next-step btn-block" onclick=" this.style.display = 'none';  document.getElementById('Mod_ReviewAds').style.display = 'block';">
                                         Send <i class="fa fa-arrow-circle-right"></i>
                                     </button>
                                 </div>

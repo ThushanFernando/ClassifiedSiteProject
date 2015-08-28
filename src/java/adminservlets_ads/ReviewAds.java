@@ -9,6 +9,7 @@ import classes.AdminClass_ReviewAds;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -60,7 +61,12 @@ public class ReviewAds extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request, response);
+        Enumeration<String> parameterNames = request.getParameterNames();
+        if (parameterNames.hasMoreElements()) {
+            processRequest(request, response);
+        } else {
+            doPost(request, response);
+        }
 
     }
 
@@ -82,27 +88,7 @@ public class ReviewAds extends HttpServlet {
             String action = request.getParameter("action");
             int result = 0;
             String alert = null;
-            if ("Approve".equals(action) && item != null) {
-                result = ar.approveAd(item);
-                if (result == 1) {
-                    alert = "<div class=\"alert alert-success\">\n"
-                            + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                            + "&times;\n"
-                            + "</button>\n"
-                            + "<i class=\"fa fa-check-circle\"></i>\n"
-                            + "<strong>Approved!</strong> Advertiesment number '" + request.getParameter("item") + "' .\n"
-                            + "</div>";
-                } else {
-                    alert = "<div class=\"alert alert-danger\">\n"
-                            + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                            + "&times;\n"
-                            + "</button>\n"
-                            + "<i class=\"fa fa-times-circle\"></i>\n"
-                            + "<strong>Failed!</strong> Advertiesment number '" + request.getParameter("item") + "' Try again.\n"
-                            + "</div>";
-                }
-                request.setAttribute("alert", alert);
-            } else if (("Remove".equals(action) && item != null)) {
+             if (("Remove".equals(action) && item != null)) {
                 result = ar.removeAd(item);
                 if (result == 1) {
                     alert = "<div class=\"alert alert-success\">\n"
@@ -124,17 +110,7 @@ public class ReviewAds extends HttpServlet {
                 request.setAttribute("alert", alert);
 
             }
-            if (session.getAttribute("alert") != null && session.getAttribute("alert") == "success") {
-                alert = "<div class=\"alert alert-success\">\n"
-                        + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                        + "&times;\n"
-                        + "</button>\n"
-                        + "<i class=\"fa fa-check-circle\"></i>\n"
-                        + "<strong>Sent !</strong>  .\n"
-                        + "</div>";
-                request.setAttribute("alert", alert);
-                session.setAttribute("alert", null);
-            }
+            
 
             ArrayList reviewAds = ar.reviewAds();
             request.setAttribute("reviewAds", reviewAds);

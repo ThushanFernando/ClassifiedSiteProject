@@ -12,6 +12,7 @@ import classes.AdminClass_ReportedMessages;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -42,7 +43,7 @@ public class MessageBlocked_ViewReports extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet MessageBlocked_ViewReports</title>");            
+            out.println("<title>Servlet MessageBlocked_ViewReports</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet MessageBlocked_ViewReports at " + request.getContextPath() + "</h1>");
@@ -63,7 +64,12 @@ public class MessageBlocked_ViewReports extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request, response);
+        Enumeration<String> parameterNames = request.getParameterNames();
+        if (parameterNames.hasMoreElements()) {
+            processRequest(request, response);
+        } else {
+            doPost(request, response);
+        }
     }
 
     /**
@@ -82,7 +88,7 @@ public class MessageBlocked_ViewReports extends HttpServlet {
             AdminClass_ReportedItems art = new AdminClass_ReportedItems();
             AdminClass_ReportedMessages arm = new AdminClass_ReportedMessages();
             AdminClass_ReportedInquiries ari = new AdminClass_ReportedInquiries();
-            
+
             if (request.getParameter("toBM") != null && request.getParameter("messageBM") != null) {
                 AdminClass_BlockedMessages ab = new AdminClass_BlockedMessages();
                 String reciever = art.getUserEmail(request.getParameter("toBM"));
@@ -92,29 +98,14 @@ public class MessageBlocked_ViewReports extends HttpServlet {
                 int state = arm.updateViewState(request.getParameter("messageBM"));
 
                 if (result == 1 && state == 1) {
-                    String alert = "<div class=\"alert alert-success\">\n"
-                            + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                            + "&times;\n"
-                            + "</button>\n"
-                            + "<i class=\"fa fa-check-circle\"></i>\n"
-                            + "<strong>Blocked !</strong>  message id " + request.getParameter("messageBM") + "  .\n"
-                            + "</div>";
+                    String alert = "<button class=\"btn btn-green\"><i  class=\"glyphicon glyphicon-ok-sign\"></i></button><br><strong>Blocked !</strong>  message id " + request.getParameter("messageBM") + "";
                     request.setAttribute("alert", alert);
                 } else {
-                    String alert = "<div class=\"alert alert-danger\">\n"
-                            + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                            + "&times;\n"
-                            + "</button>\n"
-                            + "<i class=\"fa fa-times-circle\"></i>\n"
-                            + "<strong>Failed!</strong> message id '" + request.getParameter("messageBM") + "' Try again.\n"
-                            + "</div>";
+                    String alert = "<button class=\"btn btn-red\"><i  class=\"glyphicon glyphicon-remove-circle\"></i></button><br><strong>Failed!</strong> message id " + request.getParameter("messageBM") + " Try again.";
                     request.setAttribute("alert", alert);
                 }
 
             }
-            
-            
-            
 
             String reportCount = String.valueOf(art.getItemReportCount());
             if ("0".equals(reportCount)) {

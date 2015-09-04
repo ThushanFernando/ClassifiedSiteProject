@@ -185,7 +185,7 @@
                             </a>
                             <ul class="sub-menu">
                                 <li>
-                                    <a href="">
+                                    <a href="MsgAll">
                                         <span class="title"> All </span>
                                         <span class="badge badge-new">new</span>
                                     </a>

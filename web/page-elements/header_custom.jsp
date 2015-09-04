@@ -49,7 +49,7 @@
                                         </ul>
                                     </div>
                                 </li>
-                                <li class="view-all">
+                                <li class="view-all hidden-xs">
                                     <a href="">
                                         See all messages <i class="fa fa-arrow-circle-o-right"></i>
                                     </a>

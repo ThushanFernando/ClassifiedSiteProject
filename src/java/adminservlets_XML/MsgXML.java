@@ -62,8 +62,14 @@ public class MsgXML extends HttpServlet {
         response.setContentType("test/xml");
         response.setCharacterEncoding("UTF-8");
         AdminClass_Message am = new AdminClass_Message();
+        String filter;
+        if(request.getParameter("filter")==null){
+             filter=" ";
+        }else{
+             filter=request.getParameter("filter");
+        }
         
-        ArrayList al = am.msg();
+        ArrayList al = am.allMessages(filter);
         Iterator itr = al.iterator();
         AdminClass_Message received = null;
         String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"

@@ -64,10 +64,8 @@ public class ConversationXML extends HttpServlet {
         response.setContentType("test/xml");
         response.setCharacterEncoding("UTF-8");
         AdminClass_Message am = new AdminClass_Message();
-        String type=null;
-        String sender=null;
-        String style=null;
-        ArrayList al = am.getConversation(request.getParameter("selected_con"));
+        String sender;
+        ArrayList al = am.getConversation(request.getParameter("selected_ListItem"));
         Iterator itr = al.iterator();
         AdminClass_Message received = null;
         String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -75,30 +73,22 @@ public class ConversationXML extends HttpServlet {
         while (itr.hasNext()) {
             Object a = itr.next();
             received = (AdminClass_Message) a;
-            
-            String time = am.timeDiff(received.getTimeStamp());
-            if("Admin".equals(received.getSender())){
-                type="self";
-                sender="You";
-                style="style=\"text-align: right\"";
-            }else{
-                type="other";
-                sender=received.getSender();
-                style="";
+
+            String time = received.getTimeStamp();
+            if ("Admin".equals(received.getSender())) {
+                sender = "You";
+            } else {
+                sender = received.getSender();
             }
-                content = content
-                        + "	<value>\n"
-                        + "		<type>" + type + "</type>\n"
-                        + "		<sender>" + sender + "</sender>\n"
-                        + "		<content>" + received.getContent() + "</content>\n"
-                        + "		<time>" + time + "</time>\n"
-                        + "		<style>"+style+"</style>\n"
-                        + "	</value>\n";
-             
-            
+            content = content
+                    + "	<value>\n"
+                    + "		<sender>" + sender + "</sender>\n"
+                    + "		<content>" + received.getContent() + "</content>\n"
+                    + "		<time>" + time + "</time>\n"
+                    + "	</value>\n";
+
         }
         content = content + "</values>";
-        System.out.println(content);
         response.getWriter().write(content);
     }
 

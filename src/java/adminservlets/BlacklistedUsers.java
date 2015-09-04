@@ -61,7 +61,7 @@ public class BlacklistedUsers extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Enumeration<String> parameterNames = request.getParameterNames();
+        Enumeration<String> parameterNames = request.getParameterNames();       //checking for unappropriate parameters
         if (parameterNames.hasMoreElements()) {
             processRequest(request, response);
         } else {
@@ -142,7 +142,7 @@ public class BlacklistedUsers extends HttpServlet {
                 }
             }
 
-            ArrayList blacklistedEmails = (ArrayList) ab.getBlacklistedEmails();
+            ArrayList blacklistedEmails = (ArrayList) ab.getBlacklistedEmails();//loading blacklisted emails
             request.setAttribute("blacklistedEmails", blacklistedEmails);
             RequestDispatcher rd = request.getRequestDispatcher("user_blacklisted.jsp");
             rd.forward(request, response);

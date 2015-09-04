@@ -415,7 +415,7 @@ a.bricky:hover {
     z-index: 1000;
 }
 .navbar-tools .drop-down-wrapper {
-    height: 250px;
+    height: 270px;
     width: 270px;
     overflow: hidden;
     position: relative;
@@ -3482,15 +3482,25 @@ div.timeline_element.purple div.timeline_title {
 .messages-list .messages-item .messages-item-from {
     font-weight: bold;
     margin-top: 2px;
+    
+    
+}
+.messages-list .messages-item .messages-item-current {
+    color: white;
+    
 }
 .messages-list .messages-item .messages-item-time {
     opacity: 1;
-    right: 15px;
+    right: 80px;
     top: 8px;
     transition: opacity 0.2s ease-in-out 0s;
 }
 .messages-list .messages-item .messages-item-time .text {
     color: #999999;
+    font-size: 12px;
+}
+.messages-list .messages-item .messages-item-time .text-current {
+    color: white;
     font-size: 12px;
 }
 .messages-list .messages-item .messages-item-time .messages-item-actions {
@@ -3533,7 +3543,7 @@ div.timeline_element.purple div.timeline_title {
     background:#3D9400;
 }
 .messages-list .messages-item .messages-item-time:hover .text {
-    opacity: 0;
+    opacity: 100;
 }
 .messages-list .messages-item .messages-item-time:hover .messages-item-actions {
     opacity: 1;

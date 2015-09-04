@@ -6,7 +6,6 @@
 package adminservlets_messages;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -46,13 +45,9 @@ public class MsgAll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("loggin_state") == "success") {
-            RequestDispatcher rd = request.getRequestDispatcher("admin/msg_all.jsp");
-            rd.forward(request, response);
-        } else {
-            response.sendRedirect("superb_admin.jsp");
-        }
+        
+            doPost(request, response);
+        
     }
 
     /**
@@ -66,7 +61,13 @@ public class MsgAll extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        if (session.getAttribute("loggin_state") == "success") {
+            RequestDispatcher rd = request.getRequestDispatcher("msg_all.jsp");
+            rd.forward(request, response);
+        } else {
+            response.sendRedirect("superb_admin.jsp");
+        }
     }
 
     /**

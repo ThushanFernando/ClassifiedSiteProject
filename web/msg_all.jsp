@@ -40,7 +40,140 @@
         <link rel="stylesheet" href="plugins/summernote/build/summernote.css">
         <link href="plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
         <link href="plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="plugins/DataTables/media/css/DT_bootstrap.css" />
+        <style>
 
+            .conversation-wrap
+            {
+                box-shadow: -2px 0 3px #ddd;
+                padding:0;
+                overflow: auto;
+            }
+            .conversation
+            {
+                padding:5px;
+                border-bottom:1px solid #ddd;
+                margin:0;
+
+            }
+
+            .message-wrap
+            {
+                box-shadow: 0 0 3px #ddd;
+                padding:0;
+
+            }
+            .msg
+            {
+                padding:5px;
+                /*border-bottom:1px solid #ddd;*/
+                margin:0;
+            }
+            .msg-wrap
+            {
+                padding:10px;
+                max-height: 400px;
+                overflow: auto;
+
+            }
+
+            .time
+            {
+                color:#bfbfbf;
+            }
+
+
+
+            .send-message
+            {
+                resize: none;
+            }
+
+            .highlight
+            {
+                background-color: #f7f7f9;
+                border: 1px solid #e1e1e8;
+            }
+
+
+            .btn-panel
+            {
+                background: #f7f7f9;
+            }
+
+            .btn-panel .btn
+            {
+                color:#b8b8b8;
+
+                transition: 0.2s all ease-in-out;
+            }
+
+            .btn-panel .btn:hover
+            {
+                color:#666;
+                background: #f8f8f8;
+            }
+            .btn-panel .btn:active
+            {
+                background: #f8f8f8;
+                box-shadow: 0 0 1px #ddd;
+            }
+
+            .btn-panel-conversation .btn,.btn-panel-msg .btn
+            {
+
+                background: #f8f8f8;
+            }
+            .btn-panel-conversation .btn:first-child
+            {
+                border-right: 1px solid #ddd;
+            }
+
+            .msg-wrap .media-heading1
+            {
+                color:#CC0000;
+                font-weight: 700;
+            }
+
+
+            .msg-date
+            {
+                background: none;
+                text-align: center;
+                color:#aaa;
+                border:none;
+                box-shadow: none;
+                border-bottom: 1px solid #ddd;
+            }
+
+
+
+
+            /* Let's get this party started */
+            ::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            /* Track */
+            ::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+                /*        -webkit-border-radius: 10px;
+                        border-radius: 10px;*/
+            }
+
+            /* Handle */
+            ::-webkit-scrollbar-thumb {
+                /*        -webkit-border-radius: 10px;
+                        border-radius: 10px;*/
+                background:#ddd; 
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+            }
+            ::-webkit-scrollbar-thumb:window-inactive {
+                background: #ddd; 
+            }
+
+
+        </style>
         <!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
         <script type="text/javascript" src="js/data-refresh.js"></script>
         <link rel="shortcut icon" href="favicon.ico" />
@@ -201,79 +334,43 @@
                                     </form>
                                 </li>
                             </ol>
-                            <div class="page-header ">
-                                <h1 class="hidden-xs">All <small class="hidden-xs">messages</small></h1>
-                            </div>
+
                             <!-- end: PAGE TITLE & BREADCRUMB -->
                         </div>
                     </div>
                     <!-- end: PAGE HEADER -->
                     <!-- start: PAGE CONTENT -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- start: INBOX PANEL -->
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <i class="fa fa-envelope-o"></i>
-                                    Inbox
-                                    <div class="panel-tools">
-                                        <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
-                                        </a>
-                                        <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal">
-                                            <i class="fa fa-wrench"></i>
-                                        </a>
-                                        <a class="btn btn-xs btn-link panel-refresh" href="#">
-                                            <i class="fa fa-refresh"></i>
-                                        </a>
-                                        <a class="btn btn-xs btn-link panel-expand" href="#">
-                                            <i class="fa fa-resize-full"></i>
-                                        </a>
-                                        <a class="btn btn-xs btn-link panel-close" href="#">
-                                            <i class="fa fa-times"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="panel-body messages">
-                                    <ul class="messages-list">
-                                        <li class="messages-search" >
-                                            <form action="#" class="form-inline">
-                                                <div class="input-group">
-                                                    <input type="text" id="searchmessage" onkeyup=" search()" class="form-control" placeholder="Search messages...">
-                                                    <div class="input-group-btn">
+                    <div class="container">
+                        <div class="row">
+                            <input type="text"  value="testuser2" id="currentUser" class="visible-xs form-control" placeholder="select user" >
+                            <div class="col-sm-3 hidden-xs">
+                                <div class="btn-panel btn-panel-conversation">
 
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </li>
-                                        <div style="overflow-y:  auto; height: 565px;" id="MsgAllXML" class="hidden-xs ">   
-
-                                        </div>
-
-                                    </ul>
-                                    <div class="messages-content" style="height: 365px;">
-                                        <div class="message-header">
-
-                                            <div class="message-actions">
-                                                <a title="Move to trash" href="#"><i class="fa fa-trash-o"></i></a>
-                                                <a title="Report" href="#"><i class="fa fa-ban"></i></a>
-
-
-                                            </div>
-                                        </div>
-                                        <div class="message-content">
-                                            <ol class="discussion">
-
-                                                <div id="conversation"></div>
-
-                                            </ol>
-                                        </div>
-                                    </div>
+                                    <input type="text"  id="filter" placeholder="filter messages" style="margin-bottom: 5px">
                                 </div>
                             </div>
-                            <!-- end: INBOX PANEL -->
+
+                            <div id="ConversationAction" class="col-sm-offset-1 col-sm-7">
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="conversation-wrap col-sm-3 hidden-xs">
+                                <ul class="messages-list" style="max-height: 510px" id="MsgListXML">
+
+                                </ul>
+                            </div>
+
+
+
+                            <div class="message-wrap col-sm-9">
+                                <div class="msg-wrap" id="ConversationXML">
+                                </div>
+                                <div id="msgResponce">
+                                </div>
+                            </div>
                         </div>
                     </div>
-
 
                     <!-- end: PAGE CONTENT-->
                 </div>
@@ -317,11 +414,6 @@
         <script src="js/main.js"></script>
         <!-- end: MAIN JAVASCRIPTS -->
         <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
-        <script src="plugins/flot/jquery.flot.js"></script>
-        <script src="plugins/flot/jquery.flot.pie.js"></script>
-        <script src="plugins/flot/jquery.flot.resize.min.js"></script>
-        <script src="plugins/jquery.sparkline/jquery.sparkline.js"></script>
-        <script src="plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
         <script src="plugins/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
         <script src="plugins/fullcalendar/fullcalendar/fullcalendar.js"></script>
         <script src="js/index.js"></script>
@@ -333,19 +425,141 @@
         <script src="plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
         <script src="plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
         <script src="js/ui-modals.js"></script>
+        <script type="text/javascript" src="plugins/DataTables/media/js/jquery.messageTables.min.js"></script>
+        <script type="text/javascript" src="plugins/DataTables/media/js/MT_bootstrap.js"></script>
+        <script src="js/table-message.js"></script>
+        <script>
+            function msgLoad() {
+                var id = '<%=request.getParameter("id")%>';
+                if (id !== "null") {
+                    document.getElementById("currentUser").value = id;
+                }
+            }
+            function msgList() {
+
+                $.ajax({
+                    type: "GET",
+                    url: "MsgXML",
+                    dataType: "xml",
+                    data: {
+                        filter: document.getElementById("filter").value
+                    },
+                    success: function (xml) {
+                        $("#MsgListXML").html("");
+                        $(xml).find('value').each(function () {
+
+                            var sender = $(this).find('sender').text();
+                            var content = $(this).find('content').text();
+                            var lngth = "";
+                            if (content.length > 30) {
+                                lngth = ".....";
+                            }
+                            var time = $(this).find('time').text();
+                            var status = $(this).find('status').text();
+                            var item;
+                            if (document.getElementById("currentUser").value === sender) {
+                                item = $('<clickedListItem id="' + sender + '"><li style="background-color: #02A1FF" class="messages-item">'
+                                        + '<span class="messages-item-from messages-item-current" style="colour:white">' + sender + '</span>'
+                                        + '<div class="messages-item-time ">'
+                                        + '<span class="text-current">' + time + '</span>'
+                                        + '</div>'
+                                        + '<span class="messages-item-subject messages-item-current">' + content.substring(0, 30) + lngth + '...</span>'
+                                        + '</li></clickedListItem>');
+                            } else {
+                                item = $('<clickedListItem id="' + sender + '"><li' + status + ' class="messages-item">'
+                                        + '<span class="messages-item-from">' + sender + '</span>'
+                                        + '<div class="messages-item-time">'
+                                        + '<span class="text">' + time + '</span>'
+                                        + '</div>'
+                                        + '<span class="messages-item-subject">' + content.substring(0, 30) + lngth + '...</span>'
+                                        + '</li></clickedListItem>');
+                            }
+                            $("#MsgListXML").append(item);
+                        });
+                    }
+                });
+                $.ajax({
+                    type: "GET",
+                    url: "ConversationXML",
+                    dataType: "xml",
+                    data: {
+                        selected_ListItem: document.getElementById("currentUser").value
+                    },
+                    success: function (xml) {
+                        $("#ConversationXML").html("");
+                        $("#ConversationAction").html("");
+                        $("#msgResponce").html("");
+                        $(xml).find('value').each(function () {
+
+                            var sender = $(this).find('sender').text();
+                            var content = $(this).find('content').text();
+                            var time = $(this).find('time').text();
+                            var item;
+                            var action;
+                            var responce;
+                            item = $('<div class="media msg">\n'
+                                    + '<a class="pull-left" href="#">\n'
+                                    + '<img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 32px; height: 32px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACqUlEQVR4Xu2Y60tiURTFl48STFJMwkQjUTDtixq+Av93P6iBJFTgg1JL8QWBGT4QfDX7gDIyNE3nEBO6D0Rh9+5z9rprr19dTa/XW2KHl4YFYAfwCHAG7HAGgkOQKcAUYAowBZgCO6wAY5AxyBhkDDIGdxgC/M8QY5AxyBhkDDIGGYM7rIAyBgeDAYrFIkajEYxGIwKBAA4PDzckpd+322243W54PJ5P5f6Omh9tqiTAfD5HNpuFVqvFyckJms0m9vf3EY/H1/u9vb0hn89jsVj8kwDfUfNviisJ8PLygru7O4TDYVgsFtDh9Xo9NBrNes9cLgeTybThgKenJ1SrVXGf1WoVDup2u4jFYhiPx1I1P7XVBxcoCVCr1UBfTqcTrVYLe3t7OD8/x/HxsdiOPqNGo9Eo0un02gHkBhJmuVzC7/fj5uYGXq8XZ2dnop5Mzf8iwMPDAxqNBmw2GxwOBx4fHzGdTpFMJkVzNB7UGAmSSqU2RoDmnETQ6XQiOyKRiHCOSk0ZEZQcUKlU8Pz8LA5vNptRr9eFCJQBFHq//szG5eWlGA1ywOnpqQhBapoWPfl+vw+fzweXyyU+U635VRGUBOh0OigUCggGg8IFK/teXV3h/v4ew+Hwj/OQU4gUq/w4ODgQrkkkEmKEVGp+tXm6XkkAOngmk4HBYBAjQA6gEKRmyOL05GnR99vbW9jtdjEGdP319bUIR8oA+pnG5OLiQoghU5OElFlKAtCGr6+vKJfLmEwm64aosd/XbDbbyIBSqSSeNKU+HXzlnFAohKOjI6maMs0rO0B20590n7IDflIzMmdhAfiNEL8R4jdC/EZIJj235R6mAFOAKcAUYApsS6LL9MEUYAowBZgCTAGZ9NyWe5gCTAGmAFOAKbAtiS7TB1Ng1ynwDkxRe58vH3FfAAAAAElFTkSuQmCC">\n'
+                                    + '</a>\n'
+                                    + '<div class="media-body">\n'
+                                    + '<small class="pull-right time"><i class="fa fa-clock-o"></i>&nbsp;' + time + '</small>\n'
+                                    + '<h5 class="media-heading">' + sender + '</h5>\n'
+                                    + '<small class="col-sm-10">' + content + '</small>\n'
+                                    + '</div>\n'
+                                    + '</div>');
+                            $("#ConversationXML").append(item);
+                            action = $('<div class="btn-panel btn-panel-msg message-actions">'
+                                    + '<a title="Move ' + sender + ' to trash" href="#" class="btn  col-sm-2  send-message-btn" ><i class="fa fa-trash-o"></i></a>'
+                                    + '<a title="Blacklist ' + sender + '" href="#" class="btn  col-sm-2  send-message-btn" role="button"><i class="fa fa-ban"></i></a>'
+                                    + ' </div>');
+                            $("#ConversationAction").html(action);
+                            responce = $('<div class="send-wrap ">'
+                                    + '<textarea class="form-control send-message" rows="2" placeholder="Write a reply..."></textarea>'
+                                    + '</div>'
+                                    + '<div class="btn-panel">'
+                                    + '<a href="" class=" col-sm-4 text-right btn   send-message-btn pull-right" role="button"><i class="fa fa-plus"></i> Send Message</a>'
+                                    + '</div>');
+                            $("#msgResponce").html(responce);
+
+                        });
+                    }
+                });
+            }
+            ;
+            $(document).on('click', 'clickedListItem', function () {
+                document.getElementById("currentUser").value = this.id;
+                msgList();
+            });
+            $("#filter").keyup(function () {
+                if (document.getElementById("filter").value === "") {
+                    msgList();
+                } else {
+                    document.getElementById("currentUser").value = "";
+                }
+            });
+            $("#currentUser").keyup(function () {
+              document.getElementById("filter").value ="";
+                    
+            });</script>
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
         <script>
-                                                        jQuery(document).ready(function () {
-                                                            $(".loader").fadeOut("slow");
-                                                            refresh_data();
-                                                            window.setInterval(function () {
-                                                                refresh_data();
-                                                            }, 3000);
-                                                            Main.init();
-                                                            Index.init();
-                                                            UIModals.init();
-                                                            FormValidator.init();
-                                                        });
+            jQuery(document).ready(function () {
+                $(".loader").fadeOut("slow");
+
+                refresh_data();
+                msgLoad();
+                msgList();
+
+                window.setInterval(function () {
+                    refresh_data();
+                    msgList();
+                }, 3000);
+                TableData.init();
+                Main.init();
+                Index.init();
+                UIModals.init();
+                FormValidator.init();
+            });
         </script>
     </body>
     <!-- end: BODY -->

@@ -1,0 +1,6 @@
+
+admin reported messages wala report krnda hethuwa
+admin reported inquiries wala report krnda hethuwa
+admin_reported_inquiryview eka ona
+admin reported inquiries eke reported_user ona
+

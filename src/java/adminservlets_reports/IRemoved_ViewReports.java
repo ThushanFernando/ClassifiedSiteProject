@@ -63,7 +63,7 @@ public class IRemoved_ViewReports extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Enumeration<String> parameterNames = request.getParameterNames();
+        Enumeration<String> parameterNames = request.getParameterNames();       //checking for unappropriate parameters
         if (parameterNames.hasMoreElements()) {
             processRequest(request, response);
         } else {
@@ -83,18 +83,26 @@ public class IRemoved_ViewReports extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("loggin_state") == "success") {
+        if (session.getAttribute("loggin_state") == "success") {                //checking logged in status
+            
             AdminClass_ReportedItems art = new AdminClass_ReportedItems();
             AdminClass_ReportedMessages arm = new AdminClass_ReportedMessages();
             AdminClass_ReportedInquiries ari = new AdminClass_ReportedInquiries();
 
             if (request.getParameter("removeReport") != null) {
-                int result =ari.updateViewState(request.getParameter("removeReport"));
+                
+                int result =ari.updateViewState(request.getParameter("removeReport"));// removing inquiry report
                 if (result == 1) {
-                    String alert = "<button class=\"btn btn-green\"><i  class=\"glyphicon glyphicon-ok-sign\"></i></button><br><strong>Removed !</strong>  Inquiry id " + request.getParameter("removeReport") + "";
+                    String alert = "<button class=\"btn btn-green\">"           //returning notification of the success 
+                            + "<i  class=\"glyphicon glyphicon-ok-sign\">"
+                            + "</i></button><br><strong>Removed !</strong>"
+                            + "  Inquiry id " + request.getParameter("removeReport") + "";
                     request.setAttribute("alert", alert);
                 } else {
-                    String alert = "<button class=\"btn btn-red\"><i  class=\"glyphicon glyphicon-remove-circle\"></i></button><br><strong>Failed!</strong> Inquiry id " + request.getParameter("removeReport") + " Try again.";
+                    String alert = "<button class=\"btn btn-red\">"             //returning notification of the failure 
+                            + "<i  class=\"glyphicon glyphicon-remove-circle\">"
+                            + "</i></button><br><strong>Failed!</strong>"
+                            + " Inquiry id " + request.getParameter("removeReport") + " Try again.";
                     request.setAttribute("alert", alert);
                 }
             }
@@ -115,12 +123,13 @@ public class IRemoved_ViewReports extends HttpServlet {
             }
             request.setAttribute("Inquiry_report_count", Inquiry_report_count);
 
-            ArrayList ReportedItems = art.getItemReports();
+            ArrayList ReportedItems = art.getItemReports();                     //getting ad reports
             request.setAttribute("ReportedItems", ReportedItems);
-            ArrayList ReportedMessages = arm.getMessageReports();
+            ArrayList ReportedMessages = arm.getMessageReports();               //getting message reports
             request.setAttribute("ReportedMessages", ReportedMessages);
-            ArrayList ReportedInquiries = ari.getInquiryReports();
+            ArrayList ReportedInquiries = ari.getInquiryReports();              //getting inquiry reports
             request.setAttribute("ReportedInquiries", ReportedInquiries);
+            
             RequestDispatcher rd = request.getRequestDispatcher("report_view.jsp");
             rd.forward(request, response);
         } else {

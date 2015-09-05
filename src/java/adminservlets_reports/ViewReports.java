@@ -5,10 +5,6 @@
  */
 package adminservlets_reports;
 
-import classes.AdminClass_BlockedInquiries;
-import classes.AdminClass_BlockedItems;
-import classes.AdminClass_BlockedMessages;
-import classes.AdminClass_BlockedUsers;
 import classes.AdminClass_ReportedInquiries;
 import classes.AdminClass_ReportedItems;
 import classes.AdminClass_ReportedMessages;
@@ -67,7 +63,7 @@ public class ViewReports extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Enumeration<String> parameterNames = request.getParameterNames();
+        Enumeration<String> parameterNames = request.getParameterNames();       //checking for unappropriate parameters
         if (parameterNames.hasMoreElements()) {
             processRequest(request, response);
         } else {
@@ -87,7 +83,8 @@ public class ViewReports extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("loggin_state") == "success") {
+        if (session.getAttribute("loggin_state") == "success") {                //checking logged in status
+            
             AdminClass_ReportedItems art = new AdminClass_ReportedItems();
             AdminClass_ReportedMessages arm = new AdminClass_ReportedMessages();
             AdminClass_ReportedInquiries ari = new AdminClass_ReportedInquiries();
@@ -108,12 +105,13 @@ public class ViewReports extends HttpServlet {
             }
             request.setAttribute("Inquiry_report_count", Inquiry_report_count);
 
-            ArrayList ReportedItems = art.getItemReports();
+            ArrayList ReportedItems = art.getItemReports();                     //getting ad reports
             request.setAttribute("ReportedItems", ReportedItems);
-            ArrayList ReportedMessages = arm.getMessageReports();
+            ArrayList ReportedMessages = arm.getMessageReports();               //getting message reports
             request.setAttribute("ReportedMessages", ReportedMessages);
-            ArrayList ReportedInquiries = ari.getInquiryReports();
+            ArrayList ReportedInquiries = ari.getInquiryReports();              //getting inquiry reports
             request.setAttribute("ReportedInquiries", ReportedInquiries);
+            
             RequestDispatcher rd = request.getRequestDispatcher("report_view.jsp");
             rd.forward(request, response);
         } else {

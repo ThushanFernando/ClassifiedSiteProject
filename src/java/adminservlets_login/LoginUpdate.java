@@ -48,7 +48,7 @@ public class LoginUpdate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Enumeration<String> parameterNames = request.getParameterNames();
+        Enumeration<String> parameterNames = request.getParameterNames();       //checking for unappropriate parameters
         if (parameterNames.hasMoreElements()) {
             processRequest(request, response);
         } else {
@@ -68,18 +68,21 @@ public class LoginUpdate extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("loggin_state") == "success") {
-            request.getParameter("password");
+        if (session.getAttribute("loggin_state") == "success") {                //checking logged in status
 
-            boolean result = false;
+            request.getParameter("password");
+            boolean result;
 
             AdminClass_LoginMethods lm = new AdminClass_LoginMethods();
 
             if ("".equals(request.getParameter("usernamenew"))) {
-                result = lm.updateAdminCustom((String) session.getAttribute("Admin"), request.getParameter("password"));
+                
+                result = lm.updateAdminCustom((String) session.getAttribute("Admin"), request.getParameter("password"));//update admin password
+                
                 if (result == true) {
+                    
                     session.setAttribute("loggin_state", "failed");
-                    String alert = "<div class=\"alert alert-success\">\n"
+                    String alert = "<div class=\"alert alert-success\">\n"      //returning notification of the success 
                             + "<button data-dismiss=\"alert\" class=\"close\">\n"
                             + "&times;\n"
                             + "</button>\n"
@@ -88,18 +91,24 @@ public class LoginUpdate extends HttpServlet {
                             + "</div>";
                     session.setAttribute("alert", alert);
                     response.sendRedirect("superb_admin.jsp");
+                
                 } else {
-                    String alert = "<button class=\"btn btn-red\"><i  class=\"glyphicon glyphicon-remove-circle\"></i></button><strong> Note! </strong><br><li> Use only  alphanumeric characters for your password (both numbers and letters ).</li>"
+                    
+                    String alert = "<button class=\"btn btn-red\">"             //returning notification of the failure
+                            + "<i  class=\"glyphicon glyphicon-remove-circle\">"
+                            + "</i></button><strong> Note! </strong><br><li> Use only  alphanumeric characters for your password (both numbers and letters ).</li>"
                             + "<br><li>Password must contain at least 8-20 characters, including UPPER/lowercase and number.</li>";
                     session.setAttribute("alert", alert);
                     session.setAttribute("login_change", "true");
                     response.sendRedirect("change_log-in.jsp");
                 }
+            
             } else {
-                String res = lm.updateAdmin((String) session.getAttribute("Admin"), request.getParameter("usernamenew"), request.getParameter("password"));
+                String res = lm.updateAdmin((String) session.getAttribute("Admin"), request.getParameter("usernamenew"), request.getParameter("password"));//update admin username and password
 
                 if ("success".equals(res)) {
-                    session.setAttribute("loggin_state", "failed");
+                    
+                    session.setAttribute("loggin_state", "failed");             //returning notification of the success 
                     String alert = "<div class=\"alert alert-success\">\n"
                             + "<button data-dismiss=\"alert\" class=\"close\">\n"
                             + "&times;\n"
@@ -109,14 +118,23 @@ public class LoginUpdate extends HttpServlet {
                             + "</div>";
                     session.setAttribute("alert", alert);
                     response.sendRedirect("superb_admin.jsp");
+                
                 } else if ("unavailable".equals(res)) {
-                    String alert = "<button class=\"btn btn-red\"><i  class=\"glyphicon glyphicon-remove-circle\"></i></button><strong> Failed! </strong><li>User name is not available.</li>";
+                    
+                    String alert = "<button class=\"btn btn-red\">"             //returning notification of the failure 
+                            + "<i  class=\"glyphicon glyphicon-remove-circle\">"
+                            + "</i></button><strong> Failed! </strong><li>User name is not available.</li>";
 
                     session.setAttribute("alert", alert);
                     session.setAttribute("login_change", "true");
                     response.sendRedirect("change_log-in.jsp");
+                
                 } else {
-                    String alert = "<button class=\"btn btn-red\"><i  class=\"glyphicon glyphicon-remove-circle\"></i></button><strong> Note! </strong><br><li> Use only  alphanumeric characters for your Username & password (both numbers and letters ).</li>"
+                    
+                    String alert = "<button class=\"btn btn-red\">"             //returning notification of the failure 
+                            + "<i  class=\"glyphicon glyphicon-remove-circle\">"
+                            + "</i></button><strong> Note! </strong><br>"
+                            + "<li> Use only  alphanumeric characters for your Username & password (both numbers and letters ).</li>"
                             + "<br><li>Password must contain at least 8-20 characters, including UPPER/lowercase and number.</li>"
                             + "<br><li>User name must contain at least 8-20 characters.</li>";
 

@@ -160,6 +160,10 @@
         <servlet-name>ForgotPassword</servlet-name>
         <servlet-class>adminservlets.ForgotPassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteMessage</servlet-name>
+        <servlet-class>adminservlets_messages.DeleteMessage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/Dashboard</url-pattern>
@@ -319,6 +323,10 @@
     <servlet-mapping>
         <servlet-name>ForgotPassword</servlet-name>
         <url-pattern>/ForgotPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteMessage</servlet-name>
+        <url-pattern>/DeleteMessage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

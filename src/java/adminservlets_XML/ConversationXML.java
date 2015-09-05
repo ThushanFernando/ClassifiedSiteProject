@@ -82,6 +82,7 @@ public class ConversationXML extends HttpServlet {
             }
             content = content
                     + "	<value>\n"
+                    + "		<id>" + received.getId()+ "</id>\n"
                     + "		<sender>" + sender + "</sender>\n"
                     + "		<content>" + received.getContent() + "</content>\n"
                     + "		<time>" + time + "</time>\n"

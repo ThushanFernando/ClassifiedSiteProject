@@ -61,7 +61,7 @@ public class Apr_ReviewAds extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Enumeration<String> parameterNames = request.getParameterNames();
+        Enumeration<String> parameterNames = request.getParameterNames();       //checking for unappropriate parameters
         if (parameterNames.hasMoreElements()) {
             processRequest(request, response);
         } else {
@@ -81,7 +81,7 @@ public class Apr_ReviewAds extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("loggin_state") == "success") {
+        if (session.getAttribute("loggin_state") == "success") {                //checking logged in status
             AdminClass_ReviewAds ar = new AdminClass_ReviewAds();
 
             String action = request.getParameter("action");
@@ -90,18 +90,24 @@ public class Apr_ReviewAds extends HttpServlet {
             int result;
             if ("Approve".equals(action) && item != null) {
 
-                result = ar.approveAd(item);
+                result = ar.approveAd(item);                                    //Approving advertiesment
                 if (result == 1) {
-                    alert = "<button class=\"btn btn-green\"><i  class=\"glyphicon glyphicon-ok-sign\"></i></button><br><strong>Approved!</strong> Advertiesment number "+request.getParameter("item")+""; 
+                    alert = "<button class=\"btn btn-green\">"                  //returning notification of the success 
+                            + "<i  class=\"glyphicon glyphicon-ok-sign\">"
+                            + "</i></button><br><strong>Approved!</strong>"
+                            + " Advertiesment number "+request.getParameter("item")+""; 
                             
                 } else {
-                    alert = "<button class=\"btn btn-red\"><i  class=\"glyphicon glyphicon-remove-circle\"></i></button><br><strong>Failed!</strong> Advertiesment number " + request.getParameter("item") + " Try again.";
+                    alert = "<button class=\"btn btn-red\">"                    //returning notification of the the failure
+                            + "<i  class=\"glyphicon glyphicon-remove-circle\">"
+                            + "</i></button><br><strong>Failed!</strong>"
+                            + " Advertiesment number " + request.getParameter("item") + " Try again.";
                             
                 }
                 request.setAttribute("alert", alert);
             }
 
-            ArrayList reviewAds = ar.reviewAds();
+            ArrayList reviewAds = ar.reviewAds();                               //loading ad reviews
             request.setAttribute("reviewAds", reviewAds);
             RequestDispatcher rd = request.getRequestDispatcher("ads_review.jsp");
             rd.forward(request, response);

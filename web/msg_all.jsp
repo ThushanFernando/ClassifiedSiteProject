@@ -342,7 +342,7 @@
                     <!-- start: PAGE CONTENT -->
                     <div class="container">
                         <div class="row">
-                            <input type="text"  value="testuser2" id="currentUser" class="visible-xs form-control" placeholder="select user" >
+                            <input type="text"  value="" id="currentUser" class="visible-xs form-control" placeholder="select user" >
                             <div class="col-sm-3 hidden-xs">
                                 <div class="btn-panel btn-panel-conversation">
 
@@ -370,6 +370,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
                     <!-- end: PAGE CONTENT-->
@@ -391,6 +392,7 @@
 
 
         <!-- start: BOOTSTRAP EXTENDED MODALS -->
+
         <jsp:include page="page-elements/login_update_modals.jsp"/>
         <!-- start: MAIN JAVASCRIPTS -->
         <!--[if lt IE 9]>
@@ -461,7 +463,7 @@
                                 item = $('<clickedListItem id="' + sender + '"><li style="background-color: #02A1FF" class="messages-item">'
                                         + '<span class="messages-item-from messages-item-current" style="colour:white">' + sender + '</span>'
                                         + '<div class="messages-item-time ">'
-                                        + '<span class="text-current">' + time + '</span>'
+                                        + '<span class="text-current"><small>' + time + '</small></span>'
                                         + '</div>'
                                         + '<span class="messages-item-subject messages-item-current">' + content.substring(0, 30) + lngth + '...</span>'
                                         + '</li></clickedListItem>');
@@ -469,7 +471,7 @@
                                 item = $('<clickedListItem id="' + sender + '"><li' + status + ' class="messages-item">'
                                         + '<span class="messages-item-from">' + sender + '</span>'
                                         + '<div class="messages-item-time">'
-                                        + '<span class="text">' + time + '</span>'
+                                        + '<span class="text"><small>' + time + '</small></span>'
                                         + '</div>'
                                         + '<span class="messages-item-subject">' + content.substring(0, 30) + lngth + '...</span>'
                                         + '</li></clickedListItem>');
@@ -491,6 +493,7 @@
                         $("#msgResponce").html("");
                         $(xml).find('value').each(function () {
 
+                            var id = $(this).find('id').text();
                             var sender = $(this).find('sender').text();
                             var content = $(this).find('content').text();
                             var time = $(this).find('time').text();
@@ -504,14 +507,64 @@
                                     + '<div class="media-body">\n'
                                     + '<small class="pull-right time"><i class="fa fa-clock-o"></i>&nbsp;' + time + '</small>\n'
                                     + '<h5 class="media-heading">' + sender + '</h5>\n'
-                                    + '<small class="col-sm-10">' + content + '</small>\n'
+                                    + '<small class="col-sm-10">' + content + ' <a title="Delete message" href="#confirm_delete-id-' + id + '" data-toggle="modal" ><i class="fa fa-trash-o"></i></a></small>\n'
                                     + '</div>\n'
+                                    + '</div>'
+                                    + '<div id="confirm_delete-id-' + id + '"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">'
+                                    + '<div class="modal-header">'
+                                    + '<h4 class="modal-title badge badge-green">Confirmation</h4>'
+                                    + '</div>'
+                                    + '<div class="modal-body">'
+                                    + 'Delete message " ' + content + ' " ?'
+                                    + '</div>'
+                                    + '<div class="modal-footer">'
+                                    + '<button type="button" data-dismiss="modal" class="btn btn-light-grey">'
+                                    + 'Cancel'
+                                    + '</button>'
+                                    + '<button type="button" data-dismiss="modal" class="btn btn-blue" onclick="deleteMessage('+id+')">'
+                                    + 'Delete'
+                                    + '</button>'
+                                    + '</div>'
                                     + '</div>');
+
                             $("#ConversationXML").append(item);
                             action = $('<div class="btn-panel btn-panel-msg message-actions">'
-                                    + '<a title="Move ' + sender + ' to trash" href="#" class="btn  col-sm-2  send-message-btn" ><i class="fa fa-trash-o"></i></a>'
-                                    + '<a title="Blacklist ' + sender + '" href="#" class="btn  col-sm-2  send-message-btn" role="button"><i class="fa fa-ban"></i></a>'
+                                    + '<a title="Move ' + sender + ' to trash" href="#confirm_delete-con-id-' + sender + '" data-toggle="modal" class="btn  col-sm-2  send-message-btn" ><i class="fa fa-trash-o"></i></a>'
+                                    + '<div id="confirm_delete-con-id-' + sender + '"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">'
+                                    + '<div class="modal-header">'
+                                    + '<h4 class="modal-title badge badge-green">Confirmation</h4>'
+                                    + '</div>'
+                                    + '<div class="modal-body">'
+                                    + 'Delete conversation with ' + sender + ' ?'
+                                    + '</div>'
+                                    + '<div class="modal-footer">'
+                                    + '<button type="button" data-dismiss="modal" class="btn btn-light-grey">'
+                                    + 'Cancel'
+                                    + '</button>'
+                                    + '<button type="button" data-dismiss="modal" class="btn btn-blue" onclick="">'
+                                    + 'Delete'
+                                    + '</button>'
+                                    + '</div>'
+                                    + '</div>'
+                                    + '<a title="Blacklist ' + sender + '" href="#confirm_blacklist-user' + sender + '" data-toggle="modal" class="btn  col-sm-2  send-message-btn" role="button"><i class="fa fa-ban"></i></a>'
+                                    + '<div id="confirm_blacklist-user' + sender + '"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">'
+                                    + '<div class="modal-header">'
+                                    + '<h4 class="modal-title badge badge-green">Confirmation</h4>'
+                                    + '</div>'
+                                    + '<div class="modal-body">'
+                                    + 'Blacklist user ' + sender + ' ?'
+                                    + '</div>'
+                                    + '<div class="modal-footer">'
+                                    + '<button type="button" data-dismiss="modal" class="btn btn-light-grey">'
+                                    + 'Cancel'
+                                    + '</button>'
+                                    + '<button type="button" data-dismiss="modal" class="btn btn-blue" onclick="">'
+                                    + 'Blacklist'
+                                    + '</button>'
+                                    + '</div>'
+                                    + '</div>'
                                     + ' </div>');
+
                             $("#ConversationAction").html(action);
                             responce = $('<div class="send-wrap ">'
                                     + '<textarea class="form-control send-message" rows="2" placeholder="Write a reply..."></textarea>'
@@ -520,12 +573,26 @@
                                     + '<a href="" class=" col-sm-4 text-right btn   send-message-btn pull-right" role="button"><i class="fa fa-plus"></i> Send Message</a>'
                                     + '</div>');
                             $("#msgResponce").html(responce);
-
                         });
                     }
                 });
             }
             ;
+            
+            
+
+            function deleteMessage(id) {
+                $.ajax({
+                    type: "POST",
+                    url: "DeleteMessage",
+                    dataType: "xml",
+                    data: {
+                        id: id
+                    }
+                });
+            }
+            ;
+
             $(document).on('click', 'clickedListItem', function () {
                 document.getElementById("currentUser").value = this.id;
                 msgList();
@@ -535,24 +602,23 @@
                     msgList();
                 } else {
                     document.getElementById("currentUser").value = "";
+                    msgList();
                 }
             });
             $("#currentUser").keyup(function () {
-              document.getElementById("filter").value ="";
-                    
+                document.getElementById("filter").value = document.getElementById("currentUser").value;
+                msgList();
             });</script>
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
         <script>
             jQuery(document).ready(function () {
                 $(".loader").fadeOut("slow");
-
                 refresh_data();
                 msgLoad();
                 msgList();
-
                 window.setInterval(function () {
-                    refresh_data();
-                    msgList();
+                 //   refresh_data();
+                 //   msgList();
                 }, 3000);
                 TableData.init();
                 Main.init();

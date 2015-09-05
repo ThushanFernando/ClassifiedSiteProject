@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 public class AdminClass_Message {
 
     DbClass dbc = new DbClass();
+    private String id=null;
     private String user = null;
     private String sender = null;
     private String content = null;
@@ -98,6 +99,20 @@ public class AdminClass_Message {
     public void setState(String state) {
         this.state = state;
     }
+    
+    /**
+     * @return the id
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public ArrayList allMessages(String filter) {
        ArrayList al = new ArrayList();
@@ -168,10 +183,11 @@ public class AdminClass_Message {
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "    SELECT `sender`,`content`,`time_stamp` FROM `messageview` WHERE `sender`='"+user+"' AND `receiver`='Admin' OR `sender`='Admin' AND `receiver`='"+user+"' ORDER BY `time_stamp`";
+            String query = "SELECT `message_id`,`sender`,`content`,`time_stamp` FROM `messageview` WHERE `sender`='"+user+"' AND `receiver`='Admin' OR `sender`='Admin' AND `receiver`='"+user+"' ORDER BY `time_stamp`";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 AdminClass_Message am = new AdminClass_Message();
+                am.setId(rs.getString("message_id"));
                 am.setSender(rs.getString("sender"));
                 am.setContent(rs.getString("content"));
                 am.setTimeStamp(timeDiff(rs.getString("time_stamp")));
@@ -242,6 +258,8 @@ public class AdminClass_Message {
         }
         return result;
     }
+
+    
 
    
 

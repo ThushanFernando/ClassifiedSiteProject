@@ -61,7 +61,7 @@ public class ReviewAds extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Enumeration<String> parameterNames = request.getParameterNames();
+        Enumeration<String> parameterNames = request.getParameterNames();       //checking for unappropriate parameters
         if (parameterNames.hasMoreElements()) {
             processRequest(request, response);
         } else {
@@ -82,37 +82,12 @@ public class ReviewAds extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("loggin_state") == "success") {
-            AdminClass_ReviewAds ar = new AdminClass_ReviewAds();
-            String item = request.getParameter("item");
-            String action = request.getParameter("action");
-            int result = 0;
-            String alert = null;
-             if (("Remove".equals(action) && item != null)) {
-                result = ar.removeAd(item);
-                if (result == 1) {
-                    alert = "<div class=\"alert alert-success\">\n"
-                            + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                            + "&times;\n"
-                            + "</button>\n"
-                            + "<i class=\"fa fa-check-circle\"></i>\n"
-                            + "<strong>Removed!</strong> Advertiesment number '" + request.getParameter("item") + "' .\n"
-                            + "</div>";
-                } else {
-                    alert = "<div class=\"alert alert-danger\">\n"
-                            + "<button data-dismiss=\"alert\" class=\"close\">\n"
-                            + "&times;\n"
-                            + "</button>\n"
-                            + "<i class=\"fa fa-times-circle\"></i>\n"
-                            + "<strong>Failed!</strong> Advertiesment number '" + request.getParameter("item") + "' Try again.\n"
-                            + "</div>";
-                }
-                request.setAttribute("alert", alert);
-
-            }
+        if (session.getAttribute("loggin_state") == "success") {                //checking logged in status
             
-
-            ArrayList reviewAds = ar.reviewAds();
+            AdminClass_ReviewAds ar = new AdminClass_ReviewAds();
+            
+            
+            ArrayList reviewAds = ar.reviewAds();                               //loading ad reviews
             request.setAttribute("reviewAds", reviewAds);
             RequestDispatcher rd = request.getRequestDispatcher("ads_review.jsp");
             rd.forward(request, response);

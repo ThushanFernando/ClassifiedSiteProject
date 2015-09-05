@@ -66,7 +66,7 @@ public class UpdateInterfaces extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Enumeration<String> parameterNames = request.getParameterNames();
+        Enumeration<String> parameterNames = request.getParameterNames();       //checking for unappropriate parameters
         if (parameterNames.hasMoreElements()) {
             processRequest(request, response);
         } else {
@@ -86,25 +86,31 @@ public class UpdateInterfaces extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("loggin_state") == "success") {
+        if (session.getAttribute("loggin_state") == "success") {                //checking logged in status
 
             if (request.getParameter("slider_id") != null) {
+
                 AdminClass_SliderItems as = new AdminClass_SliderItems();
                 int result = 0;
-                InputStream inputStream = null; // input stream of the upload file
-                // obtains the upload file part in this multipart request
-                Part filePart = request.getPart("slider_item");
+
+                InputStream inputStream;                                         // input stream of the upload file
+
+                Part filePart = request.getPart("slider_item");                 // obtains the upload file part in this multipart request
                 String itemId = request.getParameter("slider_id");
                 if (filePart != null) {
-                    // obtains input stream of the upload file
-                    inputStream = filePart.getInputStream();
-                    result = as.setSlider(inputStream, itemId);
+
+                    inputStream = filePart.getInputStream();                    // obtains input stream of the upload file
+                    result = as.setSlider(inputStream, itemId);                 //uploading slider item
                 }
                 if (result == 1) {
-                    String alert = "<button class=\"btn btn-green\"><i  class=\"glyphicon glyphicon-ok-sign\"></i></button><br><strong>Updated !</strong> Slider item successfully.";
+                    String alert = "<button class=\"btn btn-green\">"           //returning notification of the the success
+                            + "<i  class=\"glyphicon glyphicon-ok-sign\">"
+                            + "</i></button><br><strong>Updated !</strong> Slider item successfully.";
                     request.setAttribute("alert", alert);
                 } else {
-                    String alert = "<button class=\"btn btn-red\"><i  class=\"glyphicon glyphicon-remove-circle\"></i></button><br><strong>Failed!</strong> Slider item updating.";
+                    String alert = "<button class=\"btn btn-red\">"             //returning notification of the the failure
+                            + "<i  class=\"glyphicon glyphicon-remove-circle\">"
+                            + "</i></button><br><strong>Failed!</strong> Slider item updating.";
                     request.setAttribute("alert", alert);
 
                 }

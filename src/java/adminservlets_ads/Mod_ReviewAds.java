@@ -62,7 +62,7 @@ public class Mod_ReviewAds extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Enumeration<String> parameterNames = request.getParameterNames();
+        Enumeration<String> parameterNames = request.getParameterNames();       //checking for unappropriate parameters
         if (parameterNames.hasMoreElements()) {
             processRequest(request, response);
         } else {
@@ -82,7 +82,7 @@ public class Mod_ReviewAds extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("loggin_state") == "success") {
+        if (session.getAttribute("loggin_state") == "success") {                //checking logged in status
 
             AdminClass_ReviewAds ar = new AdminClass_ReviewAds();
             AdminClass_SendMail as = new AdminClass_SendMail();
@@ -101,20 +101,25 @@ public class Mod_ReviewAds extends HttpServlet {
                     reason = "Modified due to-" + request.getParameter("reason");
                 }
 
-                int result = 1; //ar.modifyAds(itemId, reason);
-                int result2 = as.mailClass("fernandowast@gmail.com", subject, content);
+                int result = 1; //ar.modifyAds(itemId, reason);                 //updating advertiesment status
+                int result2 = as.mailClass("fernandowast@gmail.com", subject, content);//sending mail to the user
 
-                if (result == 1 && result2 == 1) {
-                    String alert = "<button class=\"btn btn-green\"><i  class=\"glyphicon glyphicon-ok-sign\"></i></button><br>Email is sent to <strong> " + reciever + " !</strong>";
+                if (result == 1 && result2 == 1) {                              
+                    String alert = "<button class=\"btn btn-green\">"           //returning notification of the success 
+                            + "<i  class=\"glyphicon glyphicon-ok-sign\">"
+                            + "</i></button><br>Email is sent to "
+                            + "<strong> " + reciever + " !</strong>";
                     request.setAttribute("alert", alert);
                 } else {
-                    String alert = "<button class=\"btn btn-red\"><i  class=\"glyphicon glyphicon-remove-circle\"></i></button><strong> Failed !</strong>";
+                    String alert = "<button class=\"btn btn-red\">"             //returning notification of the failure 
+                            + "<i  class=\"glyphicon glyphicon-remove-circle\">"
+                            + "</i></button><strong> Failed !</strong>";
                     request.setAttribute("alert", alert);
 
                 }
             }
 
-            ArrayList reviewAds = ar.reviewAds();
+            ArrayList reviewAds = ar.reviewAds();                               //loding ad reviews
             request.setAttribute("reviewAds", reviewAds);
             RequestDispatcher rd = request.getRequestDispatcher("ads_review.jsp");
             rd.forward(request, response);

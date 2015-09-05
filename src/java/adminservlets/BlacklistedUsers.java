@@ -91,20 +91,20 @@ public class BlacklistedUsers extends HttpServlet {
                 if (exists == true) {
                     int result = ab.unblockEmail(request.getParameter("email_unblock"));//unblacklist an email
 
-                    if (result == 1) {                                           //returning notification of the success or the failure
+                    if (result == 1) {                                          //returning notification of the success
                         String alert = "<button class=\"btn btn-green\"><i  class=\""
                                 + "glyphicon glyphicon-ok-sign\"></i></button><br><strong>"
                                 + "Unblocked !</strong> Email- " + request.getParameter("email_unblock") + "";
                         request.setAttribute("alert", alert);
 
                     } else {
-                        String alert = "<button class=\"btn btn-red\"><i  class=\""
-                                + "glyphicon glyphicon-remove-circle\"></i></button><br><strong>"
+                        String alert = "<button class=\"btn btn-red\">" //returning notification of the failure
+                                + "<i  class=\"glyphicon glyphicon-remove-circle\"></i></button><br><strong>"
                                 + "Failed !</strong> Email- " + request.getParameter("email_unblock") + "";
                         request.setAttribute("alert", alert);
                     }
 
-                } else {                                                         //returning notification of the success or the failure
+                } else {                                                        //returning notification of the failure
                     String alert = "<button class=\"btn btn-red\"><i  class=\""
                             + "glyphicon glyphicon-remove-circle\"></i></button><br><strong>"
                             + "Failed !</strong> Email- " + request.getParameter("email_unblock") + " "
@@ -115,7 +115,7 @@ public class BlacklistedUsers extends HttpServlet {
             } else if (request.getParameter("email_block") != null) {           //checking if the email is null
                 boolean exists = ab.getEnteredEmail(request.getParameter("email_block"));//checking if the email is already blacklisted
 
-                if (exists == true) {                                           //returning notification of the success or the failure
+                if (exists == true) {                                           //returning notification of  the failure
                     String alert = "<button class=\"btn btn-red\"><i  class=\""
                             + "glyphicon glyphicon-remove-circle\"></i></button><br><strong>"
                             + "Failed !</strong> Email- " + request.getParameter("email_block") + " "
@@ -126,7 +126,7 @@ public class BlacklistedUsers extends HttpServlet {
                 } else {
                     int result = ab.blockEmail(request.getParameter("email_block")); //blacklisting an email
 
-                    if (result == 1) {                                          //returning notification of the success or the failure
+                    if (result == 1) {                                          //returning notification of the success 
                         String alert = "<button class=\"btn btn-green\"><i  class=\""
                                 + "glyphicon glyphicon-ok-sign\"></i></button><br><strong>"
                                 + "Blocked !</strong> Email- " + request.getParameter("email_block") + "";

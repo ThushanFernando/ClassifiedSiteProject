@@ -64,7 +64,7 @@ public class AdBlocked_ViewReports extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Enumeration<String> parameterNames = request.getParameterNames();
+        Enumeration<String> parameterNames = request.getParameterNames();       //checking for unappropriate parameters
         if (parameterNames.hasMoreElements()) {
             processRequest(request, response);
         } else {
@@ -84,7 +84,8 @@ public class AdBlocked_ViewReports extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("loggin_state") == "success") {
+        if (session.getAttribute("loggin_state") == "success") {                //checking logged in status
+            
             AdminClass_ReportedItems art = new AdminClass_ReportedItems();
             AdminClass_ReportedMessages arm = new AdminClass_ReportedMessages();
             AdminClass_ReportedInquiries ari = new AdminClass_ReportedInquiries();
@@ -97,14 +98,21 @@ public class AdBlocked_ViewReports extends HttpServlet {
                 String content = request.getParameter("contentBA");
                 String itemId = request.getParameter("itemBA");
                 String reason = request.getParameter("reasonBA");
-                int result = ab.blockItem(itemId, reason);
-                int state = art.updateViewState(request.getParameter("reportBA"));
+                int result = ab.blockItem(itemId, reason);                      //blocking advertiesment
+                int state = art.updateViewState(request.getParameter("reportBA"));//update report status
 
                 if (result == 1 && state == 1) {
-                    String alert = "<button class=\"btn btn-green\"><i  class=\"glyphicon glyphicon-ok-sign\"></i></button><br><strong>Blocked !</strong>  Advertiesment number " + itemId + "  ";
+                    
+                    String alert = "<button class=\"btn btn-green\">"           //returning notification of the success 
+                            + "<i  class=\"glyphicon glyphicon-ok-sign\">"
+                            + "</i></button><br><strong>Blocked !</strong>  Advertiesment number " + itemId + "  ";
                     request.setAttribute("alert", alert);
+                
                 } else {
-                    String alert = "<button class=\"btn btn-red\"><i  class=\"glyphicon glyphicon-remove-circle\"></i></button><br><strong>Failed!</strong> Advertiesment number " + itemId + " Try again.";
+                    
+                    String alert = "<button class=\"btn btn-red\">"             //returning notification of the failure 
+                            + "<i  class=\"glyphicon glyphicon-remove-circle\">"
+                            + "</i></button><br><strong>Failed!</strong> Advertiesment number " + itemId + " Try again.";
                     request.setAttribute("alert", alert);
                 }
             }
@@ -125,12 +133,13 @@ public class AdBlocked_ViewReports extends HttpServlet {
             }
             request.setAttribute("Inquiry_report_count", Inquiry_report_count);
 
-            ArrayList ReportedItems = art.getItemReports();
+            ArrayList ReportedItems = art.getItemReports();                     //getting ad reports
             request.setAttribute("ReportedItems", ReportedItems);
-            ArrayList ReportedMessages = arm.getMessageReports();
+            ArrayList ReportedMessages = arm.getMessageReports();               //getting message reports
             request.setAttribute("ReportedMessages", ReportedMessages);
-            ArrayList ReportedInquiries = ari.getInquiryReports();
+            ArrayList ReportedInquiries = ari.getInquiryReports();              //getting inquiry reports
             request.setAttribute("ReportedInquiries", ReportedInquiries);
+            
             RequestDispatcher rd = request.getRequestDispatcher("report_view.jsp");
             rd.forward(request, response);
         } else {

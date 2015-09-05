@@ -76,15 +76,21 @@ public class CheckLogin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        
         AdminClass_LoginMethods lm = new AdminClass_LoginMethods();
-        boolean result = lm.checkPass(request.getParameter("uname"), request.getParameter("pass"));
+        
+        boolean result = lm.checkPass(request.getParameter("uname"), request.getParameter("pass"));// checking login information
+        
         if (result == true) {
+            
             session.setAttribute("loggin_state", "success");
             session.setAttribute("Admin", request.getParameter("uname"));
             response.sendRedirect("Dashboard");
+        
         } else {
+            
             session.setAttribute("loggin_state", "failed");
-            String alert = "<div class=\"errorHandler alert alert-danger \">\n"
+            String alert = "<div class=\"errorHandler alert alert-danger \">\n" //returning notification of the the failure
                     + "<button data-dismiss=\"alert\" class=\"close\">\n"
                     + "&times;\n"
                     + "</button>\n"

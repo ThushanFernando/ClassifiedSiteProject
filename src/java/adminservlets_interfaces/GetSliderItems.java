@@ -63,11 +63,14 @@ public class GetSliderItems extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("loggin_state") == "success") {
+        if (session.getAttribute("loggin_state") == "success") {                //checking logged in status
+            
             int img_id = Integer.parseInt(request.getParameter("slider_id"));
             OutputStream oImage;
+            
             AdminClass_SliderItems as = new AdminClass_SliderItems();
-            byte barray[] = as.getSlider(img_id);
+            
+            byte barray[] = as.getSlider(img_id);                               //writing image
             response.setContentType("image/gif");
             oImage = response.getOutputStream();
             oImage.write(barray);

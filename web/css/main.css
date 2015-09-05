@@ -3491,7 +3491,7 @@ div.timeline_element.purple div.timeline_title {
 }
 .messages-list .messages-item .messages-item-time {
     opacity: 1;
-    right: 80px;
+    right: 85px;
     top: 8px;
     transition: opacity 0.2s ease-in-out 0s;
 }

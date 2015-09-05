@@ -64,7 +64,7 @@ public class UserBlocked_ViewReports extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Enumeration<String> parameterNames = request.getParameterNames();
+        Enumeration<String> parameterNames = request.getParameterNames();       //checking for unappropriate parameters
         if (parameterNames.hasMoreElements()) {
             processRequest(request, response);
         } else {
@@ -84,26 +84,37 @@ public class UserBlocked_ViewReports extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("loggin_state") == "success") {
+        if (session.getAttribute("loggin_state") == "success") {                //checking logged in status
             
             AdminClass_ReportedItems art = new AdminClass_ReportedItems();
             AdminClass_ReportedMessages arm = new AdminClass_ReportedMessages();
             AdminClass_ReportedInquiries ari = new AdminClass_ReportedInquiries();
 
             if (request.getParameter("toBU") != null && request.getParameter("reportBU") != null) {
+                
                 AdminClass_BlockedUsers ab = new AdminClass_BlockedUsers();
                 
                 String reciever = art.getUserEmail(request.getParameter("toBU"));
                 String subject = request.getParameter("subjectBU");
                 String content = request.getParameter("contentBU");
-                int result1 = ab.RemoveUser(request.getParameter("toBU"));
-                int result2 = ab.BlacklistUser(reciever);
+                
+                int result1 = ab.RemoveUser(request.getParameter("toBU"));      //removing user
+                int result2 = ab.BlacklistUser(reciever);                       //Blacklisting user
 
                 if (result1 == 1 && result2 == 1) {
-                    String alert = "<button class=\"btn btn-green\"><i  class=\"glyphicon glyphicon-ok-sign\"></i></button><br><strong>Blocked !</strong>  User " + reciever + "  ";
+                    
+                    String alert = "<button class=\"btn btn-green\">"           //returning notification of the success 
+                            + "<i  class=\"glyphicon glyphicon-ok-sign\">"
+                            + "</i></button><br><strong>Blocked !</strong>"
+                            + "  User " + reciever + "  ";
                     request.setAttribute("alert", alert);
+                    
                 } else {
-                    String alert = "<button class=\"btn btn-red\"><i  class=\"glyphicon glyphicon-remove-circle\"></i></button><br><strong>Failed!</strong> User " + reciever + " Try again.";
+                    
+                    String alert = "<button class=\"btn btn-red\">"             //returning notification of the failure 
+                            + "<i  class=\"glyphicon glyphicon-remove-circle\">"
+                            + "</i></button><br><strong>Failed!</strong>"
+                            + " User " + reciever + " Try again.";
                     request.setAttribute("alert", alert);
                 }
             }
@@ -124,12 +135,13 @@ public class UserBlocked_ViewReports extends HttpServlet {
             }
             request.setAttribute("Inquiry_report_count", Inquiry_report_count);
 
-            ArrayList ReportedItems = art.getItemReports();
+            ArrayList ReportedItems = art.getItemReports();                     //getting ad reports
             request.setAttribute("ReportedItems", ReportedItems);
-            ArrayList ReportedMessages = arm.getMessageReports();
+            ArrayList ReportedMessages = arm.getMessageReports();               //getting message reports
             request.setAttribute("ReportedMessages", ReportedMessages);
-            ArrayList ReportedInquiries = ari.getInquiryReports();
+            ArrayList ReportedInquiries = ari.getInquiryReports();              //getting inquiry reports
             request.setAttribute("ReportedInquiries", ReportedInquiries);
+            
             RequestDispatcher rd = request.getRequestDispatcher("report_view.jsp");
             rd.forward(request, response);
         } else {

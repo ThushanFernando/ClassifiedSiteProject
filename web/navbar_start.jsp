@@ -7,6 +7,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
+<jsp:include page="model_signup.jsp"></jsp:include>
+<jsp:include page="model_login.jsp"></jsp:include>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -25,7 +28,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" style="font-family: Century Gothic; font-weight: bold;" href="Home.jsp">
+                <a class="navbar-brand" style="font-family: Century Gothic; font-weight: bold;" href="home.jsp">
                     <span class="glyphicon glyphicon-shopping-cart"></span>
                     Superb.lk
                 </a>
@@ -62,6 +65,5 @@
             </div><!-- /.navbar-collapse -->
         </div>
 
-        <jsp:include page="model_signup.jsp"></jsp:include>
-        <jsp:include page="model_login.jsp"></jsp:include>
+
 

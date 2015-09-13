@@ -49,17 +49,23 @@
     <body class="container-fluid text-center">
 
         <jsp:include page="navbar.jsp"></jsp:include>
-        <jsp:include page="slider.jsp"></jsp:include>
-
-            <hr class="hr-red">
 
             <div class="row-fluid">
-                <div class="col-lg-12">
+
+                <div class="col-lg-6">
+                    <div class="caption text-center">
+                        <h3>Slider</h3>
+                        <p>Index Slider</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
                     <div class="caption text-center">
                         <h3>Map</h3>
                         <p>Sri Lanka</p>
                     </div>
                 </div>
+
             </div>
 
             <hr class="hr-blue"/>

@@ -225,85 +225,70 @@
                     <!-- end: PAGE HEADER -->
                     <!-- start: PAGE CONTENT -->
                     <div class="row" >
-                        <div class="col-sm-6">
-                            <table>
-                                <td><input type="email" id="emailId" value=""  placeholder="Enter email " onkeyup="email_val()"></td>
-                                <td>
-                                    <div class="col-sm-5 hidden-xs"></div>
-                                    <div class="col-sm-2" style="padding-left: 3px;">
-                                        <a href="#confirm_block" data-toggle="modal">
-                                            <button class="btn btn-blue next-step btn-block" id="B1" style="display: none; width: 50px;" onclick="email_block()" >
-                                                <span class="fa clip-locked"></span> <i class="fa fa-arrow-circle-right"></i>
-                                            </button>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="col-sm-2" style=" padding-left: 0px;">
-                                        <a href="#confirm_unblock" data-toggle="modal">
-                                            <button class="btn btn-blue next-step btn-block" id="B2" style="display: none; width: 50px;" onclick="email_unblock()" >
-                                                <span class="fa fa-unlock"></span> <i class="fa fa-arrow-circle-right"></i>
-                                            </button>
-                                        </a>
-                                    </div>
-                                </td>
-                            </table>
-                        </div><br>
-                        <div class="col-sm-6">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <i class="clip-users-2"></i>
-                                    Blacklisted Users
-                                    <div class="panel-tools">
-                                        <a class="btn btn-xs btn-link panel-close" href="#">
-                                            <i class="fa fa-times"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="panel-body">
-                                    <table class="table table-striped table-hover" id="sample_1">
-                                        <thead>
-                                            <tr>
-
-                                                <th >Email</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <%                                                while (itr.hasNext()) {
-                                                    Object a = itr.next();
-                                                    received = (AdminClass_BlacklistedEmails) a;
-                                            %>
-                                            <tr>
-                                                <td><%=received.getEmail_address()%></td>
-                                                <td class="center">
-                                                    <div>
-                                                        <div class="btn-group">
-                                                            <a class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
-                                                                <i class="fa fa-cog"></i> <span class="caret"></span>
-                                                            </a>
-                                                            <ul role="menu" class="dropdown-menu pull-right">
-                                                                <li role="presentation">
-                                                                <clickedUnblockingEmail id="<%=received.getEmail_address()%>">&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                    <a role="menuitem" tabindex="-1" href="#confirm_unblock" data-toggle="modal">
-                                                                        <i class="fa fa-unlock"></i> Unblock
-                                                                    </a>
-                                                                </clickedUnblockingEmail>
-                                                                </li>
-
-
-                                                            </ul>
-                                                        </div>
-                                                    </div></td>
-                                            </tr>
-                                            <%}%>
-                                        </tbody>
-                                    </table>
-                                </div>                                                                              
-                            </div>
+                        <div class="col-sm-10 col-xs-6">
+                            <input type="email" id="emailId" value=""  placeholder="Enter email to blacklist or undo blacklist " class="form-control" onkeyup="email_val()"></td>
+                        </div>
+                        <div class="col-sm-1 col-xs-3">
+                        <a href="#confirm_block" data-toggle="modal">
+                            <button class="btn btn-blue next-step btn-block" id="B1" style="display: none; width: 50px;" onclick="email_block()" >
+                                <span class="fa clip-locked"></span> <i class="fa fa-arrow-circle-right"></i>
+                            </button>
+                        </a>
+                        </div>
+                        <div class="col-sm-1 col-xs-3">
+                        <a href="#confirm_unblock" data-toggle="modal">
+                            <button class="btn btn-blue next-step btn-block" id="B2" style="display: none; width: 50px;" onclick="email_unblock()" >
+                                <span class="fa fa-unlock"></span> <i class="fa fa-arrow-circle-right"></i>
+                            </button>
+                        </a>
                         </div>
 
+                    </div>
+                    <div class="row">
+                        <div class="panel panel-default" style="border-top:none">
+                            
+                            <div class="panel-body">
+                                <table class="table table-striped table-hover" id="sample_1">
+                                    <thead>
+                                        <tr>
+
+                                            <th >Blacklisted Emails</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <%                                                while (itr.hasNext()) {
+                                                Object a = itr.next();
+                                                received = (AdminClass_BlacklistedEmails) a;
+                                        %>
+                                        <tr>
+                                            <td><%=received.getEmail_address()%></td>
+                                            <td class="center">
+                                                <div>
+                                                    <div class="btn-group">
+                                                        <a class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
+                                                            <i class="fa fa-cog"></i> <span class="caret"></span>
+                                                        </a>
+                                                        <ul role="menu" class="dropdown-menu pull-right">
+                                                            <li role="presentation">
+                                                            <clickedUnblockingEmail id="<%=received.getEmail_address()%>">&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <a role="menuitem" tabindex="-1" href="#confirm_unblock" data-toggle="modal">
+                                                                    <i class="fa fa-unlock"></i> Unblock
+                                                                </a>
+                                                            </clickedUnblockingEmail>
+                                                            </li>
+
+
+                                                        </ul>
+                                                    </div>
+                                                </div></td>
+                                        </tr>
+                                        <%}%>
+                                    </tbody>
+                                </table>
+                            </div>                                                                              
+                        </div>
                     </div>
 
 
@@ -370,47 +355,47 @@
         <script src="js/user-blacklist-functions.js"></script>
         <script src="plugins/gritter/js/jquery.gritter.min.js"></script>
         <script>
-           
-          
-                //function to initiate jquery.gritter
-                function runNotification () {
-                    var i = '<%=alert%>';
-                    if (i !== "null") {
-                        
-                            var unique_id = $.gritter.add({
-                                // (string | mandatory) the heading of the notification
-                                title: 'Notification!',
-                                // (string | mandatory) the text inside the notification
-                                text: '<%=alert%>',
-                                // (bool | optional) if you want it to fade out on its own or just sit there
-                                sticky: false,
-                                // (int | optional) the time you want it to be alive for before fading out
-                                time: 4000,
-                                // (string | optional) the class name you want to apply to that specific message
-                                class_name: 'my-sticky-class'
-                            });
-                            // You can have it return a unique id, this can be used to manually remove it later using
-                            /*
-                             setTimeout(function(){
-                             $.gritter.remove(unique_id, {
-                             fade: true,
-                             speed: 'slow'
-                             });
-                             }, 6000)
-                             */
-                            return false;
-                        
-                    }
 
-                }
-                
-            
+
+                                                //function to initiate jquery.gritter
+                                                function runNotification() {
+                                                    var i = '<%=alert%>';
+                                                    if (i !== "null") {
+
+                                                        var unique_id = $.gritter.add({
+                                                            // (string | mandatory) the heading of the notification
+                                                            title: 'Notification!',
+                                                            // (string | mandatory) the text inside the notification
+                                                            text: '<%=alert%>',
+                                                                    // (bool | optional) if you want it to fade out on its own or just sit there
+                                                                        sticky: false,
+                                                                            // (int | optional) the time you want it to be alive for before fading out
+                                                                            time: 4000,
+                                                                            // (string | optional) the class name you want to apply to that specific message
+                                                            class_name: 'my-sticky-class'
+                                                                            });
+                                                                            // You can have it return a unique id, this can be used to manually remove it later using
+                                                        /*
+                                                                            setTimeout(function(){
+                                                                        $.gritter.remove(unique_id, {
+                                                         fade: true,
+                                                                         speed: 'slow'
+                                                                         });
+                                                                         }, 6000)
+                                                                         */
+                                                                         return false;
+
+                                                                        }
+
+                                                                    }
+
+
         </script>
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 
         <script>
             jQuery(document).ready(function () {
-                Main.init();
+            Main.init();
                 runNotification();
                 $(".loader").fadeOut("slow");
                 UIModals.init();
@@ -418,13 +403,13 @@
                 Index.init();
                 refresh_data();
                 window.setInterval(function () {
-                    refresh_data();
-                }, 3000);
-                
+                refresh_data();
+                    }, 3000);
+
 
             }
             );
-        </script>
+                </script>
     </body>
     <!-- end: BODY -->
 </html>

@@ -3,22 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminservlets_messages;
+package adminservlets_XML;
 
 import classes.AdminClass_Message;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author SithuDewmi
  */
-public class MsgAll extends HttpServlet {
+public class DeleteConversationXML extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,7 +30,19 @@ public class MsgAll extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet DeleteConversationXML</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet DeleteConversationXML at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -46,8 +57,18 @@ public class MsgAll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request, response);
-
+        response.setContentType("test/xml");
+        response.setCharacterEncoding("UTF-8");
+        AdminClass_Message am = new AdminClass_Message();
+        
+        int result = 1;//am.deleteConversation(request.getParameter("user"));
+        String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                + "<values>\n"
+                + "	<value>\n"
+                    + "		<result>"+result+"</result>\n"
+                    + "	</value>\n"
+                +"</values>";
+        response.getWriter().write(content);
     }
 
     /**
@@ -61,15 +82,7 @@ public class MsgAll extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("loggin_state") == "success") {
-            AdminClass_Message am=new AdminClass_Message();
-            
-            RequestDispatcher rd = request.getRequestDispatcher("msg_all.jsp?inital_user="+am.initialUserAll());
-            rd.forward(request, response);
-        } else {
-            response.sendRedirect("superb_admin.jsp");
-        }
+        processRequest(request, response);
     }
 
     /**

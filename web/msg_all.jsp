@@ -41,13 +41,15 @@
         <link href="plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
         <link href="plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="plugins/DataTables/media/css/DT_bootstrap.css" />
+        <link rel="stylesheet" href="plugins/gritter/css/jquery.gritter.css">
         <style>
 
             .conversation-wrap
             {
                 box-shadow: -2px 0 3px #ddd;
                 padding:0;
-                overflow: auto;
+                overflow-y: auto;
+
             }
             .conversation
             {
@@ -59,7 +61,6 @@
 
             .message-wrap
             {
-                box-shadow: 0 0 3px #ddd;
                 padding:0;
 
             }
@@ -72,8 +73,9 @@
             .msg-wrap
             {
                 padding:10px;
-                max-height: 400px;
+                max-height: 350px;
                 overflow: auto;
+
 
             }
 
@@ -146,33 +148,6 @@
                 border-bottom: 1px solid #ddd;
             }
 
-
-
-
-            /* Let's get this party started */
-            ::-webkit-scrollbar {
-                width: 6px;
-            }
-
-            /* Track */
-            ::-webkit-scrollbar-track {
-                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-                /*        -webkit-border-radius: 10px;
-                        border-radius: 10px;*/
-            }
-
-            /* Handle */
-            ::-webkit-scrollbar-thumb {
-                /*        -webkit-border-radius: 10px;
-                        border-radius: 10px;*/
-                background:#ddd; 
-                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-            }
-            ::-webkit-scrollbar-thumb:window-inactive {
-                background: #ddd; 
-            }
-
-
         </style>
         <!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
         <script type="text/javascript" src="js/data-refresh.js"></script>
@@ -182,7 +157,7 @@
     <!-- start: BODY -->
     <body>
         <div class="loader">
-            <jsp:include page="page-elements/javascript_required.jsp"/>
+            <jsp:include page="page-elements/javascript_required.jsp" />
         </div>
         <%
             if (session.getAttribute("loggin_state") != "success") {
@@ -191,6 +166,7 @@
         %>
         <!-- start: HEADER -->
         <jsp:include page="page-elements/header.jsp"/>
+
         <!-- end: HEADER -->
         <!-- start: MAIN CONTAINER -->
         <div class="main-container">
@@ -216,8 +192,13 @@
                                 <span class="title"> Frontend </span><span class="selected"></span>
                             </a>
                         </li>
+                        <li class="active open visible-xs">
+                            <a href="#" target="_blank"><i class="clip-bubble"></i>
+                                <span class="title"> Messages </span><span class="selected"></span>
+                            </a>
+                        </li>
 
-                        <li class="active open">
+                        <li class="active open hidden-xs">
                             <a href="javascript:void(0)"><i class="clip-bubble"></i>
                                 <span class="title"> Messages </span><span id="MC1" class="badge"></span><i class="icon-arrow"></i>
                                 <span class="selected"></span>
@@ -342,20 +323,20 @@
                     <!-- start: PAGE CONTENT -->
                     <div class="container">
                         <div class="row">
-                            <input type="text"  value="" id="currentUser" class="visible-xs form-control" placeholder="select user" >
-                            <div class="col-sm-3 hidden-xs">
+                            <input type="text"  value="" id="currentUser" class="hidden form-control" placeholder="select user" >
+                            <div class="col-sm-3 ">
                                 <div class="btn-panel btn-panel-conversation">
 
-                                    <input type="text"  id="filter" placeholder="filter messages" style="margin-bottom: 5px">
+                                    <input type="text" class="form-control"  id="filter" placeholder="filter messages" style="margin-bottom: 5px">
                                 </div>
                             </div>
 
-                            <div id="ConversationAction" class="col-sm-offset-1 col-sm-7">
+                            <div id="ConversationAction" class="col-sm-offset-1 col-sm-7 hidden-xs">
                             </div>
                         </div>
                         <div class="row">
 
-                            <div class="conversation-wrap col-sm-3 hidden-xs">
+                            <div class="conversation-wrap col-sm-3 ">
                                 <ul class="messages-list" style="max-height: 510px" id="MsgListXML">
 
                                 </ul>
@@ -363,10 +344,16 @@
 
 
 
-                            <div class="message-wrap col-sm-9">
+                            <div class="message-wrap col-sm-9 hidden-xs">
                                 <div class="msg-wrap" id="ConversationXML">
                                 </div>
                                 <div id="msgResponce">
+                                    <div class="send-wrap ">
+                                        <textarea id="msg_responce" class="form-control send-message"  rows="2" placeholder="Write a reply..."></textarea>'
+                                    </div>
+                                    <div class="btn-panel">
+                                        <a class=" col-sm-4 text-right btn   send-message-btn pull-right" role="button" onclick="sendMessage()"><i class="fa fa-plus"></i> Send Message</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -392,6 +379,29 @@
 
 
         <!-- start: BOOTSTRAP EXTENDED MODALS -->
+        <div id="conversation_modal" class="modal fade " tabindex="-1" data-width="500" style="display: none;">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" >&times;</button>
+                <div id="ConversationActionModel"></div>
+                <div class="message-wrap col-sm-9">
+                    <div  class="msg-wrap" id="Conversation_modalXML" style="max-height: 250px;" ></div>
+                    <div id="msgResponce_modal">
+                        <div class="send-wrap  ">
+                            <div class="col-xs-10" style="padding:0px;">
+                                <textarea id="msg_responce_modal" class="form-control send-message"  rows="2"  placeholder="Write a reply..."></textarea>'
+                            </div>
+                            <div class="col-xs-2" style="padding:0px;">
+
+                                <a   class="btn btn-primary form-control" style="height: 55px;" role="button" onclick="sendMessage()"><br><i class="fa fa-share"></i></a>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <jsp:include page="page-elements/login_update_modals.jsp"/>
         <!-- start: MAIN JAVASCRIPTS -->
@@ -430,185 +440,460 @@
         <script type="text/javascript" src="plugins/DataTables/media/js/jquery.messageTables.min.js"></script>
         <script type="text/javascript" src="plugins/DataTables/media/js/MT_bootstrap.js"></script>
         <script src="js/table-message.js"></script>
+        <script src="plugins/gritter/js/jquery.gritter.min.js"></script>
         <script>
-            function msgLoad() {
-                var id = '<%=request.getParameter("id")%>';
-                if (id !== "null") {
-                    document.getElementById("currentUser").value = id;
-                }
-            }
-            function msgList() {
+                                    function msgLoad() {
+                                        var id = '<%=request.getParameter("id")%>';
+                                        if (id !== "null") {
+                                            document.getElementById("currentUser").value = id;
+                                            if (window.innerWidth < 768) {
+                                                $('#conversation_modal').modal('show');
+                                            }
+                                        } else {
+                                            document.getElementById("currentUser").value = '<%=request.getParameter("inital_user")%>';
+                                        }
+                                    }
+                                    function msgList() {
 
-                $.ajax({
-                    type: "GET",
-                    url: "MsgXML",
-                    dataType: "xml",
-                    data: {
-                        filter: document.getElementById("filter").value
-                    },
-                    success: function (xml) {
-                        $("#MsgListXML").html("");
-                        $(xml).find('value').each(function () {
+                                        $.ajax({
+                                            type: "GET",
+                                            url: "MsgXML",
+                                            dataType: "xml",
+                                            data: {
+                                                filter: document.getElementById("filter").value
+                                            },
+                                            success: function (xml) {
+                                                $("#MsgListXML").html("");
+                                                $(xml).find('value').each(function () {
 
-                            var sender = $(this).find('sender').text();
-                            var content = $(this).find('content').text();
-                            var lngth = "";
-                            if (content.length > 30) {
-                                lngth = ".....";
-                            }
-                            var time = $(this).find('time').text();
-                            var status = $(this).find('status').text();
-                            var item;
-                            if (document.getElementById("currentUser").value === sender) {
-                                item = $('<clickedListItem id="' + sender + '"><li style="background-color: #02A1FF" class="messages-item">'
-                                        + '<span class="messages-item-from messages-item-current" style="colour:white">' + sender + '</span>'
-                                        + '<div class="messages-item-time ">'
-                                        + '<span class="text-current"><small>' + time + '</small></span>'
-                                        + '</div>'
-                                        + '<span class="messages-item-subject messages-item-current">' + content.substring(0, 30) + lngth + '...</span>'
-                                        + '</li></clickedListItem>');
-                            } else {
-                                item = $('<clickedListItem id="' + sender + '"><li' + status + ' class="messages-item">'
-                                        + '<span class="messages-item-from">' + sender + '</span>'
-                                        + '<div class="messages-item-time">'
-                                        + '<span class="text"><small>' + time + '</small></span>'
-                                        + '</div>'
-                                        + '<span class="messages-item-subject">' + content.substring(0, 30) + lngth + '...</span>'
-                                        + '</li></clickedListItem>');
-                            }
-                            $("#MsgListXML").append(item);
-                        });
-                    }
-                });
-                $.ajax({
-                    type: "GET",
-                    url: "ConversationXML",
-                    dataType: "xml",
-                    data: {
-                        selected_ListItem: document.getElementById("currentUser").value
-                    },
-                    success: function (xml) {
-                        $("#ConversationXML").html("");
-                        $("#ConversationAction").html("");
-                        $("#msgResponce").html("");
-                        $(xml).find('value').each(function () {
+                                                    var sender = $(this).find('sender').text();
+                                                    if (sender.length > 12) {
+                                                        var fontsize = "x-small";
+                                                    } else {
+                                                        var fontsize = "small";
+                                                    }
+                                                    var content = $(this).find('content').text();
+                                                    var lngth = "";
+                                                    if (content.length > 30) {
+                                                        lngth = ".....";
+                                                    }
+                                                    var time = $(this).find('time').text();
+                                                    var status = $(this).find('status').text();
+                                                    var item;
+                                                    if (document.getElementById("currentUser").value === sender && window.innerWidth >= 768) {
+                                                        item = $('<clickedListItem id="' + sender + '"><li style="background-color: #02A1FF" class="messages-item">'
+                                                                + '<span class="messages-item-from messages-item-current" style="colour:white; font-size:' + fontsize + ';">' + sender + '</span>'
+                                                                + '<div class="messages-item-time ">'
+                                                                + '<span class="text-current"><small>' + time + '</small></span>'
+                                                                + '</div>'
+                                                                + '<span class="messages-item-subject messages-item-current">' + content.substring(0, 30) + lngth + '...</span>'
+                                                                + '</li></clickedListItem>');
+                                                    } else {
+                                                        item = $('<clickedListItem id="' + sender + '"><li' + status + ' class="messages-item">'
+                                                                + '<span class="messages-item-from" style="font-size:' + fontsize + ';">' + sender + '</span>'
+                                                                + '<div class="messages-item-time">'
+                                                                + '<span class="text"><small>' + time + '</small></span>'
+                                                                + '</div>'
+                                                                + '<span class="messages-item-subject">' + content.substring(0, 30) + lngth + '...</span>'
+                                                                + '</li></clickedListItem>');
+                                                    }
+                                                    $("#MsgListXML").append(item);
+                                                });
+                                            }
+                                        });
+                                        $.ajax({
+                                            type: "GET",
+                                            url: "ConversationXML",
+                                            dataType: "xml",
+                                            data: {
+                                                selected_ListItem: document.getElementById("currentUser").value
+                                            },
+                                            success: function (xml) {
+                                                $("#ConversationXML").html("");
+                                                $("#Conversation_modalXML").html("");
+                                                $("#ConversationAction").html("");
+                                                $("#ConversationActionModel").html("");
 
-                            var id = $(this).find('id').text();
-                            var sender = $(this).find('sender').text();
-                            var content = $(this).find('content').text();
-                            var time = $(this).find('time').text();
-                            var item;
-                            var action;
-                            var responce;
-                            item = $('<div class="media msg">\n'
-                                    + '<a class="pull-left" href="#">\n'
-                                    + '<img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 32px; height: 32px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACqUlEQVR4Xu2Y60tiURTFl48STFJMwkQjUTDtixq+Av93P6iBJFTgg1JL8QWBGT4QfDX7gDIyNE3nEBO6D0Rh9+5z9rprr19dTa/XW2KHl4YFYAfwCHAG7HAGgkOQKcAUYAowBZgCO6wAY5AxyBhkDDIGdxgC/M8QY5AxyBhkDDIGGYM7rIAyBgeDAYrFIkajEYxGIwKBAA4PDzckpd+322243W54PJ5P5f6Omh9tqiTAfD5HNpuFVqvFyckJms0m9vf3EY/H1/u9vb0hn89jsVj8kwDfUfNviisJ8PLygru7O4TDYVgsFtDh9Xo9NBrNes9cLgeTybThgKenJ1SrVXGf1WoVDup2u4jFYhiPx1I1P7XVBxcoCVCr1UBfTqcTrVYLe3t7OD8/x/HxsdiOPqNGo9Eo0un02gHkBhJmuVzC7/fj5uYGXq8XZ2dnop5Mzf8iwMPDAxqNBmw2GxwOBx4fHzGdTpFMJkVzNB7UGAmSSqU2RoDmnETQ6XQiOyKRiHCOSk0ZEZQcUKlU8Pz8LA5vNptRr9eFCJQBFHq//szG5eWlGA1ywOnpqQhBapoWPfl+vw+fzweXyyU+U635VRGUBOh0OigUCggGg8IFK/teXV3h/v4ew+Hwj/OQU4gUq/w4ODgQrkkkEmKEVGp+tXm6XkkAOngmk4HBYBAjQA6gEKRmyOL05GnR99vbW9jtdjEGdP319bUIR8oA+pnG5OLiQoghU5OElFlKAtCGr6+vKJfLmEwm64aosd/XbDbbyIBSqSSeNKU+HXzlnFAohKOjI6maMs0rO0B20590n7IDflIzMmdhAfiNEL8R4jdC/EZIJj235R6mAFOAKcAUYApsS6LL9MEUYAowBZgCTAGZ9NyWe5gCTAGmAFOAKbAtiS7TB1Ng1ynwDkxRe58vH3FfAAAAAElFTkSuQmCC">\n'
-                                    + '</a>\n'
-                                    + '<div class="media-body">\n'
-                                    + '<small class="pull-right time"><i class="fa fa-clock-o"></i>&nbsp;' + time + '</small>\n'
-                                    + '<h5 class="media-heading">' + sender + '</h5>\n'
-                                    + '<small class="col-sm-10">' + content + ' <a title="Delete message" href="#confirm_delete-id-' + id + '" data-toggle="modal" ><i class="fa fa-trash-o"></i></a></small>\n'
-                                    + '</div>\n'
-                                    + '</div>'
-                                    + '<div id="confirm_delete-id-' + id + '"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">'
-                                    + '<div class="modal-header">'
-                                    + '<h4 class="modal-title badge badge-green">Confirmation</h4>'
-                                    + '</div>'
-                                    + '<div class="modal-body">'
-                                    + 'Delete message " ' + content + ' " ?'
-                                    + '</div>'
-                                    + '<div class="modal-footer">'
-                                    + '<button type="button" data-dismiss="modal" class="btn btn-light-grey">'
-                                    + 'Cancel'
-                                    + '</button>'
-                                    + '<button type="button" data-dismiss="modal" class="btn btn-blue" onclick="deleteMessage('+id+')">'
-                                    + 'Delete'
-                                    + '</button>'
-                                    + '</div>'
-                                    + '</div>');
+                                                $(xml).find('value').each(function () {
 
-                            $("#ConversationXML").append(item);
-                            action = $('<div class="btn-panel btn-panel-msg message-actions">'
-                                    + '<a title="Move ' + sender + ' to trash" href="#confirm_delete-con-id-' + sender + '" data-toggle="modal" class="btn  col-sm-2  send-message-btn" ><i class="fa fa-trash-o"></i></a>'
-                                    + '<div id="confirm_delete-con-id-' + sender + '"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">'
-                                    + '<div class="modal-header">'
-                                    + '<h4 class="modal-title badge badge-green">Confirmation</h4>'
-                                    + '</div>'
-                                    + '<div class="modal-body">'
-                                    + 'Delete conversation with ' + sender + ' ?'
-                                    + '</div>'
-                                    + '<div class="modal-footer">'
-                                    + '<button type="button" data-dismiss="modal" class="btn btn-light-grey">'
-                                    + 'Cancel'
-                                    + '</button>'
-                                    + '<button type="button" data-dismiss="modal" class="btn btn-blue" onclick="">'
-                                    + 'Delete'
-                                    + '</button>'
-                                    + '</div>'
-                                    + '</div>'
-                                    + '<a title="Blacklist ' + sender + '" href="#confirm_blacklist-user' + sender + '" data-toggle="modal" class="btn  col-sm-2  send-message-btn" role="button"><i class="fa fa-ban"></i></a>'
-                                    + '<div id="confirm_blacklist-user' + sender + '"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">'
-                                    + '<div class="modal-header">'
-                                    + '<h4 class="modal-title badge badge-green">Confirmation</h4>'
-                                    + '</div>'
-                                    + '<div class="modal-body">'
-                                    + 'Blacklist user ' + sender + ' ?'
-                                    + '</div>'
-                                    + '<div class="modal-footer">'
-                                    + '<button type="button" data-dismiss="modal" class="btn btn-light-grey">'
-                                    + 'Cancel'
-                                    + '</button>'
-                                    + '<button type="button" data-dismiss="modal" class="btn btn-blue" onclick="">'
-                                    + 'Blacklist'
-                                    + '</button>'
-                                    + '</div>'
-                                    + '</div>'
-                                    + ' </div>');
+                                                    var id = $(this).find('id').text();
+                                                    var sender = $(this).find('sender').text();
+                                                    var title = sender;
+                                                    if (window.innerWidth < 768 && sender.length > 9) {
+                                                        sender = sender.substring(0, 7) + '..';
+                                                    }
+                                                    var type;
+                                                    var image;
+                                                    if (sender === "You") {
+                                                        type = "sent";
+                                                        image = "admin";
+                                                    } else {
+                                                        type = "recieved";
+                                                        image = "user";
+                                                    }
 
-                            $("#ConversationAction").html(action);
-                            responce = $('<div class="send-wrap ">'
-                                    + '<textarea class="form-control send-message" rows="2" placeholder="Write a reply..."></textarea>'
-                                    + '</div>'
-                                    + '<div class="btn-panel">'
-                                    + '<a href="" class=" col-sm-4 text-right btn   send-message-btn pull-right" role="button"><i class="fa fa-plus"></i> Send Message</a>'
-                                    + '</div>');
-                            $("#msgResponce").html(responce);
-                        });
-                    }
-                });
-            }
-            ;
-            
-            
 
-            function deleteMessage(id) {
-                $.ajax({
-                    type: "POST",
-                    url: "DeleteMessage",
-                    dataType: "xml",
-                    data: {
-                        id: id
-                    }
-                });
-            }
-            ;
 
-            $(document).on('click', 'clickedListItem', function () {
-                document.getElementById("currentUser").value = this.id;
-                msgList();
-            });
-            $("#filter").keyup(function () {
-                if (document.getElementById("filter").value === "") {
-                    msgList();
-                } else {
-                    document.getElementById("currentUser").value = "";
-                    msgList();
-                }
-            });
-            $("#currentUser").keyup(function () {
-                document.getElementById("filter").value = document.getElementById("currentUser").value;
-                msgList();
-            });</script>
+                                                    var content = $(this).find('content').text();
+                                                    var time = $(this).find('time').text();
+                                                    var item;
+                                                    var action;
+                                                    var responce;
+                                                    item = $('<div class="media msg">\n'
+                                                            + '<a class="pull-left" href="#">\n'
+                                                            + '<img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 32px; height: 32px;" src="images/' + image + '-profile-picture-icon.jpg">\n'
+                                                            + '</a>\n'
+                                                            + '<div class="media-body">\n'
+                                                            + '<small class="pull-right time"><i class="fa fa-clock-o"></i>&nbsp;' + time + '</small>\n'
+                                                            + '<h5 class="media-heading">' + sender + '</h5>\n'
+                                                            + '<small class="col-sm-10">' + content + ' <a title="Delete message" href="#confirm_delete-id-' + id + '" data-toggle="modal" ><i class="fa fa-trash-o"></i></a></small>\n'
+                                                            + '</div>\n'
+                                                            + '</div>'
+                                                            + '<div id="confirm_delete-id-' + id + '"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">'
+                                                            + '<div class="modal-header">'
+                                                            + '<h4 class="modal-title badge badge-green">Confirmation</h4>'
+                                                            + '</div>'
+                                                            + '<div class="modal-body">'
+                                                            + 'Delete message " ' + content + ' " ?'
+                                                            + '</div>'
+                                                            + '<div class="modal-footer">'
+                                                            + '<button type="button" data-dismiss="modal" class="btn btn-light-grey">'
+                                                            + 'Cancel'
+                                                            + '</button>'
+                                                            + '<button type="button" data-dismiss="modal" class="btn btn-blue" onclick="deleteMessage(' + id + ',\'' + type + '\')">'
+                                                            + 'Delete'
+                                                            + '</button>'
+                                                            + '</div>'
+                                                            + '</div>'
+                                                            );
+
+                                                    if (window.innerWidth < 768) {
+                                                        $("#Conversation_modalXML").append(item);
+
+                                                        action = $('<div>'
+                                                                + '<span class="badge badge-info" style="font-size:xx-small">' + title + '</span>'
+                                                                + '<a title="Move ' + title + ' to trash" href="#confirm_delete-con-id-' + title + '" data-toggle="modal" class="btn  col-sm-2  send-message-btn" ><i class="fa fa-trash-o"></i></a>'
+                                                                + '<div id="confirm_delete-con-id-' + title + '"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">'
+                                                                + '<div class="modal-header">'
+                                                                + '<h4 class="modal-title badge badge-green">Confirmation</h4>'
+                                                                + '</div>'
+                                                                + '<div class="modal-body">'
+                                                                + 'Delete conversation with ' + title + ' ?'
+                                                                + '</div>'
+                                                                + '<div class="modal-footer">'
+                                                                + '<button type="button" data-dismiss="modal" class="btn btn-light-grey">'
+                                                                + 'Cancel'
+                                                                + '</button>'
+                                                                + '<button type="button" data-dismiss="modal" class="btn btn-blue" onclick="deleteConversation(\'' + title + '\')">'
+                                                                + 'Delete'
+                                                                + '</button>'
+                                                                + '</div>'
+                                                                + '</div>'
+                                                                + '<a title="Blacklist ' + title + '" href="#confirm_blacklist-user' + title + '" data-toggle="modal" class="btn  col-sm-2  send-message-btn" role="button"><i class="fa fa-ban"></i></a>'
+                                                                + '<div id="confirm_blacklist-user' + title + '"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">'
+                                                                + '<div class="modal-header">'
+                                                                + '<h4 class="modal-title badge badge-green">Confirmation</h4>'
+                                                                + '</div>'
+                                                                + '<div class="modal-body">'
+                                                                + 'Blacklist user ' + title + ' ?'
+                                                                + '</div>'
+                                                                + '<div class="modal-footer">'
+                                                                + '<button type="button" data-dismiss="modal" class="btn btn-light-grey">'
+                                                                + 'Cancel'
+                                                                + '</button>'
+                                                                + '<button type="button" data-dismiss="modal" class="btn btn-blue" onclick="blacklistUser(\'' + title + '\')">'
+                                                                + 'Blacklist'
+                                                                + '</button>'
+                                                                + '</div>'
+                                                                + '</div>'
+                                                                + ' </div>'
+                                                                );
+
+                                                        $("#ConversationActionModel").html(action);
+
+                                                    } else {
+                                                        $("#ConversationXML").append(item);
+                                                        if ($('#conversation_modal').hasClass('in') === true) {
+                                                            $('#conversation_modal').modal('hide');
+                                                        }
+
+                                                        action = $('<div class="btn-panel btn-panel-msg message-actions">'
+                                                                + '<a title="Move ' + sender + ' to trash" href="#confirm_delete-con-id-' + sender + '" data-toggle="modal" class="btn  col-sm-2  send-message-btn" ><i class="fa fa-trash-o"></i></a>'
+                                                                + '<div id="confirm_delete-con-id-' + sender + '"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">'
+                                                                + '<div class="modal-header">'
+                                                                + '<h4 class="modal-title badge badge-green">Confirmation</h4>'
+                                                                + '</div>'
+                                                                + '<div class="modal-body">'
+                                                                + 'Delete conversation with ' + sender + ' ?'
+                                                                + '</div>'
+                                                                + '<div class="modal-footer">'
+                                                                + '<button type="button" data-dismiss="modal" class="btn btn-light-grey">'
+                                                                + 'Cancel'
+                                                                + '</button>'
+                                                                + '<button type="button" data-dismiss="modal" class="btn btn-blue" onclick="deleteConversation(\'' + sender + '\')">'
+                                                                + 'Delete'
+                                                                + '</button>'
+                                                                + '</div>'
+                                                                + '</div>'
+                                                                + '<a title="Blacklist ' + sender + '" href="#confirm_blacklist-user' + sender + '" data-toggle="modal" class="btn  col-sm-2  send-message-btn" role="button"><i class="fa fa-ban"></i></a>'
+                                                                + '<div id="confirm_blacklist-user' + sender + '"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">'
+                                                                + '<div class="modal-header">'
+                                                                + '<h4 class="modal-title badge badge-green">Confirmation</h4>'
+                                                                + '</div>'
+                                                                + '<div class="modal-body">'
+                                                                + 'Blacklist user ' + sender + ' ?'
+                                                                + '</div>'
+                                                                + '<div class="modal-footer">'
+                                                                + '<button type="button" data-dismiss="modal" class="btn btn-light-grey">'
+                                                                + 'Cancel'
+                                                                + '</button>'
+                                                                + '<button type="button" data-dismiss="modal" class="btn btn-blue" onclick="blacklistUser(\'' + sender + '\')">'
+                                                                + 'Blacklist'
+                                                                + '</button>'
+                                                                + '</div>'
+                                                                + '</div>'
+                                                                + ' </div>'
+                                                                );
+
+                                                        $("#ConversationAction").html(action);
+
+                                                    }
+
+
+                                                });
+                                            }
+                                        });
+
+                                        if (document.getElementById("currentUser").value === "") {
+                                            document.getElementById("msgResponce").style.display = "none";
+                                        } else {
+                                            document.getElementById("msgResponce").style.display = "block";
+                                        }
+
+                                        if (document.getElementById("ConversationXML").innerHTML === "") {
+                                            document.getElementById("msgResponce").style.display = "none";
+                                        }
+                                    }
+                                    ;
+
+
+
+                                    function deleteMessage(id, type) {
+                                        $.ajax({
+                                            type: "GET",
+                                            url: "DeleteMessageXML",
+                                            dataType: "xml",
+                                            data: {
+                                                id: id,
+                                                type: type
+
+                                            },
+                                            success: function (xml) {
+                                                $(xml).find('value').each(function () {
+
+                                                    var result = $(this).find('result').text();
+                                                    if (result === "1") {
+                                                        runNotification("<button class=\"btn btn-green\">" //returning notification of the the success
+                                                                + "<i  class=\"glyphicon glyphicon-ok-sign\">"
+                                                                + "</i></button><br><strong>Deleted !</strong> message successfully.");
+                                                    }
+                                                    else {
+                                                        runNotification("<button class=\"btn btn-red\">" //returning notification of the the failure
+                                                                + "<i  class=\"glyphicon glyphicon-remove-circle\">"
+                                                                + "</i></button><br><strong>Failed!</strong> message delete.");
+                                                    }
+
+                                                });
+                                            }
+                                        });
+
+                                    }
+                                    ;
+
+                                    function deleteConversation(user) {
+                                        $.ajax({
+                                            type: "GET",
+                                            url: "DeleteConversationXML",
+                                            dataType: "xml",
+                                            data: {
+                                                user: user
+
+                                            },
+                                            success: function (xml) {
+                                                $(xml).find('value').each(function () {
+
+                                                    var result = $(this).find('result').text();
+                                                    if (result === "1") {
+                                                        if ($('#conversation_modal').hasClass('in') === true) {
+                                                            $('#conversation_modal').modal('hide');
+                                                        }
+                                                        runNotification("<button class=\"btn btn-green\">" //returning notification of the the success
+                                                                + "<i  class=\"glyphicon glyphicon-ok-sign\">"
+                                                                + "</i></button><br><strong>Deleted !</strong> conversation successfully.");
+                                                    }
+                                                    else {
+                                                        runNotification("<button class=\"btn btn-red\">" //returning notification of the the failure
+                                                                + "<i  class=\"glyphicon glyphicon-remove-circle\">"
+                                                                + "</i></button><br><strong>Failed!</strong> conversation delete.");
+                                                    }
+
+                                                });
+                                            }
+                                        });
+
+                                    }
+                                    ;
+
+                                    function blacklistUser(user) {
+                                        $.ajax({
+                                            type: "GET",
+                                            url: "UserBlacklistXML",
+                                            dataType: "xml",
+                                            data: {
+                                                user: user
+
+                                            },
+                                            success: function (xml) {
+                                                $(xml).find('value').each(function () {
+
+                                                    var result = $(this).find('result').text();
+                                                    if (result === "1") {
+                                                        if ($('#conversation_modal').hasClass('in') === true) {
+                                                            $('#conversation_modal').modal('hide');
+                                                        }
+                                                        runNotification("<button class=\"btn btn-green\">" //returning notification of the the success
+                                                                + "<i  class=\"glyphicon glyphicon-ok-sign\">"
+                                                                + "</i></button><br><strong>Blacklisted !</strong> user " + user + " successfully.");
+                                                    }
+                                                    else {
+                                                        runNotification("<button class=\"btn btn-red\">" //returning notification of the the failure
+                                                                + "<i  class=\"glyphicon glyphicon-remove-circle\">"
+                                                                + "</i></button><br><strong>Failed!</strong> blacklist user " + user + ".");
+                                                    }
+
+                                                });
+                                            }
+                                        });
+
+                                    }
+                                    ;
+
+                                    $(document).on('click', 'clickedListItem', function () {
+                                        document.getElementById("currentUser").value = this.id;
+                                        document.getElementById("msg_responce").value = "";
+                                        document.getElementById("msg_responce_modal").value = "";
+
+                                        msgList();
+
+                                        if (window.innerWidth < 768) {
+                                            $('#conversation_modal').modal('show');
+
+                                        }
+
+                                    });
+
+                                    $("#filter").keyup(function () {
+                                        if (document.getElementById("filter").value === "") {
+                                            msgList();
+
+                                        } else {
+                                            document.getElementById("currentUser").value = "";
+                                            msgList();
+
+                                        }
+                                    });
+
+                                    //function to initiate jquery.gritter
+                                    function runNotification(alert) {
+                                        var i = alert;
+                                        if (i !== "null") {
+
+                                            var unique_id = $.gritter.add({
+                                                // (string | mandatory) the heading of the notification
+                                                title: 'Notification!',
+                                                // (string | mandatory) the text inside the notification
+                                                text: alert,
+                                                // (bool | optional) if you want it to fade out on its own or just sit there
+                                                sticky: false,
+                                                // (int | optional) the time you want it to be alive for before fading out
+                                                time: 3000,
+                                                // (string | optional) the class name you want to apply to that specific message
+                                                class_name: 'my-sticky-class'
+                                            });
+                                            // You can have it return a unique id, this can be used to manually remove it later using
+                                            /*
+                                             setTimeout(function(){
+                                             $.gritter.remove(unique_id, {
+                                             fade: true,
+                                             speed: 'slow'
+                                             });
+                                             }, 6000)
+                                             */
+                                            return false;
+
+                                        }
+
+                                    }
+
+                                    function sendMessage() {
+                                        if (document.getElementById("msg_responce").value === "" && window.innerWidth >= 768) {
+                                            runNotification("<button class=\"btn btn-red\">" //returning notification of empty reply
+                                                    + "<i  class=\"glyphicon glyphicon-remove-circle\">"
+                                                    + "</i></button><br><strong>Failed!</strong> Please enter the responce.");
+
+                                        } else if (document.getElementById("msg_responce_modal").value === "" && window.innerWidth < 768) {
+                                            runNotification("<button class=\"btn btn-red\">" //returning notification of empty reply
+                                                    + "<i  class=\"glyphicon glyphicon-remove-circle\">"
+                                                    + "</i></button><br><strong>Failed!</strong> Please enter the responce.");
+
+
+                                        } else {
+                                            if (window.innerWidth < 768) {
+                                                var content = document.getElementById("msg_responce_modal").value;
+                                            } else {
+                                                var content = document.getElementById("msg_responce").value;
+                                            }
+                                            $.ajax({
+                                                type: "GET",
+                                                url: "SendMessageXML",
+                                                dataType: "xml",
+                                                data: {
+                                                    content: content,
+                                                    reciever: document.getElementById("currentUser").value
+                                                },
+                                                success: function (xml) {
+                                                    $(xml).find('value').each(function () {
+
+                                                        var result = $(this).find('result').text();
+                                                        if (result === "1") {
+                                                            runNotification("<button class=\"btn btn-green\">" //returning notification of the the success
+                                                                    + "<i  class=\"glyphicon glyphicon-ok-sign\">"
+                                                                    + "</i></button><br><strong>Sent !</strong> message successfully.");
+                                                            document.getElementById("msg_responce_modal").value = "";
+                                                            document.getElementById("msg_responce").value = "";
+                                                        }
+                                                        else {
+                                                            runNotification("<button class=\"btn btn-red\">" //returning notification of the the failure
+                                                                    + "<i  class=\"glyphicon glyphicon-remove-circle\">"
+                                                                    + "</i></button><br><strong>Failed!</strong> message.");
+                                                        }
+
+                                                    });
+                                                }
+                                            });
+                                        }
+
+                                    }
+                                    ;
+                                    /*function scrollBottom() {
+                                     if (document.getElementById("ConversationXML").scrollTop === 0) {
+                                     var objDiv = document.getElementById("ConversationXML");
+                                     objDiv.scrollTop = objDiv.scrollHeight;
+                                     }
+                                     
+                                     }*/
+
+        </script>
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
         <script>
             jQuery(document).ready(function () {
@@ -616,9 +901,11 @@
                 refresh_data();
                 msgLoad();
                 msgList();
+
                 window.setInterval(function () {
-                 //   refresh_data();
-                 //   msgList();
+                    refresh_data();
+                    msgList();
+
                 }, 3000);
                 TableData.init();
                 Main.init();

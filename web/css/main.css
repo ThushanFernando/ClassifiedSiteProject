@@ -1487,7 +1487,7 @@ ul.main-navigation-menu > li > ul.sub-menu > li > ul.sub-menu > li > ul.sub-menu
     padding: 15px 45px 15px 15px;;
     border-bottom: 1px solid #C8C7CC;
     position: relative;
-    height: 51px;
+    height: 40px;
 }
 .breadcrumb i {
     color: #cccccc;
@@ -2178,13 +2178,12 @@ span.star:before {
 /*	Page Header
 /* ---------------------------------------------------------------------- */
 .page-header {
-    margin: 20px 0 20px;
+    margin: 0px 0 0px;
 }
 .page-header h1 {
     font-family: 'Raleway', sans-serif;
     font-weight: 200;
     letter-spacing: -1px;
-    margin: 0 0 15px;
     padding: 0;
     color: #666666;
 }
@@ -3436,8 +3435,9 @@ div.timeline_element.purple div.timeline_title {
 }
 .messages-list .messages-item {
     border-bottom: 1px solid #D9D9D9;
-    padding: 5px 15px 5px 25px;
+    padding: 5px 15px 5px 5px;
     position: relative;
+
 }
 .messages-list .messages-search {
     border-bottom: 1px solid #D9D9D9;
@@ -3481,18 +3481,18 @@ div.timeline_element.purple div.timeline_title {
 }
 .messages-list .messages-item .messages-item-from {
     font-weight: bold;
-    margin-top: 2px;
-    
-    
+    margin-top: 7px;
+
+
 }
 .messages-list .messages-item .messages-item-current {
     color: white;
-    
+
 }
 .messages-list .messages-item .messages-item-time {
     opacity: 1;
     right: 85px;
-    top: 8px;
+    top: 0px;
     transition: opacity 0.2s ease-in-out 0s;
 }
 .messages-list .messages-item .messages-item-time .text {
@@ -4786,4 +4786,27 @@ td.column-right{
     height: 100%;
     z-index: 9999;
     background: url('../images/loading.gif') 50% 50% no-repeat rgb(249,249,249);
+}
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    /*        -webkit-border-radius: 10px;
+            border-radius: 10px;*/
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    /*        -webkit-border-radius: 10px;
+            border-radius: 10px;*/
+    background:#ddd; 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: #ddd; 
 }

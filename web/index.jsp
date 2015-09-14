@@ -207,6 +207,7 @@
                             </ul>
                         </li>
 
+
                         <li>
                             <a href="BlacklistedUsers" ><i class="clip-user-block"></i>
                                 <span class="title"> Blacklisted Users</span><span class="selected"></span>
@@ -232,6 +233,17 @@
                                 <span class="title"> Update Interfaces</span><span class="selected"></span>
                             </a>
                         </li>
+                        <li>
+                            <a href="#" ><i class="clip-file"></i>
+                                <span class="title"> free space</span><span class="selected"></span>
+                            </a>
+                        </li>
+                         <li>
+                            <a href="#" ><i class="clip-file"></i>
+                                <span class="title"> free space</span><span class="selected"></span>
+                            </a>
+                        </li>
+                        
 
                     </ul>
                     <!-- end: MAIN NAVIGATION MENU -->
@@ -463,7 +475,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     &times;
                 </button>
-                <h2></h2>
+                
 
             </div>
             <div class="modal-body">
@@ -599,7 +611,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     &times;
                 </button>
-                <h2></h2>
+                
 
             </div>
             <div class="modal-body">
@@ -738,7 +750,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     &times;
                 </button>
-                <h2></h2>
+                
 
             </div>
             <div class="modal-body">

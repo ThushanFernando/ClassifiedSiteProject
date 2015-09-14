@@ -22,7 +22,7 @@
                     <!-- end: RESPONSIVE MENU TOGGLER -->
                     <!-- start: LOGO -->
                     <a class="navbar-brand" href="Dashboard">
-                        <img  src="images/logo.jpg" style="width: 100px;"/>
+                        <img  src="images/logo.png" style="width: 100px;"/>
 
                     </a>
                     <!-- end: LOGO -->

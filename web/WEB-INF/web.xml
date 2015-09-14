@@ -161,8 +161,20 @@
         <servlet-class>adminservlets.ForgotPassword</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DeleteMessage</servlet-name>
-        <servlet-class>adminservlets_messages.DeleteMessage</servlet-class>
+        <servlet-name>DeleteMessageXML</servlet-name>
+        <servlet-class>adminservlets_XML.DeleteMessageXML</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendMessageXML</servlet-name>
+        <servlet-class>adminservlets_XML.SendMessageXML</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteConversationXML</servlet-name>
+        <servlet-class>adminservlets_XML.DeleteConversationXML</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserBlacklistXML</servlet-name>
+        <servlet-class>adminservlets_XML.UserBlacklistXML</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
@@ -325,8 +337,20 @@
         <url-pattern>/ForgotPassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DeleteMessage</servlet-name>
-        <url-pattern>/DeleteMessage</url-pattern>
+        <servlet-name>DeleteMessageXML</servlet-name>
+        <url-pattern>/DeleteMessageXML</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendMessageXML</servlet-name>
+        <url-pattern>/SendMessageXML</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteConversationXML</servlet-name>
+        <url-pattern>/DeleteConversationXML</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserBlacklistXML</servlet-name>
+        <url-pattern>/UserBlacklistXML</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

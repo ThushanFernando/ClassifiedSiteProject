@@ -108,7 +108,7 @@
             <div class="modal-header">
                 <h3>Forget Password?</h3>
                 <p>
-                    Enter your e-mail address below to reset your password.
+                    Enter your e-mail address below to recover your password.
                 </p>
             </div>
             <div class="modal-body">

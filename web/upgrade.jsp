@@ -232,80 +232,99 @@
                         </div>
                         <!-- end: 404 -->
                     </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button onclick="scrollBottom()">move</button>
+                            <script>
+                                function scrollBottom() {
+                                    var objDiv = document.getElementById("test");
+                                    objDiv.scrollTop = objDiv.scrollHeight;
+                                }
+                            </script>
+                            <div id="test" style="border:solid 1px; overflow-y:auto; height: 300px; ">
+                                <div style="border:solid 1px red;  height: 1000px; ">
 
+                                </div>
 
-                    <!-- end: PAGE CONTENT-->
+                            </div> 
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-            <!-- end: PAGE -->
-        </div>
-        <!-- end: MAIN CONTAINER -->
-        <!-- start: FOOTER -->
-        <div class="footer clearfix">
-            <div class="footer-inner">
-                2015 &copy; NextGlow.com
-            </div>
-            <div class="footer-items">
-                <span class="go-top"><i class="clip-chevron-up"></i></span>
-            </div>
-        </div>
-        <!-- end: FOOTER -->
 
 
-        <!-- start: BOOTSTRAP EXTENDED MODALS -->
-        <jsp:include page="page-elements/login_update_modals.jsp"/>
-        <!-- start: MAIN JAVASCRIPTS -->
-        <!--[if lt IE 9]>
-        <script src="plugins/respond.min.js"></script>
-        <script src="plugins/excanvas.min.js"></script>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <![endif]-->
-        <!--[if gte IE 9]><!-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-        <!--<![endif]-->
-        <script src="plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js"></script>
-        <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
-        <script src="plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
-        <script src="plugins/blockUI/jquery.blockUI.js"></script>
-        <script src="plugins/iCheck/jquery.icheck.min.js"></script>
-        <script src="plugins/perfect-scrollbar/src/jquery.mousewheel.js"></script>
-        <script src="plugins/perfect-scrollbar/src/perfect-scrollbar.js"></script>
-        <script src="plugins/less/less-1.5.0.min.js"></script>
-        <script src="plugins/jquery-cookie/jquery.cookie.js"></script>
-        <script src="plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js"></script>
-        <script src="js/main.js"></script>
-        <!-- end: MAIN JAVASCRIPTS -->
-        <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
-        <script src="plugins/flot/jquery.flot.js"></script>
-        <script src="plugins/flot/jquery.flot.pie.js"></script>
-        <script src="plugins/flot/jquery.flot.resize.min.js"></script>
-        <script src="plugins/jquery.sparkline/jquery.sparkline.js"></script>
-        <script src="plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
-        <script src="plugins/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
-        <script src="plugins/fullcalendar/fullcalendar/fullcalendar.js"></script>
-        <script src="js/index.js"></script>
-        <script src="plugins/jquery-validation/dist/jquery.validate.min.js"></script>
-        <script src="plugins/summernote/build/summernote.min.js"></script>
-        <script src="plugins/ckeditor/ckeditor.js"></script>
-        <script src="plugins/ckeditor/adapters/jquery.js"></script>
-        <script src="js/form-validation.js"></script>
-        <script src="plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
-        <script src="plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
-        <script src="js/ui-modals.js"></script>
-        <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
-        <script>
-            jQuery(document).ready(function () {
-                $(".loader").fadeOut("slow");
-                refresh_data();
-                window.setInterval(function () {
-                    refresh_data();
-                }, 3000);
-                Main.init();
-                Index.init();
-                UIModals.init();
-                FormValidator.init();
-            });
-        </script>
-    </body>
-    <!-- end: BODY -->
+                <!-- end: PAGE CONTENT-->
+            </div>
+        </div>
+        <!-- end: PAGE -->
+    </div>
+    <!-- end: MAIN CONTAINER -->
+    <!-- start: FOOTER -->
+    <div class="footer clearfix">
+        <div class="footer-inner">
+            2015 &copy; NextGlow.com
+        </div>
+        <div class="footer-items">
+            <span class="go-top"><i class="clip-chevron-up"></i></span>
+        </div>
+    </div>
+    <!-- end: FOOTER -->
+
+
+    <!-- start: BOOTSTRAP EXTENDED MODALS -->
+    <jsp:include page="page-elements/login_update_modals.jsp"/>
+    <!-- start: MAIN JAVASCRIPTS -->
+    <!--[if lt IE 9]>
+    <script src="plugins/respond.min.js"></script>
+    <script src="plugins/excanvas.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <!--<![endif]-->
+    <script src="plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js"></script>
+    <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+    <script src="plugins/blockUI/jquery.blockUI.js"></script>
+    <script src="plugins/iCheck/jquery.icheck.min.js"></script>
+    <script src="plugins/perfect-scrollbar/src/jquery.mousewheel.js"></script>
+    <script src="plugins/perfect-scrollbar/src/perfect-scrollbar.js"></script>
+    <script src="plugins/less/less-1.5.0.min.js"></script>
+    <script src="plugins/jquery-cookie/jquery.cookie.js"></script>
+    <script src="plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js"></script>
+    <script src="js/main.js"></script>
+    <!-- end: MAIN JAVASCRIPTS -->
+    <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+    <script src="plugins/flot/jquery.flot.js"></script>
+    <script src="plugins/flot/jquery.flot.pie.js"></script>
+    <script src="plugins/flot/jquery.flot.resize.min.js"></script>
+    <script src="plugins/jquery.sparkline/jquery.sparkline.js"></script>
+    <script src="plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+    <script src="plugins/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+    <script src="plugins/fullcalendar/fullcalendar/fullcalendar.js"></script>
+    <script src="js/index.js"></script>
+    <script src="plugins/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="plugins/summernote/build/summernote.min.js"></script>
+    <script src="plugins/ckeditor/ckeditor.js"></script>
+    <script src="plugins/ckeditor/adapters/jquery.js"></script>
+    <script src="js/form-validation.js"></script>
+    <script src="plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
+    <script src="plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
+    <script src="js/ui-modals.js"></script>
+    <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+    <script>
+                                        jQuery(document).ready(function () {
+                                            $(".loader").fadeOut("slow");
+                                            refresh_data();
+                                            window.setInterval(function () {
+                                                refresh_data();
+                                            }, 3000);
+                                            Main.init();
+                                            Index.init();
+                                            UIModals.init();
+                                            FormValidator.init();
+                                        });
+    </script>
+</body>
+<!-- end: BODY -->
 </html>

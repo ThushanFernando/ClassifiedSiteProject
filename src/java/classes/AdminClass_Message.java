@@ -8,7 +8,6 @@ package classes;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import classes.DbClass;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -135,6 +134,23 @@ public class AdminClass_Message {
         }
         return al;
     }
+    
+    public String initialUserAll() {
+       String iniUser=null;
+        try {
+            dbc.getConnection();
+            Statement stmt = dbc.conn.createStatement();
+            String query = "SELECT `msg_from` FROM `messageview` WHERE `msg_to`='Admin' LIMIT 1";
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                iniUser=rs.getString("msg_from");
+            }
+            dbc.endConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_Message.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return iniUser;
+    }
 
     public ArrayList readMessages() {
         ArrayList al = new ArrayList();
@@ -156,6 +172,8 @@ public class AdminClass_Message {
         }
         return al;
     }
+    
+    
 
     public ArrayList unreadMessages() {
         ArrayList al = new ArrayList();
@@ -200,6 +218,53 @@ public class AdminClass_Message {
         return al;
     }
 
+    public int deleteMessage(String id,String type){
+        int result=0; 
+        String query;
+        try {
+            dbc.getConnection();
+            Statement stmt = dbc.conn.createStatement();
+            if("sent".equals(type)){
+                query = "DELETE FROM `user_messages_inbox` WHERE `message_id`='"+id+"'";
+            }else{
+                query = "DELETE FROM `user_messages_outbox` WHERE `message_id`='"+id+"'";
+            }
+            result=stmt.executeUpdate(query);
+            dbc.endConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_Message.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return result;
+    }
+    
+    public int sendMessage(String content,String reciever){
+        int result=0; 
+        String query;
+        try {
+            dbc.getConnection();
+            Statement stmt = dbc.conn.createStatement();
+           
+            dbc.endConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_Message.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return result;
+    }
+    
+    public int deleteConversation(String reciever){
+        int result=0; 
+        String query;
+        try {
+            dbc.getConnection();
+            Statement stmt = dbc.conn.createStatement();
+           
+            dbc.endConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_Message.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return result;
+    }
+    
     public String timeDiff(String time) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String timeZone = "Asia/Colombo";

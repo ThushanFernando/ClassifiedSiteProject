@@ -3,23 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminservlets_messages;
+package adminservlets_XML;
 
 import classes.AdminClass_Message;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author SithuDewmi
  */
-public class DeleteMessage extends HttpServlet {
+public class DeleteMessageXML extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +36,10 @@ public class DeleteMessage extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DeleteMessage</title>");
+            out.println("<title>Servlet DeleteMessageXML</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DeleteMessage at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteMessageXML at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,12 +57,18 @@ public class DeleteMessage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Enumeration<String> parameterNames = request.getParameterNames();       //checking for unappropriate parameters
-        if (parameterNames.hasMoreElements()) {
-            processRequest(request, response);
-        } else {
-            doPost(request, response);
-        }
+        response.setContentType("test/xml");
+        response.setCharacterEncoding("UTF-8");
+        AdminClass_Message am = new AdminClass_Message();
+        
+        int result = 1;//am.deleteMessage(request.getParameter("id"),request.getParameter("type"));
+        String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                + "<values>\n"
+                + "	<value>\n"
+                    + "		<result>"+result+"</result>\n"
+                    + "	</value>\n"
+                +"</values>";
+        response.getWriter().write(content);
     }
 
     /**
@@ -78,20 +82,7 @@ public class DeleteMessage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("test/xml");
-        response.setCharacterEncoding("UTF-8");
-        
-        HttpSession session = request.getSession();
-        if (session.getAttribute("loggin_state") == "success") {                //checking logged in status
-
-            AdminClass_Message am = new AdminClass_Message();
-            String id = request.getParameter("id");
-            int result = 1;//am.deleteMessage();                                //deleting message
-            System.out.println(id);
-            
-        } else {
-            response.sendRedirect("superb_admin.jsp");
-        }
+        processRequest(request, response);
     }
 
     /**

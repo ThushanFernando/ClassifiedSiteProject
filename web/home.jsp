@@ -75,7 +75,7 @@
                                     <a href="#">
                                         <span class="glyphicon glyphicon-chevron-right"></span>
                                         Messages
-                                        <span id="messagesCount" class='badge pull-right'>16</span>
+                                        <span id="messagesCount" class='badge pull-right'>14</span>
                                     </a>
                                 </li>
                                 <li>
@@ -102,9 +102,9 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <button type="button" class="btn btn-block btn-lg btn-warning active">
+                                <a href="postAD.jsp" class="btn btn-block btn-lg btn-warning active">
                                     Post AD
-                                </button>
+                                </a>
                             </div>
                         </div>
 

@@ -33,5 +33,7 @@
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
         -->
+
+        <link rel="icon" type="image/png" href="favicon.png">
     </head>
 </html>

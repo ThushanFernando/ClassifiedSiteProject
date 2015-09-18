@@ -38,7 +38,7 @@ public class CustomDataXMLUser extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CustomDataXMLUser</title>");            
+            out.println("<title>Servlet CustomDataXMLUser</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet CustomDataXMLUser at " + request.getContextPath() + "</h1>");
@@ -67,14 +67,18 @@ public class CustomDataXMLUser extends HttpServlet {
         AdminClass_Overviewstats ao = new AdminClass_Overviewstats();
         boolean checkFD = ao.isValidDate(fd);
         boolean checkSD = ao.isValidDate(sd);
-        
-         
+
         if (checkFD == true && checkSD == true) {
-            ArrayList al=ao.usersCustom(fd, sd);
+            ArrayList al = ao.usersCustom(fd, sd);
             DecimalFormat twoDForm = new DecimalFormat("#.#");
-             result="Users: "+(String)al.get(1) +" Percentage: "+twoDForm.format(Float.parseFloat((String) al.get(1)) / Float.parseFloat((String) al.get(0))* 100)+"%";
+            if (al.get(1).equals("0")) {
+                result = "Users : " + (String) al.get(1) + " Percentage: 0%";
+            } else {
+                result = "Users: " + (String) al.get(1) + " Percentage: " + twoDForm.format(Float.parseFloat((String) al.get(1)) / Float.parseFloat((String) al.get(0)) * 100) + "%";
+            }
+
         } else {
-             result = "Incorrect entry";
+            result = "Incorrect entry";
         }
 
         String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"

@@ -91,7 +91,7 @@ public class Rmv_ReviewAds extends HttpServlet {
             int result;
             
             if (("Remove".equals(action) && item != null)) {
-                result = 1;//ar.removeAd(item);                                 //removing advertiesment
+                result = ar.removeAd(item);                                 //removing advertiesment
                 if (result == 1) {
                     alert = "<button class=\"btn btn-green\">"                  //returning notification of the success 
                             + "<i  class=\"glyphicon glyphicon-ok-sign\">"

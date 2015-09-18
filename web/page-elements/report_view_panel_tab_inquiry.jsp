@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+
     </head>
     <body>
         <%
@@ -25,8 +25,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th class=" hidden-xs">Reported User</th>
-                        <th>Reason</th>
+                        <th>Inquiry from</th>
                         <th class="center"></th>                                                                                                
 
                     </tr>
@@ -38,8 +37,7 @@
                     %>
                     <tr>
                         <td><%=received2.getInquiry_id()%></td>
-                        <td class=" hidden-xs"><%=received2.getReported_user()%></td>
-                        <td><%=received2.getReason()%></td>
+                        <td><%=received2.getMessage_from()%></td>
                         <td class="center">
                             <div>
                                 <div class="btn-group">
@@ -58,7 +56,6 @@
                                                 <input type="hidden" id="inquiryITVI<%=received2.getInquiry_id()%>" value="<%=received2.getInquiry_time_stamp()%>">
                                                 <input type="hidden" id="inquiryIRVI<%=received2.getInquiry_id()%>" value="<%=received2.getInquiry_response()%>">
                                                 <input type="hidden" id="inquiryRTVI<%=received2.getInquiry_id()%>" value="<%=received2.getResponse_time_stamp()%>">
-                                                <input type="hidden" id="inquiryRVI<%=received2.getInquiry_id()%>" value="<%=received2.getReason()%>">
                                             </a>
                                         </clickedViewInquiry>
                                         </li>
@@ -81,7 +78,7 @@
                                         </clickedBlockInquiryUser>
                                         </li>
                                         <li role="presentation">
-                                             <a role="menuitem" tabindex="-1" href="#" onclick="document.getElementById('RRI<%=received2.getInquiry_id()%>').submit()">
+                                            <a role="menuitem" tabindex="-1" href="#" onclick="document.getElementById('RRI<%=received2.getInquiry_id()%>').submit()">
                                                 <i class="fa clip-remove"></i> Remove Report
                                             </a>
                                             <form action="IRemoved_ViewReports?tabId=panel_tab_Inquiry" method="POST" id="RRI<%=received2.getInquiry_id()%>">
@@ -94,7 +91,7 @@
                         </td>
                     </tr>
                     <%}
-                        if (Inquiry_report_count1== "") {%>
+                        if (Inquiry_report_count1 == "") {%>
                     <tr>
                         <td>No data available in table</td> 
                     </tr>

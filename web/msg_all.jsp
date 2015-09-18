@@ -452,6 +452,19 @@
                                         } else {
                                             document.getElementById("currentUser").value = '<%=request.getParameter("inital_user")%>';
                                         }
+
+                                        var blist = '<%=request.getParameter("blist")%>';
+                                        var user = '<%=request.getParameter("user")%>';
+                                        if (blist === "1" && user !== "null") {
+                                            runNotification("<button class=\"btn btn-green\">" //returning notification of the the success
+                                                    + "<i  class=\"glyphicon glyphicon-ok-sign\">"
+                                                    + "</i></button><br><strong>Blacklisted !</strong> user " + user + " successfully.");
+                                        }
+                                        else if (blist === "0" && user !== "null") {
+                                            runNotification("<button class=\"btn btn-red\">" //returning notification of the the failure
+                                                    + "<i  class=\"glyphicon glyphicon-remove-circle\">"
+                                                    + "</i></button><br><strong>Failed!</strong> blacklist user " + user + ".");
+                                        }
                                     }
                                     function msgList() {
 
@@ -571,37 +584,40 @@
                                                         $("#Conversation_modalXML").append(item);
 
                                                         action = $('<div>'
-                                                                + '<span class="badge badge-info" style="font-size:xx-small">' + title + '</span>'
-                                                                + '<a title="Move ' + title + ' to trash" href="#confirm_delete-con-id-' + title + '" data-toggle="modal" class="btn  col-sm-2  send-message-btn" ><i class="fa fa-trash-o"></i></a>'
-                                                                + '<div id="confirm_delete-con-id-' + title + '"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">'
+                                                                + '<span class="badge badge-info" style="font-size:xx-small">' + document.getElementById("currentUser").value + '</span>'
+                                                                + '<a title="Move ' + document.getElementById("currentUser").value + ' to trash" href="#confirm_delete-con-id-' + document.getElementById("currentUser").value + '" data-toggle="modal" class="btn  col-sm-2  send-message-btn" ><i class="fa fa-trash-o"></i></a>'
+                                                                + '<div id="confirm_delete-con-id-' + document.getElementById("currentUser").value + '"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">'
                                                                 + '<div class="modal-header">'
                                                                 + '<h4 class="modal-title badge badge-green">Confirmation</h4>'
                                                                 + '</div>'
                                                                 + '<div class="modal-body">'
-                                                                + 'Delete conversation with ' + title + ' ?'
+                                                                + 'Delete conversation with ' + document.getElementById("currentUser").value + ' ?'
                                                                 + '</div>'
                                                                 + '<div class="modal-footer">'
                                                                 + '<button type="button" data-dismiss="modal" class="btn btn-light-grey">'
                                                                 + 'Cancel'
                                                                 + '</button>'
-                                                                + '<button type="button" data-dismiss="modal" class="btn btn-blue" onclick="deleteConversation(\'' + title + '\')">'
+                                                                + '<button type="button" data-dismiss="modal" class="btn btn-blue" onclick="deleteConversation(\'' + document.getElementById("currentUser").value + '\')">'
                                                                 + 'Delete'
                                                                 + '</button>'
                                                                 + '</div>'
                                                                 + '</div>'
-                                                                + '<a title="Blacklist ' + title + '" href="#confirm_blacklist-user' + title + '" data-toggle="modal" class="btn  col-sm-2  send-message-btn" role="button"><i class="fa fa-ban"></i></a>'
-                                                                + '<div id="confirm_blacklist-user' + title + '"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">'
+                                                                + '<a title="Blacklist ' + document.getElementById("currentUser").value + '" href="#confirm_blacklist-user' + document.getElementById("currentUser").value + '" data-toggle="modal" class="btn  col-sm-2  send-message-btn" role="button"><i class="fa fa-ban"></i></a>'
+                                                                + '<div id="confirm_blacklist-user' + document.getElementById("currentUser").value + '"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">'
                                                                 + '<div class="modal-header">'
                                                                 + '<h4 class="modal-title badge badge-green">Confirmation</h4>'
                                                                 + '</div>'
                                                                 + '<div class="modal-body">'
-                                                                + 'Blacklist user ' + title + ' ?'
+                                                                + 'Blacklist user ' + document.getElementById("currentUser").value + ' ?'
                                                                 + '</div>'
                                                                 + '<div class="modal-footer">'
+                                                                + '<form id="blacklist_' + document.getElementById("currentUser").value + '" action="MsgBlacklistUser" method="POST">'
+                                                                + '<input type="hidden" name="user" value="' + document.getElementById("currentUser").value + '">'
+                                                                + '</form>'
                                                                 + '<button type="button" data-dismiss="modal" class="btn btn-light-grey">'
                                                                 + 'Cancel'
                                                                 + '</button>'
-                                                                + '<button type="button" data-dismiss="modal" class="btn btn-blue" onclick="blacklistUser(\'' + title + '\')">'
+                                                                + '<button type="button" data-dismiss="modal" class="btn btn-blue" onclick="document.getElementById(\'blacklist_' + document.getElementById("currentUser").value + '\').submit();">'
                                                                 + 'Blacklist'
                                                                 + '</button>'
                                                                 + '</div>'
@@ -618,36 +634,39 @@
                                                         }
 
                                                         action = $('<div class="btn-panel btn-panel-msg message-actions">'
-                                                                + '<a title="Move ' + sender + ' to trash" href="#confirm_delete-con-id-' + sender + '" data-toggle="modal" class="btn  col-sm-2  send-message-btn" ><i class="fa fa-trash-o"></i></a>'
-                                                                + '<div id="confirm_delete-con-id-' + sender + '"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">'
+                                                                + '<a title="Move ' + document.getElementById("currentUser").value + ' to trash" href="#confirm_delete-con-id-' + document.getElementById("currentUser").value + '" data-toggle="modal" class="btn  col-sm-2  send-message-btn" ><i class="fa fa-trash-o"></i></a>'
+                                                                + '<div id="confirm_delete-con-id-' + document.getElementById("currentUser").value + '"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">'
                                                                 + '<div class="modal-header">'
                                                                 + '<h4 class="modal-title badge badge-green">Confirmation</h4>'
                                                                 + '</div>'
                                                                 + '<div class="modal-body">'
-                                                                + 'Delete conversation with ' + sender + ' ?'
+                                                                + 'Delete conversation with ' + document.getElementById("currentUser").value + ' ?'
                                                                 + '</div>'
                                                                 + '<div class="modal-footer">'
                                                                 + '<button type="button" data-dismiss="modal" class="btn btn-light-grey">'
                                                                 + 'Cancel'
                                                                 + '</button>'
-                                                                + '<button type="button" data-dismiss="modal" class="btn btn-blue" onclick="deleteConversation(\'' + sender + '\')">'
+                                                                + '<button type="button" data-dismiss="modal" class="btn btn-blue" onclick="deleteConversation(\'' + document.getElementById("currentUser").value + '\')">'
                                                                 + 'Delete'
                                                                 + '</button>'
                                                                 + '</div>'
                                                                 + '</div>'
-                                                                + '<a title="Blacklist ' + sender + '" href="#confirm_blacklist-user' + sender + '" data-toggle="modal" class="btn  col-sm-2  send-message-btn" role="button"><i class="fa fa-ban"></i></a>'
-                                                                + '<div id="confirm_blacklist-user' + sender + '"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">'
+                                                                + '<a title="Blacklist ' + document.getElementById("currentUser").value + '" href="#confirm_blacklist-user' + document.getElementById("currentUser").value + '" data-toggle="modal" class="btn  col-sm-2  send-message-btn" role="button"><i class="fa fa-ban"></i></a>'
+                                                                + '<div id="confirm_blacklist-user' + document.getElementById("currentUser").value + '"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">'
                                                                 + '<div class="modal-header">'
                                                                 + '<h4 class="modal-title badge badge-green">Confirmation</h4>'
                                                                 + '</div>'
                                                                 + '<div class="modal-body">'
-                                                                + 'Blacklist user ' + sender + ' ?'
+                                                                + 'Blacklist user ' + document.getElementById("currentUser").value + ' ?'
                                                                 + '</div>'
                                                                 + '<div class="modal-footer">'
+                                                                + '<form id="blacklist_' + document.getElementById("currentUser").value + '" action="MsgBlacklistUser" method="POST">'
+                                                                + '<input type="hidden" name="user" value="' + document.getElementById("currentUser").value + '">'
+                                                                + '</form>'
                                                                 + '<button type="button" data-dismiss="modal" class="btn btn-light-grey">'
                                                                 + 'Cancel'
                                                                 + '</button>'
-                                                                + '<button type="button" data-dismiss="modal" class="btn btn-blue" onclick="blacklistUser(\'' + sender + '\')">'
+                                                                + '<button type="button" data-dismiss="modal" class="btn btn-blue" onclick="document.getElementById(\'blacklist_' + document.getElementById("currentUser").value + '\').submit();">'
                                                                 + 'Blacklist'
                                                                 + '</button>'
                                                                 + '</div>'
@@ -744,42 +763,28 @@
                                     }
                                     ;
 
-                                    function blacklistUser(user) {
+                                    
+
+                                    $(document).on('click', 'clickedListItem', function () {
+                                        document.getElementById("currentUser").value = this.id;
+
                                         $.ajax({
                                             type: "GET",
-                                            url: "UserBlacklistXML",
+                                            url: "MarkAsReadXML",
                                             dataType: "xml",
                                             data: {
-                                                user: user
+                                                reciever: this.id
 
                                             },
                                             success: function (xml) {
                                                 $(xml).find('value').each(function () {
 
                                                     var result = $(this).find('result').text();
-                                                    if (result === "1") {
-                                                        if ($('#conversation_modal').hasClass('in') === true) {
-                                                            $('#conversation_modal').modal('hide');
-                                                        }
-                                                        runNotification("<button class=\"btn btn-green\">" //returning notification of the the success
-                                                                + "<i  class=\"glyphicon glyphicon-ok-sign\">"
-                                                                + "</i></button><br><strong>Blacklisted !</strong> user " + user + " successfully.");
-                                                    }
-                                                    else {
-                                                        runNotification("<button class=\"btn btn-red\">" //returning notification of the the failure
-                                                                + "<i  class=\"glyphicon glyphicon-remove-circle\">"
-                                                                + "</i></button><br><strong>Failed!</strong> blacklist user " + user + ".");
-                                                    }
 
                                                 });
                                             }
                                         });
 
-                                    }
-                                    ;
-
-                                    $(document).on('click', 'clickedListItem', function () {
-                                        document.getElementById("currentUser").value = this.id;
                                         document.getElementById("msg_responce").value = "";
                                         document.getElementById("msg_responce_modal").value = "";
 
@@ -907,11 +912,10 @@
                     msgList();
 
                 }, 3000);
-                TableData.init();
                 Main.init();
                 Index.init();
                 UIModals.init();
-                FormValidator.init();
+
             });
         </script>
     </body>

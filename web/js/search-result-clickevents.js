@@ -165,8 +165,6 @@ $(document).on('click', 'clickedID', function () {
                 }
                 else if (selection.charAt(0) === "2") {
                     var id = $(this).find('id').text();
-                    var user = $(this).find('user').text();
-                    var reason = $(this).find('reason').text();
                     var item = $(this).find('item').text();
                     var message_to = $(this).find('message_to').text();
                     var message_from = $(this).find('message_from').text();
@@ -177,21 +175,9 @@ $(document).on('click', 'clickedID', function () {
                     $("#PlaceHeader").append("<h3>Inquiry report Detailed view</h3>");
                     $("#PlaceData").append('<form action="#" role="form" class="smart-wizard form-horizontal" >'
                             + '<div class="form-group">'
-                            + '<label class="col-sm-3 control-label">Id:</label>'
+                            + '<label class="col-sm-3 control-label">Inquiry id:</label>'
                             + '<div class="col-sm-7">'
                             + '   <input type="text" class="form-control" readonly="true"   value="' + id + '">'
-                            + '</div>'
-                            + '</div>'
-                            + '<div class="form-group">'
-                            + '<label class="col-sm-3 control-label">Reported user:</label>'
-                            + '<div class="col-sm-7">'
-                            + '   <input type="text" class="form-control" readonly="true"   value="' + user + '">'
-                            + '</div>'
-                            + '</div>'
-                            + '<div class="form-group">'
-                            + '<label class="col-sm-3 control-label">Reason:</label>'
-                            + '<div class="col-sm-7">'
-                            + '   <textarea rows="3" class="form-control" readonly="true" style="resize: none; overflow-y: auto;" >' + reason + '</textarea>'
                             + '</div>'
                             + '</div>'
                             + '<div class="form-group">'
@@ -245,7 +231,6 @@ $(document).on('click', 'clickedID', function () {
                     var reciever = $(this).find('reciever').text();
                     var content = $(this).find('content').text();
                     var message_time = $(this).find('message_time').text();
-                    var reason = $(this).find('reason').text();
                     var reported_time = $(this).find('reported_time').text();
                     $("#PlaceHeader").append("<h3>Message report Detailed view</h3>");
                     $("#PlaceData").append('<form action="#" role="form" class="smart-wizard form-horizontal" >'
@@ -268,7 +253,7 @@ $(document).on('click', 'clickedID', function () {
                             + '</div>'
                             + '</div>'
                             + '<div class="form-group">'
-                            + '<label class="col-sm-3 control-label">Reason for the report:</label>'
+                            + '<label class="col-sm-3 control-label">Content:</label>'
                             + '<div class="col-sm-7">'
                             + '   <textarea rows="3" class="form-control" readonly="true" style="resize: none; overflow-y: auto;" >' + content + '</textarea>'
                             + '</div>'
@@ -277,12 +262,6 @@ $(document).on('click', 'clickedID', function () {
                             + '<label class="col-sm-3 control-label">Messaged time:</label>'
                             + '<div class="col-sm-7">'
                             + '   <input type="text" class="form-control" readonly="true"   value="' + message_time + '">'
-                            + '</div>'
-                            + '</div>'
-                            + '<div class="form-group">'
-                            + '<label class="col-sm-3 control-label">Reported reason:</label>'
-                            + '<div class="col-sm-7">'
-                            + '   <textarea rows="3" class="form-control" readonly="true" style="resize: none; overflow-y: auto;" >' + reason + '</textarea>'
                             + '</div>'
                             + '</div>'
                             + '<div class="form-group">'

@@ -38,7 +38,7 @@ public class CustomDataXMLAds extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CustomDataXMLAds</title>");            
+            out.println("<title>Servlet CustomDataXMLAds</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet CustomDataXMLAds at " + request.getContextPath() + "</h1>");
@@ -67,14 +67,18 @@ public class CustomDataXMLAds extends HttpServlet {
         AdminClass_Overviewstats ao = new AdminClass_Overviewstats();
         boolean checkFD = ao.isValidDate(fd);
         boolean checkSD = ao.isValidDate(sd);
-        
-         
+
         if (checkFD == true && checkSD == true) {
-            ArrayList al=ao.adsCustom(fd, sd);
+            ArrayList al = ao.adsCustom(fd, sd);
             DecimalFormat twoDForm = new DecimalFormat("#.#");
-             result="Ads: "+(String)al.get(1) +" Percentage: "+twoDForm.format(Float.parseFloat((String) al.get(1)) / Float.parseFloat((String) al.get(0))* 100)+"%";
+            if (al.get(1).equals("0")) {
+                result = "Ads : " + (String) al.get(1) + " Percentage: 0%";
+            } else {
+                result = "Ads: " + (String) al.get(1) + " Percentage: " + twoDForm.format(Float.parseFloat((String) al.get(1)) / Float.parseFloat((String) al.get(0)) * 100) + "%";
+            }
+
         } else {
-             result = "Incorrect entry";
+            result = "Incorrect entry";
         }
 
         String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"

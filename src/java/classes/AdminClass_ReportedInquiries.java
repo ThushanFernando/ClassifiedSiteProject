@@ -190,13 +190,11 @@ public class AdminClass_ReportedInquiries {
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT `inquiry_id`, `reported_user`, `reason`, `item_number`, `message_to`, `message_from`, `inquiry_message`, `inquiry_time_stamp`, `inquiry_response`, `response_time_stamp` FROM `admin_reported_inquiryview` WHERE `read_state`='0'";
+            String query = "SELECT `inquiry_id`, `item_number`, `message_to`, `message_from`, `inquiry_message`, `inquiry_time_stamp`, `inquiry_response`, `response_time_stamp` FROM `admin_reported_inquiryview` WHERE `read_state`='0'";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                AdminClass_ReportedInquiries ari=new AdminClass_ReportedInquiries();
                ari.setInquiry_id(rs.getString("inquiry_id"));
-               ari.setReported_user(rs.getString("reported_user"));
-               ari.setReason(rs.getString("reason"));
                ari.setItem_number(rs.getString("item_number"));
                ari.setMessage_to(rs.getString("message_to"));
                ari.setMessage_from(rs.getString("message_from"));

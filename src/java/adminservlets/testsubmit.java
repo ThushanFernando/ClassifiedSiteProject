@@ -3,23 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminservlets_XML;
+package adminservlets;
 
-import classes.AdminClass_BlockedUsers;
-import classes.AdminClass_Message;
-import classes.AdminClass_ReportedItems;
+import classes.AdminClass_ReviewAds;
+import classes.DbClass;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 /**
  *
  * @author SithuDewmi
  */
-public class UserBlacklistXML extends HttpServlet {
+@WebServlet(name = "testsubmit", urlPatterns = {"/testsubmit"})
+public class testsubmit extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +44,10 @@ public class UserBlacklistXML extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UserBlacklistXML</title>");
+            out.println("<title>Servlet testsubmit</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UserBlacklistXML at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet testsubmit at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,20 +65,18 @@ public class UserBlacklistXML extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("test/xml");
-        response.setCharacterEncoding("UTF-8");
-        AdminClass_BlockedUsers ab = new AdminClass_BlockedUsers();
-        AdminClass_ReportedItems art = new AdminClass_ReportedItems();
-
-        int result1 = ab.RemoveUser(request.getParameter("user"));      //removing user
-        int result2 = ab.BlacklistUser(art.getUserEmail(request.getParameter("user")));                       //Blacklisting user
-        String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                + "<values>\n"
-                + "	<value>\n"
-                + "		<result>" + result2 + "</result>\n"
-                + "	</value>\n"
-                + "</values>";
-        response.getWriter().write(content);
+        int result=0;
+        try {
+            DbClass dbc=new DbClass();
+            dbc.getConnection();
+            Statement stmt = dbc.conn.createStatement();
+            String query = "INSERT INTO `user_messages`( `msg_to`, `msg_from`, `content`) VALUES ('12345678901234567890','Admin','"+request.getParameter("testarea")+"')";
+            result=stmt.executeUpdate(query);
+            dbc.endConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_ReviewAds.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(result);
     }
 
     /**

@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-       
+
     </head>
     <body>
         <%
@@ -26,8 +26,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th class=" hidden-xs">Reported User</th>
-                        <th>Reason</th>
+                        <th>Reported User</th>
                         <th class="center"></th>                                                                                                
 
                     </tr>
@@ -40,8 +39,7 @@
                     %>
                     <tr>
                         <td><%=received1.getMessage_id()%></td>
-                        <td class=" hidden-xs"><%=received1.getSender()%></td>
-                        <td><%=received1.getReason()%></td>
+                        <td><%=received1.getSender()%></td>
                         <td class="center">
                             <div>
                                 <div class="btn-group">
@@ -58,7 +56,6 @@
                                             <input type="hidden" id="messageRVM<%=received1.getMessage_id()%>" value="<%=received1.getReceiver()%>">
                                             <input type="hidden" id="messageCVM<%=received1.getMessage_id()%>" value="<%=received1.getContent()%>">
                                             <input type="hidden" id="messageTVM<%=received1.getMessage_id()%>" value="<%=received1.getMessage_time_stamp()%>">
-                                            <input type="hidden" id="messageRsVM<%=received1.getMessage_id()%>" value="<%=received1.getReason()%>">
                                         </clickedViewMessage>
                                         </li>
                                         <li role="presentation">
@@ -82,7 +79,7 @@
                                         </clickedBlockMessageUser>
                                         </li>
                                         <li role="presentation">
-                                             <a role="menuitem" tabindex="-1" href="#" onclick="document.getElementById('RRM<%=received1.getMessage_id()%>').submit()">
+                                            <a role="menuitem" tabindex="-1" href="#" onclick="document.getElementById('RRM<%=received1.getMessage_id()%>').submit()">
                                                 <i class="fa clip-remove"></i> Remove Report
                                             </a>
                                             <form action="MRemoved_ViewReports?tabId=panel_tab_Message" method="POST" id="RRM<%=received1.getMessage_id()%>">

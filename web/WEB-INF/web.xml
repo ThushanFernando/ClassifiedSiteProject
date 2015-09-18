@@ -176,6 +176,18 @@
         <servlet-name>UserBlacklistXML</servlet-name>
         <servlet-class>adminservlets_XML.UserBlacklistXML</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MarkAsReadXML</servlet-name>
+        <servlet-class>adminservlets_XML.MarkAsReadXML</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MsgUserBlacklist</servlet-name>
+        <servlet-class>adminservlets_messages.MsgUserBlacklist</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MsgBlacklistUser</servlet-name>
+        <servlet-class>adminservlets_messages.MsgBlacklistUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/Dashboard</url-pattern>
@@ -351,6 +363,18 @@
     <servlet-mapping>
         <servlet-name>UserBlacklistXML</servlet-name>
         <url-pattern>/UserBlacklistXML</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MarkAsReadXML</servlet-name>
+        <url-pattern>/MarkAsReadXML</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MsgUserBlacklist</servlet-name>
+        <url-pattern>/MsgUserBlacklist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MsgBlacklistUser</servlet-name>
+        <url-pattern>/MsgBlacklistUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

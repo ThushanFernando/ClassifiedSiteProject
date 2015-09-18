@@ -67,14 +67,18 @@ public class CustomDataXML extends HttpServlet {
         AdminClass_Overviewstats ao = new AdminClass_Overviewstats();
         boolean checkFD = ao.isValidDate(fd);
         boolean checkSD = ao.isValidDate(sd);
-        
-         
+
         if (checkFD == true && checkSD == true) {
-            ArrayList al=ao.pagevisitCustom(fd, sd);
+            ArrayList al = ao.pagevisitCustom(fd, sd);
             DecimalFormat twoDForm = new DecimalFormat("#.#");
-             result="Site visit: "+(String)al.get(1) +" Percentage: "+twoDForm.format(Float.parseFloat((String) al.get(1)) / Float.parseFloat((String) al.get(0))* 100)+"%";
+            if (al.get(1).equals("0")) {
+                result = "Site visit: " + (String) al.get(1) + " Percentage: 0%";
+            } else {
+                result = "Site visit: " + (String) al.get(1) + " Percentage: " + twoDForm.format(Float.parseFloat((String) al.get(1)) / Float.parseFloat((String) al.get(0)) * 100) + "%";
+            }
+
         } else {
-             result = "Incorrect entry";
+            result = "Incorrect entry";
         }
 
         String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"

@@ -226,27 +226,27 @@
                     <!-- start: PAGE CONTENT -->
                     <div class="row" >
                         <div class="col-sm-10 col-xs-6">
-                            <input type="email" id="emailId" value=""  placeholder="Enter email to blacklist or undo blacklist " class="form-control" onkeyup="email_val()"></td>
+                            <input type="email" id="emailId" value=""  placeholder="Enter email" class="form-control" onkeyup="email_val()"></td>
                         </div>
                         <div class="col-sm-1 col-xs-3">
-                        <a href="#confirm_block" data-toggle="modal">
-                            <button class="btn btn-blue next-step btn-block" id="B1" style="display: none; width: 50px;" onclick="email_block()" >
-                                <span class="fa clip-locked"></span> <i class="fa fa-arrow-circle-right"></i>
-                            </button>
-                        </a>
+                            <a href="#confirm_block" data-toggle="modal">
+                                <button class="btn btn-blue next-step btn-block" id="B1" style="display: none; width: 50px;" onclick="email_block()" >
+                                    <span class="fa clip-locked"></span> <i class="fa fa-arrow-circle-right"></i>
+                                </button>
+                            </a>
                         </div>
                         <div class="col-sm-1 col-xs-3">
-                        <a href="#confirm_unblock" data-toggle="modal">
-                            <button class="btn btn-blue next-step btn-block" id="B2" style="display: none; width: 50px;" onclick="email_unblock()" >
-                                <span class="fa fa-unlock"></span> <i class="fa fa-arrow-circle-right"></i>
-                            </button>
-                        </a>
+                            <a href="#confirm_unblock" data-toggle="modal">
+                                <button class="btn btn-blue next-step btn-block" id="B2" style="display: none; width: 50px;" onclick="email_unblock()" >
+                                    <span class="fa fa-unlock"></span> <i class="fa fa-arrow-circle-right"></i>
+                                </button>
+                            </a>
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="panel panel-default" style="border-top:none">
-                            
+
                             <div class="panel-body">
                                 <table class="table table-striped table-hover" id="sample_1">
                                     <thead>
@@ -283,6 +283,12 @@
                                                         </ul>
                                                     </div>
                                                 </div></td>
+                                        </tr>
+                                        <%} if(received==null){%>
+                                        <tr>
+                                            <td>
+                                                No data available in table
+                                            </td>
                                         </tr>
                                         <%}%>
                                     </tbody>
@@ -357,59 +363,58 @@
         <script>
 
 
-                                                //function to initiate jquery.gritter
-                                                function runNotification() {
-                                                    var i = '<%=alert%>';
-                                                    if (i !== "null") {
+                                    //function to initiate jquery.gritter
+                                    function runNotification() {
+                                        var i = '<%=alert%>';
+                                        if (i !== "null") {
 
-                                                        var unique_id = $.gritter.add({
-                                                            // (string | mandatory) the heading of the notification
-                                                            title: 'Notification!',
-                                                            // (string | mandatory) the text inside the notification
-                                                            text: '<%=alert%>',
-                                                                    // (bool | optional) if you want it to fade out on its own or just sit there
-                                                                        sticky: false,
-                                                                            // (int | optional) the time you want it to be alive for before fading out
-                                                                            time: 4000,
-                                                                            // (string | optional) the class name you want to apply to that specific message
-                                                            class_name: 'my-sticky-class'
-                                                                            });
-                                                                            // You can have it return a unique id, this can be used to manually remove it later using
-                                                        /*
-                                                                            setTimeout(function(){
-                                                                        $.gritter.remove(unique_id, {
-                                                         fade: true,
-                                                                         speed: 'slow'
-                                                                         });
-                                                                         }, 6000)
-                                                                         */
-                                                                         return false;
+                                            var unique_id = $.gritter.add({
+                                                // (string | mandatory) the heading of the notification
+                                                title: 'Notification!',
+                                                // (string | mandatory) the text inside the notification
+                                                text: '<%=alert%>',
+                                                // (bool | optional) if you want it to fade out on its own or just sit there
+                                                sticky: false,
+                                                // (int | optional) the time you want it to be alive for before fading out
+                                                time: 4000,
+                                                // (string | optional) the class name you want to apply to that specific message
+                                                class_name: 'my-sticky-class'
+                                            });
+                                            // You can have it return a unique id, this can be used to manually remove it later using
+                                            /*
+                                             setTimeout(function(){
+                                             $.gritter.remove(unique_id, {
+                                             fade: true,
+                                             speed: 'slow'
+                                             });
+                                             }, 6000)
+                                             */
+                                            return false;
 
-                                                                        }
+                                        }
 
-                                                                    }
+                                    }
 
 
         </script>
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 
         <script>
+
             jQuery(document).ready(function () {
-            Main.init();
-                runNotification();
                 $(".loader").fadeOut("slow");
-                UIModals.init();
-                TableData.init();
-                Index.init();
                 refresh_data();
+                runNotification();
                 window.setInterval(function () {
-                refresh_data();
-                    }, 3000);
+                    refresh_data();
+                }, 3000);
+                Main.init();
+                Index.init();
+                UIModals.init();
+                
+            });
 
-
-            }
-            );
-                </script>
+        </script>
     </body>
     <!-- end: BODY -->
 </html>

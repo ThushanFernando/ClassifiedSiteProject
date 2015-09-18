@@ -122,7 +122,7 @@ public class AdminClass_ReviewAds {
                 ar.setTime_stamp(rs.getString("time_stamp"));
                 ar.setStatus(rs.getString("status"));
                 if(rs.getString("reason")==null){
-                    ar.setReason("Waiting for approval");
+                    ar.setReason("Waiting for Approval");
                 }else{
                     ar.setReason(rs.getString("reason"));
                 }

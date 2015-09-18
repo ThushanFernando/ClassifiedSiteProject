@@ -53,14 +53,7 @@
                                     <input type="text" readonly class="form-control"  id="sentVMId" name="sentVM" value="" >
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    Reason: <span class="symbol required"></span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <textarea class="form-control" id="reasonVMId" name="reasonVM" rows="2" readonly style="resize: none; overflow-y: auto;"></textarea>
-                                </div>
-                            </div>
+                            
                         </form>
                     </div>
                 </div>
@@ -441,14 +434,7 @@
                                     <input type="text" class="form-control" readonly="true" id="responseTime" placeholder="">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    Reason: 
-                                </label>
-                                <div class="col-sm-7">
-                                    <textarea class="autosize form-control" readonly="true" rows="3" id="inquiryReason" style="overflow-y: auto; word-wrap: break-word; resize: none;"></textarea>
-                                </div>
-                            </div>
+                            
                         </form>    
                     </div>
 

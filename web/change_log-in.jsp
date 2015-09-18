@@ -271,8 +271,8 @@
                                                 document.getElementById("password_again").setCustomValidity("Password mismatch");
 
                                             }
-                                            else {
-                                                document.getElementById("password_again").setCustomValidity(null);
+                                            else{
+                                                document.getElementById("password_again").setCustomValidity("");
                                             }
 
                                         }

@@ -232,12 +232,10 @@ public class AdminClass_DetailedView {
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT `inquiry_id`, `reported_user`, `reason`, `item_number`, `message_to`, `message_from`, `inquiry_message`, `inquiry_time_stamp`, `inquiry_response`, `response_time_stamp` FROM `admin_reported_inquiryview` WHERE `inquiry_id`='"+id+"'";
+            String query = "SELECT `inquiry_id`, `item_number`, `message_to`, `message_from`, `inquiry_message`, `inquiry_time_stamp`, `inquiry_response`, `response_time_stamp` FROM `admin_reported_inquiryview` WHERE `inquiry_id`='"+id+"'";
             ResultSet rs = stmt.executeQuery(query);
             while(rs.next()){
                 al.add(rs.getString("inquiry_id"));
-                al.add(rs.getString("reported_user"));
-                al.add(rs.getString("reason"));
                 al.add(rs.getString("item_number"));
                 al.add(rs.getString("message_to"));
                 al.add(rs.getString("message_from"));
@@ -259,7 +257,7 @@ public class AdminClass_DetailedView {
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT `message_id`, `sender`, `receiver`, `content`, `message_time_stamp`, `reason`, `reported_time_stamp` FROM `admin_reported_messages` WHERE `message_id`='"+id+"'";
+            String query = "SELECT `message_id`, `sender`, `receiver`, `content`, `message_time_stamp`, `reported_time_stamp` FROM `admin_reported_messages` WHERE `message_id`='"+id+"'";
             ResultSet rs = stmt.executeQuery(query);
             while(rs.next()){
                 al.add(rs.getString("message_id"));
@@ -267,7 +265,6 @@ public class AdminClass_DetailedView {
                 al.add(rs.getString("receiver"));
                 al.add(rs.getString("content"));
                 al.add(rs.getString("message_time_stamp"));
-                al.add(rs.getString("reason"));
                 al.add(rs.getString("reported_time_stamp"));
                 
                 

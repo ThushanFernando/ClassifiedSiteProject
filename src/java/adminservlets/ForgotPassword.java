@@ -90,10 +90,10 @@ public class ForgotPassword extends HttpServlet {
             if (al != null) {
                 
                 AdminClass_SendMail sm = new AdminClass_SendMail();             
-                String reciever = "fernandowast@gmail.com";//request.getParameter("email");
+                String reciever = request.getParameter("email");
                 String subject = "www.superb.lk - Admin password recovery";
                 String content = "Someone requested that the password be "
-                        + "recovered for the following account:\n"
+                        + "recovered for the following site:\n"
                         + "\n"
                         + "http://superb.lk/ \n"
                         + "\n"

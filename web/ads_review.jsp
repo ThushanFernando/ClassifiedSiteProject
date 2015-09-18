@@ -266,13 +266,31 @@
                                                                     </a>
                                                                 </li>
                                                                 <li role="presentation">
-                                                                    <a role="menuitem" tabindex="-1" href="#">
-                                                                        <form action="Apr_ReviewAds" method="POST" id="<%=received.getItem_number()%>_approve">
-                                                                            <input type="hidden" value="<%=received.getItem_number()%>"  name="item"> 
-                                                                            <input type="hidden" value="Approve"  name="action">
-                                                                            <i class="fa clip-checkbox-checked"></i><span onclick="document.getElementById('<%=received.getItem_number()%>_approve').submit();"> Approve</span>
-                                                                        </form>
+                                                                    <a role="menuitem" tabindex="-1" href="#confirm_approve<%=received.getItem_number()%>" data-toggle="modal">
+                                                                        <i class="fa clip-checkbox-checked"></i><span> Approve</span>
+
                                                                     </a>
+                                                                    <div id="confirm_approve<%=received.getItem_number()%>"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">
+                                                                        <div class="modal-header">
+                                                                            <h4 class="modal-title"><input type="radio" class="square-green" value="" checked="checked" >Confirmation</h4>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <span class="badge badge-info">Approve the advertiesment?</span>
+                                                                            <form action="Apr_ReviewAds" method="POST" id="<%=received.getItem_number()%>_approve">
+                                                                                <input type="hidden" value="<%=received.getItem_number()%>"  name="item"> 
+                                                                                <input type="hidden" value="Approve"  name="action">
+
+                                                                            </form>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" data-dismiss="modal" class="btn btn-light-grey">
+                                                                                Cancel
+                                                                            </button>
+                                                                            <button type="button" class="btn btn-blue" onclick="document.getElementById('<%=received.getItem_number()%>_approve').submit();">
+                                                                                Approve
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
                                                                 </li>
                                                                 <li role="presentation">
                                                                     <a role="menuitem" tabindex="-1"  href="#Modify<%=received.getItem_number()%>" data-toggle="modal">
@@ -292,7 +310,7 @@
                                                                             <input type="hidden" id="MIUMA<%=received.getItem_number()%>" value="<%=received.getUsername()%>">
                                                                             <div class="form-group">
 
-                                                                                <textarea class="autosize form-control" placeholder="Important !  Enter the reason for modification" id="itemRMA<%=received.getItem_number()%>" required="true"  rows="5" style="overflow-y: auto;resize: none; word-wrap: break-word;"></textarea>
+                                                                                <textarea class="autosize form-control" placeholder="Reason for modification" id="itemRMA<%=received.getItem_number()%>" required="true"  rows="5" style="overflow-y: auto;resize: none; word-wrap: break-word;"></textarea>
                                                                             </div>
 
                                                                         </div>
@@ -301,7 +319,7 @@
                                                                                 Cancel
                                                                             </button>
                                                                             <clickedReportModifyAd id="MA<%=received.getItem_number()%>">
-                                                                                <button type="submit" href="#message" data-toggle="modal" data-dismiss="modal" class="btn btn-primary" onclick="">
+                                                                                <button class="btn btn-primary">
                                                                                     Proceed
                                                                                 </button>
                                                                             </clickedReportModifyAd>
@@ -309,13 +327,31 @@
                                                                     </div>
                                                                 </li>
                                                                 <li role="presentation">
-                                                                    <a role="menuitem" tabindex="-1" href="#">
-                                                                        <form action="Rmv_ReviewAds" method="POST" id="<%=received.getItem_number()%>_remove">
-                                                                            <input type="hidden" value="<%=received.getItem_number()%>"  name="item"> 
-                                                                            <input type="hidden" value="Remove"  name="action">
-                                                                            <i class="fa clip-remove"></i><span onclick="document.getElementById('<%=received.getItem_number()%>_remove').submit();"> Remove</span>
-                                                                        </form>
+                                                                    <a role="menuitem" tabindex="-1" href="#confirm_remove<%=received.getItem_number()%>" data-toggle="modal">
+                                                                        <i class="fa clip-remove"></i><span> Remove</span>
+
                                                                     </a>
+                                                                    <div id="confirm_remove<%=received.getItem_number()%>"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">
+                                                                        <div class="modal-header">
+                                                                            <h4 class="modal-title"><input type="radio" class="square-green" value="" checked="checked" >Confirmation</h4>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <span class="badge badge-info">Remove the advertiesment?</span>
+                                                                            <form action="Rmv_ReviewAds" method="POST" id="<%=received.getItem_number()%>_remove">
+                                                                                <input type="hidden" value="<%=received.getItem_number()%>"  name="item"> 
+                                                                                <input type="hidden" value="Remove"  name="action">
+
+                                                                            </form>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" data-dismiss="modal" class="btn btn-light-grey">
+                                                                                Cancel
+                                                                            </button>
+                                                                            <button type="button" class="btn btn-blue" onclick="document.getElementById('<%=received.getItem_number()%>_remove').submit();">
+                                                                                Remove
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
                                                                 </li>
 
 
@@ -392,7 +428,7 @@
         <script src="plugins/autosize/jquery.autosize.min.js"></script>
         <script type="text/javascript" src="plugins/DataTables/media/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="plugins/DataTables/media/js/DT_bootstrap.js"></script>
-        <script src="js/table-data.js"></script>
+        <script src="js/table-data-ads.js"></script>
         <script src="plugins/jquery-validation/dist/jquery.validate.min.js"></script>
         <script src="plugins/summernote/build/summernote.min.js"></script>
         <script src="plugins/ckeditor/ckeditor.js"></script>
@@ -434,6 +470,36 @@
                                                                                         return false;
 
                                                                                     }
+
+                                                                                }
+                                                                                function manualNotification(alert) {
+
+
+
+                                                                                    var unique_id = $.gritter.add({
+                                                                                        // (string | mandatory) the heading of the notification
+                                                                                        title: 'Notification!',
+                                                                                        // (string | mandatory) the text inside the notification
+                                                                                        text: alert,
+                                                                                        // (bool | optional) if you want it to fade out on its own or just sit there
+                                                                                        sticky: false,
+                                                                                        // (int | optional) the time you want it to be alive for before fading out
+                                                                                        time: 4000,
+                                                                                        // (string | optional) the class name you want to apply to that specific message
+                                                                                        class_name: 'my-sticky-class'
+                                                                                    });
+                                                                                    // You can have it return a unique id, this can be used to manually remove it later using
+                                                                                    /*
+                                                                                     setTimeout(function(){
+                                                                                     $.gritter.remove(unique_id, {
+                                                                                     fade: true,
+                                                                                     speed: 'slow'
+                                                                                     });
+                                                                                     }, 6000)
+                                                                                     */
+                                                                                    return false;
+
+
 
                                                                                 }
 

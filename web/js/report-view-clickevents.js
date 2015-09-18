@@ -28,7 +28,7 @@ $(document).on('click', 'clickedViewMessage', function () {
     document.getElementById("receiverVMId").value = document.getElementById('messageR' + this.id).value;
     document.getElementById("contentVMId").value = document.getElementById('messageC' + this.id).value;
     document.getElementById("sentVMId").value = document.getElementById('messageT' + this.id).value;
-    document.getElementById("reasonVMId").value = document.getElementById('messageRs' + this.id).value;
+    
 
 });
 $(document).on('click', 'clickedBlockMessage', function () {
@@ -53,7 +53,7 @@ $(document).on('click', 'clickedViewInquiry', function () {
     document.getElementById("inquiryTime").value = document.getElementById('inquiryIT' + this.id).value;
     document.getElementById("inquiryResponse").value = document.getElementById('inquiryIR' + this.id).value;
     document.getElementById("responseTime").value = document.getElementById('inquiryRT' + this.id).value;
-    document.getElementById("inquiryReason").value = document.getElementById('inquiryR' + this.id).value;
+    
 
 });
 $(document).on('click', 'clickedBlockInquiry', function () {

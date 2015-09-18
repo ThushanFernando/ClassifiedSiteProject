@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminservlets_XML;
+package adminservlets_messages;
 
 import classes.AdminClass_BlockedUsers;
-import classes.AdminClass_Message;
 import classes.AdminClass_ReportedItems;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author SithuDewmi
  */
-public class UserBlacklistXML extends HttpServlet {
+public class MsgBlacklistUser extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +37,10 @@ public class UserBlacklistXML extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UserBlacklistXML</title>");
+            out.println("<title>Servlet MsgBlacklistUser</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UserBlacklistXML at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet MsgBlacklistUser at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,20 +58,7 @@ public class UserBlacklistXML extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("test/xml");
-        response.setCharacterEncoding("UTF-8");
-        AdminClass_BlockedUsers ab = new AdminClass_BlockedUsers();
-        AdminClass_ReportedItems art = new AdminClass_ReportedItems();
-
-        int result1 = ab.RemoveUser(request.getParameter("user"));      //removing user
-        int result2 = ab.BlacklistUser(art.getUserEmail(request.getParameter("user")));                       //Blacklisting user
-        String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                + "<values>\n"
-                + "	<value>\n"
-                + "		<result>" + result2 + "</result>\n"
-                + "	</value>\n"
-                + "</values>";
-        response.getWriter().write(content);
+        processRequest(request, response);
     }
 
     /**
@@ -86,7 +72,13 @@ public class UserBlacklistXML extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        AdminClass_BlockedUsers ab = new AdminClass_BlockedUsers();
+        AdminClass_ReportedItems art = new AdminClass_ReportedItems();
+
+        int result1 = ab.BlacklistUser(art.getUserEmail(request.getParameter("user")));                //Blacklisting user
+        int result2 = ab.RemoveUser(request.getParameter("user"));      //removing user
+        
+        response.sendRedirect("MsgAll?blist="+result2+"&user="+request.getParameter("user"));
     }
 
     /**

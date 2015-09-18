@@ -124,6 +124,11 @@ public class BlacklistedUsers extends HttpServlet {
                     request.setAttribute("alert", alert);
 
                 } else {
+                    boolean exsist=ab.checkUserEmail(request.getParameter("email_block")); //check for current user
+                    if(exsist==true){
+                        
+                        ab.RemoveUser(request.getParameter("email_block"));     //remove current user content
+                    }
                     int result = ab.blockEmail(request.getParameter("email_block")); //blacklisting an email
 
                     if (result == 1) {                                          //returning notification of the success 

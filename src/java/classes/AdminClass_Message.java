@@ -265,6 +265,21 @@ public class AdminClass_Message {
          return result;
     }
     
+     public int markAsRead(String reciever){
+        int result=0; 
+        String query;
+        try {
+            dbc.getConnection();
+            Statement stmt = dbc.conn.createStatement();
+            query="UPDATE `messageview` SET `read_state`='1' WHERE `receiver`='Admin' AND `sender`='"+reciever+"'";
+            result=stmt.executeUpdate(query);
+            dbc.endConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_Message.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return result;
+    }
+    
     public String timeDiff(String time) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String timeZone = "Asia/Colombo";

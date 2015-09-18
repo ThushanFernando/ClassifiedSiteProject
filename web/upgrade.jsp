@@ -232,23 +232,7 @@
                         </div>
                         <!-- end: 404 -->
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <button onclick="scrollBottom()">move</button>
-                            <script>
-                                function scrollBottom() {
-                                    var objDiv = document.getElementById("test");
-                                    objDiv.scrollTop = objDiv.scrollHeight;
-                                }
-                            </script>
-                            <div id="test" style="border:solid 1px; overflow-y:auto; height: 300px; ">
-                                <div style="border:solid 1px red;  height: 1000px; ">
 
-                                </div>
-
-                            </div> 
-                        </div>
-                    </div>
 
                 </div>
 
@@ -313,17 +297,17 @@
     <script src="js/ui-modals.js"></script>
     <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
     <script>
-                                        jQuery(document).ready(function () {
-                                            $(".loader").fadeOut("slow");
-                                            refresh_data();
-                                            window.setInterval(function () {
-                                                refresh_data();
-                                            }, 3000);
-                                            Main.init();
-                                            Index.init();
-                                            UIModals.init();
-                                            FormValidator.init();
-                                        });
+        jQuery(document).ready(function () {
+            $(".loader").fadeOut("slow");
+            refresh_data();
+            window.setInterval(function () {
+                refresh_data();
+            }, 3000);
+            Main.init();
+            Index.init();
+            UIModals.init();
+            FormValidator.init();
+        });
     </script>
 </body>
 <!-- end: BODY -->

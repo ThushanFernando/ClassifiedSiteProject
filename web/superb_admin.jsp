@@ -100,7 +100,7 @@
 
             <!-- start: COPYRIGHT -->
             <div class="copyright">
-                2015 &copy; NextGlow.com
+                <a href="http://nextglow.com/" target="blank"> 2015 &copy; NextGlow.com</a>
             </div>
             <!-- end: COPYRIGHT -->
         </div>

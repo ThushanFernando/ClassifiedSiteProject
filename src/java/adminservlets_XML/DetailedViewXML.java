@@ -119,15 +119,13 @@ public class DetailedViewXML extends HttpServlet {
                     + "<values>\n"
                     + "	<value>\n"
                     + "		<id>" + al.get(0) + "</id>\n"
-                    + "		<user>" + al.get(1) + "</user>\n"
-                    + "		<reason>" + al.get(2) + "</reason>\n"
-                    + "		<item>" + al.get(3) + "</item>\n"
-                    + "		<message_to>" + al.get(4) + "</message_to>\n"
-                    + "		<message_from>" + al.get(5) + "</message_from>\n"
-                    + "		<message>" + al.get(6) + "</message>\n"
-                    + "		<message_time>" + al.get(7) + "</message_time>\n"
-                    + "		<response>" + al.get(8) + "</response>\n"
-                    + "		<response_time>" + al.get(9) + "</response_time>\n"
+                    + "		<item>" + al.get(1) + "</item>\n"
+                    + "		<message_to>" + al.get(2) + "</message_to>\n"
+                    + "		<message_from>" + al.get(3) + "</message_from>\n"
+                    + "		<message>" + al.get(4) + "</message>\n"
+                    + "		<message_time>" + al.get(5) + "</message_time>\n"
+                    + "		<response>" + al.get(6) + "</response>\n"
+                    + "		<response_time>" + al.get(7) + "</response_time>\n"
                     + "	</value>\n"
                     + "</values>";
         } else if ("3".equals(String.valueOf(id.charAt(0)))) {
@@ -140,8 +138,7 @@ public class DetailedViewXML extends HttpServlet {
                     + "		<reciever>" + al.get(2) + "</reciever>\n"
                     + "		<content>" + al.get(3) + "</content>\n"
                     + "		<message_time>" + al.get(4) + "</message_time>\n"
-                    + "		<reason>" + al.get(5) + "</reason>\n"
-                    + "		<reported_time>" + al.get(6) + "</reported_time>\n"
+                    + "		<reported_time>" + al.get(5) + "</reported_time>\n"
                     + "	</value>\n"
                     + "</values>";
 

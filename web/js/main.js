@@ -687,7 +687,7 @@ var Main = function () {
     //function to hide scroll bar in mobile
     var runRemoveScroll = function () {
         if (window.innerWidth < 768) {
-          alert("hello");
+          
         }
     };
     return {

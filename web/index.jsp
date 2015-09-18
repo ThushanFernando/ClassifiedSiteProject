@@ -229,8 +229,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="UpdateInterfaces" ><i class="clip-pictures"></i>
-                                <span class="title"> Update Interfaces</span><span class="selected"></span>
+                            <a href="#" ><i class="clip-file"></i>
+                                <span class="title"> free space</span><span class="selected"></span>
                             </a>
                         </li>
                         <li>
@@ -238,12 +238,7 @@
                                 <span class="title"> free space</span><span class="selected"></span>
                             </a>
                         </li>
-                         <li>
-                            <a href="#" ><i class="clip-file"></i>
-                                <span class="title"> free space</span><span class="selected"></span>
-                            </a>
-                        </li>
-                        
+
 
                     </ul>
                     <!-- end: MAIN NAVIGATION MENU -->
@@ -475,7 +470,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     &times;
                 </button>
-                
+
 
             </div>
             <div class="modal-body">
@@ -611,7 +606,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     &times;
                 </button>
-                
+
 
             </div>
             <div class="modal-body">
@@ -750,7 +745,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     &times;
                 </button>
-                
+
 
             </div>
             <div class="modal-body">

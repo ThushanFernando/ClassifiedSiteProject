@@ -48,11 +48,11 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">
-                                    How to modify: <span class="symbol required"></span>
+                                    Reason & solution: <span class="symbol required"></span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <textarea class="autosize form-control" name="content" id="form-field-24" rows="12" style="overflow-y: scroll; word-wrap: break-word;">
-                                    </textarea>
+                                    <textarea class="hidden form-control" name="content-header" id="content-header" rows="8" readonly ></textarea>
+                                    <textarea class="autosize form-control" name="content-body" id="content-body" rows="7" style="resize: none; overflow-y: auto; word-wrap: break-word;"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -69,7 +69,8 @@
                                     </button>
                                 </div>
                             </div>
-                        </form>    
+                        </form>  
+                        
                     </div>
 
                 </div>

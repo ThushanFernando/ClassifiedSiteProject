@@ -20,7 +20,7 @@ public class AdminClass_BlacklistedEmails {
 
     private String email_address = null;
     DbClass dbc = new DbClass();
-    
+
     /**
      * @return the email_address
      */
@@ -34,8 +34,6 @@ public class AdminClass_BlacklistedEmails {
     public void setEmail_address(String email_address) {
         this.email_address = email_address;
     }
-    
-    
 
     public ArrayList getBlacklistedEmails() {
         ArrayList al = new ArrayList();
@@ -45,7 +43,7 @@ public class AdminClass_BlacklistedEmails {
             String query = "SELECT `email_address` FROM `admin_blacklisted_emails`";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                AdminClass_BlacklistedEmails ab=new AdminClass_BlacklistedEmails();
+                AdminClass_BlacklistedEmails ab = new AdminClass_BlacklistedEmails();
                 ab.setEmail_address(rs.getString("email_address"));
                 al.add(ab);
 
@@ -56,16 +54,16 @@ public class AdminClass_BlacklistedEmails {
         }
         return al;
     }
-    
+
     public boolean getEnteredEmail(String email) {
-        boolean exists=false;
+        boolean exists = false;
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT `email_address` FROM `admin_blacklisted_emails` where `email_address`='"+email+"'";
+            String query = "SELECT `email_address` FROM `admin_blacklisted_emails` where `email_address`='" + email + "'";
             ResultSet rs = stmt.executeQuery(query);
-            if(rs.isBeforeFirst()){
-                exists=true;
+            if (rs.isBeforeFirst()) {
+                exists = true;
             }
             dbc.endConnection();
         } catch (SQLException ex) {
@@ -73,41 +71,67 @@ public class AdminClass_BlacklistedEmails {
         }
         return exists;
     }
-    
-    public int unblockEmail(String email){
-        int result=0;
+
+    public boolean checkUserEmail(String email) {
+        boolean exists = false;
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "DELETE FROM `admin_blacklisted_emails` WHERE `email_address`='"+email+"'";
-            result=stmt.executeUpdate(query);
+            String query = "SELECT `email` FROM `userview` WHERE `email`='" + email + "'";
+            ResultSet rs = stmt.executeQuery(query);
+            if (rs.isBeforeFirst()) {
+                exists = true;
+            }
             dbc.endConnection();
         } catch (SQLException ex) {
             Logger.getLogger(AdminClass_ReportedItems.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return result;
+        return exists;
     }
-    
-    public int blockEmail(String email){
-        int result=0;
+
+    public int RemoveUser(String email) {
+        int result = 0;
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "INSERT INTO `admin_blacklisted_emails`(`email_address`) VALUES ('"+email+"')";
-            result=stmt.executeUpdate(query);
+            String query = "DELETE FROM `user` WHERE `email`='" + email + "'";
+            result = stmt.executeUpdate(query);
+            dbc.endConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_BlockedItems.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+
+    }
+
+    public int unblockEmail(String email) {
+        int result = 0;
+        try {
+            dbc.getConnection();
+            Statement stmt = dbc.conn.createStatement();
+            String query = "DELETE FROM `admin_blacklisted_emails` WHERE `email_address`='" + email + "'";
+            result = stmt.executeUpdate(query);
             dbc.endConnection();
         } catch (SQLException ex) {
             Logger.getLogger(AdminClass_ReportedItems.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return result;
     }
-    
-    
 
-    
+    public int blockEmail(String email) {
+        int result = 0;
+        try {
+            dbc.getConnection();
+            Statement stmt = dbc.conn.createStatement();
+            String query = "INSERT INTO `admin_blacklisted_emails`(`email_address`) VALUES ('" + email + "')";
+            result = stmt.executeUpdate(query);
+            dbc.endConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminClass_ReportedItems.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-   
+        return result;
+    }
 
 }

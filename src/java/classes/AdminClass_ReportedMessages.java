@@ -146,7 +146,7 @@ public class AdminClass_ReportedMessages {
         try {
             dbc.getConnection();
             Statement stmt = dbc.conn.createStatement();
-            String query = "SELECT `message_id`, `sender`, `receiver`, `content`, `message_time_stamp`, `reason`, `reported_time_stamp` FROM `admin_reported_messages` WHERE `read_state`='0'";
+            String query = "SELECT `message_id`, `sender`, `receiver`, `content`, `message_time_stamp`,  `reported_time_stamp` FROM `admin_reported_messages` WHERE `read_state`='0'";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 AdminClass_ReportedMessages arm=new AdminClass_ReportedMessages();
@@ -155,7 +155,6 @@ public class AdminClass_ReportedMessages {
                 arm.setReceiver(rs.getString("receiver"));
                 arm.setContent(rs.getString("content"));
                 arm.setMessage_time_stamp(rs.getString("message_time_stamp"));
-                arm.setReason(rs.getString("reason"));
                 arm.setReported_time_stamp(rs.getString("reported_time_stamp"));
                 al.add(arm);
             }

@@ -98,10 +98,10 @@ public class Mod_ReviewAds extends HttpServlet {
                 if ("".equals(request.getParameter("reason"))) {
                     reason = "Modified ad, Reason isn't available !";
                 } else {
-                    reason = "Modified due to-" + request.getParameter("reason");
+                    reason = "Modified due to- " + request.getParameter("reason");
                 }
 
-                int result = 1; //ar.modifyAds(itemId, reason);                 //updating advertiesment status
+                int result = ar.modifyAds(itemId, reason);                 //updating advertiesment status
                 int result2 = as.mailClass("fernandowast@gmail.com", subject, content);//sending mail to the user
 
                 if (result == 1 && result2 == 1) {                              

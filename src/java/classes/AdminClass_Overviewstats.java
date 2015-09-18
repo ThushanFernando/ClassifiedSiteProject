@@ -476,7 +476,7 @@ public class AdminClass_Overviewstats {
             while (rs.next()) {
                 al.add(rs.getString("COUNT(`time_stamp`)"));
             }
-            query = "SELECT COUNT(`time_stamp`) FROM ` itemview` WHERE status='Active' AND  `time_stamp` BETWEEN  '" + firstdate + "' AND '" + seconddate + "'  AND `time_stamp` != '" + seconddate + "'";
+            query = "SELECT COUNT(`time_stamp`) FROM `itemview` WHERE status='Active' AND  `time_stamp` BETWEEN  '" + firstdate + "' AND '" + seconddate + "'  AND `time_stamp` != '" + seconddate + "'";
             rs = stmt.executeQuery(query);
 
             while (rs.next()) {

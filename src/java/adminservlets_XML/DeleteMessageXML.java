@@ -61,7 +61,7 @@ public class DeleteMessageXML extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         AdminClass_Message am = new AdminClass_Message();
         
-        int result = 1;//am.deleteMessage(request.getParameter("id"),request.getParameter("type"));
+        int result = am.deleteMessage(request.getParameter("id"),request.getParameter("type"));
         String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                 + "<values>\n"
                 + "	<value>\n"

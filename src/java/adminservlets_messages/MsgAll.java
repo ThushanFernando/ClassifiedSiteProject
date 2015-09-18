@@ -64,6 +64,9 @@ public class MsgAll extends HttpServlet {
         HttpSession session = request.getSession();
         if (session.getAttribute("loggin_state") == "success") {
             AdminClass_Message am=new AdminClass_Message();
+            if(request.getParameter("id")!=null){
+                am.markAsRead(request.getParameter("id"));
+            }
             
             RequestDispatcher rd = request.getRequestDispatcher("msg_all.jsp?inital_user="+am.initialUserAll());
             rd.forward(request, response);

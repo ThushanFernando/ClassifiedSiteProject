@@ -5,7 +5,9 @@
  */
 package adminservlets_ads;
 
+import classes.AdminClass_Message;
 import classes.AdminClass_ReviewAds;
+import classes.AdminClass_SendMail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -83,6 +85,43 @@ public class Apr_ReviewAds extends HttpServlet {
         HttpSession session = request.getSession();
         if (session.getAttribute("loggin_state") == "success") {                //checking logged in status
             AdminClass_ReviewAds ar = new AdminClass_ReviewAds();
+            AdminClass_SendMail as = new AdminClass_SendMail();
+            AdminClass_Message am=new AdminClass_Message();
+
+            String reciever = ar.getUserEmail(request.getParameter("to"));
+            String subject = "Approval of your ad \"" + request.getParameter("subject") + "\"";
+            String view_link = "http://Superb.lk/en/post_item/Samsung-galaxy-note-n7000-for-sale-colombo";
+
+            String content = "Hello,\n"
+                    + "\n"
+                    + "Your ad \"" + request.getParameter("subject") + "\", successfully posted on Superb.lk.\n"
+                    + "\n"
+                    + "To view your ad, please click the following link:\n"
+                    + view_link + "\n"
+                    + "\n"
+                    + "If you have any questions, feel free to reply to the email and we will get back to you.\n"
+                    + "\n"
+                    + "Regards,\n"
+                    + "The support team at Superb.lk\n"
+                    + "\n"
+                    + "--------------------------------------------\n"
+                    + "\n"
+                    + "Did you know that Superb.lk has the best second-hand mobile deals in Sri Lanka? Click here: http://Superb.lk\n"
+                    + "\n"
+                    + "Follow us on Facebook:\n"
+                    + "https://www.facebook.com/Superb.lk";
+
+            int mail_result = as.mailClass(reciever, subject, content);//sending mail to the user
+
+            String inbox_content = "Hello,\n"
+                    + "\n"
+                    + "Your ad \"" + request.getParameter("subject") + "\", successfully posted on Superb.lk.\n"
+                    + "\n"
+                    + "Regards,\n"
+                    + "The support team at Superb.lk\n"
+                    + "\n";
+            
+            int inbox_result=am.sendMessage(inbox_content, request.getParameter("to"));
 
             String action = request.getParameter("action");
             String item = request.getParameter("item");
@@ -92,17 +131,17 @@ public class Apr_ReviewAds extends HttpServlet {
 
                 result = ar.approveAd(item);                                    //Approving advertiesment
                 if (result == 1) {
-                    alert = "<button class=\"btn btn-green\">"                  //returning notification of the success 
+                    alert = "<button class=\"btn btn-green\">" //returning notification of the success 
                             + "<i  class=\"glyphicon glyphicon-ok-sign\">"
                             + "</i></button><br><strong>Approved!</strong>"
-                            + " Advertiesment number "+request.getParameter("item")+""; 
-                            
+                            + " Advertiesment number " + request.getParameter("item") + "";
+
                 } else {
-                    alert = "<button class=\"btn btn-red\">"                    //returning notification of the the failure
+                    alert = "<button class=\"btn btn-red\">" //returning notification of the the failure
                             + "<i  class=\"glyphicon glyphicon-remove-circle\">"
                             + "</i></button><br><strong>Failed!</strong>"
                             + " Advertiesment number " + request.getParameter("item") + " Try again.";
-                            
+
                 }
                 request.setAttribute("alert", alert);
             }

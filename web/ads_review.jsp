@@ -103,7 +103,7 @@
                             </a>
                             <ul class="sub-menu">
                                 <li>
-                                    <a href="">
+                                    <a href="MsgAll">
                                         <span class="title"> All </span>
                                         <span class="badge badge-new">new</span>
                                     </a>
@@ -124,6 +124,7 @@
 
                             </ul>
                         </li>
+
 
                         <li>
                             <a href="BlacklistedUsers" ><i class="clip-user-block"></i>
@@ -146,10 +147,16 @@
                             </a>
                         </li>
                         <li>
-                            <a href="UpdateInterfaces" ><i class="clip-pictures"></i>
-                                <span class="title"> Update Interfaces</span><span class="selected"></span>
+                            <a href="#" ><i class="clip-file"></i>
+                                <span class="title"> free space</span><span class="selected"></span>
                             </a>
                         </li>
+                        <li>
+                            <a href="#" ><i class="clip-file"></i>
+                                <span class="title"> free space</span><span class="selected"></span>
+                            </a>
+                        </li>
+
 
                     </ul>
                     <!-- end: MAIN NAVIGATION MENU -->
@@ -278,6 +285,8 @@
                                                                             <span class="badge badge-info">Approve the advertiesment?</span>
                                                                             <form action="Apr_ReviewAds" method="POST" id="<%=received.getItem_number()%>_approve">
                                                                                 <input type="hidden" value="<%=received.getItem_number()%>"  name="item"> 
+                                                                                <input type="hidden" value="<%=received.getUsername()%>" name="to">
+                                                                                <input type="hidden" value="<%=received.getTitle()%>" name="subject">
                                                                                 <input type="hidden" value="Approve"  name="action">
 
                                                                             </form>
@@ -339,8 +348,9 @@
                                                                             <span class="badge badge-info">Remove the advertiesment?</span>
                                                                             <form action="Rmv_ReviewAds" method="POST" id="<%=received.getItem_number()%>_remove">
                                                                                 <input type="hidden" value="<%=received.getItem_number()%>"  name="item"> 
+                                                                                <input type="hidden" value="<%=received.getUsername()%>" name="to">
+                                                                                <input type="hidden" value="<%=received.getTitle()%>" name="subject">
                                                                                 <input type="hidden" value="Remove"  name="action">
-
                                                                             </form>
                                                                         </div>
                                                                         <div class="modal-footer">
@@ -385,7 +395,7 @@
         <!-- start: FOOTER -->
         <div class="footer clearfix">
             <div class="footer-inner">
-                2015 &copy; NextGlow.com
+                <a href="http://nextglow.com/" target="blank" style="color: black;"> 2015 &copy; NextGlow.com</a>
             </div>
             <div class="footer-items">
                 <span class="go-top"><i class="clip-chevron-up"></i></span>
@@ -441,7 +451,7 @@
         <script src="plugins/gritter/js/jquery.gritter.min.js"></script>
         <script>
 
-                                                                                //function to initiate jquery.gritter
+         //function to initiate jquery.gritter
                                                                                 function runNotification() {
                                                                                     var i = '<%=alert%>';
                                                                                     if (i !== "null") {
@@ -472,10 +482,8 @@
                                                                                     }
 
                                                                                 }
+
                                                                                 function manualNotification(alert) {
-
-
-
                                                                                     var unique_id = $.gritter.add({
                                                                                         // (string | mandatory) the heading of the notification
                                                                                         title: 'Notification!',
@@ -498,12 +506,7 @@
                                                                                      }, 6000)
                                                                                      */
                                                                                     return false;
-
-
-
                                                                                 }
-
-
         </script>
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
         <script>

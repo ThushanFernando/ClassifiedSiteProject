@@ -9,6 +9,7 @@ import classes.AdminClass_BlockedUsers;
 import classes.AdminClass_ReportedInquiries;
 import classes.AdminClass_ReportedItems;
 import classes.AdminClass_ReportedMessages;
+import classes.AdminClass_SendMail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -85,33 +86,50 @@ public class UserBlocked_ViewReports extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session.getAttribute("loggin_state") == "success") {                //checking logged in status
-            
+
             AdminClass_ReportedItems art = new AdminClass_ReportedItems();
             AdminClass_ReportedMessages arm = new AdminClass_ReportedMessages();
             AdminClass_ReportedInquiries ari = new AdminClass_ReportedInquiries();
+            AdminClass_SendMail as = new AdminClass_SendMail();
 
             if (request.getParameter("toBU") != null && request.getParameter("reportBU") != null) {
-                
+
                 AdminClass_BlockedUsers ab = new AdminClass_BlockedUsers();
-                
+
                 String reciever = art.getUserEmail(request.getParameter("toBU"));
-                String subject = request.getParameter("subjectBU");
-                String content = request.getParameter("contentBU");
-                
+                String subject = "Temporarily disabeling your account in superb.lk";
+
+                String content = "Hello,\n"
+                        + "\n"
+                        + "Your account in superb.lk is temporarily disabled due to invalid activity or policy violations.\n\n"
+                        + "Visit the link for common reasons and policy violations cause accounts to be suspended.\n"
+                        + "http://Superb.lk/en/policies\n\n"
+                        + "Regards,\n"
+                        + "The support team at Superb.lk\n"
+                        + "\n"
+                        + "--------------------------------------------\n"
+                        + "\n"
+                        + "Did you know that Superb.lk has the best second-hand mobile deals in Sri Lanka? Click here: http://Superb.lk\n"
+                        + "\n"
+                        + "Follow us on Facebook:\n"
+                        + "https://www.facebook.com/Superb.lk";
+
+                int mail_result = as.mailClass(reciever, subject, content);//sending mail to the user
+
                 int result1 = ab.RemoveUser(request.getParameter("toBU"));      //removing user
                 int result2 = ab.BlacklistUser(reciever);                       //Blacklisting user
 
                 if (result1 == 1 && result2 == 1) {
-                    
-                    String alert = "<button class=\"btn btn-green\">"           //returning notification of the success 
+
+                    String alert = "<button class=\"btn btn-green\">" //returning notification of the success 
                             + "<i  class=\"glyphicon glyphicon-ok-sign\">"
                             + "</i></button><br><strong>Blocked !</strong>"
                             + "  User " + reciever + "  ";
                     request.setAttribute("alert", alert);
-                    
+
                 } else {
-                    
-                    String alert = "<button class=\"btn btn-red\">"             //returning notification of the failure 
+
+                    String alert = "<button class=\"btn btn-red\">" //returning notification of the failure 
                             + "<i  class=\"glyphicon glyphicon-remove-circle\">"
                             + "</i></button><br><strong>Failed!</strong>"
                             + " User " + reciever + " Try again.";
@@ -141,7 +159,7 @@ public class UserBlocked_ViewReports extends HttpServlet {
             request.setAttribute("ReportedMessages", ReportedMessages);
             ArrayList ReportedInquiries = ari.getInquiryReports();              //getting inquiry reports
             request.setAttribute("ReportedInquiries", ReportedInquiries);
-            
+
             RequestDispatcher rd = request.getRequestDispatcher("report_view.jsp");
             rd.forward(request, response);
         } else {

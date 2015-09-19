@@ -6,6 +6,7 @@
 package adminservlets_reports;
 
 import classes.AdminClass_BlockedMessages;
+import classes.AdminClass_Message;
 import classes.AdminClass_ReportedInquiries;
 import classes.AdminClass_ReportedItems;
 import classes.AdminClass_ReportedMessages;
@@ -85,36 +86,42 @@ public class MessageBlocked_ViewReports extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session.getAttribute("loggin_state") == "success") {                //checking logged in status
-            
+
             AdminClass_ReportedItems art = new AdminClass_ReportedItems();
             AdminClass_ReportedMessages arm = new AdminClass_ReportedMessages();
             AdminClass_ReportedInquiries ari = new AdminClass_ReportedInquiries();
+            AdminClass_Message am=new AdminClass_Message();
 
             if (request.getParameter("toBM") != null && request.getParameter("messageBM") != null) {
-                
+
                 AdminClass_BlockedMessages ab = new AdminClass_BlockedMessages();
+
+                String inbox_content = "Hello,\n"
+                        + "\n"
+                        + "Your message \""+request.getParameter("message_contentBM")+"\" in superb.lk is  disabled due to policy violations.\n\n"
+                        + "Policy violations cause accounts to be suspended.\n"
+                        + "\n\n"
+                        + "Regards,\n"
+                        + "The support team at Superb.lk\n";
                 
-                String reciever = art.getUserEmail(request.getParameter("toBM"));
-                String subject = request.getParameter("subjectBM");
-                String content = request.getParameter("contentBM");
-                
+                int inbox_result = am.sendMessage(inbox_content, request.getParameter("toBM"));
                 int result = ab.blockMessage(request.getParameter("messageBM"));//blocking message
                 int state = arm.updateViewState(request.getParameter("messageBM"));//updating report status
 
                 if (result == 1 && state == 1) {
-                    
-                    String alert = "<button class=\"btn btn-green\">"           //returning notification of the success 
+
+                    String alert = "<button class=\"btn btn-green\">" //returning notification of the success 
                             + "<i  class=\"glyphicon glyphicon-ok-sign\">"
                             + "</i></button><br><strong>Blocked !</strong>"
-                            + "  message id " + request.getParameter("messageBM") + "";
+                            + "  Message id " + request.getParameter("messageBM") + "";
                     request.setAttribute("alert", alert);
-                    
+
                 } else {
-                    
-                    String alert = "<button class=\"btn btn-red\">"             //returning notification of the failure 
+
+                    String alert = "<button class=\"btn btn-red\">" //returning notification of the failure 
                             + "<i  class=\"glyphicon glyphicon-remove-circle\">"
                             + "</i></button><br><strong>Failed!</strong>"
-                            + " message id " + request.getParameter("messageBM") + " Try again.";
+                            + " Message id " + request.getParameter("messageBM") + " Try again.";
                     request.setAttribute("alert", alert);
                 }
 
@@ -136,13 +143,13 @@ public class MessageBlocked_ViewReports extends HttpServlet {
             }
             request.setAttribute("Inquiry_report_count", Inquiry_report_count);
 
-           ArrayList ReportedItems = art.getItemReports();                     //getting ad reports
+            ArrayList ReportedItems = art.getItemReports();                     //getting ad reports
             request.setAttribute("ReportedItems", ReportedItems);
             ArrayList ReportedMessages = arm.getMessageReports();               //getting message reports
             request.setAttribute("ReportedMessages", ReportedMessages);
             ArrayList ReportedInquiries = ari.getInquiryReports();              //getting inquiry reports
             request.setAttribute("ReportedInquiries", ReportedInquiries);
-            
+
             RequestDispatcher rd = request.getRequestDispatcher("report_view.jsp");
             rd.forward(request, response);
         } else {

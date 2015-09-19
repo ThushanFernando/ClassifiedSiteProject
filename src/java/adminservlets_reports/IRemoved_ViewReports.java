@@ -96,13 +96,13 @@ public class IRemoved_ViewReports extends HttpServlet {
                     String alert = "<button class=\"btn btn-green\">"           //returning notification of the success 
                             + "<i  class=\"glyphicon glyphicon-ok-sign\">"
                             + "</i></button><br><strong>Removed !</strong>"
-                            + "  Inquiry id " + request.getParameter("removeReport") + "";
+                            + "  Inquiry report id " + request.getParameter("removeReport") + "";
                     request.setAttribute("alert", alert);
                 } else {
                     String alert = "<button class=\"btn btn-red\">"             //returning notification of the failure 
                             + "<i  class=\"glyphicon glyphicon-remove-circle\">"
                             + "</i></button><br><strong>Failed!</strong>"
-                            + " Inquiry id " + request.getParameter("removeReport") + " Try again.";
+                            + " Inquiry report id " + request.getParameter("removeReport") + " Try again.";
                     request.setAttribute("alert", alert);
                 }
             }

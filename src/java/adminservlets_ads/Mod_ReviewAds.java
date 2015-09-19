@@ -5,6 +5,7 @@
  */
 package adminservlets_ads;
 
+import classes.AdminClass_Message;
 import classes.AdminClass_ReviewAds;
 import classes.AdminClass_SendMail;
 import java.io.IOException;
@@ -86,32 +87,52 @@ public class Mod_ReviewAds extends HttpServlet {
 
             AdminClass_ReviewAds ar = new AdminClass_ReviewAds();
             AdminClass_SendMail as = new AdminClass_SendMail();
-
+            AdminClass_Message am=new AdminClass_Message();
             if (request.getParameter("subject") != null) {
 
                 String reciever = ar.getUserEmail(request.getParameter("to"));
                 String subject = request.getParameter("subject");
-                String content = request.getParameter("content").replace("*", "");
+                String edit_link = "http://Superb.lk/en/post_item/Samsung-galaxy-note-n7000-for-sale-colombo/edit";
+                String content_footer = "\n\nTo edit your ad, please click the following link:\n"
+                        + edit_link + "\n\n"
+                        + "Your password is: the password you selected\n"
+                        + "\n"
+                        + "If you have any questions, feel free to reply to the email and we will get back to you.\n"
+                        + "\n"
+                        + "Regards,\n"
+                        + "The support team at Superb.lk\n"
+                        + "\n"
+                        + "--------------------------------------------\n"
+                        + "\n"
+                        + "Did you know that Superb.lk has the best second-hand mobile deals in Sri Lanka? Click here: http://Superb.lk\n"
+                        + "\n"
+                        + "Follow us on Facebook:\n"
+                        + "https://www.facebook.com/Superb.lk";
+
+                String content = request.getParameter("content-header") + request.getParameter("content-body") + content_footer;
                 String itemId = request.getParameter("itemname");
-                String reason = null;
-               
-                if ("".equals(request.getParameter("reason"))) {
-                    reason = "Modified ad, Reason isn't available !";
-                } else {
-                    reason = "Modified due to- " + request.getParameter("reason");
-                }
+                String reason = "Modified due to- " + request.getParameter("reason");
+
+                String inbox_content = request.getParameter("content-header") + request.getParameter("content-body")
+                        + "\n\nPlease update your ad"
+                        + "\n"
+                        + "Regards,\n"
+                        + "The support team at Superb.lk\n"
+                        + "\n";
+                
+                int inbox_result=am.sendMessage(inbox_content, request.getParameter("to"));
 
                 int result = ar.modifyAds(itemId, reason);                 //updating advertiesment status
-                int result2 = as.mailClass("fernandowast@gmail.com", subject, content);//sending mail to the user
+                int result2 = as.mailClass(reciever, subject, content);//sending mail to the user
 
-                if (result == 1 && result2 == 1) {                              
-                    String alert = "<button class=\"btn btn-green\">"           //returning notification of the success 
+                if (result == 1 && result2 == 1) {
+                    String alert = "<button class=\"btn btn-green\">" //returning notification of the success 
                             + "<i  class=\"glyphicon glyphicon-ok-sign\">"
                             + "</i></button><br>Email is sent to "
                             + "<strong> " + reciever + " !</strong>";
                     request.setAttribute("alert", alert);
                 } else {
-                    String alert = "<button class=\"btn btn-red\">"             //returning notification of the failure 
+                    String alert = "<button class=\"btn btn-red\">" //returning notification of the failure 
                             + "<i  class=\"glyphicon glyphicon-remove-circle\">"
                             + "</i></button><strong> Failed !</strong>";
                     request.setAttribute("alert", alert);

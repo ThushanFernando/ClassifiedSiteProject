@@ -9,6 +9,7 @@ import classes.AdminClass_BlockedUsers;
 import classes.AdminClass_ReportedInquiries;
 import classes.AdminClass_ReportedItems;
 import classes.AdminClass_ReportedMessages;
+import classes.AdminClass_SendMail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -89,14 +90,31 @@ public class InquiryUBlocked_ViewReports extends HttpServlet {
             AdminClass_ReportedItems art = new AdminClass_ReportedItems();
             AdminClass_ReportedMessages arm = new AdminClass_ReportedMessages();
             AdminClass_ReportedInquiries ari = new AdminClass_ReportedInquiries();
+            AdminClass_SendMail as = new AdminClass_SendMail();
 
-            if (request.getParameter("toBIU") != null && request.getParameter("subjectBIU") != null) {
+            if (request.getParameter("toBIU") != null) {
                 
                 AdminClass_BlockedUsers ab = new AdminClass_BlockedUsers();
                 
                 String reciever = art.getUserEmail(request.getParameter("toBIU"));
-                String subject = request.getParameter("subjectBIU");
-                String content = request.getParameter("contentBIU");
+                String subject = "Temporarily disabeling your account in superb.lk";
+
+                String content = "Hello,\n"
+                        + "\n"
+                        + "Your account in superb.lk is temporarily disabled due to invalid activity or policy violations.\n\n"
+                        + "Visit the link for common reasons and policy violations cause accounts to be suspended.\n"
+                        + "http://Superb.lk/en/policies\n\n"
+                        + "Regards,\n"
+                        + "The support team at Superb.lk\n"
+                        + "\n"
+                        + "--------------------------------------------\n"
+                        + "\n"
+                        + "Did you know that Superb.lk has the best second-hand mobile deals in Sri Lanka? Click here: http://Superb.lk\n"
+                        + "\n"
+                        + "Follow us on Facebook:\n"
+                        + "https://www.facebook.com/Superb.lk";
+
+                int mail_result = as.mailClass(reciever, subject, content);//sending mail to the user
                 
                 int result1 = ab.RemoveUser(request.getParameter("toBIU"));     //removing user
                 int result2 = ab.BlacklistUser(reciever);                       //blacklisting user

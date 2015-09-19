@@ -25,6 +25,9 @@ import javax.mail.internet.MimeMessage;
 public class AdminClass_SendMail {
     public int mailClass(String reciever,String subject,String content){
         int result=1;
+        System.out.println(reciever);
+        System.out.println(subject);
+        System.out.println(content);
         Properties props = new Properties();
         props.setProperty("mail.host", "mail.superb.lk");
         props.setProperty("mail.smtp.port", "25");

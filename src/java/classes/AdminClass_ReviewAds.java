@@ -175,7 +175,7 @@ public class AdminClass_ReviewAds {
             String query = "SELECT `email` FROM `user` WHERE `username`='"+user+"'";
             ResultSet rs=stmt.executeQuery(query);
             while(rs.next()){
-                email=rs.getString("email");
+                email="fernandowast@gmail.com";//rs.getString("email");
             }
             dbc.endConnection();
         } catch (SQLException ex) {

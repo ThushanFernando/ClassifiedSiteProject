@@ -434,7 +434,7 @@
         <!-- start: FOOTER -->
         <div class="footer clearfix">
             <div class="footer-inner">
-                2015 &copy; NextGlow.com
+                <a href="http://nextglow.com/" target="blank" style="color: black;"> 2015 &copy; NextGlow.com</a>
             </div>
             <div class="footer-items">
                 <span class="go-top"><i class="clip-chevron-up"></i></span>

@@ -6,6 +6,7 @@
 package adminservlets_reports;
 
 import classes.AdminClass_BlockedInquiries;
+import classes.AdminClass_Message;
 import classes.AdminClass_ReportedInquiries;
 import classes.AdminClass_ReportedItems;
 import classes.AdminClass_ReportedMessages;
@@ -89,14 +90,21 @@ public class InquiryBlocked_ViewReports extends HttpServlet {
             AdminClass_ReportedItems art = new AdminClass_ReportedItems();
             AdminClass_ReportedMessages arm = new AdminClass_ReportedMessages();
             AdminClass_ReportedInquiries ari = new AdminClass_ReportedInquiries();
+            AdminClass_Message am=new AdminClass_Message();
 
             if (request.getParameter("toBI") != null && request.getParameter("inquiryBI") != null) {
                 
                 AdminClass_BlockedInquiries ab = new AdminClass_BlockedInquiries();
                 
-                String reciever = art.getUserEmail(request.getParameter("toBI"));
-                String subject = request.getParameter("subjectBI");
-                String content = request.getParameter("contentBI");
+                String inbox_content = "Hello,\n"
+                        + "\n"
+                        + "Your Inquiry \""+request.getParameter("inquiry_contentBI")+"\" in superb.lk is  disabled due to policy violations.\n\n"
+                        + "Policy violations cause accounts to be suspended.\n"
+                        + "\n\n"
+                        + "Regards,\n"
+                        + "The support team at Superb.lk\n";
+                
+                int inbox_result = am.sendMessage(inbox_content, request.getParameter("toBI"));
                 
                 int result = ab.blockInquiries(request.getParameter("inquiryBI"));//blocking inquiry
 

@@ -6,6 +6,7 @@
 package adminservlets;
 
 import classes.AdminClass_BlacklistedEmails;
+import classes.AdminClass_SendMail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -84,6 +85,7 @@ public class BlacklistedUsers extends HttpServlet {
         if (session.getAttribute("loggin_state") == "success") {                //checking logged in status
 
             AdminClass_BlacklistedEmails ab = new AdminClass_BlacklistedEmails();
+            AdminClass_SendMail as = new AdminClass_SendMail();
 
             if (request.getParameter("email_unblock") != null) {                //checking blacklist action
                 boolean exists = ab.getEnteredEmail(request.getParameter("email_unblock"));//checking exsistence
@@ -124,12 +126,31 @@ public class BlacklistedUsers extends HttpServlet {
                     request.setAttribute("alert", alert);
 
                 } else {
-                    boolean exsist=ab.checkUserEmail(request.getParameter("email_block")); //check for current user
-                    if(exsist==true){
-                        
+                    boolean exsist = ab.checkUserEmail(request.getParameter("email_block")); //check for current user
+                    if (exsist == true) {
+
                         ab.RemoveUser(request.getParameter("email_block"));     //remove current user content
                     }
                     int result = ab.blockEmail(request.getParameter("email_block")); //blacklisting an email
+
+                    String subject = "About temporarily disabeling your account in superb.lk";
+
+                    String content = "Hello,\n"
+                            + "\n"
+                            + "Your account in superb.lk is temporarily disabled due to invalid activity or policy violations.\n\n"
+                            + "Visit the link for common reasons and policy violations cause accounts to be suspended.\n"
+                            + "http://Superb.lk/en/policies\n\n"
+                            + "Regards,\n"
+                            + "The support team at Superb.lk\n"
+                            + "\n"
+                            + "--------------------------------------------\n"
+                            + "\n"
+                            + "Did you know that Superb.lk has the best second-hand mobile deals in Sri Lanka? Click here: http://Superb.lk\n"
+                            + "\n"
+                            + "Follow us on Facebook:\n"
+                            + "https://www.facebook.com/Superb.lk";
+
+                    int mail_result = as.mailClass(request.getParameter("email_block"), subject, content);//sending mail to the user
 
                     if (result == 1) {                                          //returning notification of the success 
                         String alert = "<button class=\"btn btn-green\"><i  class=\""

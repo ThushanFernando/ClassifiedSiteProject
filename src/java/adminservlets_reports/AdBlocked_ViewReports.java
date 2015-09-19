@@ -6,9 +6,11 @@
 package adminservlets_reports;
 
 import classes.AdminClass_BlockedItems;
+import classes.AdminClass_Message;
 import classes.AdminClass_ReportedInquiries;
 import classes.AdminClass_ReportedItems;
 import classes.AdminClass_ReportedMessages;
+import classes.AdminClass_SendMail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -85,32 +87,64 @@ public class AdBlocked_ViewReports extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session.getAttribute("loggin_state") == "success") {                //checking logged in status
-            
+
             AdminClass_ReportedItems art = new AdminClass_ReportedItems();
             AdminClass_ReportedMessages arm = new AdminClass_ReportedMessages();
             AdminClass_ReportedInquiries ari = new AdminClass_ReportedInquiries();
+            AdminClass_SendMail as = new AdminClass_SendMail();
+            AdminClass_Message am=new AdminClass_Message();
 
             if (request.getParameter("itemBA") != null && request.getParameter("reportBA") != null) {
 
                 AdminClass_BlockedItems ab = new AdminClass_BlockedItems();
+
                 String reciever = art.getUserEmail(request.getParameter("toBA"));
                 String subject = request.getParameter("subjectBA");
-                String content = request.getParameter("contentBA");
+                String edit_link = "http://Superb.lk/en/post_item/Samsung-galaxy-note-n7000-for-sale-colombo/edit";
+                String content_footer = "\n\nTo edit your ad, please click the following link:\n"
+                        + edit_link + "\n\n"
+                        + "Your password is: the password you selected\n"
+                        + "\n"
+                        + "If you have any questions, feel free to reply to the email and we will get back to you.\n"
+                        + "\n"
+                        + "Regards,\n"
+                        + "The support team at Superb.lk\n"
+                        + "\n"
+                        + "--------------------------------------------\n"
+                        + "\n"
+                        + "Did you know that Superb.lk has the best second-hand mobile deals in Sri Lanka? Click here: http://Superb.lk\n"
+                        + "\n"
+                        + "Follow us on Facebook:\n"
+                        + "https://www.facebook.com/Superb.lk";
+
+                String content = request.getParameter("contentBA-header") + request.getParameter("contentBA-body") + content_footer;
+
                 String itemId = request.getParameter("itemBA");
-                String reason = request.getParameter("reasonBA");
+                String reason = "Blocked due to- " + request.getParameter("reasonBA");
+                
+                String inbox_content = request.getParameter("contentBA-header") + request.getParameter("contentBA-body")
+                        + "\n\nPlease update your ad"
+                        + "\n"
+                        + "Regards,\n"
+                        + "The support team at Superb.lk\n"
+                        + "\n";
+                
+                
                 int result = ab.blockItem(itemId, reason);                      //blocking advertiesment
-                int state = art.updateViewState(request.getParameter("reportBA"));//update report status
+                int state = 1;//art.updateViewState(request.getParameter("reportBA"));//update report status
+                int inbox_result=am.sendMessage(inbox_content, request.getParameter("toBA"));
+                int result2 = as.mailClass(reciever, subject, content);//sending mail to the user
 
                 if (result == 1 && state == 1) {
-                    
-                    String alert = "<button class=\"btn btn-green\">"           //returning notification of the success 
+
+                    String alert = "<button class=\"btn btn-green\">" //returning notification of the success 
                             + "<i  class=\"glyphicon glyphicon-ok-sign\">"
                             + "</i></button><br><strong>Blocked !</strong>  Advertiesment number " + itemId + "  ";
                     request.setAttribute("alert", alert);
-                
+
                 } else {
-                    
-                    String alert = "<button class=\"btn btn-red\">"             //returning notification of the failure 
+
+                    String alert = "<button class=\"btn btn-red\">" //returning notification of the failure 
                             + "<i  class=\"glyphicon glyphicon-remove-circle\">"
                             + "</i></button><br><strong>Failed!</strong> Advertiesment number " + itemId + " Try again.";
                     request.setAttribute("alert", alert);
@@ -139,7 +173,7 @@ public class AdBlocked_ViewReports extends HttpServlet {
             request.setAttribute("ReportedMessages", ReportedMessages);
             ArrayList ReportedInquiries = ari.getInquiryReports();              //getting inquiry reports
             request.setAttribute("ReportedInquiries", ReportedInquiries);
-            
+
             RequestDispatcher rd = request.getRequestDispatcher("report_view.jsp");
             rd.forward(request, response);
         } else {

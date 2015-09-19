@@ -192,8 +192,9 @@
                                 <span class="title"> Frontend </span><span class="selected"></span>
                             </a>
                         </li>
+
                         <li class="active open visible-xs">
-                            <a href="#" target="_blank"><i class="clip-bubble"></i>
+                            <a href="MsgAll" target="_blank"><i class="clip-bubble"></i>
                                 <span class="title"> Messages </span><span class="selected"></span>
                             </a>
                         </li>
@@ -205,7 +206,7 @@
                             </a>
                             <ul class="sub-menu">
                                 <li class="active open">
-                                    <a href="">
+                                    <a href="MsgAll">
                                         <span class="title"> All </span>
                                         <span class="badge badge-new">new</span>
                                     </a>
@@ -226,6 +227,7 @@
 
                             </ul>
                         </li>
+
 
                         <li>
                             <a href="BlacklistedUsers" ><i class="clip-user-block"></i>
@@ -248,10 +250,16 @@
                             </a>
                         </li>
                         <li>
-                            <a href="UpdateInterfaces" ><i class="clip-pictures"></i>
-                                <span class="title"> Update Interfaces</span><span class="selected"></span>
+                            <a href="#" ><i class="clip-file"></i>
+                                <span class="title"> free space</span><span class="selected"></span>
                             </a>
                         </li>
+                        <li>
+                            <a href="#" ><i class="clip-file"></i>
+                                <span class="title"> free space</span><span class="selected"></span>
+                            </a>
+                        </li>
+
 
                     </ul>
                     <!-- end: MAIN NAVIGATION MENU -->
@@ -369,7 +377,7 @@
         <!-- start: FOOTER -->
         <div class="footer clearfix">
             <div class="footer-inner">
-                2015 &copy; NextGlow.com
+                <a href="http://nextglow.com/" target="blank" style="color: black;"> 2015 &copy; NextGlow.com</a>
             </div>
             <div class="footer-items">
                 <span class="go-top"><i class="clip-chevron-up"></i></span>

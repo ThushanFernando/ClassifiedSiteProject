@@ -87,8 +87,7 @@
                                                     <input type="hidden" id="itemUBA<%=received.getReport_id()%>" value="<%=received.getUsername()%>">
                                                     <div class="form-group">
                                                         <div>
-                                                            <textarea class="autosize form-control" id="itemRBA<%=received.getReport_id()%>" required=""  rows="5"  style="overflow-y: auto; word-wrap: break-word; resize: none;">
-                                                            </textarea>
+                                                            <textarea class="autosize form-control" id="itemRBA<%=received.getReport_id()%>" required="" placeholder="Reason for blocking ad"  rows="5"  style="overflow-y: auto; word-wrap: break-word; resize: none;"></textarea>
                                                         </div>
                                                     </div>
 
@@ -98,33 +97,65 @@
                                                         Cancel
                                                     </button>
                                                     <clickedReportBlockAd id="BA<%=received.getReport_id()%>">
-                                                        <a href="#itemBA" data-toggle="modal">
-                                                            <button type="button" data-dismiss="modal" class="btn btn-primary" onclick="">
-                                                                Block
-                                                            </button>
-                                                        </a>
+                                                        <button type="button" class="btn btn-primary">
+                                                            Block
+                                                        </button>
                                                     </clickedReportBlockAd>
                                                 </div>
                                             </div>    
                                         </li>
                                         <li role="presentation">
-                                        <clickedReportBlockUser id="BU<%=received.getReport_id()%>">&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <a role="menuitem" tabindex="-1" href="#itemBU"  data-toggle="modal">
+
+                                            <a role="menuitem" tabindex="-1" href="#confirm_blockU<%=received.getReport_id()%>"  data-toggle="modal">
                                                 <i class="fa clip-locked"></i><span>Block User</span>
                                             </a>
-                                        </clickedReportBlockUser>
-                                        <input type="hidden" id="itemRIBU<%=received.getReport_id()%>" value="<%=received.getReport_id()%>">
-                                        <input type="hidden" id="itemTBU<%=received.getReport_id()%>" value="<%=received.getTitle()%>">
-                                        <input type="hidden" id="itemUBU<%=received.getReport_id()%>" value="<%=received.getUsername()%>">
+
+                                            <div id="confirm_blockU<%=received.getReport_id()%>"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title"><input type="radio" class="square-green" value="" checked="checked" >Confirmation</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <span class="badge badge-info">Block user <%=received.getUsername()%>?</span>
+                                                    <form action="UserBlocked_ViewReports" method="POST"  id="<%=received.getReport_id()%>_blockU">
+                                                        <input type="hidden"  name="toBU" value="<%=received.getUsername()%>">
+                                                        <input type="hidden"  name="reportBU" value="<%=received.getReport_id()%>">
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" data-dismiss="modal" class="btn btn-light-grey">
+                                                        Cancel
+                                                    </button>
+                                                    <button type="button" class="btn btn-blue" onclick="document.getElementById('<%=received.getReport_id()%>_blockU').submit();">
+                                                        Block
+                                                    </button>
+                                                </div>
+                                            </div>
 
                                         </li>
                                         <li role="presentation">
-                                            <a role="menuitem" tabindex="-1" href="#" onclick="document.getElementById('RR<%=received.getReport_id()%>').submit()">
+                                            <a role="menuitem" tabindex="-1" href="#confirm_remove<%=received.getReport_id()%>" data-toggle="modal">
                                                 <i class="fa clip-remove"></i> Remove Report
                                             </a>
-                                            <form action="Removed_ViewReports" method="POST" id="RR<%=received.getReport_id()%>">
-                                                <input type="hidden" name="removeReport" value="<%=received.getReport_id()%>">
-                                            </form>
+                                            <div id="confirm_remove<%=received.getReport_id()%>"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title"><input type="radio" class="square-green" value="" checked="checked" >Confirmation</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <span class="badge badge-info">Remove report?</span>
+                                                    <form action="Removed_ViewReports" method="POST" id="<%=received.getReport_id()%>_remove">
+                                                        <input type="hidden" name="removeReport" value="<%=received.getReport_id()%>">
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" data-dismiss="modal" class="btn btn-light-grey">
+                                                        Cancel
+                                                    </button>
+                                                    <button type="button" class="btn btn-blue" onclick="document.getElementById('<%=received.getReport_id()%>_remove').submit();">
+                                                        Remove
+                                                    </button>
+                                                </div>
+                                            </div>
+
                                         </li>
                                     </ul>
                                 </div>

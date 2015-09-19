@@ -26,6 +26,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Inquiry from</th>
+                        <th class="hidden-xs">Time</th>
                         <th class="center"></th>                                                                                                
 
                     </tr>
@@ -38,6 +39,7 @@
                     <tr>
                         <td><%=received2.getInquiry_id()%></td>
                         <td><%=received2.getMessage_from()%></td>
+                        <td class="hidden-xs"><%=received2.getInquiry_time_stamp()%></td>
                         <td class="center">
                             <div>
                                 <div class="btn-group">
@@ -60,30 +62,84 @@
                                         </clickedViewInquiry>
                                         </li>
                                         <li role="presentation">
-                                        <clickedBlockInquiry id="BI<%=received2.getInquiry_id()%>">&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <a role="menuitem" tabindex="-1" href="#messageBI"  data-toggle="modal">
+
+                                            <a role="menuitem" tabindex="-1" href="#confirm_blockI<%=received2.getInquiry_id()%>"  data-toggle="modal">
                                                 <i class="fa clip-cancel-circle"></i> <span>Block Inquiry</span>
-                                                <input type="hidden" id="inquiryRUBI<%=received2.getInquiry_id()%>" value="<%=received2.getReported_user()%>">
-                                                <input type="hidden" id="inquiryIIBI<%=received2.getInquiry_id()%>" value="<%=received2.getInquiry_id()%>">
                                             </a>
-                                        </clickedBlockInquiry>
+
+                                            <div id="confirm_blockI<%=received2.getInquiry_id()%>"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title"><input type="radio" class="square-green" value="" checked="checked" >Confirmation</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <span class="badge badge-info">Block inquiry id : <%=received2.getInquiry_id()%>?</span>
+                                                    <form action="InquiryBlocked_ViewReports?tabId=panel_tab_Inquiry" method="POST" id="<%=received2.getInquiry_id()%>_blockI">
+                                                        <input type="hidden" name="toBI" value="<%=received2.getMessage_from()%>">
+                                                        <input type="hidden" name="inquiryBI" value="<%=received2.getInquiry_id()%>">
+                                                        <input type="hidden" name="inquiry_contentBI" value="<%=received2.getInquiry_message()%>">
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" data-dismiss="modal" class="btn btn-light-grey">
+                                                        Cancel
+                                                    </button>
+                                                    <button type="button" class="btn btn-blue" onclick="document.getElementById('<%=received2.getInquiry_id()%>_blockI').submit();">
+                                                        Block
+                                                    </button>
+                                                </div>
+                                            </div>
 
                                         </li>
                                         <li role="presentation">
-                                        <clickedBlockInquiryUser id="BIU<%=received2.getInquiry_id()%>">&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <a role="menuitem" tabindex="-1" href="#messageBIU"  data-toggle="modal">
-                                                <i class="fa clip-users"></i> <span>Block User</span>
-                                                <input type="hidden" id="inquiryRUBIU<%=received2.getInquiry_id()%>" value="<%=received2.getReported_user()%>">
+
+                                            <a role="menuitem" tabindex="-1" href="#confirm_blockIU<%=received2.getInquiry_id()%>"  data-toggle="modal">
+                                                <i class="fa clip-users"></i><span>Block User</span>
                                             </a>
-                                        </clickedBlockInquiryUser>
+                                            <div id="confirm_blockIU<%=received2.getInquiry_id()%>"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title"><input type="radio" class="square-green" value="" checked="checked" >Confirmation</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <span class="badge badge-info">Block inquiry User : <%=received2.getMessage_from()%>?</span>
+                                                    <form action="InquiryUBlocked_ViewReports?tabId=panel_tab_Inquiry" method="POST" id="<%=received2.getInquiry_id()%>_blockMIU">
+                                                        <input type="hidden" name="toBIU" value="<%=received2.getMessage_from()%>">
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" data-dismiss="modal" class="btn btn-light-grey">
+                                                        Cancel
+                                                    </button>
+                                                    <button type="button" class="btn btn-blue" onclick="document.getElementById('<%=received2.getInquiry_id()%>_blockMIU').submit();">
+                                                        Block
+                                                    </button>
+                                                </div>
+                                            </div>
+
                                         </li>
                                         <li role="presentation">
-                                            <a role="menuitem" tabindex="-1" href="#" onclick="document.getElementById('RRI<%=received2.getInquiry_id()%>').submit()">
+                                            <a role="menuitem" tabindex="-1" href="#confirm_removeIR<%=received2.getInquiry_id()%>" data-toggle="modal">
                                                 <i class="fa clip-remove"></i> Remove Report
                                             </a>
-                                            <form action="IRemoved_ViewReports?tabId=panel_tab_Inquiry" method="POST" id="RRI<%=received2.getInquiry_id()%>">
-                                                <input type="hidden" name="removeReport" value="<%=received2.getInquiry_id()%>">
-                                            </form>
+
+                                            <div id="confirm_removeIR<%=received2.getInquiry_id()%>"  class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="350" style="display: none;">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title"><input type="radio" class="square-green" value="" checked="checked" >Confirmation</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <span class="badge badge-info">Remove report : <%=received2.getInquiry_id()%>?</span>
+                                                    <form action="IRemoved_ViewReports?tabId=panel_tab_Inquiry" method="POST" id="<%=received2.getInquiry_id()%>_removeIR">
+                                                        <input type="hidden" name="removeReport" value="<%=received2.getInquiry_id()%>">
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" data-dismiss="modal" class="btn btn-light-grey">
+                                                        Cancel
+                                                    </button>
+                                                    <button type="button" class="btn btn-blue" onclick="document.getElementById('<%=received2.getInquiry_id()%>_removeIR').submit();">
+                                                        Remove
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>

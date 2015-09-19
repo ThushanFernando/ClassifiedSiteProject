@@ -104,7 +104,7 @@
                             </a>
                             <ul class="sub-menu">
                                 <li>
-                                    <a href="">
+                                    <a href="MsgAll">
                                         <span class="title"> All </span>
                                         <span class="badge badge-new">new</span>
                                     </a>
@@ -125,6 +125,7 @@
 
                             </ul>
                         </li>
+
 
                         <li>
                             <a href="BlacklistedUsers" ><i class="clip-user-block"></i>
@@ -147,10 +148,16 @@
                             </a>
                         </li>
                         <li>
-                            <a href="UpdateInterfaces" ><i class="clip-pictures"></i>
-                                <span class="title"> Update Interfaces</span><span class="selected"></span>
+                            <a href="#" ><i class="clip-file"></i>
+                                <span class="title"> free space</span><span class="selected"></span>
                             </a>
                         </li>
+                        <li>
+                            <a href="#" ><i class="clip-file"></i>
+                                <span class="title"> free space</span><span class="selected"></span>
+                            </a>
+                        </li>
+
 
                     </ul>
                     <!-- end: MAIN NAVIGATION MENU -->
@@ -265,7 +272,7 @@
         <!-- start: FOOTER -->
         <div class="footer clearfix">
             <div class="footer-inner">
-                2015 &copy; NextGlow.com
+                <a href="http://nextglow.com/" target="blank" style="color: black;"> 2015 &copy; NextGlow.com</a>
             </div>
             <div class="footer-items">
                 <span class="go-top"><i class="clip-chevron-up"></i></span>
@@ -355,6 +362,36 @@
                 }
 
             }
+            function manualNotification(alert) {
+
+
+
+                var unique_id = $.gritter.add({
+                    // (string | mandatory) the heading of the notification
+                    title: 'Notification!',
+                    // (string | mandatory) the text inside the notification
+                    text: alert,
+                    // (bool | optional) if you want it to fade out on its own or just sit there
+                    sticky: false,
+                    // (int | optional) the time you want it to be alive for before fading out
+                    time: 4000,
+                    // (string | optional) the class name you want to apply to that specific message
+                    class_name: 'my-sticky-class'
+                });
+                // You can have it return a unique id, this can be used to manually remove it later using
+                /*
+                 setTimeout(function(){
+                 $.gritter.remove(unique_id, {
+                 fade: true,
+                 speed: 'slow'
+                 });
+                 }, 6000)
+                 */
+                return false;
+
+
+
+            }
 
 
         </script>
@@ -363,7 +400,7 @@
 
         <script>
             jQuery(document).ready(function () {
-                
+
                 Main.init();
                 runNotification();
                 $(".loader").fadeOut("slow");

@@ -53,7 +53,7 @@
                                     <input type="text" readonly class="form-control"  id="sentVMId" name="sentVM" value="" >
                                 </div>
                             </div>
-                            
+
                         </form>
                     </div>
                 </div>
@@ -101,7 +101,8 @@
                                     Reason for Ad block: <span class="symbol required"></span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <textarea class="autosize form-control" name="contentBA" id="contentidBA" rows="12" style="overflow-y: auto; resize: none; word-wrap: break-word;"></textarea>
+                                    <textarea class="hidden form-control" name="contentBA-header" id="contentidBA-header"></textarea>
+                                    <textarea class="autosize form-control" name="contentBA-body" id="contentidBA-body" rows="8" style="overflow-y: auto; resize: none; word-wrap: break-word;"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -113,7 +114,9 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-6">
-                                    <button class="btn btn-blue next-step btn-block">
+                                    <div id="loader_preview_BA" style="display: none"><img src="images/loading.gif" style="width: 50px;"/></div>
+                                    <button class="btn btn-blue next-step btn-block" onclick=" this.style.display = 'none';
+                                            document.getElementById('loader_preview_BA').style.display = 'block';">
                                         Send <i class="fa fa-arrow-circle-right"></i>
                                     </button>
                                 </div>
@@ -125,69 +128,7 @@
             </div>
 
         </div>
-        <div id="itemBU" class="modal fade" tabindex="-1" data-width="760" style="display: none;">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-                <h4 class="modal-title"><input type="radio" class="square-green" value="" checked="checked" >Message to the user</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-14">
-                        <form action="UserBlocked_ViewReports" method="POST" role="form" class="smart-wizard form-horizontal" id="">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    From: <span class="symbol required"></span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <input type="text" readonly class="form-control"  name="fromname" value="Superb.lk" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    To: <span class="symbol required"></span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <input type="text" readonly class="form-control" id="toidBU" name="toBU" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    Subject: <span class="symbol required"></span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <textarea class="form-control" id="subjectidBU" name="subjectBU" rows="2" readonly style="overflow-y: auto; resize: none"></textarea>
 
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    Reason for User block: <span class="symbol required"></span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <textarea class="autosize form-control" name="contentBU" id="contentidBU" rows="12" style="overflow-y: auto; resize: none; word-wrap: break-word;"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-7">
-                                    <input type="hidden" id="reportidBU" name="reportBU" value="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-4 col-sm-offset-6">
-                                    <button class="btn btn-blue next-step btn-block">
-                                        Send <i class="fa fa-arrow-circle-right"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>    
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
         <div id="view_report" class="modal fade" tabindex="-1" data-width="760" style="display: none;">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -240,132 +181,8 @@
 
         </div>
 
-        <div id="messageBM" class="modal fade" tabindex="-1" data-width="760" style="display: none;">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-                <h4 class="modal-title"><input type="radio" class="square-green" value="" checked="checked" >Message to the user</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-14">
-                        <form action="MessageBlocked_ViewReports?tabId=panel_tab_Message" method="POST" role="form" class="smart-wizard form-horizontal" id="">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    From: <span class="symbol required"></span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <input type="text" readonly class="form-control"  name="fromname" value="Superb.lk" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    To: <span class="symbol required"></span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <input type="text" readonly class="form-control" id="toidBM" name="toBM" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    Subject: <span class="symbol required"></span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <textarea class="form-control" id="subjectidBM" name="subjectBM" rows="2" readonly style="overflow-y: auto; resize: none"></textarea>
 
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    Reason for Message block: <span class="symbol required"></span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <textarea class="autosize form-control" name="contentBM" id="contentidBM" rows="12" style="overflow-y: auto; resize: none; word-wrap: break-word;"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-7">
-                                    <input type="hidden" id="messageidBM" name="messageBM" value="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-4 col-sm-offset-6">
-                                    <button class="btn btn-blue next-step btn-block">
-                                        Send <i class="fa fa-arrow-circle-right"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>    
-                    </div>
 
-                </div>
-            </div>
-
-        </div>
-        <div id="messageBU" class="modal fade" tabindex="-1" data-width="760" style="display: none;">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-                <h4 class="modal-title"><input type="radio" class="square-green" value="" checked="checked" >Message to the user</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-14">
-                        <form action="MessageUBlocked_ViewReports?tabId=panel_tab_Message" method="POST" role="form" class="smart-wizard form-horizontal" id="">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    From: <span class="symbol required"></span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <input type="text" readonly class="form-control"  name="fromname" value="Superb.lk" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    To: <span class="symbol required"></span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <input type="text" readonly class="form-control" id="toidBMU" name="toBMU" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    Subject: <span class="symbol required"></span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <textarea class="form-control" id="subjectidBMU" name="subjectBMU" rows="2" readonly style="overflow-y: auto; resize: none"></textarea>
-
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    Reason for User block: <span class="symbol required"></span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <textarea class="autosize form-control" name="contentBMU" id="contentidBMU" rows="12" style="overflow-y: auto; resize: none; word-wrap: break-word;"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-7">
-                                    <input type="hidden" id="messageidBMU" name="messageBMU" value="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-4 col-sm-offset-6">
-                                    <button class="btn btn-blue next-step btn-block">
-                                        Send <i class="fa fa-arrow-circle-right"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>    
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
 
         <div id="view_inquiry" class="modal fade" tabindex="-1" data-width="760" style="display: none;">
             <div class="modal-header">
@@ -434,134 +251,7 @@
                                     <input type="text" class="form-control" readonly="true" id="responseTime" placeholder="">
                                 </div>
                             </div>
-                            
-                        </form>    
-                    </div>
 
-                </div>
-            </div>
-
-        </div>
-
-        <div id="messageBI" class="modal fade" tabindex="-1" data-width="760" style="display: none;">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-                <h4 class="modal-title"><input type="radio" class="square-green" value="" checked="checked" >Message to the user</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-14">
-                        <form action="InquiryBlocked_ViewReports?tabId=panel_tab_Inquiry" method="POST" role="form" class="smart-wizard form-horizontal" id="">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    From: <span class="symbol required"></span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <input type="text" readonly class="form-control"  name="fromname" value="Superb.lk" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    To: <span class="symbol required"></span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <input type="text" readonly class="form-control" id="toidBI" name="toBI" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    Subject: <span class="symbol required"></span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <textarea class="form-control" id="subjectidBI" name="subjectBI" rows="2" readonly style=" overflow-y: auto; resize: none"></textarea>
-
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    Reason for Inquiry block: <span class="symbol required"></span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <textarea class="autosize form-control" name="contentBI" id="contentidBI" rows="12" style="overflow-y: auto; resize: none; word-wrap: break-word;"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-7">
-                                    <input type="hidden" id="inquiryidBI" name="inquiryBI" value="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-4 col-sm-offset-6">
-                                    <button class="btn btn-blue next-step btn-block">
-                                        Send <i class="fa fa-arrow-circle-right"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>    
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-
-        <div id="messageBIU" class="modal fade" tabindex="-1" data-width="760" style="display: none;">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-                <h4 class="modal-title"><input type="radio" class="square-green" value="" checked="checked" >Message to the user</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-14">
-                        <form action="InquiryUBlocked_ViewReports?tabId=panel_tab_Inquiry" method="POST" role="form" class="smart-wizard form-horizontal" id="">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    From: <span class="symbol required"></span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <input type="text" readonly class="form-control"  name="fromname" value="Superb.lk" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    To: <span class="symbol required"></span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <input type="text" readonly class="form-control" id="toidBIU" name="toBIU" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    Subject: <span class="symbol required"></span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <textarea class="form-control" id="subjectidBIU" name="subjectBIU" rows="2" readonly style="overflow-y: auto; resize: none"></textarea>
-
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    Reason for User block: <span class="symbol required"></span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <textarea class="autosize form-control" name="contentBIU" id="contentidBIU" rows="12" style="overflow-y: auto; resize: none; word-wrap: break-word;"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-7">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-4 col-sm-offset-6">
-                                    <button class="btn btn-blue next-step btn-block">
-                                        Send <i class="fa fa-arrow-circle-right"></i>
-                                    </button>
-                                </div>
-                            </div>
                         </form>    
                     </div>
 

@@ -92,7 +92,7 @@ public class AdBlocked_ViewReports extends HttpServlet {
             AdminClass_ReportedMessages arm = new AdminClass_ReportedMessages();
             AdminClass_ReportedInquiries ari = new AdminClass_ReportedInquiries();
             AdminClass_SendMail as = new AdminClass_SendMail();
-            AdminClass_Message am=new AdminClass_Message();
+            AdminClass_Message am = new AdminClass_Message();
 
             if (request.getParameter("itemBA") != null && request.getParameter("reportBA") != null) {
 
@@ -115,24 +115,27 @@ public class AdBlocked_ViewReports extends HttpServlet {
                         + "Did you know that Superb.lk has the best second-hand mobile deals in Sri Lanka? Click here: http://Superb.lk\n"
                         + "\n"
                         + "Follow us on Facebook:\n"
-                        + "https://www.facebook.com/Superb.lk";
+                        + "https://www.facebook.com/classified.superb.lk \n\n"
+                        + "Follow us on twitter\n"
+                        + "https://twitter.com/superb_lk \n\n"
+                        + "Follow us on Google +\n"
+                        + "https://plus.google.com/u/0/108482462581533717510";
 
                 String content = request.getParameter("contentBA-header") + request.getParameter("contentBA-body") + content_footer;
 
                 String itemId = request.getParameter("itemBA");
                 String reason = "Blocked due to- " + request.getParameter("reasonBA");
-                
+
                 String inbox_content = request.getParameter("contentBA-header") + request.getParameter("contentBA-body")
                         + "\n\nPlease update your ad"
                         + "\n"
                         + "Regards,\n"
                         + "The support team at Superb.lk\n"
                         + "\n";
-                
-                
+
                 int result = ab.blockItem(itemId, reason);                      //blocking advertiesment
-                int state = 1;//art.updateViewState(request.getParameter("reportBA"));//update report status
-                int inbox_result=am.sendMessage(inbox_content, request.getParameter("toBA"));
+                int state = art.updateViewState(request.getParameter("reportBA"));//update report status
+                int inbox_result = am.sendMessage(inbox_content, request.getParameter("toBA"));
                 int result2 = as.mailClass(reciever, subject, content);//sending mail to the user
 
                 if (result == 1 && state == 1) {

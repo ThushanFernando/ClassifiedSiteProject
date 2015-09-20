@@ -87,15 +87,14 @@ public class Rmv_ReviewAds extends HttpServlet {
 
             AdminClass_ReviewAds ar = new AdminClass_ReviewAds();
             AdminClass_SendMail as = new AdminClass_SendMail();
-            AdminClass_Message am=new AdminClass_Message();
+            AdminClass_Message am = new AdminClass_Message();
 
             String reciever = ar.getUserEmail(request.getParameter("to"));
             String subject = "Refusal of your Ad \"" + request.getParameter("subject") + "\"";
-            
 
             String content = "Hello,\n"
                     + "\n"
-                    + "Your ad \""+request.getParameter("subject")+"\", cannot be posted on Superb.lk.\n"
+                    + "Your ad \"" + request.getParameter("subject") + "\", cannot be posted on Superb.lk.\n"
                     + "\n"
                     + "The reason why we could not approve your ad:\n"
                     + "\n"
@@ -112,13 +111,17 @@ public class Rmv_ReviewAds extends HttpServlet {
                     + "Did you know that Superb.lk has the best second-hand mobile deals in Sri Lanka? Click here: http://Superb.lk\n"
                     + "\n"
                     + "Follow us on Facebook:\n"
-                    + "https://www.facebook.com/Superb.lk";
+                    + "https://www.facebook.com/classified.superb.lk \n\n"
+                    + "Follow us on twitter\n"
+                    + "https://twitter.com/superb_lk \n\n"
+                    + "Follow us on Google +\n"
+                    + "https://plus.google.com/u/0/108482462581533717510";
 
             int mail_result = as.mailClass(reciever, subject, content);//sending mail to the user
 
             String inbox_content = "Hello,\n"
                     + "\n"
-                    + "Your ad \""+request.getParameter("subject")+"\", cannot be posted on Superb.lk.\n"
+                    + "Your ad \"" + request.getParameter("subject") + "\", cannot be posted on Superb.lk.\n"
                     + "\n"
                     + "The reason why we could not approve your ad:\n"
                     + "\n"
@@ -128,16 +131,16 @@ public class Rmv_ReviewAds extends HttpServlet {
                     + "Regards,\n"
                     + "The support team at Superb.lk\n"
                     + "\n";
-            
-            int inbox_result=am.sendMessage(inbox_content, request.getParameter("to"));
-            
+
+            int inbox_result = am.sendMessage(inbox_content, request.getParameter("to"));
+
             String action = request.getParameter("action");
             String item = request.getParameter("item");
             String alert;
             int result;
 
             if (("Remove".equals(action) && item != null)) {
-                result =ar.removeAd(item);                                 //removing advertiesment
+                result = ar.removeAd(item);                                 //removing advertiesment
                 if (result == 1) {
                     alert = "<button class=\"btn btn-green\">" //returning notification of the success 
                             + "<i  class=\"glyphicon glyphicon-ok-sign\">"

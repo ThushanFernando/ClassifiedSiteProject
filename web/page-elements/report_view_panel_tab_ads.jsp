@@ -122,12 +122,17 @@
                                                     </form>
                                                 </div>
                                                 <div class="modal-footer">
+                                                   
                                                     <button type="button" data-dismiss="modal" class="btn btn-light-grey">
                                                         Cancel
                                                     </button>
-                                                    <button type="button" class="btn btn-blue" onclick="document.getElementById('<%=received.getReport_id()%>_blockU').submit();">
+                                                    <div style="display: none" id="blockU_loader">
+                                                        <img src="images/loading.gif" style="width: 50px;"/>
+                                                    </div>
+                                                    <button type="button" class="btn btn-blue" onclick="document.getElementById('<%=received.getReport_id()%>_blockU').submit();this.style.display = 'none';document.getElementById('blockU_loader').style.display = 'inline';">
                                                         Block
                                                     </button>
+                                                    
                                                 </div>
                                             </div>
 
@@ -150,7 +155,10 @@
                                                     <button type="button" data-dismiss="modal" class="btn btn-light-grey">
                                                         Cancel
                                                     </button>
-                                                    <button type="button" class="btn btn-blue" onclick="document.getElementById('<%=received.getReport_id()%>_remove').submit();">
+                                                    <div style="display: none" id="remove_loader">
+                                                        <img src="images/loading.gif" style="width: 50px;"/>
+                                                    </div>
+                                                    <button type="button" class="btn btn-blue" onclick="document.getElementById('<%=received.getReport_id()%>_remove').submit();this.style.display = 'none';document.getElementById('remove_loader').style.display = 'inline';">
                                                         Remove
                                                     </button>
                                                 </div>

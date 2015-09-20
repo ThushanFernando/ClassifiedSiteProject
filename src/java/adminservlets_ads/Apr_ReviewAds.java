@@ -86,7 +86,7 @@ public class Apr_ReviewAds extends HttpServlet {
         if (session.getAttribute("loggin_state") == "success") {                //checking logged in status
             AdminClass_ReviewAds ar = new AdminClass_ReviewAds();
             AdminClass_SendMail as = new AdminClass_SendMail();
-            AdminClass_Message am=new AdminClass_Message();
+            AdminClass_Message am = new AdminClass_Message();
 
             String reciever = ar.getUserEmail(request.getParameter("to"));
             String subject = "Approval of your ad \"" + request.getParameter("subject") + "\"";
@@ -109,7 +109,11 @@ public class Apr_ReviewAds extends HttpServlet {
                     + "Did you know that Superb.lk has the best second-hand mobile deals in Sri Lanka? Click here: http://Superb.lk\n"
                     + "\n"
                     + "Follow us on Facebook:\n"
-                    + "https://www.facebook.com/Superb.lk";
+                    + "https://www.facebook.com/classified.superb.lk \n\n"
+                    + "Follow us on twitter\n"
+                    + "https://twitter.com/superb_lk \n\n"
+                    + "Follow us on Google +\n"
+                    + "https://plus.google.com/u/0/108482462581533717510";
 
             int mail_result = as.mailClass(reciever, subject, content);//sending mail to the user
 
@@ -120,8 +124,8 @@ public class Apr_ReviewAds extends HttpServlet {
                     + "Regards,\n"
                     + "The support team at Superb.lk\n"
                     + "\n";
-            
-            int inbox_result=am.sendMessage(inbox_content, request.getParameter("to"));
+
+            int inbox_result = am.sendMessage(inbox_content, request.getParameter("to"));
 
             String action = request.getParameter("action");
             String item = request.getParameter("item");

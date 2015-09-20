@@ -115,8 +115,7 @@
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-6">
                                     <div id="loader_preview_BA" style="display: none"><img src="images/loading.gif" style="width: 50px;"/></div>
-                                    <button class="btn btn-blue next-step btn-block" onclick=" this.style.display = 'none';
-                                            document.getElementById('loader_preview_BA').style.display = 'block';">
+                                    <button class="btn btn-blue next-step btn-block" onclick=" this.style.display = 'none';document.getElementById('loader_preview_BA').style.display = 'block';">
                                         Send <i class="fa fa-arrow-circle-right"></i>
                                     </button>
                                 </div>

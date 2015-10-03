@@ -1,6 +1,25 @@
 
-admin reported messages wala report krnda hethuwa
-admin reported inquiries wala report krnda hethuwa
-admin_reported_inquiryview eka ona
-admin reported inquiries eke reported_user ona
+
+
+
+--------------------------------------
+
+delete conversation method
+send message method
+get msg list method
+scroll to bottom 
+
+
+
+AdminClass_ViewReports getuser email eka hadanna
+AdminClass_ReviewAds getuser email eka hadanna
+policies link eka danna ona
+ad edit link eka danna ona 
+admin password recovery eke aye yna address eka danna ona
+facebook linke eka danna ona
+FRONT END LINK EKa DANDA ONA 
+
+
+https://www.facebook.com/classified.superb.lk
+https://twitter.com/superb_lk
 

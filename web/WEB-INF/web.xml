@@ -77,10 +77,6 @@
         <servlet-class>classes.AdminClass_BlockedItems</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>BlacklistedUsers</servlet-name>
-        <servlet-class>adminservlets.BlacklistedUsers</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>UpdateInterfaces</servlet-name>
         <servlet-class>adminservlets_interfaces.UpdateInterfaces</servlet-class>
     </servlet>
@@ -188,6 +184,10 @@
         <servlet-name>MsgBlacklistUser</servlet-name>
         <servlet-class>adminservlets_messages.MsgBlacklistUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BlacklistedUsers</servlet-name>
+        <servlet-class>adminservlets.BlacklistedUsers</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/Dashboard</url-pattern>
@@ -263,10 +263,6 @@
     <servlet-mapping>
         <servlet-name>AdminClass_BlockedItems</servlet-name>
         <url-pattern>/AdminClass_BlockedItems</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BlacklistedUsers</servlet-name>
-        <url-pattern>/BlacklistedUsers</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UpdateInterfaces</servlet-name>
@@ -375,6 +371,10 @@
     <servlet-mapping>
         <servlet-name>MsgBlacklistUser</servlet-name>
         <url-pattern>/MsgBlacklistUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlacklistedUsers</servlet-name>
+        <url-pattern>/BlacklistedUsers</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

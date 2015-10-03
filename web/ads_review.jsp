@@ -451,7 +451,7 @@
         <script src="plugins/gritter/js/jquery.gritter.min.js"></script>
         <script>
 
-         //function to initiate jquery.gritter
+//function to initiate jquery.gritter
                                                                                 function runNotification() {
                                                                                     var i = '<%=alert%>';
                                                                                     if (i !== "null") {
@@ -482,6 +482,7 @@
                                                                                     }
 
                                                                                 }
+                                                                              
 
                                                                                 function manualNotification(alert) {
                                                                                     var unique_id = $.gritter.add({

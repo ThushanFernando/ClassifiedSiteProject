@@ -891,7 +891,6 @@
         <script src="plugins/summernote/build/summernote.min.js"></script>
         <script src="plugins/ckeditor/ckeditor.js"></script>
         <script src="plugins/ckeditor/adapters/jquery.js"></script>
-        <script src="js/form-validation.js"></script>
         <script src="plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
         <script src="plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
         <script src="js/ui-modals.js"></script>
@@ -1072,7 +1071,6 @@
                     refresh_data();
                 }, 3000);
                 Main.init();
-                Index.init();
                 UIModals.init();
                 FormValidator.init();
             });

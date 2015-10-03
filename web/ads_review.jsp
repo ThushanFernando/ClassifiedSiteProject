@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
     <!--<![endif]-->
-    <!-- start: HEAD -->
+    <!-- start HEAD -->
     <head>
         <title>Superb.lk-Admin</title>
         <!-- start: META -->

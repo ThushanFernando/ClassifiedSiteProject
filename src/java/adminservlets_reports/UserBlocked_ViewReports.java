@@ -112,11 +112,7 @@ public class UserBlocked_ViewReports extends HttpServlet {
                         + "Did you know that Superb.lk has the best second-hand mobile deals in Sri Lanka? Click here: http://Superb.lk\n"
                         + "\n"
                         + "Follow us on Facebook:\n"
-                        + "https://www.facebook.com/classified.superb.lk \n\n"
-                        + "Follow us on twitter\n"
-                        + "https://twitter.com/superb_lk \n\n"
-                        + "Follow us on Google +\n"
-                        + "https://plus.google.com/u/0/108482462581533717510";
+                        + "https://www.facebook.com/Superb.lk";
 
                 int mail_result = as.mailClass(reciever, subject, content);//sending mail to the user
 

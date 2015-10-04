@@ -80,10 +80,7 @@
                                                     <button type="button" data-dismiss="modal" class="btn btn-light-grey">
                                                         Cancel
                                                     </button>
-                                                    <div style="display: none" id="blockM_loader">
-                                                        <img src="images/loading.gif" style="width: 50px;"/>
-                                                    </div>
-                                                    <button type="button" class="btn btn-blue" onclick="document.getElementById('<%=received1.getMessage_id()%>_blockM').submit();this.style.display = 'none';document.getElementById('blockM_loader').style.display = 'inline';">
+                                                    <button type="button" class="btn btn-blue" onclick="document.getElementById('<%=received1.getMessage_id()%>_blockM').submit();">
                                                         Block
                                                     </button>
                                                 </div>
@@ -112,10 +109,7 @@
                                                     <button type="button" data-dismiss="modal" class="btn btn-light-grey">
                                                         Cancel
                                                     </button>
-                                                    <div style="display: none" id="blockMU_loader">
-                                                        <img src="images/loading.gif" style="width: 50px;"/>
-                                                    </div>
-                                                    <button type="button" class="btn btn-blue" onclick="document.getElementById('<%=received1.getMessage_id()%>_blockMU').submit();this.style.display = 'none';document.getElementById('blockMU_loader').style.display = 'inline';">
+                                                    <button type="button" class="btn btn-blue" onclick="document.getElementById('<%=received1.getMessage_id()%>_blockMU').submit();">
                                                         Block
                                                     </button>
                                                 </div>
@@ -140,10 +134,7 @@
                                                     <button type="button" data-dismiss="modal" class="btn btn-light-grey">
                                                         Cancel
                                                     </button>
-                                                    <div style="display: none" id="removeMR_loader">
-                                                        <img src="images/loading.gif" style="width: 50px;"/>
-                                                    </div>
-                                                   <button type="button" class="btn btn-blue" onclick="document.getElementById('<%=received1.getMessage_id()%>_removeMR').submit();this.style.display = 'none';document.getElementById('removeMR_loader').style.display = 'inline';">
+                                                    <button type="button" class="btn btn-blue" onclick="document.getElementById('<%=received1.getMessage_id()%>_removeMR').submit();">
                                                         Remove
                                                     </button>
                                                 </div>

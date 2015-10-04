@@ -86,16 +86,16 @@ public class InquiryUBlocked_ViewReports extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session.getAttribute("loggin_state") == "success") {                //checking logged in status
-
+            
             AdminClass_ReportedItems art = new AdminClass_ReportedItems();
             AdminClass_ReportedMessages arm = new AdminClass_ReportedMessages();
             AdminClass_ReportedInquiries ari = new AdminClass_ReportedInquiries();
             AdminClass_SendMail as = new AdminClass_SendMail();
 
             if (request.getParameter("toBIU") != null) {
-
+                
                 AdminClass_BlockedUsers ab = new AdminClass_BlockedUsers();
-
+                
                 String reciever = art.getUserEmail(request.getParameter("toBIU"));
                 String subject = "Temporarily disabeling your account in superb.lk";
 
@@ -112,24 +112,20 @@ public class InquiryUBlocked_ViewReports extends HttpServlet {
                         + "Did you know that Superb.lk has the best second-hand mobile deals in Sri Lanka? Click here: http://Superb.lk\n"
                         + "\n"
                         + "Follow us on Facebook:\n"
-                        + "https://www.facebook.com/classified.superb.lk \n\n"
-                        + "Follow us on twitter\n"
-                        + "https://twitter.com/superb_lk \n\n"
-                        + "Follow us on Google +\n"
-                        + "https://plus.google.com/u/0/108482462581533717510";
+                        + "https://www.facebook.com/Superb.lk";
 
                 int mail_result = as.mailClass(reciever, subject, content);//sending mail to the user
-
+                
                 int result1 = ab.RemoveUser(request.getParameter("toBIU"));     //removing user
                 int result2 = ab.BlacklistUser(reciever);                       //blacklisting user
 
                 if (result1 == 1 && result2 == 1) {
-                    String alert = "<button class=\"btn btn-green\">" //returning notification of the success 
+                    String alert = "<button class=\"btn btn-green\">"           //returning notification of the success 
                             + "<i  class=\"glyphicon glyphicon-ok-sign\">"
                             + "</i></button><br><strong>Blocked !</strong>  User " + reciever + "";
                     request.setAttribute("alert", alert);
                 } else {
-                    String alert = "<button class=\"btn btn-red\">" //returning notification of the failure 
+                    String alert = "<button class=\"btn btn-red\">"             //returning notification of the failure 
                             + "<i class=\"glyphicon glyphicon-remove-circle\">"
                             + "</i></button><br><strong>Failed!</strong> User " + reciever + " Try again.";
                     request.setAttribute("alert", alert);
@@ -159,7 +155,7 @@ public class InquiryUBlocked_ViewReports extends HttpServlet {
             request.setAttribute("ReportedMessages", ReportedMessages);
             ArrayList ReportedInquiries = ari.getInquiryReports();              //getting inquiry reports
             request.setAttribute("ReportedInquiries", ReportedInquiries);
-
+            
             RequestDispatcher rd = request.getRequestDispatcher("report_view.jsp");
             rd.forward(request, response);
         } else {
